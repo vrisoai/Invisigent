@@ -113,10 +113,10 @@ export function HeroSection() {
         </div>
 
         {/* Right column — orbital cards around central monolith */}
-        <div className="relative flex w-full justify-center md:w-[40%] md:flex-none">
+        <div className="relative hidden w-full justify-center sm:flex md:w-[40%] md:flex-none">
           <div
-            className="origin-center scale-[0.65] md:scale-[0.72] lg:scale-[0.82] xl:scale-[0.92] 2xl:scale-100"
-            style={{ width: 500, height: 500, minWidth: 500, minHeight: 500 }}
+            className="origin-center scale-[0.55] sm:scale-[0.6] md:scale-[0.72] lg:scale-[0.82] xl:scale-[0.92] 2xl:scale-100"
+            style={{ width: 500, height: 500 }}
           >
             <OrbitalCards onAmberPulseRef={setAmberPulseRef} />
           </div>

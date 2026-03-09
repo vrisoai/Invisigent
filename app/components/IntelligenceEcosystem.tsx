@@ -262,7 +262,7 @@ export function IntelligenceEcosystem() {
               ref={splineRef}
               className="mt-6 flex flex-1 items-center justify-center overflow-hidden rounded-md"
               style={{
-                minHeight: 160,
+                minHeight: 'clamp(100px, 20vw, 160px)',
                 background:
                   'radial-gradient(ellipse 70% 70% at 50% 50%, rgba(59,91,219,0.06) 0%, var(--color-bg-section) 70%)',
               }}
@@ -542,7 +542,7 @@ export function IntelligenceEcosystem() {
             <p
               className="font-serif text-trust-amber"
               style={{
-                fontSize: 'clamp(40px, 4vw, 56px)',
+                fontSize: 'clamp(32px, 8vw, 56px)',
                 fontWeight: 700,
                 lineHeight: 1,
                 marginTop: 12,

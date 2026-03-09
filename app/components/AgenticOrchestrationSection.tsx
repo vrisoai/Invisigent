@@ -393,7 +393,7 @@ export function AgenticOrchestrationSection() {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                'radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59,130,246,0.05), transparent 40%)',
+                'radial-gradient(min(250px, 60vw) circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59,130,246,0.05), transparent 40%)',
             }}
             aria-hidden
           />
@@ -432,7 +432,9 @@ export function AgenticOrchestrationSection() {
                     background: '#1F1F1F',
                     border: '1px solid #262626',
                     padding: 'clamp(20px, 3vw, 32px)',
-                    minWidth: 200,
+                    minWidth: 0,
+                    width: '100%',
+                    maxWidth: 240,
                     textAlign: 'center',
                     boxShadow: '0 0 30px rgba(251,191,36,0.08)',
                   }}
@@ -519,7 +521,7 @@ export function AgenticOrchestrationSection() {
         {/* ═══════════════ SYSTEM METADATA ROW ═══════════════ */}
         <motion.div
           ref={metaRef}
-          className="grid grid-cols-2 gap-x-8 gap-y-5 rounded-lg lg:grid-cols-4"
+          className="grid grid-cols-1 gap-x-8 gap-y-5 rounded-lg sm:grid-cols-2 lg:grid-cols-4"
           style={{
             background: 'rgba(31,31,31,0.50)',
             border: '1px solid var(--color-border)',

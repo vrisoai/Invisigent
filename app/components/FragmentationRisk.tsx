@@ -194,7 +194,7 @@ export function FragmentationRisk() {
         <div
           ref={columnsRef}
           className="grid grid-cols-1 md:grid-cols-[3fr_2fr]"
-          style={{ marginTop: 80, columnGap: 'clamp(48px, 6vw, 80px)', rowGap: 48 }}
+          style={{ marginTop: 'clamp(40px, 8vw, 80px)', columnGap: 'clamp(32px, 6vw, 80px)', rowGap: 'clamp(24px, 5vw, 48px)' }}
         >
           {/* Left — Diagnosis (slides in from left) */}
           <motion.div
