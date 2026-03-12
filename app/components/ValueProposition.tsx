@@ -1,18 +1,9 @@
 'use client';
 
 import Script from 'next/script';
-import dynamic from 'next/dynamic';
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useCallback } from 'react';
+import { useRef } from 'react';
 import { EASE, FADE_UP } from '@/app/lib/animations';
-
-const CardMiniScene = dynamic(
-  () =>
-    import('./3d/CardMiniScene').then((m) => ({
-      default: m.CardMiniScene,
-    })),
-  { ssr: false },
-);
 
 /* ─── JSON-LD (Service) ─── */
 const JSON_LD = {
@@ -78,9 +69,6 @@ const cardReveal = {
 export function ValueProposition() {
   const gridRef = useRef<HTMLDivElement>(null);
   const gridInView = useInView(gridRef, { once: true, margin: '-60px' });
-  const [activeNode, setActiveNode] = useState<number | null>(null);
-  const handleCardEnter = useCallback((i: number) => () => setActiveNode(i), []);
-  const handleCardLeave = useCallback(() => setActiveNode(null), []);
 
   return (
     <section
@@ -192,14 +180,12 @@ export function ValueProposition() {
           initial="hidden"
           animate={gridInView ? 'visible' : 'hidden'}
         >
-          {CARDS.map((card, i) => (
+          {CARDS.map((card) => (
             <motion.article
               key={card.label}
               className="vp-card"
               variants={cardReveal}
               aria-label={card.title}
-              onMouseEnter={handleCardEnter(i)}
-              onMouseLeave={handleCardLeave}
             >
               {/* Signal node */}
               <div
@@ -216,12 +202,9 @@ export function ValueProposition() {
               </h3>
 
               {/* Description */}
-              <p className="vp-card__desc" style={{ marginBottom: 16 }}>
+              <p className="vp-card__desc">
                 {card.description}
               </p>
-
-              {/* 3D mini scene */}
-              <CardMiniScene variant={i} hovered={activeNode === i} />
             </motion.article>
           ))}
         </motion.div>

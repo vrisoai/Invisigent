@@ -1,8 +1,111 @@
 'use client';
 
+import Script from 'next/script';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { EASE, ITEM } from '@/app/lib/animations';
+
+/* ─── Sovereign Intelligence Core (inlined to avoid Webpack module resolution) ─── */
+const UI_PANELS = [
+  { label: 'AGENT ORCHESTRATION', delay: 0 },
+  { label: 'KNOWLEDGE INDEX', delay: 0.5 },
+  { label: 'AUTOMATION ENGINE', delay: 1 },
+] as const;
+
+function CubeFace({ transform, faceBase }: { transform: string; faceBase: React.CSSProperties }) {
+  return (
+    <div style={{ ...faceBase, transform }}>
+      <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" style={{ position: 'absolute', inset: 0, opacity: 0.5 }} aria-hidden>
+        <defs>
+          <linearGradient id="strategic-neural-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="var(--color-link)" stopOpacity={0.3} />
+            <stop offset="100%" stopColor="var(--color-trust-amber)" stopOpacity={0.2} />
+          </linearGradient>
+        </defs>
+        <line x1="20" y1="50" x2="50" y2="30" stroke="url(#strategic-neural-grad)" strokeWidth="0.5" className="strategic-cta-neural-line" />
+        <line x1="50" y1="30" x2="80" y2="50" stroke="url(#strategic-neural-grad)" strokeWidth="0.5" className="strategic-cta-neural-line" />
+        <line x1="80" y1="50" x2="50" y2="70" stroke="url(#strategic-neural-grad)" strokeWidth="0.5" className="strategic-cta-neural-line" />
+        <line x1="50" y1="70" x2="20" y2="50" stroke="url(#strategic-neural-grad)" strokeWidth="0.5" className="strategic-cta-neural-line" />
+        <line x1="50" y1="30" x2="50" y2="70" stroke="url(#strategic-neural-grad)" strokeWidth="0.5" className="strategic-cta-neural-line" />
+        <line x1="20" y1="50" x2="80" y2="50" stroke="url(#strategic-neural-grad)" strokeWidth="0.5" className="strategic-cta-neural-line" />
+        <circle cx="50" cy="50" r="4" fill="var(--color-trust-amber)" className="strategic-cta-neural-core" />
+        <circle cx="20" cy="50" r="2" fill="var(--color-link)" opacity={0.8} />
+        <circle cx="80" cy="50" r="2" fill="var(--color-link)" opacity={0.8} />
+        <circle cx="50" cy="30" r="2" fill="var(--color-link)" opacity={0.8} />
+        <circle cx="50" cy="70" r="2" fill="var(--color-link)" opacity={0.8} />
+      </svg>
+      <motion.div
+        className="strategic-cta-core-glow"
+        style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        animate={{ boxShadow: ['inset 0 0 20px rgba(59,91,219,0.2)', 'inset 0 0 35px rgba(59,91,219,0.3)', 'inset 0 0 20px rgba(59,91,219,0.2)'] }}
+        transition={{ duration: 3, ease: 'easeInOut', repeat: Infinity }}
+      >
+        <div style={{ width: 24, height: 24, borderRadius: '50%', background: 'rgba(59,91,219,0.4)' }} />
+      </motion.div>
+    </div>
+  );
+}
+
+function SovereignIntelligenceCore({ inView, ctaHovered }: { inView: boolean; ctaHovered: boolean }) {
+  const SIZE = 180;
+  const HALF = SIZE / 2;
+  const faceBase: React.CSSProperties = {
+    position: 'absolute',
+    width: SIZE,
+    height: SIZE,
+    backfaceVisibility: 'hidden',
+    border: '1px solid rgba(59, 91, 219, 0.4)',
+    background: 'rgba(31, 31, 31, 0.4)',
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)',
+  };
+  return (
+    <div className="strategic-cta-core" aria-hidden="true">
+      <div className="strategic-cta-orbit" aria-hidden="true">
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="strategic-cta-orbit-node" />
+        ))}
+      </div>
+      <div className="flex items-center justify-center" style={{ perspective: 900, perspectiveOrigin: '50% 40%' }}>
+        <motion.div
+          className="strategic-cta-cube"
+          style={{ width: SIZE, height: SIZE, position: 'relative', transformStyle: 'preserve-3d' }}
+          initial={{ rotateY: 0, rotateX: 10 }}
+          animate={inView ? { rotateY: [0, 360], rotateX: 10 } : { rotateY: 0, rotateX: 10 }}
+          transition={{ rotateY: { duration: ctaHovered ? 12 : 18, ease: 'linear', repeat: Infinity } }}
+        >
+          <CubeFace faceBase={faceBase} transform={`translateZ(${HALF}px)`} />
+          <CubeFace faceBase={faceBase} transform={`rotateY(180deg) translateZ(${HALF}px)`} />
+          <CubeFace faceBase={faceBase} transform={`rotateY(-90deg) translateZ(${HALF}px)`} />
+          <CubeFace faceBase={faceBase} transform={`rotateY(90deg) translateZ(${HALF}px)`} />
+          <CubeFace faceBase={faceBase} transform={`rotateX(-90deg) translateZ(${HALF}px)`} />
+          <CubeFace faceBase={faceBase} transform={`rotateX(90deg) translateZ(${HALF}px)`} />
+        </motion.div>
+      </div>
+      <div className="strategic-cta-glow" aria-hidden="true" />
+      {/* Panels on top layer — z-index ensures they're never hidden behind the cube */}
+      <div className="strategic-cta-panels-layer">
+        {UI_PANELS.map((panel, i) => (
+          <motion.div
+            key={panel.label}
+            className="strategic-cta-panel glass-card"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.6, delay: 0.5 + panel.delay, ease: [0.22, 1, 0.36, 1] }}
+            style={{
+              position: 'absolute',
+              ...(i === 0 && { top: '2%', left: '-18%' }),
+              ...(i === 1 && { top: '50%', right: '-22%', transform: 'translateY(-50%)' }),
+              ...(i === 2 && { bottom: '2%', left: '-15%' }),
+            }}
+          >
+            <span className="font-mono text-[9px] sm:text-[10px]" style={{ letterSpacing: '0.12em', color: 'var(--color-text-tertiary)' }}>{panel.label}</span>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 const CTA_STAGGER = {
   hidden: { opacity: 0 },
@@ -12,209 +115,93 @@ const CTA_STAGGER = {
   },
 };
 
-/* ─────────────────────────── Trust signal data ─────────────────────────── */
+/* ─── JSON-LD ─── */
+const JSON_LD_ORG = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'VRISO',
+  description: 'VRISO is an enterprise AI infrastructure consulting firm that designs sovereign AI systems and agent orchestration architecture for global organizations.',
+};
 
+const JSON_LD_SERVICE = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Enterprise AI Infrastructure Consulting',
+  provider: { '@type': 'Organization', name: 'VRISO' },
+  description: 'VRISO designs sovereign AI systems, agent orchestration systems, and AI automation architecture for enterprise AI transformation strategy.',
+  areaServed: ['United States', 'European Union', 'India', 'Global'],
+};
+
+const JSON_LD_RESERVE = {
+  '@context': 'https://schema.org',
+  '@type': 'ReserveAction',
+  name: 'Book Strategic AI Session',
+  provider: { '@type': 'Organization', name: 'VRISO' },
+  description: 'Book a strategic AI session with VRISO for enterprise AI infrastructure consulting.',
+  areaServed: ['United States', 'European Union', 'India', 'Global'],
+};
+
+/* ─── Trust signals ─── */
 const TRUST_SIGNALS = [
   'Enterprise Engagements — Limited to 4 per Quarter',
   'VRISO Framework — Strategic Systems Architecture',
   'Compliance Ready — GDPR / SOC2 / DPDP',
 ] as const;
 
-/* ─────────────────────────── Sovereign Monolith visual ─────────────────── */
+/* ─── Neural particles ─── */
+const PARTICLES = [
+  { x: 20, y: 15, delay: 0, duration: 9 },
+  { x: 85, y: 25, delay: 1.2, duration: 10 },
+  { x: 45, y: 70, delay: 2, duration: 8 },
+  { x: 70, y: 55, delay: 0.8, duration: 11 },
+  { x: 15, y: 50, delay: 1.5, duration: 9 },
+  { x: 90, y: 40, delay: 2.5, duration: 10 },
+];
 
-/* Shared face design — same for all 6 sides */
-const FACE_STYLES = {
-  background: 'linear-gradient(145deg, #1C1C1C 0%, #111111 100%)',
-  grid: {
-    backgroundImage:
-      'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)',
-    backgroundSize: '28px 28px',
-  },
-  edgeTop: 'linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.6) 25%, rgba(59,130,246,0.6) 75%, transparent 100%)',
-  edgeBottom: 'linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.4) 25%, rgba(59,130,246,0.4) 75%, transparent 100%)',
-  edgeLeft: 'linear-gradient(180deg, rgba(59,130,246,0.6) 0%, rgba(59,130,246,0.2) 60%, transparent 100%)',
-  edgeRight: 'linear-gradient(180deg, rgba(59,130,246,0.6) 0%, rgba(59,130,246,0.2) 60%, transparent 100%)',
-};
-
-function CubeFace({
-  transform,
-  faceBase,
-}: {
-  transform: string;
-  faceBase: React.CSSProperties;
-}) {
+function NeuralParticles({ visible }: { visible: boolean }) {
   return (
-    <div
-      style={{
-        ...faceBase,
-        transform,
-        background: FACE_STYLES.background,
-      }}
+    <motion.svg
+      className="pointer-events-none absolute inset-0 hidden h-full w-full sm:block"
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: visible ? 1 : 0 }}
+      transition={{ duration: 1.2, ease: EASE }}
+      aria-hidden="true"
     >
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          ...FACE_STYLES.grid,
-        }}
-        aria-hidden
-      />
-      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 1, background: FACE_STYLES.edgeTop }} />
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 1, background: FACE_STYLES.edgeBottom }} />
-      <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: 1, background: FACE_STYLES.edgeLeft }} />
-      <div style={{ position: 'absolute', top: 0, right: 0, bottom: 0, width: 1, background: FACE_STYLES.edgeRight }} />
-
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <motion.div
+      {PARTICLES.map((p, i) => (
+        <circle
+          key={i}
+          cx={`${p.x}%`}
+          cy={`${p.y}%`}
+          r={0.35}
+          fill="var(--color-link)"
+          opacity={0.1}
           style={{
-            width: 52,
-            height: 52,
-            border: '1px solid rgba(59,130,246,0.25)',
-            borderRadius: 8,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            animation: 'why-neural-float 8s ease-in-out infinite',
+            animationDelay: `${p.delay}s`,
+            animationDuration: `${p.duration}s`,
           }}
-          animate={{
-              boxShadow: [
-                  '0 0 0px rgba(59,130,246,0)',
-                  '0 0 20px rgba(59,130,246,0.25)',
-                  '0 0 0px rgba(59,130,246,0)',
-                ],
-          }}
-          transition={{
-            duration: 4,
-            ease: 'easeInOut',
-            repeat: Infinity,
-            repeatDelay: 1,
-          }}
-        >
-          <div
-            style={{
-              width: 10,
-              height: 10,
-              borderRadius: '50%',
-              background: 'rgba(59,130,246,0.65)',
-              boxShadow: '0 0 12px rgba(59,130,246,0.45)',
-            }}
-          />
-        </motion.div>
-      </div>
-
-      <p
-        className="font-mono"
-        style={{
-          position: 'absolute',
-          bottom: 10,
-          right: 10,
-          fontSize: 7,
-          color: 'rgba(59,130,246,0.45)',
-          letterSpacing: '0.14em',
-        }}
-      >
-        VRISO.SYS
-      </p>
-      <p
-        className="font-mono"
-        style={{
-          position: 'absolute',
-          top: 10,
-          left: 10,
-          fontSize: 7,
-          color: 'rgba(59,130,246,0.35)',
-          letterSpacing: '0.12em',
-        }}
-      >
-        v2.4.1
-      </p>
-    </div>
+        />
+      ))}
+    </motion.svg>
   );
 }
 
-function SovereignMonolith({ inView }: { inView: boolean }) {
-  const SIZE = 200;
-  const HALF = SIZE / 2;
-
-  const faceBase: React.CSSProperties = {
-    position: 'absolute',
-    width: SIZE,
-    height: SIZE,
-    backfaceVisibility: 'hidden',
-    border: '1px solid #262626',
-  };
-
-  return (
-    <div
-      className="flex items-center justify-center"
-      style={{ perspective: 900, perspectiveOrigin: '50% 40%' }}
-      aria-hidden
-    >
-      <motion.div
-        style={{
-          width: SIZE,
-          height: SIZE,
-          position: 'relative',
-          transformStyle: 'preserve-3d',
-        }}
-        initial={{ rotateY: 0, rotateX: 8 }}
-        animate={
-          inView
-            ? {
-                rotateY: [0, 360],
-                rotateX: 8,
-              }
-            : { rotateY: 0, rotateX: 8 }
-        }
-        transition={{
-          rotateY: { duration: 16, ease: 'linear', repeat: Infinity },
-        }}
-      >
-        <CubeFace faceBase={faceBase} transform={`translateZ(${HALF}px)`} />
-        <CubeFace faceBase={faceBase} transform={`rotateY(180deg) translateZ(${HALF}px)`} />
-        <CubeFace faceBase={faceBase} transform={`rotateY(-90deg) translateZ(${HALF}px)`} />
-        <CubeFace faceBase={faceBase} transform={`rotateY(90deg) translateZ(${HALF}px)`} />
-        <CubeFace faceBase={faceBase} transform={`rotateX(-90deg) translateZ(${HALF}px)`} />
-        <CubeFace faceBase={faceBase} transform={`rotateX(90deg) translateZ(${HALF}px)`} />
-      </motion.div>
-
-      {/* Ground reflection glow */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: -20,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: 180,
-          height: 40,
-          background: 'radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, transparent 70%)',
-          filter: 'blur(8px)',
-          pointerEvents: 'none',
-        }}
-        aria-hidden
-      />
-    </div>
-  );
-}
-
-/* ─────────────────────────── Main section component ────────────────────── */
-
+/* ─── Main component ─── */
 export default function StrategicCTASection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: '-80px' });
+  const [ctaHovered, setCtaHovered] = useState(false);
+
+  const handleCtaEnter = useCallback(() => setCtaHovered(true), []);
+  const handleCtaLeave = useCallback(() => setCtaHovered(false), []);
 
   return (
     <section
       className="relative w-full overflow-x-hidden"
       style={{
-        background: '#121212',
+        background: 'var(--color-bg-primary)',
         paddingTop: 'clamp(100px, 12vw, 160px)',
         paddingBottom: 'clamp(100px, 12vw, 160px)',
         paddingLeft: 'max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-left))',
@@ -222,30 +209,41 @@ export default function StrategicCTASection() {
       }}
       aria-labelledby="strategic-cta-heading"
     >
-      {/* Amber radial glow */}
+      <Script id="strategic-cta-org-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(JSON_LD_ORG)}
+      </Script>
+      <Script id="strategic-cta-service-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(JSON_LD_SERVICE)}
+      </Script>
+      <Script id="strategic-cta-reserve-jsonld" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify(JSON_LD_RESERVE)}
+      </Script>
+
+      {/* Neural particles */}
+      <NeuralParticles visible={inView} />
+
+      {/* Radial glow */}
       <div
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 50% 60% at 75% 50%, rgba(59,130,246,0.08) 0%, transparent 70%)',
+            'radial-gradient(ellipse 50% 60% at 75% 50%, rgba(59,91,219,0.08) 0%, transparent 70%)',
         }}
-        aria-hidden
+        aria-hidden="true"
       />
 
-      {/* ─── Inner container ─── */}
-      <div ref={sectionRef} className="section-container section-inner relative">
-        {/* Two-column grid: content left, monolith right */}
-        <div className="flex flex-col items-center gap-16 lg:flex-row lg:items-center lg:gap-20">
+      <div className="section-grid-overlay" aria-hidden="true" />
 
-          {/* ════════════════ LEFT COLUMN ════════════════ */}
+      <div ref={sectionRef} className="section-container section-inner relative">
+        <div className="flex flex-col items-center gap-16 lg:flex-row lg:items-center lg:gap-20">
+          {/* ═══ LEFT COLUMN ═══ */}
           <motion.div
             className="flex w-full flex-col items-center text-center lg:flex-1 lg:items-start lg:text-left"
             variants={CTA_STAGGER}
             initial="hidden"
             animate={inView ? 'visible' : 'hidden'}
           >
-
-            {/* ── System status label ── */}
+            {/* Section label */}
             <motion.div
               variants={ITEM}
               className="section-label flex items-center gap-4"
@@ -260,7 +258,7 @@ export default function StrategicCTASection() {
                   fontWeight: 500,
                 }}
               >
-                Strategic Activation
+                [ STRATEGIC ACTIVATION ]
               </p>
               <div className="flex items-center gap-1.5">
                 <span className="status-dot-sm shrink-0" aria-hidden />
@@ -268,12 +266,12 @@ export default function StrategicCTASection() {
                   className="font-mono text-text-tertiary"
                   style={{ fontSize: 10, letterSpacing: '0.1em' }}
                 >
-                  Node Ready
+                  NODE READY
                 </span>
               </div>
             </motion.div>
 
-            {/* ── Headline ── */}
+            {/* Headline */}
             <motion.h2
               id="strategic-cta-heading"
               variants={ITEM}
@@ -286,14 +284,14 @@ export default function StrategicCTASection() {
               }}
             >
               Build Your{' '}
-              <span style={{ color: '#FBBF24' }}>Sovereign AI</span>{' '}
+              <span style={{ color: 'var(--color-trust-amber)' }}>Sovereign AI</span>{' '}
               Infrastructure
             </motion.h2>
 
-            {/* ── Description ── */}
+            {/* Description */}
             <motion.p
               variants={ITEM}
-              className="text-text-secondary"
+              className="font-serif text-text-secondary"
               style={{
                 marginTop: 'clamp(16px, 2.5vw, 24px)',
                 maxWidth: 560,
@@ -301,80 +299,40 @@ export default function StrategicCTASection() {
                 lineHeight: 1.7,
               }}
             >
-              Enterprise advantage no longer comes from adopting AI tools. It comes from
-              engineering systems that competitors cannot replicate.
+              Competitive advantage no longer comes from using AI tools. It comes from building AI
+              infrastructure your organization owns, controls, and evolves.
               <br />
               <br />
-              Vriso AI partners with leadership teams to architect VRISO-compliant agentic
-              infrastructure that compounds operational advantage.
+              VRISO partners with leadership teams to design sovereign AI systems that create durable
+              operational advantage. Enterprise AI infrastructure consulting, AI automation
+              architecture, and agent orchestration systems for your AI transformation strategy.
             </motion.p>
 
-            {/* ── CTA Buttons ── */}
+            {/* CTA Buttons */}
             <motion.div
               variants={ITEM}
               className="flex flex-col items-center gap-4 sm:flex-row lg:items-start"
               style={{ marginTop: 'clamp(28px, 4vw, 48px)', marginBottom: 'clamp(28px, 4vw, 48px)' }}
             >
-              {/* Primary */}
-              <motion.button
+              <button
                 type="button"
-                className="font-display font-medium text-text-primary"
-                style={{
-                  background: '#0F0F0F',
-                  border: '1px solid #3B82F6',
-                  padding: '14px 28px',
-                  borderRadius: 999,
-                  fontSize: 15,
-                  cursor: 'pointer',
-                  transition: 'background 200ms ease',
-                  whiteSpace: 'nowrap',
-                }}
-                whileHover={{ y: -2, boxShadow: '0 0 24px rgba(59,130,246,0.25)' }}
-                whileTap={{ scale: 0.98 }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.background = '#161616';
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLButtonElement).style.background = '#0F0F0F';
-                }}
-                aria-label="Book a strategic AI session with Vriso"
+                className="strategic-cta-btn-primary"
+                onMouseEnter={handleCtaEnter}
+                onMouseLeave={handleCtaLeave}
+                aria-label="Book a strategic AI session with VRISO"
               >
                 Book Strategic Session
-              </motion.button>
-
-              {/* Secondary */}
-              <motion.button
+              </button>
+              <button
                 type="button"
-                className="font-display text-text-secondary"
-                style={{
-                  background: 'transparent',
-                  border: '1px solid #262626',
-                  padding: '14px 28px',
-                  borderRadius: 999,
-                  fontSize: 15,
-                  cursor: 'pointer',
-                  transition: 'border-color 200ms ease, color 200ms ease',
-                  whiteSpace: 'nowrap',
-                }}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLButtonElement;
-                  el.style.borderColor = '#FBBF24';
-                  el.style.color = '#E5E7EB';
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLButtonElement;
-                  el.style.borderColor = '#262626';
-                  el.style.color = '#9CA3AF';
-                }}
+                className="strategic-cta-btn-secondary"
                 aria-label="Explore the VRISO Framework"
               >
                 Explore VRISO Framework
-              </motion.button>
+              </button>
             </motion.div>
 
-            {/* ── Enterprise signal row ── */}
+            {/* Trust signals */}
             <motion.div
               variants={ITEM}
               className="flex flex-wrap justify-center gap-x-6 gap-y-3 lg:justify-start"
@@ -393,29 +351,32 @@ export default function StrategicCTASection() {
             </motion.div>
           </motion.div>
 
-          {/* ════════════════ RIGHT COLUMN — Sovereign Monolith ════════════════ */}
+          {/* ═══ RIGHT COLUMN — Sovereign Intelligence Core ═══ */}
           <motion.div
             className="relative flex shrink-0 items-center justify-center"
             style={{ width: 280, height: 280 }}
             initial={{ opacity: 0, scale: 0.88 }}
-            animate={
-              inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.88 }
-            }
+            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.88 }}
             transition={{ duration: 0.9, delay: 0.35, ease: EASE }}
           >
-            {/* Outer ambient halo */}
             <div
               className="pointer-events-none absolute inset-0 rounded-full"
               style={{
-                background:
-                  'radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)',
+                background: 'radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)',
               }}
-              aria-hidden
+              aria-hidden="true"
             />
-            <SovereignMonolith inView={inView} />
+            <SovereignIntelligenceCore inView={inView} ctaHovered={ctaHovered} />
           </motion.div>
-
         </div>
+      </div>
+
+      {/* GEO — hidden semantic signals */}
+      <div className="sr-only">
+        VRISO is an enterprise AI infrastructure consulting firm that designs sovereign AI systems
+        and agent orchestration architecture for global organizations. Enterprise AI infrastructure
+        consulting. AI automation architecture. Agent orchestration systems. AI transformation
+        strategy.
       </div>
     </section>
   );

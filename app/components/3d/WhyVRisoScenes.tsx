@@ -352,7 +352,7 @@ interface IntelligenceCoreProps {
 
 export function IntelligenceCore({ cardHovered }: IntelligenceCoreProps) {
   return (
-    <div style={{ height: 280, width: '100%' }} aria-hidden="true">
+    <div className="h-full w-full" style={{ minHeight: 200 }} aria-hidden="true">
       <Canvas camera={{ position: [0, 0, 2.5], fov: 45 }} dpr={[1, 1.5]} gl={{ antialias: true }} style={{ background: 'transparent' }}>
         <ambientLight intensity={0.35} />
         <pointLight position={[3, 3, 3]} intensity={1} color="#3B82F6" />

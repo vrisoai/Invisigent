@@ -417,6 +417,182 @@ a:focus-visible {
   color: var(--color-text-secondary);
 }
 
+/* === WHY VRISO — Mobile optimization === */
+.why-vriso-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: 0.25rem;
+}
+
+/* Space between description paragraph and cards */
+.why-vriso-desc {
+  margin-bottom: 3rem !important;
+}
+@media (min-width: 640px) {
+  .why-vriso-desc {
+    margin-bottom: 3.5rem !important;
+  }
+}
+@media (min-width: 768px) {
+  .why-vriso-desc {
+    margin-bottom: 4rem !important;
+  }
+}
+
+/* Reduce inner padding on mobile for Why VRISO */
+@media (max-width: 639px) {
+  .why-vriso-section .section-inner {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+/* === WHY VRISO — Mobile cards (no 3D, lightweight) === */
+.why-vriso-card-mobile {
+  padding: 1.25rem 1.25rem;
+  min-height: 0;
+}
+.why-vriso-card-mobile__title {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+}
+.why-vriso-card-mobile__desc {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+}
+
+/* === HOW WE WORK === */
+.how-we-work-card {
+  position: relative;
+  padding: clamp(28px, 3vw, 40px);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  perspective: 1000px;
+}
+
+/* Wrapper for entrance animation — no tilt, passes events to child */
+.how-we-work-card-wrapper {
+  perspective: 1000px;
+}
+
+/* Card with tilt — entire card (border, background, content) bends toward cursor */
+.how-we-work-card-tilt {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(800px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition: transform 0.15s ease-out;
+}
+
+.how-we-work-card-tilt:hover {
+  transform: perspective(800px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .how-we-work-card-tilt {
+    transform: none !important;
+    transition: none;
+  }
+  .how-we-work-card-tilt:hover {
+    transform: translateY(-2px) !important;
+  }
+}
+
+.how-we-work-card__step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-trust-amber);
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  margin-bottom: 1rem;
+}
+
+.how-we-work-card__label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  font-weight: 500;
+  color: var(--color-text-micro);
+  margin-bottom: 0.75rem;
+}
+
+.how-we-work-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 120px;
+}
+
+@media (min-width: 1024px) {
+  .how-we-work-card {
+    min-height: 240px;
+  }
+  .how-we-work-card__content {
+    min-height: 140px;
+  }
+}
+
+/* Connection beam from card to center Process Engine */
+.how-we-work-card-with-beam .how-we-work-beam {
+  display: none;
+}
+@media (min-width: 1024px) {
+  .how-we-work-card-with-beam {
+    position: relative;
+  }
+  .how-we-work-card-with-beam .how-we-work-beam {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 120px;
+    margin-top: -120px;
+    background: linear-gradient(
+      to top,
+      rgba(59, 91, 219, 0.4) 0%,
+      rgba(251, 191, 36, 0.2) 50%,
+      transparent 100%
+    );
+    transition: opacity 400ms ease;
+    pointer-events: none;
+  }
+  .how-we-work-card-with-beam:hover .how-we-work-beam {
+    opacity: 0.8 !important;
+    background: linear-gradient(
+      to top,
+      rgba(59, 91, 219, 0.7) 0%,
+      rgba(251, 191, 36, 0.4) 50%,
+      transparent 100%
+    );
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .how-we-work-card-with-beam .how-we-work-beam {
+    transition: none;
+  }
+}
+
 /* Animated grid overlay for sections */
 .section-grid-overlay {
   position: absolute;
@@ -430,6 +606,250 @@ a:focus-visible {
   animation: grid-drift 30s ease-in-out infinite;
   will-change: transform;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .section-grid-overlay {
+    animation: none;
+  }
+}
+
+/* === STRATEGIC CTA SECTION === */
+.strategic-cta-core {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.strategic-cta-orbit {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  animation: strategic-cta-orbit 12s linear infinite;
+}
+
+.strategic-cta-orbit-node {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-trust-amber);
+  box-shadow: 0 0 12px var(--color-trust-amber);
+  top: 50%;
+  left: 50%;
+  margin-top: -4px;
+  margin-left: -4px;
+  transform-origin: 4px 4px;
+}
+
+.strategic-cta-orbit-node:nth-child(1) {
+  transform: translate(-4px, -4px) rotate(0deg) translateY(-120px);
+}
+
+.strategic-cta-orbit-node:nth-child(2) {
+  transform: translate(-4px, -4px) rotate(120deg) translateY(-120px);
+}
+
+.strategic-cta-orbit-node:nth-child(3) {
+  transform: translate(-4px, -4px) rotate(240deg) translateY(-120px);
+}
+
+/* Panels layer — above cube so tags are never hidden */
+.strategic-cta-panels-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.strategic-cta-panel {
+  padding: 8px 12px;
+  border-radius: 8px;
+  animation: strategic-cta-panel-float 6s ease-in-out infinite;
+}
+
+.strategic-cta-panel:nth-child(2) {
+  animation-delay: 1s;
+}
+
+.strategic-cta-panel:nth-child(3) {
+  animation-delay: 2s;
+}
+
+.strategic-cta-glow {
+  position: absolute;
+  bottom: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 48px;
+  background: radial-gradient(ellipse, rgba(59, 91, 219, 0.15) 0%, transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.strategic-cta-neural-line {
+  animation: network-pulse 2.5s ease-in-out infinite;
+}
+
+.strategic-cta-neural-core {
+  animation: strategic-cta-core-pulse 2s ease-in-out infinite;
+}
+
+@keyframes strategic-cta-core-pulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strategic-cta-orbit,
+  .strategic-cta-orbit-node,
+  .strategic-cta-panel {
+    animation: none;
+  }
+}
+
+/* Strategic CTA buttons */
+.strategic-cta-btn-primary {
+  background: var(--color-btn-bg);
+  border: 1px solid var(--color-link);
+  color: var(--color-text-primary);
+  padding: 14px 28px;
+  border-radius: 9999px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+}
+
+.strategic-cta-btn-primary:hover {
+  background: var(--color-btn-hover-bg);
+  box-shadow: 0 0 24px rgba(59, 91, 219, 0.25);
+  transform: translateY(-2px);
+}
+
+.strategic-cta-btn-primary:focus-visible,
+.strategic-cta-btn-secondary:focus-visible {
+  outline: 2px solid var(--color-action-accent);
+  outline-offset: 3px;
+}
+
+.strategic-cta-btn-secondary {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  padding: 14px 28px;
+  border-radius: 9999px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  cursor: pointer;
+  transition: border-color 200ms ease, color 200ms ease, transform 200ms ease;
+}
+
+.strategic-cta-btn-secondary:hover {
+  border-color: var(--color-trust-amber);
+  color: var(--color-text-primary);
+  transform: translateY(-2px);
+}
+
+/* === CORE SERVICES — Page scroll, sticky inner content (proven stacking pattern) === */
+.core-services-section {
+  background: var(--color-bg-section);
+  position: relative;
+}
+
+.core-services-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  gap: clamp(1.5rem, 3vw, 4rem);
+  align-items: start;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: clamp(40px, 6vw, 80px) max(clamp(1rem, 4vw, 4rem), env(safe-area-inset-left));
+  padding-right: max(clamp(1rem, 4vw, 4rem), env(safe-area-inset-right));
+}
+
+@media (max-width: 1023px) {
+  .core-services-layout {
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    padding: clamp(32px, 5vw, 60px) max(clamp(1rem, 4vw, 2rem), env(safe-area-inset-left));
+    padding-right: max(clamp(1rem, 4vw, 2rem), env(safe-area-inset-right));
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+  }
+}
+
+.core-services-left {
+  position: sticky;
+  top: clamp(72px, 10vw, 100px);
+  min-width: 0;
+}
+
+@media (max-width: 1023px) {
+  .core-services-left {
+    position: relative;
+    top: 0;
+    margin-bottom: clamp(1rem, 3vw, 2rem);
+  }
+}
+
+/* Right: cards — scroll-driven stacking (CodyHouse pattern) */
+.core-services-cards-column {
+  position: relative;
+  min-width: 0;
+}
+
+.core-services-card-slot {
+  position: relative;
+}
+
+.core-services-stack-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(260px, 42vh, 340px);
+  min-height: 260px;
+  max-height: 340px;
+  padding: clamp(16px, 2vw, 28px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+/* Mobile: no stacking, simple list */
+@media (max-width: 1023px) {
+  .core-services-card-slot {
+    position: relative !important;
+    height: auto !important;
+  }
+  .core-services-stack-card {
+    position: relative !important;
+    top: auto !important;
+    height: auto !important;
+    min-height: 160px !important;
+    max-height: none !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .core-services-stack-card {
+    min-height: 140px !important;
+    padding: 0.875rem !important;
+    margin-bottom: 0.75rem !important;
+  }
+}
+
+.core-services-stack-card .font-mono { font-size: clamp(9px, 2.2vw, 10px) !important; }
+.core-services-stack-card h3 { font-size: clamp(16px, 3.5vw, 22px) !important; }
+.core-services-stack-card p:not(.font-mono) { font-size: clamp(13px, 2vw, 16px) !important; }
 
 /* === SELECTION === */
 ::selection {

@@ -3,7 +3,7 @@ import {
   ValueProposition,
   CoreServices,
   WhyVRISO,
-  OutcomeVaultSection,
+  HowWeWork,
   StrategicCTASection,
   VrisoLogoSection,
 } from '@/app/components';
@@ -15,7 +15,7 @@ export default function Home() {
       <ValueProposition />
       <CoreServices />
       <WhyVRISO />
-      <OutcomeVaultSection />
+      <HowWeWork />
       <StrategicCTASection />
       <VrisoLogoSection />
     </main>

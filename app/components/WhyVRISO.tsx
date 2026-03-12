@@ -6,14 +6,8 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useCallback, useMemo } from 'react';
 import { EASE, FADE_UP, CARD_FADE } from '@/app/lib/animations';
 
-const WhyVRisoCardScene = dynamic(
-  () => import('./3d/WhyVRisoScenes').then((m) => ({ default: m.WhyVRisoCardScene })),
-  { ssr: false },
-);
-const IntelligenceCore = dynamic(
-  () => import('./3d/WhyVRisoScenes').then((m) => ({ default: m.IntelligenceCore })),
-  { ssr: false },
-);
+const WhyVRisoCardScene = dynamic(() => import('./3d/WhyVRisoCardSceneWrapper'), { ssr: false });
+const IntelligenceCore = dynamic(() => import('./3d/IntelligenceCoreWrapper'), { ssr: false });
 
 /* ─── JSON-LD ─── */
 const JSON_LD_ORG = {
@@ -126,13 +120,13 @@ export function WhyVRISO() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden"
+      className="why-vriso-section relative w-full overflow-hidden"
       style={{
         background: 'var(--color-bg-primary)',
-        paddingTop: 'clamp(80px, 10vw, 140px)',
-        paddingBottom: 'clamp(80px, 10vw, 140px)',
-        paddingLeft: 'max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-left))',
-        paddingRight: 'max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-right))',
+        paddingTop: 'clamp(40px, 8vw, 140px)',
+        paddingBottom: 'clamp(40px, 8vw, 140px)',
+        paddingLeft: 'max(clamp(0.75rem, 3vw, 4rem), env(safe-area-inset-left))',
+        paddingRight: 'max(clamp(0.75rem, 3vw, 4rem), env(safe-area-inset-right))',
       }}
       aria-labelledby="why-vriso-heading"
     >
@@ -143,8 +137,10 @@ export function WhyVRISO() {
         {JSON.stringify(JSON_LD_SERVICE)}
       </Script>
 
-      {/* Neural particles */}
-      <NeuralParticles visible={sectionInView} />
+      {/* Neural particles — desktop only for mobile performance */}
+      <div className="hidden sm:block">
+        <NeuralParticles visible={sectionInView} />
+      </div>
 
       {/* Radial glow */}
       <div
@@ -161,20 +157,10 @@ export function WhyVRISO() {
 
       <div className="section-container section-inner relative">
         {/* ── Header ── */}
-        <header
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            textAlign: 'center',
-            maxWidth: 720,
-            marginInline: 'auto',
-          }}
-        >
+        <header className="why-vriso-header">
           <motion.p
-            className="font-mono"
+            className="font-mono text-[11px] sm:text-xs"
             style={{
-              fontSize: 12,
               letterSpacing: '0.14em',
               fontWeight: 500,
               color: 'var(--color-text-tertiary)',
@@ -190,12 +176,11 @@ export function WhyVRISO() {
 
           <motion.h2
             id="why-vriso-heading"
-            className="font-serif"
+            className="font-serif text-2xl sm:text-4xl md:text-5xl"
             style={{
-              fontSize: 'clamp(36px, 4vw, 50px)',
               fontWeight: 500,
-              lineHeight: 1.15,
-              marginTop: 'clamp(20px, 3vw, 32px)',
+              lineHeight: 1.2,
+              marginTop: 'clamp(12px, 2vw, 32px)',
               color: 'var(--color-text-primary)',
               width: '100%',
             }}
@@ -210,12 +195,11 @@ export function WhyVRISO() {
           </motion.h2>
 
           <motion.p
-            className="font-serif"
+            className="font-serif text-sm sm:text-base md:text-lg why-vriso-desc"
             style={{
-              fontSize: 'clamp(16px, 1.3vw, 20px)',
               lineHeight: 1.7,
               maxWidth: 680,
-              marginTop: 'clamp(18px, 2.5vw, 28px)',
+              marginTop: 'clamp(12px, 2vw, 28px)',
               color: 'var(--color-text-secondary)',
               width: '100%',
             }}
@@ -231,10 +215,37 @@ export function WhyVRISO() {
           </motion.p>
         </header>
 
-        {/* ── Grid: cards + 3D core ── */}
-        <div className="relative" style={{ marginTop: 'clamp(48px, 6vw, 80px)' }}>
+        {/* ── Cards: flex column on mobile, 2x2 grid with core on desktop ── */}
+        <div className="relative mt-16 sm:mt-14 md:mt-20">
+          {/* Mobile: simple flex column, 4 cards */}
           <motion.div
-            className="grid gap-6 sm:grid-cols-2"
+            className="flex flex-col gap-5 sm:hidden"
+            initial="hidden"
+            animate={sectionInView ? 'visible' : 'hidden'}
+            variants={{
+              hidden: { opacity: 1 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+              },
+            }}
+          >
+            {CARDS.map((card, i) => (
+              <motion.article
+                key={card.title}
+                className="why-vriso-card-mobile glass-card"
+                variants={CARD_FADE}
+                aria-label={card.title}
+              >
+                <h3 className="why-vriso-card-mobile__title">{card.title}</h3>
+                <p className="why-vriso-card-mobile__desc">{card.description}</p>
+              </motion.article>
+            ))}
+          </motion.div>
+
+          {/* Desktop: grid with 3D core */}
+          <motion.div
+            className="hidden sm:grid sm:grid-cols-2 sm:gap-6"
             style={{
               gridTemplateRows: 'auto auto auto',
               position: 'relative',
@@ -250,103 +261,61 @@ export function WhyVRISO() {
               },
             }}
           >
-            {/* Row 1: Card 1, Card 2 */}
             {[0, 1].map((i) => (
-            <motion.article
-              key={i}
-              className="glass-card"
-              style={{
-                gridColumn: i === 0 ? 1 : 2,
-                gridRow: 1,
-                padding: 'clamp(24px, 2.5vw, 32px)',
-              }}
-              variants={CARD_FADE}
-              onMouseEnter={handleEnter(i)}
-              onMouseLeave={handleLeave}
-              onMouseMove={handleCardMouseMove}
-              aria-label={CARDS[i].title}
-            >
-              <WhyVRisoCardScene variant={i} hovered={hoveredCard === i} />
-              <h3
-                className="font-serif"
-                style={{
-                  fontSize: 'clamp(18px, 1.5vw, 22px)',
-                  fontWeight: 600,
-                  marginTop: 16,
-                  color: 'var(--color-text-primary)',
-                }}
+              <motion.article
+                key={CARDS[i].title}
+                className={`glass-card ${i === 0 ? 'sm:col-start-1' : 'sm:col-start-2'} sm:row-start-1`}
+                style={{ padding: 'clamp(24px, 2.5vw, 32px)' }}
+                variants={CARD_FADE}
+                onMouseEnter={handleEnter(i)}
+                onMouseLeave={handleLeave}
+                onMouseMove={handleCardMouseMove}
+                aria-label={CARDS[i].title}
               >
-                {CARDS[i].title}
-              </h3>
-              <p
-                className="font-serif"
-                style={{
-                  fontSize: 'clamp(14px, 1vw, 16px)',
-                  lineHeight: 1.7,
-                  marginTop: 8,
-                  color: 'var(--color-text-secondary)',
-                }}
-              >
-                {CARDS[i].description}
-              </p>
-            </motion.article>
-          ))}
-
-            {/* Row 2: 3D Intelligence Core */}
+                <div style={{ height: 140 }}>
+                  <WhyVRisoCardScene variant={i} hovered={hoveredCard === i} />
+                </div>
+                <h3 className="font-serif mt-4" style={{ fontSize: 'clamp(18px, 1.5vw, 22px)', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                  {CARDS[i].title}
+                </h3>
+                <p className="font-serif mt-2" style={{ fontSize: 'clamp(14px, 1vw, 16px)', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
+                  {CARDS[i].description}
+                </p>
+              </motion.article>
+            ))}
             <motion.div
-              className="relative col-span-1 sm:col-span-2 flex items-center justify-center"
-              style={{ gridRow: 2, minHeight: 280 }}
+              className="relative col-span-2 flex items-center justify-center sm:row-start-2 h-70"
               variants={CARD_FADE}
             >
               <IntelligenceCore cardHovered={hoveredCard} />
             </motion.div>
-
-          {/* Row 3: Card 3, Card 4 */}
-          {[2, 3].map((i) => (
-            <motion.article
-              key={i}
-              className="glass-card"
-              style={{
-                gridColumn: i === 2 ? 1 : 2,
-                gridRow: 3,
-                padding: 'clamp(24px, 2.5vw, 32px)',
-              }}
-              variants={CARD_FADE}
-              onMouseEnter={handleEnter(i)}
-              onMouseLeave={handleLeave}
-              onMouseMove={handleCardMouseMove}
-              aria-label={CARDS[i].title}
-            >
-              <WhyVRisoCardScene variant={i} hovered={hoveredCard === i} />
-              <h3
-                className="font-serif"
-                style={{
-                  fontSize: 'clamp(18px, 1.5vw, 22px)',
-                  fontWeight: 600,
-                  marginTop: 16,
-                  color: 'var(--color-text-primary)',
-                }}
+            {[2, 3].map((i) => (
+              <motion.article
+                key={CARDS[i].title}
+                className={`glass-card ${i === 2 ? 'sm:col-start-1' : 'sm:col-start-2'} sm:row-start-3`}
+                style={{ padding: 'clamp(24px, 2.5vw, 32px)' }}
+                variants={CARD_FADE}
+                onMouseEnter={handleEnter(i)}
+                onMouseLeave={handleLeave}
+                onMouseMove={handleCardMouseMove}
+                aria-label={CARDS[i].title}
               >
-                {CARDS[i].title}
-              </h3>
-              <p
-                className="font-serif"
-                style={{
-                  fontSize: 'clamp(14px, 1vw, 16px)',
-                  lineHeight: 1.7,
-                  marginTop: 8,
-                  color: 'var(--color-text-secondary)',
-                }}
-              >
-                {CARDS[i].description}
-              </p>
-            </motion.article>
-          ))}
+                <div style={{ height: 140 }}>
+                  <WhyVRisoCardScene variant={i} hovered={hoveredCard === i} />
+                </div>
+                <h3 className="font-serif mt-4" style={{ fontSize: 'clamp(18px, 1.5vw, 22px)', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                  {CARDS[i].title}
+                </h3>
+                <p className="font-serif mt-2" style={{ fontSize: 'clamp(14px, 1vw, 16px)', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
+                  {CARDS[i].description}
+                </p>
+              </motion.article>
+            ))}
           </motion.div>
 
-          {/* Beams overlay — from cards to center, visible on hover */}
+          {/* Beams overlay — from cards to center, visible on hover (desktop only) */}
           <svg
-            className="pointer-events-none absolute inset-0 h-full w-full"
+            className="pointer-events-none absolute inset-0 hidden h-full w-full sm:block"
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
             style={{ zIndex: 5 }}
