@@ -6,6 +6,7 @@ import {
   HowWeWork,
   StrategicCTASection,
   VrisoLogoSection,
+  FooterSection,
 } from '@/app/components';
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
       <HowWeWork />
       <StrategicCTASection />
       <VrisoLogoSection />
+      <FooterSection />
     </main>
   );
 }

@@ -187,24 +187,25 @@ export function ValueProposition() {
               variants={cardReveal}
               aria-label={card.title}
             >
-              {/* Signal node */}
-              <div
-                className="flex items-center gap-3"
-                style={{ marginBottom: 24 }}
-              >
-                <span className="vp-card__signal" aria-hidden="true" />
-                <span className="vp-card__label">{card.label}</span>
+              <div className="vp-card__inner">
+                {/* Front: heading only */}
+                <div className="vp-card__front">
+                  <div
+                    className="flex items-center gap-3"
+                    style={{ marginBottom: 24 }}
+                  >
+                    <span className="vp-card__signal" aria-hidden="true" />
+                    <span className="vp-card__label">{card.label}</span>
+                  </div>
+                  <h3 className="vp-card__title">{card.title}</h3>
+                </div>
+
+                {/* Back: blurred surface + description */}
+                <div className="vp-card__back">
+                  <div className="vp-card__back-blur" aria-hidden="true" />
+                  <p className="vp-card__desc">{card.description}</p>
+                </div>
               </div>
-
-              {/* Title */}
-              <h3 className="vp-card__title" style={{ marginBottom: 16 }}>
-                {card.title}
-              </h3>
-
-              {/* Description */}
-              <p className="vp-card__desc">
-                {card.description}
-              </p>
             </motion.article>
           ))}
         </motion.div>

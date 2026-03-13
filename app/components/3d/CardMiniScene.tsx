@@ -13,7 +13,7 @@ function InfrastructureScene({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    const t = clock.getElapsedTime();
+    const t = clock.elapsedTime;
     groupRef.current.rotation.y = t * 0.25;
     groupRef.current.rotation.x = Math.sin(t * 0.15) * 0.2;
   });
@@ -78,7 +78,7 @@ function AutomationScene({ hovered }: { hovered: boolean }) {
   const ring2Ref = useRef<THREE.Group>(null);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.elapsedTime;
     if (ring1Ref.current) ring1Ref.current.rotation.z = t * 0.4;
     if (ring2Ref.current) ring2Ref.current.rotation.z = -t * 0.3;
   });
@@ -173,7 +173,7 @@ function IntelligenceScene({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y = clock.getElapsedTime() * 0.2;
+    groupRef.current.rotation.y = clock.elapsedTime * 0.2;
   });
 
   const nodes = useMemo(() => {

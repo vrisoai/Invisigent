@@ -1,8 +1,9 @@
+// How we work 
 'use client';
 
 import Script from 'next/script';
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useCallback, useMemo } from 'react';
+import { useRef, useState, useCallback, useMemo, useEffect } from 'react';
 import { EASE, FADE_UP, CARD_FADE } from '@/app/lib/animations';
 
 /* ─── JSON-LD ─── */
@@ -97,6 +98,7 @@ export default function HowWeWork() {
   const sectionRef = useRef<HTMLElement>(null);
   const sectionInView = useInView(sectionRef, { once: true, margin: '-80px' });
   const gridRef = useRef<HTMLDivElement>(null);
+  const carouselGridRef = useRef<HTMLDivElement>(null);
   const gridInView = useInView(gridRef, { once: true, margin: '-60px' });
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const [tappedCard, setTappedCard] = useState<number | null>(null);
@@ -123,10 +125,31 @@ export default function HowWeWork() {
     e.currentTarget.style.setProperty('--tilt-y', `${tiltY}deg`);
   }, []);
 
+  // Scroll to second card by default on mobile carousel (ARCHITECTURE_DESIGN centered)
+  useEffect(() => {
+    const grid = carouselGridRef.current;
+    if (!grid) return;
+    if (window.innerWidth > 767) return;
+
+    const scrollToSecond = () => {
+      const cards = Array.from(grid.children) as HTMLElement[];
+      if (cards.length < 2) return;
+      // Scroll so second card (index 1) is the snapped card
+      const secondCard = cards[1];
+      grid.scrollLeft = secondCard.offsetLeft - grid.offsetWidth * 0.08;
+    };
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToSecond();
+      });
+    });
+  }, []);
+
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden"
+      className="how-we-work-section relative w-full overflow-hidden"
       style={{
         background: 'var(--color-bg-primary)',
         paddingTop: 'clamp(80px, 10vw, 140px)',
@@ -250,8 +273,11 @@ export default function HowWeWork() {
 
         {/* ── Process steps grid ── */}
         <motion.div
-          ref={gridRef}
-          className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-3"
+          ref={(el: HTMLDivElement | null) => {
+            (gridRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+            carouselGridRef.current = el;
+          }}
+          className="how-we-work-grid grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-3"
           style={{ marginTop: 'clamp(40px, 5vw, 64px)' }}
           initial="hidden"
           animate={gridInView ? 'visible' : 'hidden'}
@@ -278,11 +304,6 @@ export default function HowWeWork() {
             >
               {/* Entire card tilts — glass styling + transform on same element */}
               <div className="how-we-work-card-tilt glass-card how-we-work-card cursor-pointer">
-              {/* Step number */}
-              <span className="how-we-work-card__step" aria-hidden="true">
-                {i + 1}
-              </span>
-
               {/* Label */}
               <p className="how-we-work-card__label">{step.label}</p>
 

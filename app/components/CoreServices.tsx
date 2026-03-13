@@ -1,9 +1,21 @@
+// CoreServices.tsx
 'use client';
+
+/**
+ * Section 3: Core Services (Services section).
+ * To change this section, edit:
+ *   - app/components/CoreServices.tsx  (layout, cards data, scroll logic)
+ *   - app/styles/components.css         (search: "CORE SERVICES" or ".core-services-")
+ */
 
 import Script from 'next/script';
 import { motion } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useLayoutEffect, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { EASE } from '@/app/lib/animations';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const JSON_LD = {
   '@context': 'https://schema.org',
@@ -27,12 +39,42 @@ const JSON_LD = {
 };
 
 const CARDS = [
-  { label: '[ SOVEREIGNTY ]', title: 'Sovereign AI Architecture', description: 'Design private AI infrastructure that organizations fully own, control, and scale without vendor dependency.' },
-  { label: '[ ORCHESTRATION ]', title: 'Agentic Orchestration', description: 'Deploy intelligent agents that autonomously execute business workflows across operations, finance, and compliance.' },
-  { label: '[ AUTOMATION ]', title: 'Enterprise Automation Systems', description: 'Automate mission-critical workflows with intelligent decision systems and adaptive automation.' },
-  { label: '[ CONSULTING ]', title: 'AI Technology Consulting', description: 'Strategic consulting for organizations adopting AI infrastructure, automation systems, and intelligent enterprise platforms.' },
-  { label: '[ KNOWLEDGE ]', title: 'Enterprise Knowledge Intelligence', description: 'Convert fragmented organizational knowledge into AI-ready intelligence layers for decision systems.' },
-  { label: '[ MX-OPTIMIZATION ]', title: 'Machine Experience Optimization', description: 'Structure digital infrastructure for discoverability by AI agents, search models, and autonomous systems.' },
+  {
+    label: '[ STRATEGY ]',
+    title: 'AI & Technology Strategy Consulting',
+    description:
+      'Design the right AI architecture for your organization. We help leadership teams plan AI adoption, infrastructure strategy, and scalable automation roadmaps.',
+  },
+  {
+    label: '[ ORCHESTRATION ]',
+    title: 'Agent Orchestration & AI Workflows',
+    description:
+      'Build intelligent multi-agent systems that coordinate tasks, automate workflows, and power complex AI-driven operations across your organization.',
+  },
+  {
+    label: '[ KNOWLEDGE ]',
+    title: 'RAG & Knowledge Retrieval Systems',
+    description:
+      'Develop AI systems that securely access enterprise knowledge using advanced retrieval pipelines and Retrieval-Augmented Generation to deliver accurate, context-aware responses.',
+  },
+  {
+    label: '[ PERFORMANCE ]',
+    title: 'AI Performance & Latency Optimization',
+    description:
+      'Optimize AI infrastructure for speed, efficiency, and cost. We improve inference performance, reduce latency, and ensure reliable production-grade AI systems.',
+  },
+  {
+    label: '[ PRODUCTS ]',
+    title: 'AI-Native Product Development',
+    description:
+      'Design and build AI-first products, copilots, and intelligent applications that embed AI capabilities directly into your platform or business workflows.',
+  },
+  {
+    label: '[ COMPLIANCE ]',
+    title: 'Compliance-Ready AI Systems',
+    description:
+      'Develop AI systems with built-in governance, security, and compliance aligned with regulations like the General Data Protection Regulation to support enterprise-grade deployment.',
+  },
 ];
 
 const NEURAL_NODES: { x: number; y: number }[] = [
@@ -56,65 +98,173 @@ const NEURAL_EDGES = (() => {
   return result;
 })();
 
-const CARD_HEIGHT = 280;
-const CARD_GAP = 42; /* 15% visible */
-const SCROLL_PER_CARD = 238; /* 85% overlap */
-
 export function CoreServices() {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const [cardTransforms, setCardTransforms] = useState<number[]>(CARDS.map(() => 0));
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [activeCard, setActiveCard] = useState(0);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const section = sectionRef.current;
-    const cardsEl = cardsRef.current;
-    if (!section || !cardsEl) return;
+    if (!section) return;
 
-    const animate = () => {
-      const rect = section.getBoundingClientRect();
-      const sectionTop = -rect.top;
-      const transforms: number[] = [];
-      let active = 0;
+    let pinTrigger: ScrollTrigger | null = null;
+    let onWheel: (e: WheelEvent) => void = () => {};
 
-      for (let i = 0; i < CARDS.length; i++) {
-        const scrollForThisCard = sectionTop - i * SCROLL_PER_CARD;
-        if (scrollForThisCard > 0) {
-          const moveUp = Math.min(scrollForThisCard, SCROLL_PER_CARD) * (CARD_HEIGHT - CARD_GAP) / SCROLL_PER_CARD;
-          transforms.push(-moveUp);
-          active = i;
-        } else {
-          transforms.push(0);
-        }
+    const isMobile = window.innerWidth < 1024;
+
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLElement>('.core-services-stack-card', section);
+      const total = cards.length;
+      if (total === 0) return;
+
+      ScrollTrigger.getAll().forEach(st => st.kill());
+
+      // Setup all cards hidden below, first card visible
+      gsap.set(cards, {
+        position: 'absolute', top: '50%', yPercent: -50,
+        left: 0, right: 0, force3D: true, y: 120, opacity: 0,
+      });
+      gsap.set(cards[0], { y: 0, opacity: 1 });
+
+      let current = 0;
+      let animating = false;
+      let cooldown = false;          // blocks next scroll until cooldown expires
+      let accDelta = 0;              // accumulates trackpad delta
+      let accTimer: ReturnType<typeof setTimeout> | null = null;
+
+      const goTo = (index: number) => {
+        if (index < 0 || index >= total || animating) return;
+        animating = true;
+
+        const outgoing = cards[current];
+        const incoming = cards[index];
+        const direction = index > current ? 1 : -1;
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            current = index;
+            animating = false;
+          },
+        });
+
+        tl.to(outgoing, {
+          y: -120 * direction,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'power3.inOut',
+        });
+        tl.fromTo(
+          incoming,
+          { y: 120 * direction, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, ease: 'power3.inOut' },
+          '-=0.3'
+        );
+      };
+
+      // Pin section and intercept scroll only on desktop; mobile uses carousel (no pin)
+      if (!isMobile) {
+        pinTrigger = ScrollTrigger.create({
+          trigger: section,
+          start: 'top top',
+          end: `+=${(total - 1) * 100}vh`,
+          pin: true,
+          onUpdate: () => {
+            // Keep scroll locked while animating
+          },
+        });
       }
-      setCardTransforms(transforms);
-      setActiveCard(active);
+
+      onWheel = (e: WheelEvent) => {
+        const rect = section.getBoundingClientRect();
+        const inView = rect.top <= 10 && rect.bottom >= window.innerHeight - 10;
+        if (!inView) return;
+
+        const atStart = current === 0 && e.deltaY < 0;
+        const atEnd = current === total - 1 && e.deltaY > 0;
+        if (atStart || atEnd) return;
+
+        e.preventDefault();
+        if (animating || cooldown) return;
+
+        // Accumulate delta to distinguish intentional scroll from trackpad drift
+        accDelta += e.deltaY;
+
+        // Reset accumulator after 150ms of no scroll
+        if (accTimer) clearTimeout(accTimer);
+        accTimer = setTimeout(() => {
+          accDelta = 0;
+        }, 150);
+
+        // Only trigger when accumulated delta passes threshold
+        const THRESHOLD = 30;
+        if (Math.abs(accDelta) < THRESHOLD) return;
+
+        // Trigger card change
+        const direction = accDelta > 0 ? 1 : -1;
+        accDelta = 0; // reset immediately after trigger
+        if (accTimer) clearTimeout(accTimer);
+        accTimer = null;
+
+        goTo(current + direction);
+
+        // Cooldown: block further scroll for animation duration + buffer
+        cooldown = true;
+        setTimeout(() => {
+          cooldown = false;
+        }, 900); // matches goTo animation duration (0.6s) + 300ms buffer
+      };
+
+      if (!isMobile) {
+        window.addEventListener('wheel', onWheel, { passive: false });
+      }
+    }, sectionRef);
+
+    return () => {
+      if (!isMobile) {
+        window.removeEventListener('wheel', onWheel);
+        pinTrigger?.kill();
+      }
+      ctx.revert();
+    };
+  }, []);
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    const onScroll = () => {
+      const index = Math.round(carousel.scrollLeft / carousel.offsetWidth);
+      setActiveCard(index);
     };
 
-    animate();
-    window.addEventListener('scroll', animate, { passive: true });
-    return () => window.removeEventListener('scroll', animate);
+    carousel.addEventListener('scroll', onScroll, { passive: true });
+    return () => carousel.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
-    <section ref={sectionRef} className="core-services-section relative w-full" aria-labelledby="core-services-heading">
+    <section
+      ref={sectionRef}
+      className="core-services-section core-services-section--sticky-scroll relative w-full"
+      aria-labelledby="core-services-heading"
+    >
       <Script id="core-services-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(JSON_LD)}
       </Script>
 
-      <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-        {NEURAL_EDGES.map((e, i) => (
-          <line key={i} x1={`${e.x1}%`} y1={`${e.y1}%`} x2={`${e.x2}%`} y2={`${e.y2}%`} stroke="var(--color-action-accent)" strokeWidth={0.15} opacity={0.12} />
-        ))}
-        {NEURAL_NODES.map((n, i) => (
-          <circle key={i} cx={`${n.x}%`} cy={`${n.y}%`} r={0.3} fill="var(--color-link)" opacity={0.2} />
-        ))}
-      </svg>
+      <div className="core-services-pin">
+        <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          {NEURAL_EDGES.map((e, i) => (
+            <line key={i} x1={`${e.x1}%`} y1={`${e.y1}%`} x2={`${e.x2}%`} y2={`${e.y2}%`} stroke="var(--color-action-accent)" strokeWidth={0.15} opacity={0.12} />
+          ))}
+          {NEURAL_NODES.map((n, i) => (
+            <circle key={i} cx={`${n.x}%`} cy={`${n.y}%`} r={0.3} fill="var(--color-link)" opacity={0.2} />
+          ))}
+        </svg>
 
-      <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 55% 50% at 70% 40%, rgba(59,91,219,0.06) 0%, transparent 70%)' }} aria-hidden="true" />
-      <div className="section-grid-overlay" aria-hidden="true" />
+        <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 55% 50% at 70% 40%, rgba(59,91,219,0.06) 0%, transparent 70%)' }} aria-hidden="true" />
+        <div className="section-grid-overlay" aria-hidden="true" />
 
-      <div className="core-services-layout">
+        <div className="core-services-layout">
         <div className="core-services-left">
           <motion.p className="section-label font-mono" style={{ fontSize: 'clamp(10px, 2.5vw, 12px)', letterSpacing: '0.14em', fontWeight: 500, color: 'var(--color-text-tertiary)' }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, ease: EASE }}>
             [ CORE SERVICES ]
@@ -127,29 +277,61 @@ export function CoreServices() {
           </motion.p>
         </div>
 
-        <div ref={cardsRef} className="core-services-cards-column">
+        {/* DESKTOP: existing sticky scroll cards — unchanged */}
+        <div className="core-services-cards-column core-services-cards-desktop">
           {CARDS.map((card, i) => (
-            <div key={card.title} className="core-services-card-slot" style={{ height: SCROLL_PER_CARD }}>
-              <article
-                className="core-services-stack-card glass-card"
-                style={{
-                  zIndex: activeCard === i ? 10 : i + 1,
-                  transform: `translateY(${cardTransforms[i]}px)`,
-                }}
-              >
+            <article
+              key={card.title}
+              className="core-services-stack-card glass-card"
+              style={{ zIndex: i + 1 }}
+            >
+              <p className="font-mono" style={{ fontSize: 'clamp(9px, 2.2vw, 10px)', letterSpacing: '0.14em', fontWeight: 500, color: 'var(--color-text-micro)', borderLeft: '2px solid var(--color-trust-amber)', paddingLeft: 10 }}>
+                {card.label}
+              </p>
+              <h3 className="font-serif" style={{ fontSize: 'clamp(18px, 1.5vw, 22px)', fontWeight: 600, lineHeight: 1.3, marginTop: 12, color: 'var(--color-text-primary)' }}>
+                {card.title}
+              </h3>
+              <p className="font-serif" style={{ fontSize: 'clamp(14px, 1vw, 16px)', lineHeight: 1.7, marginTop: 10, color: 'var(--color-text-secondary)' }}>
+                {card.description}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        {/* MOBILE/TABLET: horizontal carousel */}
+        <div className="core-services-carousel-wrapper">
+          <div className="core-services-carousel" ref={carouselRef}>
+            {CARDS.map((card, i) => (
+              <article key={card.title} className="core-services-carousel-card glass-card">
                 <p className="font-mono" style={{ fontSize: 'clamp(9px, 2.2vw, 10px)', letterSpacing: '0.14em', fontWeight: 500, color: 'var(--color-text-micro)', borderLeft: '2px solid var(--color-trust-amber)', paddingLeft: 10 }}>
                   {card.label}
                 </p>
-                <h3 className="font-serif" style={{ fontSize: 'clamp(18px, 1.5vw, 22px)', fontWeight: 600, lineHeight: 1.3, marginTop: 12, color: 'var(--color-text-primary)' }}>
+                <h3 className="font-serif" style={{ fontSize: 'clamp(18px, 4vw, 22px)', fontWeight: 600, lineHeight: 1.3, marginTop: 12, color: 'var(--color-text-primary)' }}>
                   {card.title}
                 </h3>
-                <p className="font-serif" style={{ fontSize: 'clamp(14px, 1vw, 16px)', lineHeight: 1.7, marginTop: 10, color: 'var(--color-text-secondary)' }}>
+                <p className="font-serif" style={{ fontSize: 'clamp(14px, 3.5vw, 16px)', lineHeight: 1.7, marginTop: 10, color: 'var(--color-text-secondary)' }}>
                   {card.description}
                 </p>
               </article>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          {/* Dot indicators */}
+          <div className="core-services-carousel-dots">
+            {CARDS.map((_, i) => (
+              <button
+                key={i}
+                className={`core-services-carousel-dot${i === activeCard ? ' active' : ''}`}
+                onClick={() => {
+                  carouselRef.current?.scrollTo({ left: i * carouselRef.current.offsetWidth, behavior: 'smooth' });
+                  setActiveCard(i);
+                }}
+                aria-label={`Go to card ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
+      </div>
       </div>
 
       <div className="sr-only">

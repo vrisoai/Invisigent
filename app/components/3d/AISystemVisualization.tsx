@@ -31,11 +31,11 @@ function CoreNode({ activeNode }: { activeNode: number | null }) {
 
   useFrame(({ clock }) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = clock.getElapsedTime() * 0.2;
-      meshRef.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.1) * 0.1;
+      meshRef.current.rotation.y = clock.elapsedTime * 0.2;
+      meshRef.current.rotation.x = Math.sin(clock.elapsedTime * 0.1) * 0.1;
     }
     if (glowRef.current) {
-      const s = 1.3 + Math.sin(clock.getElapsedTime() * 1.5) * 0.1;
+      const s = 1.3 + Math.sin(clock.elapsedTime * 1.5) * 0.1;
       glowRef.current.scale.set(s, s, s);
     }
   });
@@ -99,7 +99,7 @@ function SatelliteNode({
 
   useFrame(({ clock }) => {
     if (!ref.current) return;
-    const t = clock.getElapsedTime() * 0.15 + offset;
+    const t = clock.elapsedTime * 0.15 + offset;
     ref.current.position.x = basePosition[0] * Math.cos(t * 0.3) - basePosition[1] * Math.sin(t * 0.3) * 0.2;
     ref.current.position.y = basePosition[1] * Math.cos(t * 0.3) + basePosition[0] * Math.sin(t * 0.3) * 0.2;
     ref.current.position.z = Math.sin(t + index) * 0.3;
@@ -212,7 +212,7 @@ function PulseRings({ activeNode }: { activeNode: number | null }) {
   useFrame(({ clock }) => {
     ringsRef.current.forEach((mesh, i) => {
       if (!mesh) return;
-      const t = (clock.getElapsedTime() * 0.4 + i * 0.8) % 3;
+      const t = (clock.elapsedTime * 0.4 + i * 0.8) % 3;
       const s = 0.3 + t * 0.6;
       mesh.scale.set(s, s, s);
       (mesh.material as THREE.MeshBasicMaterial).opacity = Math.max(0, 0.3 - t * 0.1);

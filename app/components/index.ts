@@ -11,6 +11,7 @@ export { OrbitalCards } from './OrbitalCards';
 export { default as HowWeWork } from './HowWeWork';
 export { default as OutcomeVaultSection } from './OutcomeVaultSection';
 export { default as StrategicCTASection } from './StrategicCTASection';
+export { default as FooterSection } from './FooterSection';
 export { ValueProposition } from './ValueProposition';
 export { VrisoLogo } from './VrisoLogo';
 export { VrisoLogoSection } from './VrisoLogoSection';

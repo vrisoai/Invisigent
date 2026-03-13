@@ -13,7 +13,7 @@ function SovereignScene({ hovered }: { hovered: boolean }) {
   const innerRef = useRef<THREE.Mesh>(null);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.elapsedTime;
     const speed = hovered ? 0.6 : 0.3;
     if (outerRef.current) {
       outerRef.current.rotation.y = t * speed;
@@ -79,7 +79,7 @@ function AgenticScene({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y = clock.getElapsedTime() * (hovered ? 0.4 : 0.2);
+    groupRef.current.rotation.y = clock.elapsedTime * (hovered ? 0.4 : 0.2);
   });
 
   return (
@@ -131,7 +131,7 @@ function AutomationScene({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!ringRef.current) return;
-    ringRef.current.rotation.z = clock.getElapsedTime() * (hovered ? 0.5 : 0.25);
+    ringRef.current.rotation.z = clock.elapsedTime * (hovered ? 0.5 : 0.25);
   });
 
   return (
@@ -207,7 +207,7 @@ function ConsultingScene({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    const t = clock.getElapsedTime();
+    const t = clock.elapsedTime;
     groupRef.current.rotation.y = Math.sin(t * 0.2) * 0.15;
     groupRef.current.position.y = Math.sin(t * 0.5) * 0.02;
     setProgress(((t * (hovered ? 0.35 : 0.2)) % 1));
@@ -286,7 +286,7 @@ function TransformationOrb({
 
   useFrame(({ clock }) => {
     if (!orbRef.current) return;
-    const p = ((clock.getElapsedTime() * (hovered ? 0.35 : 0.2)) % 1);
+    const p = ((clock.elapsedTime * (hovered ? 0.35 : 0.2)) % 1);
     const idx = p * (pathNodes.length - 1);
     const i0 = Math.floor(idx);
     const i1 = Math.min(i0 + 1, pathNodes.length - 1);
@@ -345,8 +345,8 @@ function KnowledgeScene({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y = clock.getElapsedTime() * (hovered ? 0.35 : 0.18);
-    groupRef.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.15) * 0.1;
+    groupRef.current.rotation.y = clock.elapsedTime * (hovered ? 0.35 : 0.18);
+    groupRef.current.rotation.x = Math.sin(clock.elapsedTime * 0.15) * 0.1;
   });
 
   return (
@@ -395,7 +395,7 @@ function MXScene({ hovered }: { hovered: boolean }) {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.elapsedTime;
     if (scanRef.current) {
       scanRef.current.position.y = Math.sin(t * (hovered ? 1.5 : 0.8)) * 0.5;
       scanRef.current.position.x = Math.cos(t * 0.6) * 0.3;

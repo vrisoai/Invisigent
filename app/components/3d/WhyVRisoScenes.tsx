@@ -22,7 +22,7 @@ function SovereignClusterScene({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    const t = clock.getElapsedTime();
+    const t = clock.elapsedTime;
     groupRef.current.rotation.y = t * (hovered ? 0.4 : 0.2);
     groupRef.current.rotation.x = Math.sin(t * 0.15) * 0.1;
   });
@@ -73,7 +73,7 @@ function DecisionTreeScene({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y = Math.sin(clock.getElapsedTime() * 0.2) * 0.2;
+    groupRef.current.rotation.y = Math.sin(clock.elapsedTime * 0.2) * 0.2;
   });
 
   return (
@@ -121,7 +121,7 @@ function ShieldScene({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!shieldRef.current) return;
-    const t = clock.getElapsedTime();
+    const t = clock.elapsedTime;
     shieldRef.current.rotation.y = Math.sin(t * 0.3) * 0.25;
     shieldRef.current.position.y = Math.sin(t * 0.6) * 0.03;
   });
@@ -186,8 +186,8 @@ function GlobeScene({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y = clock.getElapsedTime() * (hovered ? 0.35 : 0.18);
-    groupRef.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.12) * 0.08;
+    groupRef.current.rotation.y = clock.elapsedTime * (hovered ? 0.35 : 0.18);
+    groupRef.current.rotation.x = Math.sin(clock.elapsedTime * 0.12) * 0.08;
   });
 
   return (
@@ -242,7 +242,7 @@ function IntelligenceCoreInner({ cardHovered }: { cardHovered: number | null }) 
   );
 
   useFrame(({ clock }) => {
-    const t = clock.getElapsedTime();
+    const t = clock.elapsedTime;
     if (coreRef.current) {
       coreRef.current.rotation.y = t * 0.15;
       coreRef.current.rotation.x = Math.sin(t * 0.1) * 0.1;

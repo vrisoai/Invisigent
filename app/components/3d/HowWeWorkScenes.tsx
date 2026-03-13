@@ -22,7 +22,7 @@ function ProcessEngineInner({ activeStep }: { activeStep: number | null }) {
 
   useFrame(({ clock }) => {
     if (!ringRef.current) return;
-    ringRef.current.rotation.z = clock.getElapsedTime() * 0.15;
+    ringRef.current.rotation.z = clock.elapsedTime * 0.15;
   });
 
   return (
@@ -99,7 +99,7 @@ function DiscoveryIcon({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y = Math.sin(clock.getElapsedTime() * 0.3) * 0.2;
+    groupRef.current.rotation.y = Math.sin(clock.elapsedTime * 0.3) * 0.2;
   });
 
   return (
@@ -157,7 +157,7 @@ function ArchitectureIcon({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.y = clock.getElapsedTime() * 0.15;
+    groupRef.current.rotation.y = clock.elapsedTime * 0.15;
   });
 
   return (
@@ -203,7 +203,7 @@ function DeploymentIcon({ hovered }: { hovered: boolean }) {
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
-    groupRef.current.rotation.z = clock.getElapsedTime() * (hovered ? 0.4 : 0.2);
+    groupRef.current.rotation.z = clock.elapsedTime * (hovered ? 0.4 : 0.2);
   });
 
   return (
