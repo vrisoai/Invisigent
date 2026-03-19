@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, type Variants } from 'framer-motion';
 import { useRef, useMemo } from 'react';
 import { EASE, fadeUp } from '@/app/lib/animations';
 import { useMediaQuery } from '@/app/hooks/useMediaQuery';
@@ -33,18 +33,15 @@ export function HeroSection({ reducedMotion = false }: HeroSectionProps) {
   const inViewMargin = isMobile ? '-40px 0px' : '-80px 0px';
   const inView = useInView(ref, { once: true, margin: inViewMargin });
 
-  const containerVariants = useMemo(
-    () =>
-      reducedMotion
-        ? {}
-        : {
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.06, delayChildren: 0.1 },
-            },
-          },
-    [reducedMotion]
+  const containerVariants = useMemo<Variants>(
+    () => ({
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+      },
+    }),
+    []
   );
 
   const headingVariants = isMobile || reducedMotion ? fadeUp : containerVariants;

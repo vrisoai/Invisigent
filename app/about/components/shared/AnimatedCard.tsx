@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { useRef, useState, useCallback, type ReactNode } from 'react';
 import { useMediaQuery } from '@/app/hooks/useMediaQuery';
 
@@ -11,7 +11,7 @@ interface AnimatedCardProps {
   topBorder?: TopBorder;
   className?: string;
   number?: string;
-  variants?: { hidden: object; visible: object };
+  variants?: Variants;
 }
 
 export function AnimatedCard({

@@ -18,7 +18,7 @@ export function SectionLabel({
     <motion.div
       aria-hidden="true"
       initial={reducedMotion ? false : { opacity: 0, x: -12 }}
-      whileInView={reducedMotion ? false : { opacity: 1, x: 0 }}
+      whileInView={reducedMotion ? undefined : { opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.5, ease: EASE }}
       className={`section-label ${className}`}

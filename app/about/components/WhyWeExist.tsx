@@ -79,7 +79,7 @@ export function WhyWeExist({ reducedMotion = false }: WhyWeExistProps) {
                     className="mb-4 h-0.5 w-8 shrink-0 bg-[var(--color-trust-amber)] sm:mb-4"
                     style={{ transformOrigin: 'left' }}
                     initial={reducedMotion ? false : { scaleX: 0 }}
-                    whileInView={reducedMotion ? false : { scaleX: 1 }}
+                    whileInView={reducedMotion ? undefined : { scaleX: 1 }}
                     viewport={{ once: true, margin }}
                     transition={{ duration: 0.5, delay: 0.2 + i * 0.15, ease: EASE }}
                   />

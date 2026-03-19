@@ -13,7 +13,7 @@ export function GradientDivider({ reducedMotion = false, className = '' }: Gradi
     <motion.div
       aria-hidden="true"
       initial={reducedMotion ? false : { scaleX: 0 }}
-      whileInView={reducedMotion ? false : { scaleX: 1 }}
+      whileInView={reducedMotion ? undefined : { scaleX: 1 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.8, ease: EASE }}
       className={className}

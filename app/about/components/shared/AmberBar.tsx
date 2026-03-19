@@ -14,7 +14,7 @@ export function AmberBar({ reducedMotion = false, className = '', style }: Amber
     <motion.div
       aria-hidden="true"
       initial={reducedMotion ? false : { scaleY: 0, opacity: 0 }}
-      whileInView={reducedMotion ? false : { scaleY: 1, opacity: 1 }}
+      whileInView={reducedMotion ? undefined : { scaleY: 1, opacity: 1 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.6, ease: EASE }}
       className={className}
