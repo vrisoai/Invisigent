@@ -74,7 +74,7 @@ export function GlobalContext({ reducedMotion = false }: GlobalContextProps) {
                     animation: reducedMotion ? 'none' : 'status-pulse 2s ease-in-out infinite',
                   }}
                 />
-                HQ // JAIPUR, INDIA · SERVING GLOBAL ENTERPRISE
+                 SERVING GLOBAL ENTERPRISE
               </p>
             </motion.div>
           </div>

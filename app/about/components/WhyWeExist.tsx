@@ -36,10 +36,10 @@ export function WhyWeExist({ reducedMotion = false }: WhyWeExistProps) {
     <section
       ref={ref}
       className="about-why overflow-x-hidden"
-      style={{ background: 'var(--color-bg-section)' }}
+      style={{ background: '#121212' }}
       aria-labelledby="about-why-heading"
     >
-      <div className="section-wrapper">
+      <div className="section-wrapper pt-0">
         <div className="section-inner-max section-inner">
           <div className="mx-auto w-full max-w-[720px] text-left">
             <SectionLabel text="[ OUR POSITION ]" reducedMotion={reducedMotion} />

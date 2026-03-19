@@ -1820,8 +1820,14 @@ a:focus-visible {
 /* Sticky hero wrapper: pins hero for 100vh, then section 2 covers it */
 #sticky-wrapper {
   position: relative;
-  height: 200svh;
+  height: 135svh;
   overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+  #sticky-wrapper {
+    height: 122svh;
+  }
 }
 
 /* Hero pinned inside sticky wrapper */

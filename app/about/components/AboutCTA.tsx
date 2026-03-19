@@ -22,7 +22,7 @@ export function AboutCTA({ reducedMotion = false }: AboutCTAProps) {
       ref={ref}
       className="about-cta overflow-x-hidden"
       style={{
-        background: 'var(--color-bg-section)',
+        background: '#121212',
         backgroundImage:
           'radial-gradient(ellipse 80% 40% at 50% 0%, rgba(45,91,255,0.05) 0%, transparent 60%)',
       }}

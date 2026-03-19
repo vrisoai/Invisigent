@@ -137,14 +137,14 @@ export function HeroSection({ reducedMotion = false }: HeroSectionProps) {
           rent.
         </motion.p>
 
-        <motion.p
+        {/* <motion.p
           className="about-description-tight text-label font-mono tracking-wider text-[var(--color-text-tertiary)]"
           initial={reducedMotion ? false : { opacity: 0 }}
           animate={inView && !reducedMotion ? { opacity: 1 } : undefined}
           transition={{ duration: 0.5, delay: 0.7, ease: EASE }}
         >
           Founded in Jaipur. Built for global enterprise AI systems.
-        </motion.p>
+        </motion.p> */}
 
         <motion.div
           aria-hidden="true"

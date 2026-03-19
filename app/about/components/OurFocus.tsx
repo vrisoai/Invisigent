@@ -36,7 +36,7 @@ export function OurFocus({ reducedMotion = false }: OurFocusProps) {
     <section
       ref={ref}
       className="about-focus overflow-x-hidden"
-      style={{ background: 'var(--color-bg-section)' }}
+      style={{ background: '#121212' }}
       aria-labelledby="about-focus-heading"
     >
       <div className="section-wrapper">

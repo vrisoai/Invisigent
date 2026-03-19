@@ -52,7 +52,7 @@ export function PhilosophySection({ reducedMotion = false }: PhilosophySectionPr
       id="section-2"
       className="about-philosophy section-2-sheet overflow-x-hidden"
       style={{
-        background: 'var(--color-bg-section)',
+        background: '#121212',
       }}
       aria-labelledby="about-philosophy-heading"
     >
