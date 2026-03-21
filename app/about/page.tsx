@@ -11,6 +11,7 @@ import {
   GlobalContext,
   AboutCTA,
 } from '@/app/about/components';
+import { VrisoLogoSection, FooterSection } from '@/app/components';
 
 export default function AboutPage() {
   const reducedMotion = useReducedMotion() ?? false;
@@ -57,6 +58,8 @@ export default function AboutPage() {
       <OurFocus reducedMotion={reducedMotion} />
       <GlobalContext reducedMotion={reducedMotion} />
       <AboutCTA reducedMotion={reducedMotion} />
+      <VrisoLogoSection />
+      <FooterSection />
     </main>
   );
 }

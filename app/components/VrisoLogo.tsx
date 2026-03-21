@@ -1,7 +1,8 @@
 'use client';
 
-import { motion, useAnimation } from 'framer-motion';
-import { useEffect } from 'react';
+import { motion, useAnimation, useMotionValue } from 'framer-motion';
+import { useEffect, useCallback } from 'react';
+import { useMediaQuery } from '@/app/hooks/useMediaQuery';
 
 /* ─────────────────────────── Animation variants ─────────────────────────── */
 
@@ -21,6 +22,33 @@ export function VrisoLogo({ size = 'sm' }: VrisoLogoProps) {
   const scanControls = useAnimation();
   const amberGlowControls = useAnimation();
   const pulseDotControls = useAnimation();
+  const hasHover = useMediaQuery('(hover: hover)');
+
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!hasHover) return;
+
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width;
+      const y = (e.clientY - rect.top) / rect.height;
+
+      // Same tilt math as HowWeWork: cursor direction => bend toward cursor.
+      const tiltY = (0.5 - x) * 18;
+      const tiltX = (y - 0.5) * 18;
+
+      rotateX.set(tiltX);
+      rotateY.set(tiltY);
+    },
+    [hasHover, rotateX, rotateY]
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    rotateX.set(0);
+    rotateY.set(0);
+  }, [rotateX, rotateY]);
 
   useEffect(() => {
     const end = SCAN_END[size === 'full' ? 'full' : size === 'lg' ? 'lg' : 'sm'];
@@ -52,8 +80,15 @@ export function VrisoLogo({ size = 'sm' }: VrisoLogoProps) {
   }, [size, scanControls, amberGlowControls, pulseDotControls]);
 
   return (
-    <div
+    <motion.div
       className={`flex items-center gap-2 sm:gap-3 ${size === 'full' ? 'max-w-full min-w-0' : ''}`}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transformStyle: 'preserve-3d',
+        rotateX,
+        rotateY,
+      }}
     >
       {/* VRIS text */}
       <span
@@ -86,6 +121,7 @@ export function VrisoLogo({ size = 'sm' }: VrisoLogoProps) {
             'linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05))',
           border: '1px solid rgba(255,255,255,0.25)',
           boxShadow: '0 0 18px rgba(255,255,255,0.06)',
+          perspective: 800,
         }}
         initial={false}
         animate={{
@@ -103,61 +139,64 @@ export function VrisoLogo({ size = 'sm' }: VrisoLogoProps) {
           boxShadow: '0 0 20px rgba(251,191,36,0.2)',
         }}
       >
-        {/* Inner radial highlight (left side) */}
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(ellipse 80% 100% at 0% 50%, rgba(255,255,255,0.15) 0%, transparent 70%)',
-          }}
-          aria-hidden
-        />
+        <motion.div style={{ width: '100%', height: '100%', transformStyle: 'preserve-3d' }}>
+          {/* Inner radial highlight (left side) */}
+          <div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(ellipse 80% 100% at 0% 50%, rgba(255,255,255,0.15) 0%, transparent 70%)',
+            }}
+            aria-hidden
+          />
 
-        {/* Top reflection */}
-        <div
-          className="pointer-events-none absolute left-0 right-0 top-0 h-1/2"
-          style={{
-            background:
-              'linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%)',
-            borderRadius: '999px 999px 0 0',
-          }}
-          aria-hidden
-        />
+          {/* Top reflection */}
+          <div
+            className="pointer-events-none absolute left-0 right-0 top-0 h-1/2"
+            style={{
+              background:
+                'linear-gradient(180deg, rgba(255,255,255,0.12) 0%, transparent 100%)',
+              borderRadius: '999px 999px 0 0',
+            }}
+            aria-hidden
+          />
 
-        {/* Blue scan beam — 2px wide, 8px blur glow, travels left→right */}
-        <motion.div
-          className="absolute top-0 bottom-0 w-0.5"
-          style={{
-            left: 0,
-            background: '#3B82F6',
-            boxShadow: '0 0 8px #3B82F6',
-            width: 2,
-          }}
-          animate={scanControls}
-        />
+          {/* Blue scan beam — 2px wide, 8px blur glow, travels left→right */}
+          <motion.div
+            className="absolute top-0 bottom-0 w-0.5"
+            style={{
+              left: 0,
+              background: '#3B82F6',
+              boxShadow: '0 0 8px #3B82F6',
+              width: 2,
+            }}
+            animate={scanControls}
+          />
 
-        {/* Amber core glow (after scan) */}
-        <motion.div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background: 'radial-gradient(ellipse 60% 80% at 50% 50%, rgba(251,191,36,0.4) 0%, transparent 70%)',
-            opacity: 0,
-          }}
-          animate={amberGlowControls}
-          aria-hidden
-        />
+          {/* Amber core glow (after scan) */}
+          <motion.div
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(ellipse 60% 80% at 50% 50%, rgba(251,191,36,0.4) 0%, transparent 70%)',
+              opacity: 0,
+            }}
+            animate={amberGlowControls}
+            aria-hidden
+          />
 
-        {/* Amber pulse dot (0.5s after scan) */}
-        <motion.div
-          className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-trust-amber"
-          style={{
-            boxShadow: '0 0 8px rgba(251,191,36,0.6)',
-            opacity: 0,
-          }}
-          animate={pulseDotControls}
-          aria-hidden
-        />
+          {/* Amber pulse dot (0.5s after scan) */}
+          <motion.div
+            className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-trust-amber"
+            style={{
+              boxShadow: '0 0 8px rgba(251,191,36,0.6)',
+              opacity: 0,
+            }}
+            animate={pulseDotControls}
+            aria-hidden
+          />
+        </motion.div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 }

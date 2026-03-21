@@ -219,6 +219,75 @@ button {
   50% { transform: translateY(-4px); }
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.75); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes scan-line {
+    0% { transform: translateY(-100%); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(400%); opacity: 0; }
+  }
+
+  @keyframes draw-line {
+    from { stroke-dashoffset: 1000; }
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes amber-pulse-ring {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  @keyframes count-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Service cards — top-edge shimmer scan (hover) */
+  @keyframes shimmer-scan {
+    0% {
+      left: -60%;
+    }
+    100% {
+      left: 110%;
+    }
+  }
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-text-secondary) 0%,
+    var(--color-text-primary) 40%,
+    var(--color-text-secondary) 60%,
+    var(--color-text-secondary) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
 /* About page — responsive typography scale (clamp) */
 .text-hero { font-size: clamp(1.875rem, 5vw + 0.5rem, 5rem); }
 .text-section-h { font-size: clamp(1.5rem, 3.5vw + 0.5rem, 3rem); }
@@ -240,6 +309,22 @@ button {
   width: 100%;
   max-width: 1152px;
   margin: 0 auto;
+}
+
+/* Services page spacing override */
+.services-page .section-wrapper {
+  width: 100%;
+  padding-left: max(var(--section-px), env(safe-area-inset-left));
+  padding-right: max(var(--section-px), env(safe-area-inset-right));
+  padding-top: clamp(4rem, 7vw, 6rem);
+  padding-bottom: clamp(4rem, 7vw, 6rem);
+}
+
+@media (min-width: 640px) {
+  .services-page .section-wrapper {
+    padding-top: clamp(5rem, 8vw, 7rem);
+    padding-bottom: clamp(5rem, 8vw, 7rem);
+  }
 }
 
 /* Reduced motion — required for accessibility */

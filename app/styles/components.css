@@ -384,6 +384,13 @@ a:focus-visible {
   .hero-ticker-track { animation: none; }
 }
 
+/* === SERVICES PAGE — Positioning ("Not Tools. Systems.") === */
+.services-page .services-positioning-section {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-bg-primary);
+}
+
 /* === VALUE PROPOSITION CARDS — rectangular, flip on hover, blur + description on back === */
 .vp-card {
   position: relative;
@@ -1257,6 +1264,9 @@ a:focus-visible {
 /* === Section 7: VRISO Logo === */
 .vriso-logo-section {
   width: 100%;
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
 }
 
 .vriso-logo-section .section-container {
@@ -1278,6 +1288,9 @@ a:focus-visible {
 
 /* === VRISO FOOTER (Section 8) === */
 .vriso-footer-section {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
   background: #0a0a0a;
 }
 
