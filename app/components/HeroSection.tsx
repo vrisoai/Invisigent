@@ -10,6 +10,7 @@ import {
 } from '@/app/lib/animations';
 import { DecisionEngineVis } from './hero/DecisionEngineVis';
 import { HeroTrustTicker } from './hero/HeroTrustTicker';
+import MagneticButton from './MagneticButton';
 
 /* ─── JSON-LD (Organization) ─── */
 const JSON_LD = {
@@ -165,12 +166,19 @@ export function HeroSection() {
               aria-label="Primary hero actions"
               variants={fadeUp}
             >
-              <button type="button" className="hero-cta hero-cta--primary w-full sm:w-auto">
+              <MagneticButton
+                type="button"
+                primary
+                className="hero-cta hero-cta--primary w-full sm:w-auto"
+              >
                 Book Strategic Session
-              </button>
-              <button type="button" className="hero-cta hero-cta--secondary w-full sm:w-auto">
+              </MagneticButton>
+              <MagneticButton
+                type="button"
+                className="hero-cta hero-cta--secondary w-full sm:w-auto"
+              >
                 Explore AI Systems
-              </button>
+              </MagneticButton>
             </motion.nav>
           </motion.div>
 

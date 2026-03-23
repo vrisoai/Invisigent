@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useCallback } from 'react';
 import { EASE, ITEM } from '@/app/lib/animations';
+import MagneticButton from './MagneticButton';
 
 /* ─── Sovereign Intelligence Core (inlined to avoid Webpack module resolution) ─── */
 const UI_PANELS = [
@@ -324,22 +325,23 @@ export default function StrategicCTASection() {
               className="flex flex-col items-center gap-4 sm:flex-row lg:items-start"
               style={{ marginTop: 'clamp(20px, 3vw, 28px)', marginBottom: 'clamp(28px, 4vw, 48px)' }}
             >
-              <button
+              <MagneticButton
                 type="button"
+                primary
                 className="strategic-cta-btn-primary"
                 onMouseEnter={handleCtaEnter}
                 onMouseLeave={handleCtaLeave}
                 aria-label="Discuss your AI architecture with VRISO"
               >
                 Discuss Your AI Architecture
-              </button>
-              <button
+              </MagneticButton>
+              <MagneticButton
                 type="button"
                 className="strategic-cta-btn-secondary"
                 aria-label="Explore the VRISO Framework"
               >
                 Explore VRISO Framework
-              </button>
+              </MagneticButton>
             </motion.div>
 
             {/* Trust signals */}

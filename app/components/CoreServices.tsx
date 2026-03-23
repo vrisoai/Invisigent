@@ -362,6 +362,50 @@ export function CoreServices() {
             ))}
           </div>
         </div>
+
+        {/* MOBILE: vertical stacked cards list (replaces the swipe carousel) */}
+        <div className="core-services-mobile-stack" aria-label="Core services list">
+          {CARDS.map((card) => (
+            <article key={card.title} className="core-services-mobile-stack-card glass-card" aria-label={card.title}>
+              <p
+                className="font-mono"
+                style={{
+                  fontSize: 'clamp(9px, 2.2vw, 10px)',
+                  letterSpacing: '0.14em',
+                  fontWeight: 500,
+                  color: 'var(--color-text-micro)',
+                  borderLeft: '2px solid var(--color-trust-amber)',
+                  paddingLeft: 10,
+                }}
+              >
+                {card.label}
+              </p>
+              <h3
+                className="font-serif"
+                style={{
+                  fontSize: 'clamp(18px, 5vw, 22px)',
+                  fontWeight: 600,
+                  lineHeight: 1.3,
+                  marginTop: 12,
+                  color: 'var(--color-text-primary)',
+                }}
+              >
+                {card.title}
+              </h3>
+              <p
+                className="font-serif"
+                style={{
+                  fontSize: 'clamp(14px, 4vw, 16px)',
+                  lineHeight: 1.7,
+                  marginTop: 10,
+                  color: 'var(--color-text-secondary)',
+                }}
+              >
+                {card.description}
+              </p>
+            </article>
+          ))}
+        </div>
       </div>
       </div>
 

@@ -1,9 +1,9 @@
 'use client';
 
-import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { SectionLabel } from './shared/SectionLabel';
+import { MagneticLinkButton } from './shared/MagneticLinkButton';
 import { useMediaQuery } from '@/app/hooks/useMediaQuery';
 import { EASE, fadeUp, fadeLeft, fadeRight } from '@/app/lib/animations';
 
@@ -78,20 +78,21 @@ export function AboutCTA({ reducedMotion = false }: AboutCTAProps) {
               systems, we would like to hear about what you are building.
             </p>
             <div className="about-block-spacing flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-              <Link
+              <MagneticLinkButton
                 href="/contact"
+                primary
                 className="btn-base btn-primary w-full sm:w-auto"
-                aria-label="Discuss your AI architecture with VRISO"
+                ariaLabel="Discuss your AI architecture with VRISO"
               >
                 Discuss Your AI Architecture
-              </Link>
-              <Link
+              </MagneticLinkButton>
+              <MagneticLinkButton
                 href="/#how-we-work"
                 className="btn-base btn-secondary w-full sm:w-auto"
-                aria-label="See how we work"
+                ariaLabel="See how we work"
               >
                 See How We Work
-              </Link>
+              </MagneticLinkButton>
             </div>
             <p
               className="about-description text-label flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono text-[var(--color-text-micro)] sm:gap-x-4"

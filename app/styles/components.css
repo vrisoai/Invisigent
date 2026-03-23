@@ -638,6 +638,7 @@ a:focus-visible {
 @media (max-width: 767px) {
   .how-we-work-section {
     overflow-x: hidden !important;
+    overflow-y: visible !important; /* prevent top clipping of lifted cards */
     padding-left: 0 !important;
     padding-right: 0 !important;
   }
@@ -656,6 +657,7 @@ a:focus-visible {
     display: flex !important;
     flex-wrap: nowrap !important;
     overflow-x: scroll !important;
+    overflow-y: visible !important; /* keep card tops visible when elevated */
     scroll-snap-type: x mandatory !important;
     -webkit-overflow-scrolling: touch !important;
     scrollbar-width: none !important;
@@ -670,6 +672,7 @@ a:focus-visible {
     margin-right: 0 !important;
     opacity: 1 !important;
     scroll-padding-left: 8vw !important;
+    padding-top: 8px !important; /* small safety space for visual lift */
   }
 
   .how-we-work-grid::-webkit-scrollbar {
@@ -684,6 +687,7 @@ a:focus-visible {
     margin-left: 0 !important;      /* gap handles spacing */
     margin-right: 0 !important;
     box-sizing: border-box !important;
+    overflow: visible !important;
   }
 
   .how-we-work-card-tilt {
@@ -691,6 +695,7 @@ a:focus-visible {
     transition: none !important;
     width: 100% !important;
     max-width: 100% !important;
+    overflow: visible !important;
   }
 
   /* Allow lifted “hover” glass state on phones (see @media (hover: none) .glass-card) */
@@ -1119,6 +1124,11 @@ a:focus-visible {
   display: none;
 }
 
+/* Mobile: vertical stacked list (hidden by default; enabled at max-width: 767px) */
+.core-services-mobile-stack {
+  display: none;
+}
+
 /* Right: single visible card at a time, scroll-driven translateY + opacity */
 .core-services-cards-column {
   position: relative;
@@ -1291,6 +1301,43 @@ a:focus-visible {
     height: auto !important;
     justify-content: flex-start !important;
     padding-bottom: 1.5rem;
+  }
+}
+
+/* Mobile only: replace carousel with vertical stacked cards in normal flow */
+@media (max-width: 767px) {
+  .core-services-carousel-wrapper {
+    display: none !important;
+  }
+
+  .core-services-mobile-stack {
+    display: flex !important;
+    flex-direction: column;
+    gap: clamp(0.9rem, 3vw, 1.5rem);
+    width: 100%;
+  }
+
+  .core-services-mobile-stack-card {
+    width: 100%;
+    padding: clamp(20px, 5vw, 28px);
+    margin: 0;
+    overflow: visible;
+    transform: none;
+    box-sizing: border-box;
+  }
+
+  /* Reduce extra bottom padding so Section 4 follows naturally */
+  .core-services-layout {
+    padding-bottom: clamp(1.25rem, 3.5vw, 2rem) !important;
+    overflow: visible !important;
+  }
+
+  .core-services-pin {
+    overflow: visible !important;
+  }
+
+  .core-services-left {
+    padding-bottom: 0.75rem !important;
   }
 }
 

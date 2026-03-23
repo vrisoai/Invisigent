@@ -60,7 +60,7 @@ export default function AboutPage() {
           zIndex: 1,
           marginTop: `-${ABOUT_OVERLAP_SCROLL}`,
           borderRadius: '20px 20px 0 0',
-          background: '#1a1a1a',
+          background: '#121212',
           boxShadow: '0 -8px 40px rgba(0, 0, 0, 0.6)',
         }}
       >

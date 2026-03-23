@@ -81,7 +81,7 @@ html {
 /* Section 2 sheet styling (first child of content wrapper) */
 .content-over-hero > *:first-child {
   position: relative;
-  background: var(--color-bg-section);
+  background: #121212;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   overflow: hidden;
@@ -102,26 +102,57 @@ html {
 }
 
 /* ── Home (mobile): section snap + spacing — fewer “two sections at once” viewports ── */
-@media (max-width: 1023px) {
+@media (max-width: 767px) {
   html:has(main.home-page) {
-    scroll-snap-type: y proximity;
+    scroll-snap-type: none !important;
   }
 
   main.home-page .home-mobile-content-sheet {
     display: flex;
     flex-direction: column;
-    gap: clamp(2.5rem, 10svh, 5rem);
+    gap: 0;
+    justify-content: flex-start !important;
+  }
+
+  /* Mobile: prevent sections from being forced to viewport height.
+     Grey “full-screen” empty blocks typically come from min-height/100vh rules
+     or from overly-large padding on smaller content sections. */
+  main.home-page .home-mobile-content-sheet section {
+    height: auto !important;
+    min-height: auto !important;
+  }
+
+  /* Reduce vertical padding on the homepage content sections (except CoreServices),
+     so the viewport isn’t dominated by empty background. */
+  main.home-page .home-mobile-content-sheet section:not(.core-services-section) {
+    padding-top: clamp(44px, 6svh, 72px) !important;
+    padding-bottom: clamp(44px, 6svh, 72px) !important;
+  }
+
+  /* Also ensure the snap wrapper itself doesn't accidentally grow. */
+  main.home-page .home-mobile-section-snap {
+    height: auto !important;
+    min-height: auto !important;
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+    scroll-margin-top: 0 !important;
   }
 
   main.home-page .home-mobile-section-snap {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
-    scroll-margin-top: var(--nav-h, 64px);
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+    scroll-margin-top: 0 !important;
   }
 
   main.home-page .home-mobile-hero-stage {
-    scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+  }
+
+  /* Hide common spacer utilities if present in homepage sections. */
+  main.home-page .spacer,
+  main.home-page .section-spacer {
+    display: none !important;
   }
 }
 

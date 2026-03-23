@@ -42,8 +42,7 @@ export function WhyWeExist({ reducedMotion = false }: WhyWeExistProps) {
       <div
         className="section-wrapper"
         style={{
-          /* No extra top gap after sticky Philosophy — rhythm comes from label + heading */
-          paddingTop: 0,
+          paddingTop: 'clamp(40px, 6vw, 80px)',
         }}
       >
         <div className="section-inner-max section-inner">
