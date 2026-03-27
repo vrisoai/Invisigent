@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from 'next';
 import { Space_Grotesk, Playfair_Display, JetBrains_Mono } from 'next/font/google';
 import { Navbar } from '@/app/components';
@@ -93,7 +94,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <SchemaOrg />
       </head>
-      <body className="min-h-screen antialiased font-display">
+      <body className="min-h-screen overflow-x-hidden antialiased font-display">
         <Navbar />
         {children}
       </body>

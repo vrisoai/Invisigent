@@ -1,3 +1,4 @@
+/* app/styles/globals.css */
 /* Import order matters — tokens must come first */
 @import './tokens.css';
 @import './typography.css';
@@ -168,7 +169,390 @@ html {
   }
 }
 
+/* Interactive demo page: touch devices should not rely on hover-only visuals */
+@media (hover: none) {
+  .interactive-demo-page .glass-card:hover {
+    transform: none !important;
+    box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04) !important;
+    border-color: var(--color-border) !important;
+  }
+
+  .interactive-demo-page .btn-primary:hover,
+  .interactive-demo-page .btn-accent:hover {
+    box-shadow: none !important;
+    filter: none !important;
+  }
+}
+
+/* Interactive demo: one full-viewport section at a time (scroll snap) */
+html:has(main.interactive-demo-page),
+body:has(main.interactive-demo-page) {
+  /* Reserve scrollbar width so centered blocks match the visual viewport (avoids a leftward shift on overlay scrollbars). */
+  scrollbar-gutter: stable;
+}
+
+html:has(main.interactive-demo-page) {
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: var(--nav-h, 64px);
+}
+
+main.interactive-demo-page {
+  padding-top: var(--nav-h, 64px);
+}
+
+main.interactive-demo-page > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  min-height: 100svh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+ * First hero sits below main’s padding-top (navbar offset). Using 100svh here centers
+ * the stack in a column taller than the visible band below the nav — content rides high.
+ * Use the remaining viewport height so vertical center matches what users see.
+ */
+main.interactive-demo-page > section.interactive-demo-hero {
+  min-height: calc(100svh - var(--nav-h, 64px));
+}
+
+@supports (height: 100dvh) {
+  main.interactive-demo-page > section.interactive-demo-hero {
+    /* Mobile browser chrome — dynamic viewport height */
+    min-height: calc(100dvh - var(--nav-h, 64px));
+  }
+}
+
+/* Tools grid: natural-height section, no snap target */
+main.interactive-demo-page > section.interactive-demo-tools,
+main.interactive-demo-page > section.interactive-demo-tools.interactive-demo-tools {
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal !important;
+  display: block !important;
+  flex-direction: unset !important;
+}
+
+main.interactive-demo-page > section.interactive-demo-tools .section-wrapper {
+  padding-top: clamp(3rem, 5vw, 5rem);
+  padding-bottom: clamp(4rem, 6vw, 6rem);
+}
+
+/* Featured tool card: consistent horizontal inset so copy never sits on the glass border */
+main.interactive-demo-page
+  > section.interactive-demo-tools
+  article.interactive-demo-featured-card.glass-card {
+  box-sizing: border-box;
+  padding-top: clamp(1rem, 2vw + 0.85rem, 1rem);
+  padding-left: clamp(1.5rem, 2.5vw + 0.85rem, 2.5rem);
+  padding-right: clamp(1.25rem, 2vw + 0.65rem, 2.125rem);
+  /* Extra space below the CTA so the pill button doesn’t sit on the card edge */
+  padding-bottom: clamp(2.25rem, 4vw + 0.85rem, 3.25rem);
+}
+
+main.interactive-demo-page
+  > section.interactive-demo-tools
+  article.interactive-demo-featured-card
+  .interactive-demo-featured-cta {
+  border-radius: 9999px;
+}
+
+/* FEATURED SYSTEM kicker: generous inset (reset * { padding: 0 } + layer order) */
+main.interactive-demo-page
+  section.interactive-demo-tools
+  article.interactive-demo-featured-card.glass-card
+  span.interactive-demo-featured-badge {
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1.4 !important;
+  padding-block: 0.625rem !important;
+  padding-inline: 1.5rem !important;
+}
+
+@media (min-width: 640px) {
+  main.interactive-demo-page
+    section.interactive-demo-tools
+    article.interactive-demo-featured-card.glass-card
+    span.interactive-demo-featured-badge {
+    padding-block: 0.75rem !important;
+    padding-inline: 2rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  main.interactive-demo-page
+    section.interactive-demo-tools
+    article.interactive-demo-featured-card.glass-card
+    span.interactive-demo-featured-badge {
+    padding-block: 0.75rem !important;
+    padding-inline: 2.5rem !important;
+  }
+}
+
+/* Search Visibility mock: inset label + bar from inner panel edges (esp. left) */
+main.interactive-demo-page
+  section.interactive-demo-tools
+  .interactive-demo-analyzer-panel {
+  box-sizing: border-box;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 1.25rem;
+  padding-left: clamp(1.375rem, 3vw + 0.5rem, 2.5rem);
+}
+
+@media (min-width: 640px) {
+  main.interactive-demo-page
+    section.interactive-demo-tools
+    .interactive-demo-analyzer-panel {
+    padding-top: 1.125rem;
+    padding-bottom: 1.125rem;
+    padding-right: 1.375rem;
+    padding-left: clamp(1.5rem, 2.5vw + 0.65rem, 2.75rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(main.interactive-demo-page) {
+    scroll-snap-type: none;
+  }
+}
+
+/* Interactive demo hero — layout inside snap section */
+/*
+ * Grid + justify-items:center + width:min(100%,1120px) centers horizontally.
+ * align-content:center vertically centers the hero stack in the viewport band below the nav (all breakpoints).
+ * Symmetric padding-block keeps centering visually balanced.
+ */
+main.interactive-demo-page > section.interactive-demo-hero .interactive-demo-hero-inner.section-wrapper {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  align-content: center;
+  min-height: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: clamp(1.5rem, 4.5svh, 3.5rem);
+  padding-bottom: clamp(1.5rem, 4.5svh, 3.5rem);
+  padding-left: max(1.5rem, env(safe-area-inset-left));
+  padding-right: max(1.5rem, env(safe-area-inset-right));
+}
+
+/* Tablet + mobile: slightly tighter vertical padding; still centered via base align-content */
+@media (max-width: 1024px) {
+  main.interactive-demo-page > section.interactive-demo-hero .interactive-demo-hero-inner.section-wrapper {
+    padding-top: clamp(1rem, 4svh, 2.5rem);
+    padding-bottom: clamp(1rem, 4svh, 2.5rem);
+    padding-left: max(1.25rem, env(safe-area-inset-left));
+    padding-right: max(1.25rem, env(safe-area-inset-right));
+  }
+}
+
+@media (max-width: 768px) {
+  main.interactive-demo-page > section.interactive-demo-hero .interactive-demo-hero-inner.section-wrapper {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
+/* Centered column — same max-width as .siteHeaderInner */
+main.interactive-demo-page > section.interactive-demo-hero .interactive-demo-hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  width: min(100%, 1120px);
+  max-width: 1120px;
+  justify-self: center;
+}
+
+main.interactive-demo-page > section.interactive-demo-hero .interactive-demo-hero-content > * {
+  text-align: center;
+}
+
+/* Title stack: kicker + h1 are separate from body copy (not one paragraph block) */
+main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  gap: clamp(0.5rem, 1.25svh, 0.875rem);
+}
+
+/* Body copy: two paragraphs with clear rhythm */
+main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 42rem;
+  margin-top: clamp(1rem, 2svh, 1.5rem);
+  gap: clamp(0.5rem, 1.25svh, 0.875rem);
+}
+
+/* Centered kicker (symmetric accent — avoids left-only section-label bar) */
+main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-label {
+  font-family: var(--font-mono);
+  font-size: clamp(0.625rem, 2.1vw + 0.2rem, 0.75rem);
+  font-weight: 500;
+  letter-spacing: clamp(0.08em, 0.5vw + 0.06em, 0.14em);
+  line-height: 1.35;
+  color: var(--color-text-tertiary);
+  text-align: center;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 0;
+  margin-inline: auto;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--color-trust-amber);
+}
+
+main.interactive-demo-page .interactive-demo-hero h1.interactive-demo-hero-title {
+  font-size: clamp(1.375rem, 5.2vw + 0.45rem, 5rem);
+  line-height: 1.06;
+  text-align: center;
+  align-self: center;
+  width: min(100%, 56rem);
+  max-width: 56rem;
+  margin-inline: auto;
+  overflow-wrap: break-word;
+}
+
+main.interactive-demo-page .interactive-demo-hero p.interactive-demo-hero-dek {
+  text-align: center;
+  align-self: center;
+  width: 100%;
+  max-width: 42rem;
+  margin-top: 0;
+  margin-inline: auto;
+}
+
+main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-copy p.interactive-demo-hero-dek {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  main.interactive-demo-page .interactive-demo-hero h1.interactive-demo-hero-title {
+    line-height: 1.12;
+  }
+}
+
+main.interactive-demo-page .interactive-demo-hero a.interactive-demo-hero-cta {
+  align-self: center;
+  text-align: center;
+  margin-top: clamp(1.75rem, 4svh, 2.75rem);
+  box-sizing: border-box;
+  max-width: min(100%, 22rem);
+}
+
+main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-status {
+  align-self: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: clamp(1.25rem, 3svh, 2rem);
+}
+
+main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-status span {
+  text-align: center;
+}
+
+main.interactive-demo-page .interactive-demo-hero .text-body {
+  font-size: clamp(0.8125rem, 1.35vw + 0.45rem, 1rem);
+}
+
+/* Interactive demo hero — phones / small tablets */
+@media (max-width: 639px) {
+  main.interactive-demo-page > section.interactive-demo-hero .interactive-demo-hero-inner.section-wrapper {
+    align-content: center;
+    padding-top: clamp(1rem, 4svh, 2.25rem);
+    padding-bottom: clamp(1rem, 4svh, 2.25rem);
+  }
+
+  main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-head {
+    gap: clamp(0.4rem, 1.5svh, 0.75rem);
+  }
+
+  main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-copy {
+    margin-top: clamp(0.875rem, 2svh, 1.35rem);
+    gap: clamp(0.4rem, 1.15svh, 0.75rem);
+  }
+
+  main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-label {
+    font-size: clamp(0.5625rem, 2.8vw + 0.15rem, 0.6875rem);
+    letter-spacing: clamp(0.06em, 0.55vw + 0.05em, 0.12em);
+  }
+
+  main.interactive-demo-page .interactive-demo-hero a.interactive-demo-hero-cta {
+    width: 100%;
+    min-width: 0;
+    max-width: min(100%, 22rem);
+    margin-top: clamp(1.35rem, 3.5svh, 2.25rem);
+  }
+
+  main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-status {
+    margin-top: clamp(1rem, 2.75svh, 1.75rem);
+  }
+
+  main.interactive-demo-page .interactive-demo-hero p.interactive-demo-hero-dek {
+    font-size: clamp(0.8125rem, 1.1vw + 0.65rem, 1rem);
+    line-height: 1.55;
+  }
+}
+
+@media (max-width: 380px) {
+  main.interactive-demo-page > section.interactive-demo-hero .interactive-demo-hero-inner.section-wrapper {
+    padding-left: max(0.75rem, env(safe-area-inset-left));
+    padding-right: max(0.75rem, env(safe-area-inset-right));
+  }
+}
+
+@media (max-width: 479px) {
+  main.interactive-demo-page .interactive-demo-hero .hero-grid-overlay {
+    background-size: 44px 44px;
+    opacity: 0.055;
+  }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+  main.interactive-demo-page > section.interactive-demo-hero .interactive-demo-hero-inner.section-wrapper {
+    align-content: start;
+    padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
+    padding-bottom: 0.5rem;
+  }
+
+  main.interactive-demo-page .interactive-demo-hero h1.interactive-demo-hero-title {
+    font-size: clamp(1.25rem, 4.5vh + 0.25rem, 2.75rem);
+  }
+
+  main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-copy {
+    margin-top: 0.35rem !important;
+    gap: 0.25rem !important;
+  }
+
+  main.interactive-demo-page .interactive-demo-hero p.interactive-demo-hero-dek {
+    font-size: clamp(0.75rem, 1.2vh + 0.55rem, 0.9375rem);
+  }
+
+  main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-cta {
+    margin-top: clamp(0.5rem, 2vh, 1rem) !important;
+  }
+
+  main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-status {
+    margin-top: clamp(0.35rem, 1.5vh, 0.75rem) !important;
+  }
+}
+
 img,
+svg,
 video {
   max-width: 100%;
   height: auto;
