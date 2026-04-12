@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import {
   HeroSection,
@@ -13,14 +14,64 @@ import {
 } from '@/app/components';
 import { EASE } from '@/app/lib/animations';
 
+/* Opacity only — no translateY: transforms on the inner motion layer still confuse stacking with 3D sections above. */
 const sectionReveal = {
-  hidden: { opacity: 0, y: 56 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: { duration: 0.65, ease: EASE },
+    transition: { duration: 0.55, ease: EASE },
   },
 };
+
+/** Opaque outer wrapper holds z-index. Slabs 5+ skip Framer opacity on the inner wrapper — a transparent motion layer
+ *  composites wrong vs How We Work’s backdrop-filter / 3D cards (CTA looks “under” the insight strip). CTA still animates in-section. */
+function HomeOverHeroSlab({ slab, children }: { slab: number; children: ReactNode }) {
+  const innerClass = 'min-w-0 w-full';
+  if (slab >= 5) {
+    return (
+      <div className={`home-over-hero-slab home-over-hero-slab--${slab}`}>
+        <div className={innerClass}>{children}</div>
+      </div>
+    );
+  }
+  return (
+    <div className={`home-over-hero-slab home-over-hero-slab--${slab}`}>
+      <motion.div
+        className={innerClass}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
+        variants={sectionReveal}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
+function HomeMobileSlab({ slab, children }: { slab: number; children: ReactNode }) {
+  const innerClass = 'home-mobile-section-snap min-w-0 w-full';
+  if (slab >= 5) {
+    return (
+      <div className={`home-mobile-slab home-mobile-slab--${slab}`}>
+        <div className={innerClass}>{children}</div>
+      </div>
+    );
+  }
+  return (
+    <div className={`home-mobile-slab home-mobile-slab--${slab}`}>
+      <motion.div
+        className={innerClass}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
+        variants={sectionReveal}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+}
 
 /** Mobile: sticky hero fills viewport below nav; stage adds scroll room so section 2 slides over (matches lg+ behavior). */
 const NAV = 'var(--nav-h, 64px)';
@@ -39,62 +90,27 @@ export default function Home() {
         </div>
 
         <div className="content-over-hero">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          <HomeOverHeroSlab slab={1}>
             <ValueProposition />
-          </motion.div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeOverHeroSlab>
+          <HomeOverHeroSlab slab={2}>
             <CoreServices />
-          </motion.div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeOverHeroSlab>
+          <HomeOverHeroSlab slab={3}>
             <WhyVRISO />
-          </motion.div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeOverHeroSlab>
+          <HomeOverHeroSlab slab={4}>
             <HowWeWork />
-          </motion.div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeOverHeroSlab>
+          <HomeOverHeroSlab slab={5}>
             <StrategicCTASection />
-          </motion.div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeOverHeroSlab>
+          <HomeOverHeroSlab slab={6}>
             <VrisoLogoSection />
-          </motion.div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeOverHeroSlab>
+          <HomeOverHeroSlab slab={7}>
             <FooterSection />
-          </motion.div>
+          </HomeOverHeroSlab>
         </div>
       </div>
 
@@ -144,72 +160,31 @@ export default function Home() {
             borderRadius: '20px 20px 0 0',
             borderTop: '1px solid rgba(251, 191, 36, 0.15)',
             boxShadow: '0 -8px 40px rgba(0, 0, 0, 0.45), 0 -1px 0 rgba(251, 191, 36, 0.08)',
-            overflowX: 'clip',
+            /* Single-axis overflow-x clips/clip + default y:visible makes y compute to auto → nested scrollbar */
+            overflow: 'hidden',
           }}
         >
-          <motion.div
-            className="home-mobile-section-snap"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          <HomeMobileSlab slab={1}>
             <ValueProposition />
-          </motion.div>
-          <motion.div
-            className="home-mobile-section-snap"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeMobileSlab>
+          <HomeMobileSlab slab={2}>
             <CoreServices />
-          </motion.div>
-          <motion.div
-            className="home-mobile-section-snap"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeMobileSlab>
+          <HomeMobileSlab slab={3}>
             <WhyVRISO />
-          </motion.div>
-          <motion.div
-            className="home-mobile-section-snap"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeMobileSlab>
+          <HomeMobileSlab slab={4}>
             <HowWeWork />
-          </motion.div>
-          <motion.div
-            className="home-mobile-section-snap"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeMobileSlab>
+          <HomeMobileSlab slab={5}>
             <StrategicCTASection />
-          </motion.div>
-          <motion.div
-            className="home-mobile-section-snap"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeMobileSlab>
+          <HomeMobileSlab slab={6}>
             <VrisoLogoSection />
-          </motion.div>
-          <motion.div
-            className="home-mobile-section-snap"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={sectionReveal}
-          >
+          </HomeMobileSlab>
+          <HomeMobileSlab slab={7}>
             <FooterSection />
-          </motion.div>
+          </HomeMobileSlab>
         </div>
       </div>
     </main>

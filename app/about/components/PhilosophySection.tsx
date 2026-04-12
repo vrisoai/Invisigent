@@ -80,7 +80,7 @@ export function PhilosophySection({ reducedMotion = false }: PhilosophySectionPr
           </div>
 
           <motion.div
-            className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-12 lg:grid-cols-3 lg:gap-6"
+            className="about-philosophy-cards grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6"
             variants={
               reducedMotion
                 ? undefined

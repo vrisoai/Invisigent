@@ -1,9 +1,10 @@
+// app/components/StrategicCTASection.tsx
 'use client';
 
 import Script from 'next/script';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useCallback } from 'react';
-import { EASE, ITEM } from '@/app/lib/animations';
+import { EASE } from '@/app/lib/animations';
 import MagneticButton from './MagneticButton';
 
 /* ─── Sovereign Intelligence Core (inlined to avoid Webpack module resolution) ─── */
@@ -108,11 +109,32 @@ function SovereignIntelligenceCore({ inView, ctaHovered }: { inView: boolean; ct
   );
 }
 
+/* Parent stays opacity:1 — a group at opacity:0 composites badly with How We Work’s backdrop-filter / glass layers */
 const CTA_STAGGER = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: { staggerChildren: 0.12, delayChildren: 0.15 },
+  },
+};
+
+/** Headline stays opaque; only y animates */
+const STRATEGIC_HEADLINE_ITEM = {
+  hidden: { opacity: 1, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: EASE },
+  },
+};
+
+/** Same timing as ITEM but opacity always 1 — avoids compositor holes vs How We Work glass / backdrop */
+const STRATEGIC_ITEM = {
+  hidden: { opacity: 1, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: EASE },
   },
 };
 
@@ -159,15 +181,14 @@ const PARTICLES = [
   { x: 90, y: 40, delay: 2.5, duration: 10 },
 ];
 
-function NeuralParticles({ visible }: { visible: boolean }) {
+function NeuralParticles() {
   return (
     <motion.svg
       className="pointer-events-none absolute inset-0 hidden h-full w-full sm:block"
       viewBox="0 0 100 100"
       preserveAspectRatio="none"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: visible ? 1 : 0 }}
-      transition={{ duration: 1.2, ease: EASE }}
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
       aria-hidden="true"
     >
       {PARTICLES.map((p, i) => (
@@ -191,8 +212,8 @@ function NeuralParticles({ visible }: { visible: boolean }) {
 
 /* ─── Main component ─── */
 export default function StrategicCTASection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(sectionRef, { once: true, margin: '-80px' });
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { once: true, margin: '-120px' });
   const [ctaHovered, setCtaHovered] = useState(false);
 
   const handleCtaEnter = useCallback(() => setCtaHovered(true), []);
@@ -200,7 +221,8 @@ export default function StrategicCTASection() {
 
   return (
     <section
-      className="relative w-full overflow-x-hidden"
+      ref={sectionRef}
+      className="strategic-cta-section relative w-full overflow-hidden"
       style={{
         background: 'var(--color-bg-primary)',
         paddingTop: 'clamp(100px, 12vw, 160px)',
@@ -221,7 +243,7 @@ export default function StrategicCTASection() {
       </Script>
 
       {/* Neural particles */}
-      <NeuralParticles visible={inView} />
+      <NeuralParticles />
 
       {/* Radial glow */}
       <div
@@ -235,7 +257,7 @@ export default function StrategicCTASection() {
 
       <div className="section-grid-overlay" aria-hidden="true" />
 
-      <div ref={sectionRef} className="section-container section-inner relative">
+      <div className="section-container section-inner relative">
         <div className="flex flex-col items-center gap-16 lg:flex-row lg:items-center lg:gap-20">
           {/* ═══ LEFT COLUMN ═══ */}
           <motion.div
@@ -246,7 +268,7 @@ export default function StrategicCTASection() {
           >
             {/* Section label */}
             <motion.div
-              variants={ITEM}
+              variants={STRATEGIC_ITEM}
               className="section-label flex items-center gap-4"
               style={{ paddingLeft: 10 }}
             >
@@ -275,7 +297,7 @@ export default function StrategicCTASection() {
             {/* Headline */}
             <motion.h2
               id="strategic-cta-heading"
-              variants={ITEM}
+              variants={STRATEGIC_HEADLINE_ITEM}
               className="font-serif text-text-primary"
               style={{
                 marginTop: 'clamp(20px, 3vw, 28px)',
@@ -291,7 +313,7 @@ export default function StrategicCTASection() {
 
             {/* Description */}
             <motion.p
-              variants={ITEM}
+              variants={STRATEGIC_ITEM}
               className="font-serif text-text-secondary"
               style={{
                 marginTop: 'clamp(16px, 2.5vw, 24px)',
@@ -310,7 +332,7 @@ export default function StrategicCTASection() {
 
             {/* CTA intro + Buttons */}
             <motion.p
-              variants={ITEM}
+              variants={STRATEGIC_ITEM}
               className="font-serif text-text-secondary"
               style={{
                 marginTop: 'clamp(20px, 2.5vw, 28px)',
@@ -321,7 +343,7 @@ export default function StrategicCTASection() {
               Discuss your AI architecture with VRISO.
             </motion.p>
             <motion.div
-              variants={ITEM}
+              variants={STRATEGIC_ITEM}
               className="flex flex-col items-center gap-4 sm:flex-row lg:items-start"
               style={{ marginTop: 'clamp(20px, 3vw, 28px)', marginBottom: 'clamp(28px, 4vw, 48px)' }}
             >
@@ -346,7 +368,7 @@ export default function StrategicCTASection() {
 
             {/* Trust signals */}
             <motion.div
-              variants={ITEM}
+              variants={STRATEGIC_ITEM}
               className="flex flex-wrap justify-center gap-x-6 gap-y-3 lg:justify-start"
             >
               {TRUST_SIGNALS.map((signal) => (
@@ -367,8 +389,8 @@ export default function StrategicCTASection() {
           <motion.div
             className="relative flex shrink-0 items-center justify-center"
             style={{ width: 280, height: 280 }}
-            initial={{ opacity: 0, scale: 0.88 }}
-            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.88 }}
+            initial={{ opacity: 1, scale: 0.92 }}
+            animate={inView ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 0.92 }}
             transition={{ duration: 0.9, delay: 0.35, ease: EASE }}
           >
             <div

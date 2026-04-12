@@ -1,12 +1,27 @@
 // app/interactive-demo/page.tsx
+import Link from 'next/link';
+import { FooterSection, VrisoLogoSection } from '@/app/components';
+import { InteractiveDemoDeploymentCarousel } from '@/app/components/InteractiveDemoDeploymentCarousel';
+import { InteractiveDemoDeploymentTiltCard } from '@/app/components/InteractiveDemoDeploymentTiltCard';
+
 type Tool = {
   id: string;
   name: string;
   shortDescription: string;
   capabilities: string[];
   cta: string;
+  /** When set, CTA navigates here (e.g. full analyzer flow + API submit on that page). */
+  ctaHref?: string;
   featured?: boolean;
 };
+
+/** Standard tool cards with no preview mock (copy + CTA only) */
+const STANDARD_TOOL_IDS_WITHOUT_MOCK = new Set<string>([
+  'hotel-concierge-ai',
+  'ecommerce-ai-assistant',
+  'market-intelligence-engine',
+  'seo-article-generator',
+]);
 
 const TOOLS: Tool[] = [
   {
@@ -20,6 +35,7 @@ const TOOLS: Tool[] = [
       'AI-generated SEO recommendations',
     ],
     cta: 'Generate Report',
+    ctaHref: '/search-visibility-analyzer',
     featured: true,
   },
   {
@@ -33,6 +49,7 @@ const TOOLS: Tool[] = [
       'Personalized recommendations',
     ],
     cta: 'Try Demo',
+    ctaHref: '/hotel-concierge-ai',
   },
   {
     id: 'ecommerce-ai-assistant',
@@ -45,6 +62,7 @@ const TOOLS: Tool[] = [
       'Improved conversion flow',
     ],
     cta: 'Try Demo',
+    ctaHref: '/ecommerce-ai-assistant',
   },
   {
     id: 'market-intelligence-engine',
@@ -57,6 +75,20 @@ const TOOLS: Tool[] = [
       'Insight generation',
     ],
     cta: 'Try Demo',
+    ctaHref: '/market-intelligence-engine',
+  },
+  {
+    id: 'seo-article-generator',
+    name: 'SEO Article Generator',
+    shortDescription:
+      'Generate high-quality, keyword-rich articles tailored to your audience. Scale your content production while maintaining consistency and SEO value.',
+    capabilities: [
+      'Audience-tailored, keyword-rich long-form content',
+      'Scaled workflows with consistent tone and structure',
+      'Suitable for bloggers and content teams',
+    ],
+    cta: 'Try Demo',
+    ctaHref: '/seo-article-generator',
   },
 ];
 
@@ -70,7 +102,7 @@ function getToolVisual(id: string) {
   if (id === 'search-visibility-analyzer') {
     return (
       <div className="flex w-full flex-col shrink-0">
-        <div className="interactive-demo-analyzer-panel flex w-full max-w-full flex-col gap-3 overflow-hidden rounded-xl border border-white/10 bg-black/20">
+        <div className="interactive-demo-analyzer-panel flex w-full max-w-full flex-col gap-1.5 overflow-hidden rounded-xl border border-white/10 bg-black/20">
           <div className="min-w-0">
             <span className="block font-mono text-[11px] tracking-[0.12em] text-text-tertiary">
               ANALYZING VISIBILITY
@@ -89,69 +121,7 @@ function getToolVisual(id: string) {
     );
   }
 
-  if (id === 'hotel-concierge-ai') {
-    return (
-      <div className="flex min-h-[9rem] flex-1 flex-col sm:min-h-[10rem]">
-        <div className="flex w-full max-w-full min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-white/10 bg-black/20 p-5 sm:p-6">
-          <p className="font-mono text-[11px] tracking-[0.1em] text-text-tertiary">
-            GUEST CHAT
-          </p>
-          <div className="mt-4 flex flex-1 flex-col justify-end space-y-3 text-sm leading-relaxed text-text-secondary">
-            <div className="w-[88%] rounded-md bg-white/5 px-3 py-2.5">
-              Need airport pickup at 7 PM.
-            </div>
-            <div className="ml-auto w-[82%] rounded-md border border-white/10 bg-black/20 px-3 py-2.5">
-              Confirmed. Pickup and check-in updated.
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (id === 'ecommerce-ai-assistant') {
-    return (
-      <div className="flex min-h-[9rem] flex-1 flex-col sm:min-h-[10rem]">
-        <div className="flex w-full max-w-full min-h-0 flex-1 flex-col gap-4 overflow-hidden rounded-xl border border-white/10 bg-black/20 p-5 sm:p-6">
-          <p className="font-mono text-[11px] tracking-[0.1em] text-text-tertiary">
-            SEMANTIC SEARCH
-          </p>
-          <div className="rounded-md border border-white/10 px-3 py-2.5 text-sm leading-relaxed text-text-secondary">
-            query: lightweight travel laptop
-          </div>
-          <div className="mt-auto flex gap-2.5 pt-1">
-            <div className="h-8 w-[30%] rounded bg-white/10" />
-            <div className="h-8 w-[38%] rounded border border-white/10 bg-black/20" />
-            <div className="h-8 w-[24%] rounded bg-white/10" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="flex min-h-[8.5rem] flex-1 flex-col sm:min-h-[9rem]">
-      <div className="flex w-full max-w-full min-h-0 flex-1 flex-col gap-3 overflow-hidden rounded-xl border border-white/10 bg-black/20 p-5 sm:p-6">
-        <p className="font-mono text-[11px] tracking-[0.1em] text-text-tertiary">
-          LIVE MARKET SIGNALS
-        </p>
-        <svg
-          className="mt-auto h-12 w-full shrink-0 sm:h-14"
-          viewBox="0 0 120 48"
-          aria-hidden="true"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <polyline
-            fill="none"
-            stroke="var(--color-link)"
-            strokeWidth="2"
-            points="0,34 16,30 30,32 44,20 58,24 72,16 86,19 100,11 120,14"
-            style={{ animation: 'data-flow 2.5s linear infinite' }}
-          />
-        </svg>
-      </div>
-    </div>
-  );
+  return null;
 }
 
 export default function InteractiveDemoPage() {
@@ -173,9 +143,15 @@ export default function InteractiveDemoPage() {
       '@type': 'ListItem',
       position: index + 1,
       name: tool.name,
-      url: `https://vriso.ai/interactive-demo#${tool.id}`,
+      url: tool.ctaHref
+        ? `https://vriso.ai${tool.ctaHref}`
+        : `https://vriso.ai/interactive-demo#${tool.id}`,
     })),
   };
+
+  const standardToolCount = TOOLS.filter((t) => !t.featured).length;
+  /** On xl (3 columns), last row has a single orphan — span full width */
+  const lastStandardCardFullWidthXl = standardToolCount % 3 === 1;
 
   const softwareAppsJsonLd = TOOLS.map((tool) => ({
     '@context': 'https://schema.org',
@@ -265,67 +241,110 @@ export default function InteractiveDemoPage() {
 
           <div className="h-8 sm:h-10 lg:h-12" aria-hidden="true" />
 
-          <div className="grid w-full grid-cols-1 items-stretch gap-6 sm:grid-cols-2 sm:gap-8 lg:gap-10 xl:grid-cols-3 xl:gap-9">
+          <div className="interactive-demo-tools-grid grid w-full grid-cols-1 items-stretch gap-6 sm:grid-cols-2 sm:gap-8 lg:gap-10 xl:grid-cols-3 xl:gap-9">
             {TOOLS.map((tool, index) => (
               <article
                 id={tool.id}
                 key={tool.id}
                 className={`${
                   tool.featured
-                    ? 'interactive-demo-featured-card glass-card flex h-full w-full max-w-full flex-col gap-3 overflow-hidden break-words text-left sm:gap-4 lg:gap-5'
-                    : 'glass-card flex h-full w-full flex-col gap-5 overflow-hidden break-words p-6 pl-8 text-left sm:gap-6 sm:p-7 sm:pl-10 lg:gap-7 lg:p-8 lg:pl-12'
+                    ? 'interactive-demo-featured-card glass-card flex h-full w-full max-w-full flex-col gap-1.5 overflow-hidden break-words text-left sm:gap-2 lg:gap-3'
+                    : `interactive-demo-tool-card glass-card min-h-0 h-full w-full overflow-hidden break-words text-left${
+                        STANDARD_TOOL_IDS_WITHOUT_MOCK.has(tool.id)
+                          ? ' interactive-demo-tool-card--no-mock'
+                          : ''
+                      }`
                 } ${
                   tool.featured
                     ? 'col-span-1 sm:col-span-2 lg:col-span-2 xl:col-span-3'
                     : index === TOOLS.length - 1
-                      ? 'sm:col-span-2 lg:col-span-2 xl:col-span-1'
+                      ? lastStandardCardFullWidthXl
+                        ? 'sm:col-span-2 lg:col-span-2 xl:col-span-3'
+                        : 'sm:col-span-2 lg:col-span-2 xl:col-span-1'
                       : ''
                 }`}
                 aria-label={tool.name}
               >
                 {tool.featured ? (
-                  <span className="interactive-demo-featured-badge inline-flex w-fit items-center justify-center rounded-full border border-trust-amber/40 bg-trust-amber/10 font-mono text-[10px] tracking-[0.12em] text-trust-amber">
-                    FEATURED SYSTEM
-                  </span>
-                ) : null}
-                <h3
-                  className={`text-card-title font-serif font-semibold leading-[1.15] text-text-primary break-words ${
-                    tool.featured
-                      ? 'text-2xl sm:text-3xl lg:text-4xl xl:text-5xl'
-                      : 'text-lg sm:text-xl lg:text-2xl xl:text-3xl'
-                  }`}
-                >
-                  {tool.name}
-                </h3>
-                <p className="text-body max-w-prose break-words font-serif leading-[1.65] text-text-secondary sm:leading-[1.7]">
-                  {tool.shortDescription}
-                </p>
-                <ul
-                  className={
-                    tool.featured
-                      ? 'space-y-2.5 text-base leading-[1.6] text-text-secondary sm:space-y-3 sm:text-[1.0625rem] sm:leading-[1.65]'
-                      : 'space-y-3.5 text-base leading-[1.65] text-text-secondary sm:space-y-4 sm:text-[1.0625rem] sm:leading-[1.7]'
-                  }
-                >
-                  {tool.capabilities.map((capability) => (
-                    <li key={capability} className="flex gap-3">
-                      <span className="mt-[0.5rem] h-1.5 w-1.5 shrink-0 rounded-full bg-trust-amber" />
-                      <span>{capability}</span>
-                    </li>
-                  ))}
-                </ul>
-                {getToolVisual(tool.id)}
-                <button
-                  type="button"
-                  className={
-                    tool.featured
-                      ? 'btn-primary interactive-demo-featured-cta mt-auto w-auto self-center px-7 py-2.5 text-[0.9375rem] whitespace-nowrap'
-                      : 'btn-primary mt-auto w-full whitespace-nowrap sm:w-auto'
-                  }
-                  aria-label={`${tool.cta} for ${tool.name}`}
-                >
-                  {tool.cta}
-                </button>
+                  <>
+                    <span className="interactive-demo-featured-badge inline-flex w-fit items-center justify-center rounded-full border border-trust-amber/40 bg-trust-amber/10 font-mono text-[10px] tracking-[0.12em] text-trust-amber">
+                      FEATURED SYSTEM
+                    </span>
+                    <h3 className="text-card-title break-words font-serif text-lg font-semibold leading-[1.15] text-text-primary sm:text-xl lg:text-2xl xl:text-3xl">
+                      {tool.name}
+                    </h3>
+                    <p className="max-w-prose break-words font-serif text-[0.9375rem] leading-snug text-text-secondary sm:text-base sm:leading-[1.55]">
+                      {tool.shortDescription}
+                    </p>
+                    <ul className="interactive-demo-capability-list space-y-1.5 text-[0.875rem] leading-[1.5] text-text-secondary sm:space-y-1.5 sm:text-[0.9375rem] sm:leading-[1.55]">
+                      {tool.capabilities.map((capability) => (
+                        <li key={capability} className="interactive-demo-capability-li">
+                          <span className="interactive-demo-capability-dot" aria-hidden />
+                          <span className="min-w-0 flex-1">{capability}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    {getToolVisual(tool.id)}
+                    {tool.ctaHref ? (
+                      <Link
+                        href={tool.ctaHref}
+                        className="btn-primary interactive-demo-featured-cta mt-auto w-auto self-center px-6 py-2 text-[0.875rem] whitespace-nowrap"
+                        aria-label={`${tool.cta} for ${tool.name}`}
+                      >
+                        {tool.cta}
+                      </Link>
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn-primary interactive-demo-featured-cta mt-auto w-auto self-center px-6 py-2 text-[0.875rem] whitespace-nowrap"
+                        aria-label={`${tool.cta} for ${tool.name}`}
+                      >
+                        {tool.cta}
+                      </button>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <div className="interactive-demo-tool-copy flex shrink-0 flex-col gap-3 sm:gap-4">
+                      <h3 className="text-card-title break-words font-serif text-lg font-semibold leading-[1.15] text-text-primary sm:text-xl lg:text-2xl xl:text-3xl">
+                        {tool.name}
+                      </h3>
+                      <p className="text-body max-w-prose break-words font-serif leading-[1.65] text-text-secondary sm:leading-[1.7]">
+                        {tool.shortDescription}
+                      </p>
+                      <ul className="interactive-demo-capability-list space-y-3 text-base leading-[1.65] text-text-secondary sm:space-y-3.5 sm:text-[1.0625rem] sm:leading-[1.7]">
+                        {tool.capabilities.map((capability) => (
+                          <li key={capability} className="interactive-demo-capability-li">
+                            <span className="interactive-demo-capability-dot" aria-hidden />
+                            <span className="min-w-0 flex-1 text-left">{capability}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    {!STANDARD_TOOL_IDS_WITHOUT_MOCK.has(tool.id) ? (
+                      <div className="interactive-demo-tool-visual min-h-0 w-full">
+                        {getToolVisual(tool.id)}
+                      </div>
+                    ) : null}
+                    {tool.ctaHref ? (
+                      <Link
+                        href={tool.ctaHref}
+                        className="btn-primary mt-0 w-full shrink-0 whitespace-nowrap sm:w-auto sm:self-center"
+                        aria-label={`${tool.cta} for ${tool.name}`}
+                      >
+                        {tool.cta}
+                      </Link>
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn-primary mt-0 w-full shrink-0 whitespace-nowrap sm:w-auto sm:self-center"
+                        aria-label={`${tool.cta} for ${tool.name}`}
+                      >
+                        {tool.cta}
+                      </button>
+                    )}
+                  </>
+                )}
               </article>
             ))}
           </div>
@@ -333,9 +352,12 @@ export default function InteractiveDemoPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-bg-primary" aria-labelledby="built-for-business-heading">
+      <section
+        className="interactive-demo-built-for-business relative overflow-hidden bg-bg-primary"
+        aria-labelledby="built-for-business-heading"
+      >
         <div className="section-grid-overlay" aria-hidden="true" />
-        <div className="section-wrapper">
+        <div className="section-wrapper interactive-demo-built-for-business-inner">
           <div className="mx-auto w-full max-w-3xl px-4 text-center">
           <h2 id="built-for-business-heading" className="text-section-h font-serif font-semibold leading-tight">
             Built for Real Businesses
@@ -354,85 +376,102 @@ export default function InteractiveDemoPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-bg-primary" aria-labelledby="demo-to-deployment-heading">
+      <section
+        className="interactive-demo-deployment relative overflow-hidden bg-bg-primary"
+        aria-labelledby="demo-to-deployment-heading"
+      >
         <div className="section-wrapper">
           <div className="mx-auto w-full max-w-7xl">
           <h2 id="demo-to-deployment-heading" className="text-section-h font-serif font-semibold leading-tight text-center">
             From Demo to Deployment
           </h2>
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-3">
-            <article className="glass-card flex h-full flex-col p-4 sm:p-5 lg:p-6">
+          <InteractiveDemoDeploymentCarousel>
+            <InteractiveDemoDeploymentTiltCard>
               <h3 className="text-card-title font-serif font-semibold leading-tight break-words text-text-primary">
                 Demo → Prototype → Production
               </h3>
-              <p className="text-body mt-3 leading-relaxed text-text-secondary">
+              <p className="text-body mt-5 leading-relaxed text-text-secondary sm:mt-6">
                 We validate core behavior fast, then harden the architecture for reliability, observability, and enterprise uptime.
               </p>
-            </article>
-            <article className="glass-card flex h-full flex-col p-4 sm:p-5 lg:p-6">
+            </InteractiveDemoDeploymentTiltCard>
+            <InteractiveDemoDeploymentTiltCard>
               <h3 className="text-card-title font-serif font-semibold leading-tight break-words text-text-primary">
                 AI Models → Integrated Systems
               </h3>
-              <p className="text-body mt-3 leading-relaxed text-text-secondary">
+              <p className="text-body mt-5 leading-relaxed text-text-secondary sm:mt-6">
                 Models are only one layer. We integrate orchestration, retrieval, monitoring, and governance into one operational system.
               </p>
-            </article>
-            <article className="glass-card flex h-full flex-col p-4 sm:p-5 lg:p-6">
+            </InteractiveDemoDeploymentTiltCard>
+            <InteractiveDemoDeploymentTiltCard>
               <h3 className="text-card-title font-serif font-semibold leading-tight break-words text-text-primary">
                 Tools → Infrastructure
               </h3>
-              <p className="text-body mt-3 leading-relaxed text-text-secondary">
+              <p className="text-body mt-5 leading-relaxed text-text-secondary sm:mt-6">
                 We turn disconnected AI tools into production-grade AI infrastructure aligned with your teams, workflows, and scale.
               </p>
-            </article>
-          </div>
+            </InteractiveDemoDeploymentTiltCard>
+          </InteractiveDemoDeploymentCarousel>
         </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-bg-primary" aria-labelledby="conversion-heading">
+      <section
+        className="interactive-demo-conversion relative overflow-hidden bg-bg-primary"
+        aria-labelledby="conversion-heading"
+      >
         <div className="section-wrapper">
           <div className="mx-auto w-full max-w-6xl">
-          <div className="glass-card p-5 sm:p-7 md:p-10">
-            <h2 id="conversion-heading" className="text-section-h font-serif font-semibold leading-tight">
+          <div className="interactive-demo-conversion-card glass-card flex flex-col gap-8 sm:gap-9 md:gap-10">
+            <h2
+              id="conversion-heading"
+              className="text-section-h font-serif font-semibold leading-snug text-text-primary"
+            >
               Want This for Your Business?
             </h2>
-            <p className="text-body mt-5 max-w-3xl font-serif leading-relaxed text-text-secondary">
+            <p className="text-body max-w-3xl font-serif leading-[1.7] text-text-secondary">
               We design and build custom AI systems tailored to your workflows, infrastructure, and scale.
             </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:gap-4">
-              <a href="/contact" className="btn-primary w-full whitespace-nowrap sm:w-auto" aria-label="Start the conversation with VRISO">
-                Start the Conversation
-              </a>
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
               <a href="/contact" className="btn-accent w-full whitespace-nowrap sm:w-auto" aria-label="Request a custom AI solution">
                 Request Custom Solution
               </a>
             </div>
-            <div className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-xs text-text-tertiary sm:text-sm">
-              <span className="font-mono whitespace-nowrap">• Limited engagements per quarter</span>
-              <span className="font-mono whitespace-nowrap">• Built for enterprise environments</span>
-              <span className="font-mono whitespace-nowrap">• Compliance-ready systems</span>
-            </div>
+            <ul className="flex list-none flex-col gap-3.5 text-xs leading-relaxed text-text-tertiary sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-3 sm:text-sm">
+              <li className="font-mono pl-0 sm:whitespace-nowrap">• Limited engagements per quarter</li>
+              <li className="font-mono pl-0 sm:whitespace-nowrap">• Built for enterprise environments</li>
+              <li className="font-mono pl-0 sm:whitespace-nowrap">• Compliance-ready systems</li>
+            </ul>
           </div>
         </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-white/5 bg-bg-primary" aria-labelledby="geo-seo-block-heading">
-        <div className="section-wrapper">
-          <div className="mx-auto w-full max-w-6xl">
-          <h2 id="geo-seo-block-heading" className="text-section-h font-serif font-semibold leading-tight text-text-primary">
-            AI Infrastructure India, US, Europe
-          </h2>
-          <p className="text-body mt-4 font-serif leading-relaxed text-text-secondary">
-            VRISO provides enterprise AI system design, AI automation workflows, and AI infrastructure solutions for businesses across India, the United States, and Europe. From search intelligence to automation systems, we build scalable AI solutions for production environments.
-          </p>
-          <p className="text-body mt-3 font-serif leading-relaxed text-text-secondary">
-            VRISO builds AI systems for businesses across India, US, and Europe.
-          </p>
-        </div>
+      <section
+        className="interactive-demo-global-infra relative overflow-hidden border-t border-white/5 bg-bg-primary"
+        aria-labelledby="global-ai-infrastructure-heading"
+      >
+        <div className="section-wrapper interactive-demo-global-infra-inner">
+          <div className="mx-auto flex w-full max-w-6xl flex-col items-center text-center">
+            <h2
+              id="global-ai-infrastructure-heading"
+              className="text-section-h font-serif font-semibold leading-tight text-text-primary"
+            >
+              AI Infrastructure for Global Organizations
+            </h2>
+            <div className="mt-10 flex w-full max-w-3xl flex-col gap-5 sm:mt-12 sm:gap-6 md:mt-14">
+              <p className="text-body font-serif leading-relaxed text-text-secondary">
+                VRISO designs enterprise AI systems, automation workflows, and scalable infrastructure for organizations operating across regions, teams, and complex environments.
+              </p>
+              <p className="text-body font-serif leading-relaxed text-text-secondary">
+                From search intelligence to automation systems, we build AI that runs in production — not just in demos.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
+
+      <VrisoLogoSection />
+      <FooterSection />
 
       <script
         type="application/ld+json"

@@ -2007,6 +2007,17 @@ a:focus-visible {
   }
 }
 
+/* Philosophy section — extra space between heading group and cards grid */
+.about-page .about-philosophy-cards {
+  margin-top: 3.5rem;
+}
+
+@media (min-width: 1024px) {
+  .about-page .about-philosophy-cards {
+    margin-top: 4.5rem;
+  }
+}
+
 /* Section inner — use with section-wrapper for about */
 .about-page .section-inner {
   padding-left: var(--section-px);

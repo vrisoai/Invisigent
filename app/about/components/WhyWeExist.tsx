@@ -64,11 +64,12 @@ export function WhyWeExist({ reducedMotion = false }: WhyWeExistProps) {
               className="mt-6 mb-8 sm:mt-8 sm:mb-10"
             />
 
-            <div className="space-y-8 sm:space-y-10">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
               {PARAGRAPHS.map((p, i) => (
                 <motion.div
                   key={i}
-                  className="flex gap-3 sm:gap-4"
+                  className={p.editorial ? 'text-pullquote' : 'text-body'}
+                  style={{ position: 'relative', paddingLeft: '3rem' }}
                   variants={
                     reducedMotion
                       ? undefined
@@ -81,8 +82,16 @@ export function WhyWeExist({ reducedMotion = false }: WhyWeExistProps) {
                 >
                   <motion.span
                     aria-hidden="true"
-                    className="mb-4 h-0.5 w-8 shrink-0 bg-[var(--color-trust-amber)] sm:mb-4"
-                    style={{ transformOrigin: 'left' }}
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      top: `calc(${p.editorial ? '1.75' : '1.8'}em / 2 - 1px)`,
+                      width: '2rem',
+                      height: '2px',
+                      display: 'block',
+                      background: 'var(--color-trust-amber)',
+                      transformOrigin: 'left',
+                    }}
                     initial={reducedMotion ? false : { scaleX: 0 }}
                     whileInView={reducedMotion ? undefined : { scaleX: 1 }}
                     viewport={{ once: true, margin }}
@@ -91,8 +100,8 @@ export function WhyWeExist({ reducedMotion = false }: WhyWeExistProps) {
                   <p
                     className={
                       p.editorial
-                        ? 'text-pullquote font-serif font-medium leading-[1.75] text-[var(--color-text-primary)]'
-                        : 'text-body font-display leading-[1.8] text-[var(--color-text-secondary)]'
+                        ? 'font-serif font-medium leading-[1.75] text-[var(--color-text-primary)]'
+                        : 'font-display leading-[1.8] text-[var(--color-text-secondary)]'
                     }
                   >
                     {p.text}

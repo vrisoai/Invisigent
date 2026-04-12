@@ -74,23 +74,23 @@ export function Navbar() {
           <nav className="navCenter" id="primary-nav" aria-label="Primary navigation">
             <ul className="primaryNavList">
               <li>
-                <Link href="/services" className="primaryNavLink" onClick={() => setOpenState(false)}>
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/case-studies" className="primaryNavLink" onClick={() => setOpenState(false)}>
-                  Case Studies
-                </Link>
-              </li>
-              <li>
-                <Link href="/interactive-demo" className="primaryNavLink" onClick={() => setOpenState(false)}>
-                  Interactive demo
+                <Link href="/" className="primaryNavLink" onClick={() => setOpenState(false)}>
+                  Home
                 </Link>
               </li>
               <li>
                 <Link href="/about" className="primaryNavLink" onClick={() => setOpenState(false)}>
                   About
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="primaryNavLink" onClick={() => setOpenState(false)}>
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/interactive-demo" className="primaryNavLink" onClick={() => setOpenState(false)}>
+                  Interactive Demo
                 </Link>
               </li>
               <li className="primaryNavCta">

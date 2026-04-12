@@ -72,11 +72,84 @@ html {
   overflow: visible; /* don't clip hero heading */
 }
 
-/* Content wrapper that flows over sticky hero */
+/* Content wrapper that flows over sticky hero — isolate so slab z-indices only compete inside this subtree */
 .content-over-hero {
   position: relative;
   z-index: 2;
+  isolation: isolate;
   background: var(--color-bg-section);
+}
+
+/*
+ * Homepage slabs over hero: explicit classes + !important so Framer Motion never flattens stack order.
+ * How We Work (4) uses 3D card transforms; Strategic CTA (5) must paint above it while scrolling.
+ */
+.content-over-hero .home-over-hero-slab {
+  position: relative !important;
+  isolation: isolate;
+  display: flow-root;
+  /* Opaque paint layer: entrance opacity is on the inner motion.div only, so we never see through to the previous section. */
+  background: var(--color-bg-primary);
+}
+
+.content-over-hero .home-over-hero-slab--1 {
+  z-index: 10 !important;
+}
+.content-over-hero .home-over-hero-slab--2 {
+  z-index: 11 !important;
+}
+.content-over-hero .home-over-hero-slab--3 {
+  z-index: 12 !important;
+}
+/* How We Work (slab 4): below Strategic CTA. Do NOT add overflow:hidden here — .how-we-work-section already clips;
+ * a second clip on the slab created compositor layers that painted above the following slab in some browsers. */
+.content-over-hero .home-over-hero-slab--4 {
+  z-index: 13 !important;
+}
+
+/* Home How We Work: drop backdrop-filter on all .glass-card — blur layers composite over the next slab in Chromium */
+.content-over-hero .home-over-hero-slab--4 .glass-card,
+main.home-page .home-mobile-content-sheet .home-mobile-slab--4 .glass-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+/* Strategic CTA (slab 5): z-index above How We Work; ::before = solid underlay behind content */
+.content-over-hero .home-over-hero-slab--5 {
+  z-index: 100 !important;
+  transform: translate3d(0, 0, 0);
+  scroll-margin-top: 120px;
+  /* overflow-x:clip + overflow-y:visible → computed as overflow-y:auto (spec) → nested scrollbar */
+  overflow: visible;
+}
+.content-over-hero .home-over-hero-slab--5::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--color-bg-primary);
+  pointer-events: none;
+}
+.content-over-hero .home-over-hero-slab--5 > * {
+  position: relative;
+  z-index: 1;
+}
+/* Logo + footer: must stay above Strategic CTA (slab 5 z-index 100) */
+.content-over-hero .home-over-hero-slab--6 {
+  z-index: 110 !important;
+  transform: translate3d(0, 0, 0);
+}
+.content-over-hero .home-over-hero-slab--7 {
+  z-index: 111 !important;
+  transform: translate3d(0, 0, 0);
+}
+
+/*
+ * Strategic CTA: `overflow-x: hidden` with default `overflow-y: visible` forces `overflow-y: auto`
+ * (CSS Overflow 3), so abs/3D bleed creates a vertical scrollbar. Lock both axes.
+ */
+.content-over-hero .strategic-cta-section,
+main.home-page .strategic-cta-section {
+  overflow: hidden;
 }
 
 /* Section 2 sheet styling (first child of content wrapper) */
@@ -157,6 +230,58 @@ html {
   }
 }
 
+/* <lg home: one stacking root for slabs (mirrors .content-over-hero on desktop) */
+main.home-page .home-mobile-content-sheet {
+  isolation: isolate;
+}
+
+/* Mobile home sheet: same slab stack as desktop */
+main.home-page .home-mobile-content-sheet .home-mobile-slab {
+  position: relative !important;
+  isolation: isolate;
+  display: flow-root;
+  background: var(--color-bg-primary);
+}
+
+main.home-page .home-mobile-content-sheet .home-mobile-slab--1 {
+  z-index: 10 !important;
+}
+main.home-page .home-mobile-content-sheet .home-mobile-slab--2 {
+  z-index: 11 !important;
+}
+main.home-page .home-mobile-content-sheet .home-mobile-slab--3 {
+  z-index: 12 !important;
+}
+main.home-page .home-mobile-content-sheet .home-mobile-slab--4 {
+  z-index: 13 !important;
+}
+main.home-page .home-mobile-content-sheet .home-mobile-slab--5 {
+  z-index: 100 !important;
+  transform: translate3d(0, 0, 0);
+  scroll-margin-top: 120px;
+  overflow: visible;
+}
+main.home-page .home-mobile-content-sheet .home-mobile-slab--5::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--color-bg-primary);
+  pointer-events: none;
+}
+main.home-page .home-mobile-content-sheet .home-mobile-slab--5 > * {
+  position: relative;
+  z-index: 1;
+}
+main.home-page .home-mobile-content-sheet .home-mobile-slab--6 {
+  z-index: 110 !important;
+  transform: translate3d(0, 0, 0);
+}
+main.home-page .home-mobile-content-sheet .home-mobile-slab--7 {
+  z-index: 111 !important;
+  transform: translate3d(0, 0, 0);
+}
+
 @media (min-width: 1024px) {
   html:has(main.home-page) {
     scroll-snap-type: none;
@@ -225,6 +350,48 @@ main.interactive-demo-page > section.interactive-demo-hero {
   }
 }
 
+/* Built for Real Businesses — center block in viewport below nav */
+main.interactive-demo-page > section.interactive-demo-built-for-business {
+  min-height: calc(100svh - var(--nav-h, 64px));
+  justify-content: center;
+}
+
+@supports (height: 100dvh) {
+  main.interactive-demo-page > section.interactive-demo-built-for-business {
+    min-height: calc(100dvh - var(--nav-h, 64px));
+  }
+}
+
+main.interactive-demo-page
+  > section.interactive-demo-built-for-business
+  > .section-wrapper.interactive-demo-built-for-business-inner {
+  flex: 0 1 auto;
+  width: 100%;
+  padding-top: clamp(1.5rem, 4vh, 3rem);
+  padding-bottom: clamp(1.5rem, 4vh, 3rem);
+}
+
+/* Global AI infrastructure — center copy in viewport below nav (interactive demo §6) */
+main.interactive-demo-page > section.interactive-demo-global-infra {
+  min-height: calc(100svh - var(--nav-h, 64px));
+  justify-content: center;
+}
+
+@supports (height: 100dvh) {
+  main.interactive-demo-page > section.interactive-demo-global-infra {
+    min-height: calc(100dvh - var(--nav-h, 64px));
+  }
+}
+
+main.interactive-demo-page
+  > section.interactive-demo-global-infra
+  > .section-wrapper.interactive-demo-global-infra-inner {
+  flex: 0 1 auto;
+  width: 100%;
+  padding-top: clamp(1.5rem, 4vh, 3rem);
+  padding-bottom: clamp(1.5rem, 4vh, 3rem);
+}
+
 /* Tools grid: natural-height section, no snap target */
 main.interactive-demo-page > section.interactive-demo-tools,
 main.interactive-demo-page > section.interactive-demo-tools.interactive-demo-tools {
@@ -237,21 +404,200 @@ main.interactive-demo-page > section.interactive-demo-tools.interactive-demo-too
   flex-direction: unset !important;
 }
 
+/* VRISO wordmark (services §8): natural height — not a full-viewport snap slab */
+main.interactive-demo-page > section.vriso-logo-section {
+  min-height: 0 !important;
+  height: auto !important;
+  overflow: visible !important;
+  scroll-snap-align: none !important;
+  scroll-snap-stop: normal !important;
+  display: block !important;
+  flex-direction: unset !important;
+}
+
+/* Want This for Your Business — taller glass card (interactive demo §5) */
+main.interactive-demo-page
+  section.interactive-demo-conversion
+  .interactive-demo-conversion-card.glass-card {
+  box-sizing: border-box;
+  min-height: clamp(19rem, 50svh, 30rem);
+  padding-top: clamp(1.5rem, 3.5vw + 0.75rem, 2.5rem);
+  padding-bottom: clamp(1.5rem, 3.5vw + 0.75rem, 2.5rem);
+  padding-left: clamp(1.5rem, 4vw + 0.75rem, 2.85rem);
+  padding-right: clamp(1.5rem, 4vw + 0.75rem, 2.85rem);
+}
+
+@media (min-width: 640px) {
+  main.interactive-demo-page
+    section.interactive-demo-conversion
+    .interactive-demo-conversion-card.glass-card {
+    min-height: clamp(21rem, 46svh, 32rem);
+    padding-top: clamp(1.65rem, 3vw + 0.85rem, 2.65rem);
+    padding-bottom: clamp(1.65rem, 3vw + 0.85rem, 2.65rem);
+    padding-left: clamp(1.65rem, 3.5vw + 0.85rem, 3rem);
+    padding-right: clamp(1.65rem, 3.5vw + 0.85rem, 3rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  main.interactive-demo-page
+    section.interactive-demo-conversion
+    .interactive-demo-conversion-card.glass-card {
+    min-height: clamp(22rem, 42svh, 34rem);
+    padding-top: clamp(1.75rem, 2.5vw + 0.9rem, 2.85rem);
+    padding-bottom: clamp(1.75rem, 2.5vw + 0.9rem, 2.85rem);
+    padding-left: clamp(1.85rem, 2.5vw + 0.95rem, 3.15rem);
+    padding-right: clamp(1.85rem, 2.5vw + 0.95rem, 3.15rem);
+  }
+}
+
 main.interactive-demo-page > section.interactive-demo-tools .section-wrapper {
   padding-top: clamp(3rem, 5vw, 5rem);
   padding-bottom: clamp(4rem, 6vw, 6rem);
 }
 
-/* Featured tool card: consistent horizontal inset so copy never sits on the glass border */
+/* Featured tool card: comfortable inset so copy and mocks never hug the glass edge */
 main.interactive-demo-page
   > section.interactive-demo-tools
   article.interactive-demo-featured-card.glass-card {
   box-sizing: border-box;
-  padding-top: clamp(1rem, 2vw + 0.85rem, 1rem);
-  padding-left: clamp(1.5rem, 2.5vw + 0.85rem, 2.5rem);
-  padding-right: clamp(1.25rem, 2vw + 0.65rem, 2.125rem);
-  /* Extra space below the CTA so the pill button doesn’t sit on the card edge */
-  padding-bottom: clamp(2.25rem, 4vw + 0.85rem, 3.25rem);
+  padding-top: clamp(1.125rem, 2.2vw + 0.5rem, 1.75rem);
+  padding-left: clamp(1.35rem, 2.8vw + 0.65rem, 2.35rem);
+  padding-right: clamp(1.25rem, 2.4vw + 0.55rem, 2.1rem);
+  padding-bottom: clamp(1.35rem, 2.6vw + 0.6rem, 2.1rem);
+}
+
+/*
+ * Standard tool cards: CSS Grid (not flex) so the mock row gets a real 1fr track when the
+ * parent tools grid stretches siblings — Tailwind `flex` on the article was winning and flex-1
+ * never showed extra space. `!important` beats utility `display:flex` from class order issues.
+ */
+main.interactive-demo-page
+  section.interactive-demo-tools
+  .interactive-demo-tools-grid {
+  align-items: stretch;
+}
+
+main.interactive-demo-page
+  section.interactive-demo-tools
+  article.interactive-demo-tool-card.glass-card {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  /* Middle row grows: mocks line up across Hotel / E‑commerce / Market in one grid row */
+  grid-template-rows: auto minmax(11rem, 1fr) auto;
+  gap: clamp(0.875rem, 2vw, 1.25rem);
+  min-height: 0;
+  height: 100%;
+  align-self: stretch;
+  box-sizing: border-box;
+  /* Explicit inset — avoids text/mock feeling flush to border (reset + layered glass) */
+  padding-top: clamp(1.25rem, 2.8vw, 1.65rem);
+  padding-bottom: clamp(1.25rem, 2.8vw, 1.65rem);
+  padding-left: clamp(1.35rem, 3.2vw, 2rem);
+  padding-right: clamp(1.35rem, 3.2vw, 2rem);
+}
+
+@media (min-width: 640px) {
+  main.interactive-demo-page
+    section.interactive-demo-tools
+    article.interactive-demo-tool-card.glass-card {
+    grid-template-rows: auto minmax(12rem, 1fr) auto;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    padding-top: clamp(1.35rem, 2.5vw, 1.75rem);
+    padding-bottom: clamp(1.35rem, 2.5vw, 1.75rem);
+    padding-left: clamp(1.5rem, 3vw, 2.15rem);
+    padding-right: clamp(1.5rem, 3vw, 2.15rem);
+  }
+}
+
+@media (min-width: 1280px) {
+  main.interactive-demo-page
+    section.interactive-demo-tools
+    article.interactive-demo-tool-card.glass-card {
+    min-height: 21rem;
+    padding-left: clamp(1.65rem, 2.5vw, 2.35rem);
+    padding-right: clamp(1.65rem, 2.5vw, 2.35rem);
+    padding-top: clamp(1.5rem, 2.2vw, 1.85rem);
+    padding-bottom: clamp(1.5rem, 2.2vw, 1.85rem);
+  }
+}
+
+main.interactive-demo-page
+  section.interactive-demo-tools
+  article.interactive-demo-tool-card
+  .interactive-demo-tool-copy
+  > h3 {
+  text-align: center;
+}
+
+/* Capability bullets: align dot with first line of text (lh-aware; fixes fixed mt-*) */
+main.interactive-demo-page
+  section.interactive-demo-tools
+  ul.interactive-demo-capability-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+main.interactive-demo-page
+  section.interactive-demo-tools
+  .interactive-demo-capability-li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+main.interactive-demo-page
+  section.interactive-demo-tools
+  .interactive-demo-capability-dot {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 0.375rem;
+  height: 0.375rem;
+  margin-top: calc(0.5lh - 0.1875rem);
+  border-radius: 9999px;
+  background: var(--color-trust-amber);
+}
+
+@supports not (width: 1lh) {
+  main.interactive-demo-page
+    section.interactive-demo-tools
+    .interactive-demo-capability-dot {
+    margin-top: 0.45em;
+  }
+}
+
+main.interactive-demo-page
+  section.interactive-demo-tools
+  article.interactive-demo-tool-card
+  .interactive-demo-tool-visual {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+/*
+ * No mock (copy + CTA only): same row siblings share height via tools grid stretch.
+ * 1fr + auto pins the button to the bottom when the card is stretched taller than content.
+ */
+main.interactive-demo-page
+  section.interactive-demo-tools
+  article.interactive-demo-tool-card--no-mock.glass-card {
+  grid-template-rows: 1fr auto !important;
+  min-height: 0;
+  height: 100%;
+  align-self: stretch;
+}
+
+main.interactive-demo-page
+  section.interactive-demo-tools
+  article.interactive-demo-tool-card--no-mock.glass-card
+  .interactive-demo-tool-copy {
+  min-height: 0;
+  align-self: stretch;
 }
 
 main.interactive-demo-page
@@ -271,9 +617,9 @@ main.interactive-demo-page
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  line-height: 1.4 !important;
-  padding-block: 0.625rem !important;
-  padding-inline: 1.5rem !important;
+  line-height: 1.35 !important;
+  padding-block: 0.375rem !important;
+  padding-inline: 1.1rem !important;
 }
 
 @media (min-width: 640px) {
@@ -281,8 +627,8 @@ main.interactive-demo-page
     section.interactive-demo-tools
     article.interactive-demo-featured-card.glass-card
     span.interactive-demo-featured-badge {
-    padding-block: 0.75rem !important;
-    padding-inline: 2rem !important;
+    padding-block: 0.4375rem !important;
+    padding-inline: 1.5rem !important;
   }
 }
 
@@ -291,34 +637,215 @@ main.interactive-demo-page
     section.interactive-demo-tools
     article.interactive-demo-featured-card.glass-card
     span.interactive-demo-featured-badge {
-    padding-block: 0.75rem !important;
-    padding-inline: 2.5rem !important;
+    padding-block: 0.5rem !important;
+    padding-inline: 1.75rem !important;
   }
 }
 
-/* Search Visibility mock: inset label + bar from inner panel edges (esp. left) */
+/* Search Visibility mock */
 main.interactive-demo-page
   section.interactive-demo-tools
   .interactive-demo-analyzer-panel {
   box-sizing: border-box;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-right: 1.25rem;
-  padding-left: clamp(1.375rem, 3vw + 0.5rem, 2.5rem);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.875rem;
+  padding-left: clamp(1rem, 2.2vw + 0.35rem, 2rem);
 }
 
 @media (min-width: 640px) {
   main.interactive-demo-page
     section.interactive-demo-tools
     .interactive-demo-analyzer-panel {
-    padding-top: 1.125rem;
-    padding-bottom: 1.125rem;
-    padding-right: 1.375rem;
-    padding-left: clamp(1.5rem, 2.5vw + 0.65rem, 2.75rem);
+    padding-top: 0.5625rem;
+    padding-bottom: 0.5625rem;
+    padding-right: 1rem;
+    padding-left: clamp(1.2rem, 1.8vw + 0.45rem, 2.35rem);
+  }
+}
+
+/* From Demo to Deployment — taller cards, inset so copy clears glass border */
+main.interactive-demo-page
+  section.interactive-demo-deployment
+  .interactive-demo-deployment-grid {
+  align-items: stretch;
+  /* Explicit gap below heading (flex/utility order was hiding Tailwind mt-*) */
+  margin-top: clamp(2.75rem, 7vw, 5rem) !important;
+}
+
+@media (min-width: 640px) {
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    .interactive-demo-deployment-grid {
+    margin-top: clamp(3.25rem, 6vw, 5.5rem) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    .interactive-demo-deployment-grid {
+    margin-top: clamp(3.75rem, 5vw, 6rem) !important;
+  }
+}
+
+main.interactive-demo-page
+  section.interactive-demo-deployment
+  #demo-to-deployment-heading {
+  margin-bottom: 0;
+  padding-bottom: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+main.interactive-demo-page
+  section.interactive-demo-deployment
+  article.interactive-demo-deployment-card.glass-card {
+  box-sizing: border-box;
+  min-height: clamp(10.5rem, 24vw, 14.5rem);
+  padding-top: clamp(1.25rem, 3vw, 1.9rem);
+  padding-bottom: clamp(1.25rem, 3vw, 1.9rem);
+  padding-left: clamp(1.4rem, 3.2vw, 2.35rem);
+  padding-right: clamp(1.4rem, 3.2vw, 2.35rem);
+}
+
+@media (min-width: 640px) {
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    article.interactive-demo-deployment-card.glass-card {
+    min-height: clamp(11.5rem, 20vw, 16.5rem);
+    padding-top: clamp(1.35rem, 2.6vw, 2.1rem);
+    padding-bottom: clamp(1.35rem, 2.6vw, 2.1rem);
+    padding-left: clamp(1.5rem, 2.8vw, 2.5rem);
+    padding-right: clamp(1.5rem, 2.8vw, 2.5rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    article.interactive-demo-deployment-card.glass-card {
+    min-height: clamp(12.5rem, 16vw, 18.5rem);
+    padding-top: clamp(1.45rem, 2.2vw, 2.2rem);
+    padding-bottom: clamp(1.45rem, 2.2vw, 2.2rem);
+    padding-left: clamp(1.65rem, 2.2vw, 2.65rem);
+    padding-right: clamp(1.65rem, 2.2vw, 2.65rem);
+  }
+}
+
+/* From Demo to Deployment — mobile: horizontal carousel, middle card default, 80vw + ~7vw peeks */
+@media (max-width: 767.98px) {
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    .interactive-demo-deployment-carousel-shell {
+    width: 100vw;
+    max-width: 100vw;
+    position: relative;
+    left: 50%;
+    translate: -50% 0;
+    /* Room for 3D tilt + lift so cards don’t clip / ride into the heading */
+    padding-top: clamp(0.65rem, 3vw, 1.1rem);
+    padding-bottom: 0.5rem;
+  }
+
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    .interactive-demo-deployment-carousel-track {
+    position: relative;
+    display: flex !important;
+    flex-flow: row nowrap;
+    grid-template-columns: unset !important;
+    align-items: stretch;
+    overflow-x: auto;
+    overflow-y: visible;
+    overscroll-behavior-x: contain;
+    gap: 0.75rem;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-top: clamp(0.35rem, 1.5vw, 0.65rem);
+    padding-bottom: clamp(0.35rem, 1.5vw, 0.65rem);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    .interactive-demo-deployment-carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    .interactive-demo-deployment-carousel-track > article.interactive-demo-deployment-card {
+    flex: 0 0 80vw !important;
+    width: 80vw !important;
+    min-width: 80vw !important;
+    max-width: 80vw !important;
+    height: auto;
+    align-self: stretch;
+  }
+}
+
+@media (min-width: 768px) {
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    .interactive-demo-deployment-carousel-track {
+    overflow-x: visible;
+  }
+}
+
+/* From Demo to Deployment — bend toward cursor (same idea as How We Work cards) */
+main.interactive-demo-page
+  section.interactive-demo-deployment
+  article.interactive-demo-deployment-card-tilt.glass-card {
+  transform-style: preserve-3d;
+  transform: perspective(840px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+  transition:
+    transform 0.14s ease-out,
+    border-color 400ms ease,
+    box-shadow 400ms ease;
+}
+
+main.interactive-demo-page
+  section.interactive-demo-deployment
+  article.interactive-demo-deployment-card-tilt.glass-card:hover {
+  transform: perspective(840px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg))
+    translateY(-4px);
+}
+
+@media (max-width: 767.98px) {
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    article.interactive-demo-deployment-card-tilt.glass-card:hover {
+    transform: perspective(840px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg))
+      translateY(-2px);
+  }
+}
+
+@media (hover: none) {
+  /* Beat .interactive-demo-page .glass-card:hover { transform: none } for these cards */
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    article.interactive-demo-deployment-card-tilt.glass-card,
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    article.interactive-demo-deployment-card-tilt.glass-card:hover {
+    transform: perspective(840px) rotateX(0deg) rotateY(0deg) translateY(-2px) !important;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    article.interactive-demo-deployment-card-tilt.glass-card {
+    transform: translateY(0) !important;
+    transition: border-color 400ms ease, box-shadow 400ms ease;
+  }
+
+  main.interactive-demo-page
+    section.interactive-demo-deployment
+    article.interactive-demo-deployment-card-tilt.glass-card:hover {
+    transform: translateY(-2px) !important;
+  }
+
   html:has(main.interactive-demo-page) {
     scroll-snap-type: none;
   }
@@ -760,6 +1287,586 @@ button {
   width: 100%;
   max-width: 1152px;
   margin: 0 auto;
+}
+
+/* Search Visibility + Market Intelligence — obsidian page + glass panel (tokens only) */
+main.search-visibility-page,
+main.market-intelligence-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--color-bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.search-visibility-page .search-visibility-page-inner,
+.market-intelligence-page .market-intelligence-page-inner {
+  flex: 1 1 auto;
+  padding-top: clamp(3rem, 8vw, 5rem);
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+}
+
+.search-visibility-page-grid,
+.market-intelligence-page-grid {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  max-width: 72rem;
+  margin: 0 auto;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .search-visibility-page-grid,
+  .market-intelligence-page-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  }
+}
+
+.search-visibility-page .search-visibility-page-intro,
+.market-intelligence-page .market-intelligence-page-intro {
+  max-width: 36rem;
+}
+
+.search-visibility-page .search-visibility-page-eyebrow,
+.market-intelligence-page .market-intelligence-page-eyebrow {
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.14em;
+}
+
+.search-visibility-page .search-visibility-card.glass-card,
+.market-intelligence-page .market-intelligence-card.glass-card {
+  box-sizing: border-box;
+  width: 100%;
+  padding: clamp(1.35rem, 3.2vw, 2rem);
+}
+
+.market-intelligence-stock-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.25rem);
+}
+
+.market-intelligence-stock-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .market-intelligence-stock-row {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0.85rem;
+  }
+
+  .market-intelligence-stock-input {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .market-intelligence-stock-submit {
+    flex-shrink: 0;
+    align-self: stretch;
+    min-width: 7.5rem;
+  }
+}
+
+.search-visibility-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.search-visibility-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.search-visibility-field-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(0.8125rem, 0.9vw + 0.65rem, 0.9375rem);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.search-visibility-field-hint {
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 0.5vw + 0.65rem, 0.8125rem);
+  color: var(--color-text-tertiary);
+  line-height: 1.45;
+  margin: 0 0 0.5rem;
+}
+
+.search-visibility-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.search-visibility-input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.search-visibility-input:hover:not(:disabled) {
+  border-color: var(--color-btn-hover-border);
+}
+
+.search-visibility-input:focus {
+  outline: none;
+}
+
+.search-visibility-input:focus-visible {
+  outline: 2px solid var(--color-action-accent);
+  outline-offset: 2px;
+  border-color: var(--color-action-accent);
+}
+
+.search-visibility-input:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.search-visibility-input[aria-invalid='true'] {
+  border-color: var(--color-trust-amber-alt);
+}
+
+.search-visibility-field-error {
+  margin-top: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-trust-amber-alt);
+}
+
+.search-visibility-form-error {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-trust-amber-alt);
+  background: var(--color-bg-section);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+}
+
+.search-visibility-form-success {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-section);
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+.search-visibility-inline-link {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.search-visibility-inline-link:hover {
+  color: var(--color-action-accent);
+}
+
+.search-visibility-inline-link:focus-visible {
+  outline: 2px solid var(--color-action-accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.search-visibility-actions {
+  margin-top: 0.25rem;
+  padding-top: 0.25rem;
+}
+
+/* SEO Article Generator — page layout + form (tokens only) */
+main.seo-article-generator-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--color-bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Override section-wrapper's huge --section-py; keep its horizontal safe-area padding */
+.seo-article-generator-page .seo-article-generator-page-inner {
+  flex: 1 1 auto;
+  padding-top: clamp(3rem, 8vw, 5rem) !important;
+  padding-bottom: clamp(3rem, 8vw, 5rem) !important;
+  display: flex;
+  align-items: center;
+}
+
+/* Single-column default: narrow + centered */
+.seo-article-generator-page-grid {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3rem);
+  width: 100%;
+  max-width: 38rem;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* Two-column on desktop: wider max-width */
+@media (min-width: 1024px) {
+  .seo-article-generator-page-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    max-width: 72rem;
+    align-items: center;
+  }
+}
+
+/* Intro: full-width on single-column, constrained on desktop */
+.seo-article-generator-page .seo-article-generator-page-intro {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .seo-article-generator-page .seo-article-generator-page-intro {
+    max-width: 36rem;
+  }
+}
+
+/* Center-align intro text on mobile/tablet */
+@media (max-width: 1023px) {
+  .seo-article-generator-page .seo-article-generator-page-intro {
+    text-align: center;
+  }
+
+  .seo-article-generator-page .seo-article-generator-page-lede {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.seo-article-generator-page .seo-article-generator-page-eyebrow {
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.14em;
+}
+
+.seo-article-generator-page .seo-article-generator-card.glass-card {
+  box-sizing: border-box;
+  width: 100%;
+  padding: clamp(1.35rem, 3.2vw, 2rem);
+}
+
+.seo-article-generator-form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.seo-article-generator-field-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(0.8125rem, 0.9vw + 0.65rem, 0.9375rem);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.seo-article-generator-field-hint {
+  font-family: var(--font-display);
+  font-size: clamp(0.75rem, 0.5vw + 0.65rem, 0.8125rem);
+  color: var(--color-text-tertiary);
+  line-height: 1.45;
+  margin: 0 0 0.5rem;
+}
+
+.seo-article-generator-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
+  line-height: 1.4;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+.seo-article-generator-input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.seo-article-generator-input:hover:not(:disabled) {
+  border-color: var(--color-btn-hover-border);
+}
+
+.seo-article-generator-input:focus {
+  outline: none;
+}
+
+.seo-article-generator-input:focus-visible {
+  outline: 2px solid var(--color-action-accent);
+  outline-offset: 2px;
+  border-color: var(--color-action-accent);
+}
+
+.seo-article-generator-input:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.seo-article-generator-actions {
+  margin-top: 0.25rem;
+  padding-top: 0.25rem;
+}
+
+/* Center the submit button on mobile/tablet */
+@media (max-width: 1023px) {
+  .seo-article-generator-actions {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* Tiny screens: tighten vertical padding */
+@media (max-width: 380px) {
+  .seo-article-generator-page .seo-article-generator-page-inner {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+}
+
+/* Landscape phones: reduce vertical padding to avoid overflow */
+@media (max-height: 520px) and (orientation: landscape) {
+  .seo-article-generator-page .seo-article-generator-page-inner {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+    align-items: flex-start;
+  }
+}
+
+/* Hotel Concierge + E-commerce assistant — chat demo layouts (tokens only) */
+main.hotel-concierge-page,
+main.ecommerce-assistant-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--color-bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.hotel-concierge-page .hotel-concierge-page-inner,
+.ecommerce-assistant-page .ecommerce-assistant-page-inner {
+  flex: 1 1 auto;
+  padding-top: clamp(3rem, 8vw, 5rem);
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+}
+
+.hotel-concierge-page-grid,
+.ecommerce-assistant-page-grid {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  max-width: 72rem;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+@media (min-width: 1024px) {
+  .hotel-concierge-page-grid,
+  .ecommerce-assistant-page-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  }
+}
+
+.hotel-concierge-page .hotel-concierge-page-intro,
+.ecommerce-assistant-page .ecommerce-assistant-page-intro {
+  max-width: 36rem;
+}
+
+.hotel-concierge-page .hotel-concierge-page-eyebrow,
+.ecommerce-assistant-page .ecommerce-assistant-page-eyebrow {
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.14em;
+}
+
+.hotel-concierge-page .hotel-concierge-chat-card.glass-card,
+.ecommerce-assistant-page .ecommerce-assistant-chat-card.glass-card {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: min(28rem, 55svh);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.hotel-concierge-chat,
+.ecommerce-assistant-chat {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  gap: 1rem;
+}
+
+.hotel-concierge-chat-head,
+.ecommerce-assistant-chat-head {
+  flex-shrink: 0;
+}
+
+.hotel-concierge-chat-log,
+.ecommerce-assistant-chat-log {
+  flex: 1 1 auto;
+  min-height: 12rem;
+  max-height: min(52vh, 28rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-section);
+  padding: 0.75rem 0.85rem;
+  scroll-behavior: smooth;
+}
+
+.hotel-concierge-chat-list,
+.ecommerce-assistant-chat-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.hotel-concierge-chat-row,
+.ecommerce-assistant-chat-row {
+  display: flex;
+  width: 100%;
+}
+
+.hotel-concierge-chat-row--user,
+.ecommerce-assistant-chat-row--user {
+  justify-content: flex-end;
+}
+
+.hotel-concierge-chat-row--assistant,
+.ecommerce-assistant-chat-row--assistant {
+  justify-content: flex-start;
+}
+
+.hotel-concierge-bubble,
+.ecommerce-assistant-bubble {
+  max-width: min(100%, 26rem);
+  padding: 0.65rem 0.85rem;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-size: clamp(0.875rem, 0.5vw + 0.75rem, 0.9375rem);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.hotel-concierge-bubble--assistant,
+.ecommerce-assistant-bubble--assistant {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.hotel-concierge-bubble--user,
+.ecommerce-assistant-bubble--user {
+  background: var(--color-action-accent);
+  border: 1px solid transparent;
+  color: #ffffff;
+}
+
+.hotel-concierge-chat-composer,
+.ecommerce-assistant-chat-composer {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+@media (min-width: 640px) {
+  .hotel-concierge-chat-composer,
+  .ecommerce-assistant-chat-composer {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.hotel-concierge-chat-input,
+.ecommerce-assistant-chat-input {
+  box-sizing: border-box;
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 3rem;
+  resize: vertical;
+  padding: 0.65rem 0.85rem;
+  font-family: var(--font-display);
+  font-size: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
+  line-height: 1.45;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: border-color 200ms ease;
+}
+
+.hotel-concierge-chat-input::placeholder,
+.ecommerce-assistant-chat-input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.hotel-concierge-chat-input:hover:not(:disabled),
+.ecommerce-assistant-chat-input:hover:not(:disabled) {
+  border-color: var(--color-btn-hover-border);
+}
+
+.hotel-concierge-chat-input:focus,
+.ecommerce-assistant-chat-input:focus {
+  outline: none;
+}
+
+.hotel-concierge-chat-input:focus-visible,
+.ecommerce-assistant-chat-input:focus-visible {
+  outline: 2px solid var(--color-action-accent);
+  outline-offset: 2px;
+  border-color: var(--color-action-accent);
+}
+
+.hotel-concierge-chat-input:disabled,
+.ecommerce-assistant-chat-input:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.hotel-concierge-chat-send,
+.ecommerce-assistant-chat-send {
+  flex-shrink: 0;
+  align-self: stretch;
+}
+
+@media (min-width: 640px) {
+  .hotel-concierge-chat-send,
+  .ecommerce-assistant-chat-send {
+    align-self: flex-end;
+  }
 }
 
 /* Services page spacing override */
