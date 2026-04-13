@@ -82,7 +82,7 @@ export function AboutCTA({ reducedMotion = false }: AboutCTAProps) {
                 href="/contact"
                 primary
                 className="btn-base btn-primary w-full sm:w-auto"
-                ariaLabel="Discuss your AI architecture with VRISO"
+                ariaLabel="Discuss your AI architecture with Invisigent"
               >
                 Discuss Your AI Architecture
               </MagneticLinkButton>

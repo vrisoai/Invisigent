@@ -283,7 +283,7 @@ function ServicesHero() {
             }}
           >
             We design and build AI systems that integrate with your infrastructure, data, and operations. From
-            strategy to deployment, VRISO delivers production-ready AI architecture built for scale, performance, and
+            strategy to deployment, Invisigent delivers production-ready AI architecture built for scale, performance, and
             control.
           </motion.p>
 
@@ -385,7 +385,7 @@ function PositioningBlock() {
             }}
             className="text-sm sm:text-base"
           >
-            VRISO builds infrastructure — the systems that connect models, data, and workflows into something your
+            Invisigent builds infrastructure — the systems that connect models, data, and workflows into something your
             organization can actually run.
           </motion.p>
 
@@ -1274,7 +1274,7 @@ function GlobalBlock() {
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 32 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7, ease: EASE, delay: 0.15 }} className="lg:col-span-3">
             <p className="text-sm leading-[1.8] text-text-secondary sm:text-base">
-              VRISO provides enterprise AI infrastructure consulting, AI automation systems, and agent orchestration architecture for organizations across India, the United States, and Europe. We design scalable AI systems, knowledge retrieval pipelines, and AI-native applications for global businesses building production AI capabilities — with compliance aligned to the EU AI Act, GDPR, and India&apos;s DPDP Act.
+              Invisigent provides enterprise AI infrastructure consulting, AI automation systems, and agent orchestration architecture for organizations across India, the United States, and Europe. We design scalable AI systems, knowledge retrieval pipelines, and AI-native applications for global businesses building production AI capabilities — with compliance aligned to the EU AI Act, GDPR, and India&apos;s DPDP Act.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <span className="h-1.5 w-1.5 rounded-full bg-trust-amber" style={{ animation: 'pulse-dot 2s ease-in-out infinite' }} />
@@ -1495,7 +1495,7 @@ export default function ServicesPageClient() {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name: 'Enterprise AI Infrastructure Consulting',
-    provider: { '@type': 'Organization', name: 'VRISO' },
+    provider: { '@type': 'Organization', name: 'Invisigent' },
     description:
       'Enterprise AI infrastructure consulting, agent orchestration, RAG systems, AI-native product development, and compliance-ready AI for global organizations.',
   };

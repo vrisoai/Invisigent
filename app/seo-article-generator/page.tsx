@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Generate high-quality, keyword-optimized articles instantly. Enter your keyword and generate SEO-ready content tailored for your audience.',
   openGraph: {
-    title: 'SEO Article Generator | VRISO',
+    title: 'SEO Article Generator | Invisigent',
     description:
       'AI-powered SEO article generation — keyword-rich, audience-tailored content at scale.',
   },

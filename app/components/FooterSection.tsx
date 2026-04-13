@@ -7,12 +7,12 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { EASE } from '@/app/lib/animations';
 
-import vrisoLogo from '@/app/assets/VRISO LOGO.png';
+import vrisoLogo from '@/app/assets/Invisigent.png';
 
 const JSON_LD_PROFESSIONAL_SERVICE = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: 'VRISO',
+  name: 'Invisigent',
   serviceType: 'Enterprise AI Infrastructure Consulting',
   description:
     'Enterprise AI infrastructure and automation architecture consulting specializing in scalable AI systems and agent orchestration.',
@@ -62,11 +62,11 @@ export default function FooterSection() {
             <div className="vriso-footer-brand-top flex flex-col gap-2 items-start">
               <Image
                 src={vrisoLogo}
-                alt="VRISO"
+                alt="Invisigent"
                 id="vriso-footer-heading"
                 className="vriso-footer-logo-img"
-                height={40}
-                width={150}
+                height={56}
+                width={200}
               />
               <p className="font-serif text-xs text-footer-muted">
                 Enterprise AI Infrastructure
@@ -74,12 +74,12 @@ export default function FooterSection() {
             </div>
 
             <p className="vriso-footer-brand-desc font-serif">
-              VRISO designs enterprise AI infrastructure and automation architecture for modern organizations.
+              Invisigent designs enterprise AI infrastructure and automation architecture for modern organizations.
             </p>
           </div>
 
           {/* Quick Links column */}
-          <nav aria-label="VRISO quick links" className="vriso-footer-column vriso-footer-quicklinks">
+          <nav aria-label="Invisigent quick links" className="vriso-footer-column vriso-footer-quicklinks">
             <h3 className="vriso-footer-heading">Quick Links</h3>
             <ul className="vriso-footer-list">
               {footerColumns.company.map((item) => (
@@ -103,7 +103,7 @@ export default function FooterSection() {
               <a
                 href="mailto:hello@vriso.ai"
                 className="vriso-footer-email vriso-footer-contact-item"
-                aria-label="Email VRISO at hello@vriso.ai"
+                aria-label="Email Invisigent at hello@vriso.ai"
               >
                 hello@vriso.ai
               </a>
@@ -112,7 +112,7 @@ export default function FooterSection() {
                   href="https://www.linkedin.com"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="VRISO on LinkedIn"
+                  aria-label="Invisigent on LinkedIn"
                   className="vriso-footer-linkedin vriso-footer-contact-item"
                 >
                   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -126,7 +126,7 @@ export default function FooterSection() {
                 <a
                   href="#"
                   className="vriso-footer-cta-btn vriso-footer-contact-item"
-                  aria-label="Book a call with VRISO"
+                  aria-label="Book a call with Invisigent"
                 >
                   Book a call
                 </a>
@@ -136,14 +136,14 @@ export default function FooterSection() {
         </motion.div>
 
         {/* System status row */}
-        <div className="vriso-footer-status-row" aria-label="VRISO system status">
+        <div className="vriso-footer-status-row" aria-label="Invisigent system status">
           <span className="font-mono text-[11px] tracking-[0.16em] text-footer-muted">
             SYSTEM STATUS
           </span>
           <div className="flex items-center gap-2">
             <span className="vriso-footer-status-dot" aria-hidden="true" />
             <p className="font-mono text-xs tracking-[0.12em] text-footer-subtle">
-              VRISO NETWORK — ACTIVE
+              INVISIGENT NETWORK — ACTIVE
             </p>
           </div>
         </div>
@@ -151,7 +151,7 @@ export default function FooterSection() {
         {/* Copyright */}
         <div className="vriso-footer-bottom">
           <p className="font-mono text-[11px] tracking-[0.16em] text-footer-muted">
-            © 2026 VRISO. All rights reserved.
+            © 2026 Invisigent. All rights reserved.
           </p>
           <p className="font-serif text-xs text-footer-subtle">
             Enterprise AI Infrastructure &amp; Automation Architecture

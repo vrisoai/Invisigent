@@ -69,3 +69,10 @@
     --section-px: max(2rem, 5vw);
   }
 }
+
+/* Ultra-wide (≥1920px): cap horizontal padding so content fills more of the viewport */
+@media (min-width: 1920px) {
+  :root {
+    --section-px: clamp(2rem, 4vw, 5rem);
+  }
+}

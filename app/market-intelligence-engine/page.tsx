@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Search a stock by name or symbol for AI-assisted market context — news, trends, and insight workflows.',
   openGraph: {
-    title: 'Market Intelligence Engine | VRISO',
+    title: 'Market Intelligence Engine | Invisigent',
     description:
       'Demo: enter a company or ticker to drive aggregation, trend detection, and insight generation.',
   },

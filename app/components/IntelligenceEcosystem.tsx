@@ -189,7 +189,7 @@ export function IntelligenceEcosystem() {
           animate={gridInView ? 'visible' : 'hidden'}
           variants={GRID_STAGGER}
         >
-          {/* ─── Card A — The VRISO Advantage (2×2) ─── */}
+          {/* ─── Card A — The Invisigent Advantage (2×2) ─── */}
           <motion.article
             className="glass-card relative flex flex-col overflow-hidden md:col-span-2 md:row-span-2"
             style={{
@@ -221,7 +221,7 @@ export function IntelligenceEcosystem() {
                 marginTop: 16,
               }}
             >
-              The VRISO Advantage.
+              The Invisigent Advantage.
             </h3>
             <p
               className="font-serif text-text-secondary"

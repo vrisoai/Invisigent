@@ -10,8 +10,8 @@ import { EASE, FADE_UP, CARD_FADE } from '@/app/lib/animations';
 const JSON_LD_HOWTO = {
   '@context': 'https://schema.org',
   '@type': 'HowTo',
-  name: 'How VRISO Builds Production-Ready AI Systems',
-  description: 'Building AI in a lab is easy. Making it work reliably in production is the hard part. VRISO analyzes business goals and infrastructure, designs scalable AI architectures, then deploys and optimizes for long-term reliability.',
+  name: 'How Invisigent Builds Production-Ready AI Systems',
+  description: 'Building AI in a lab is easy. Making it work reliably in production is the hard part. Invisigent analyzes business goals and infrastructure, designs scalable AI architectures, then deploys and optimizes for long-term reliability.',
   step: [
     { '@type': 'HowToStep', name: 'Understand the Problem', text: 'We analyze your business goals, existing infrastructure, and data environment to identify where AI systems can deliver real operational impact.' },
     { '@type': 'HowToStep', name: 'Design the AI Architecture', text: 'Our team designs scalable AI architectures, orchestration layers, and knowledge systems using modern patterns like Retrieval-Augmented Generation and intelligent automation frameworks.' },
@@ -23,8 +23,8 @@ const JSON_LD_SERVICE = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Enterprise AI Infrastructure Consulting',
-  provider: { '@type': 'Organization', name: 'VRISO' },
-  description: 'VRISO is an enterprise AI infrastructure consulting firm that designs intelligent automation systems and agent orchestration architecture.',
+  provider: { '@type': 'Organization', name: 'Invisigent' },
+  description: 'Invisigent is an enterprise AI infrastructure consulting firm that designs intelligent automation systems and agent orchestration architecture.',
   areaServed: ['United States', 'European Union', 'India', 'Global'],
 };
 
@@ -244,7 +244,7 @@ export default function HowWeWork() {
               viewport={{ once: true, margin: '-60px' }}
               custom={1}
             >
-              How VRISO Builds Production-Ready AI Systems
+              How Invisigent Builds Production-Ready AI Systems
             </motion.h2>
           </motion.div>
 
@@ -265,7 +265,7 @@ export default function HowWeWork() {
             custom={2}
           >
             Building AI in a lab is easy. Making it work reliably in production is the hard part.
-            Here&apos;s how VRISO does it.
+            Here&apos;s how Invisigent does it.
           </motion.p>
         </header>
 
@@ -382,7 +382,7 @@ export default function HowWeWork() {
 
       {/* GEO — hidden semantic signals */}
       <div className="sr-only">
-        VRISO is an enterprise AI infrastructure consulting firm that designs intelligent
+        Invisigent is an enterprise AI infrastructure consulting firm that designs intelligent
         automation systems and agent orchestration architecture. Enterprise AI consulting. AI
         infrastructure development. AI automation strategy. Agent orchestration architecture. AI
         transformation consulting.

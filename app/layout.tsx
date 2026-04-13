@@ -29,11 +29,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://vriso.ai'),
   title: {
-    default: 'VRISO — Enterprise AI Systems Architecture',
-    template: '%s | VRISO',
+    default: 'Invisigent — Enterprise AI Systems Architecture',
+    template: '%s | Invisigent',
   },
   description:
-    'VRISO architects sovereign, multi-agent AI systems for enterprise workflow automation, governance, and execution. Strategic AI retainers for EU, India, and US markets.',
+    'Invisigent architects sovereign, multi-agent AI systems for enterprise workflow automation, governance, and execution. Strategic AI retainers for EU, India, and US markets.',
   keywords: [
     'Enterprise AI Architecture',
     'Agentic Orchestration',
@@ -44,14 +44,14 @@ export const metadata: Metadata = {
     'GDPR Compliant AI',
     'DPDP AI Compliance',
   ],
-  authors: [{ name: 'VRISO', url: 'https://vriso.ai' }],
-  creator: 'VRISO',
+  authors: [{ name: 'Invisigent', url: 'https://vriso.ai' }],
+  creator: 'Invisigent',
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://vriso.ai',
-    siteName: 'VRISO',
-    title: 'VRISO — Enterprise AI Systems Architecture',
+    siteName: 'Invisigent',
+    title: 'Invisigent — Enterprise AI Systems Architecture',
     description:
       'Sovereign, multi-agent AI systems for enterprise workflow automation and governance.',
     images: [
@@ -59,13 +59,13 @@ export const metadata: Metadata = {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'VRISO — Enterprise AI Systems Architecture',
+        alt: 'Invisigent — Enterprise AI Systems Architecture',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'VRISO — Enterprise AI Systems Architecture',
+    title: 'Invisigent — Enterprise AI Systems Architecture',
     description: 'Sovereign multi-agent AI systems for enterprise governance and execution.',
     images: ['/og-image.png'],
   },

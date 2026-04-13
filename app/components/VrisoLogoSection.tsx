@@ -12,7 +12,7 @@ export function VrisoLogoSection() {
     <section
       ref={sectionRef}
       className="vriso-logo-section overflow-hidden bg-bg-primary py-12 md:py-16"
-      aria-label="VRISO brand"
+      aria-label="Invisigent brand"
     >
       <div className="section-container section-inner flex w-full items-center justify-center overflow-hidden">
         <motion.div

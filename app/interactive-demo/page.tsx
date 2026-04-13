@@ -93,9 +93,9 @@ const TOOLS: Tool[] = [
 ];
 
 export const metadata = {
-  title: 'Interactive Demos | VRISO',
+  title: 'Interactive Demos | Invisigent',
   description:
-    'AI tools demo page by VRISO showcasing enterprise AI systems, AI automation demos, and AI workflow systems for businesses across India, US, and Europe.',
+    'AI tools demo page by Invisigent showcasing enterprise AI systems, AI automation demos, and AI workflow systems for businesses across India, US, and Europe.',
 };
 
 function getToolVisual(id: string) {
@@ -128,9 +128,9 @@ export default function InteractiveDemoPage() {
   const orgJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'VRISO',
+    name: 'Invisigent',
     description:
-      'VRISO designs enterprise AI systems, AI workflow systems, and AI automation demos for production environments.',
+      'Invisigent designs enterprise AI systems, AI workflow systems, and AI automation demos for production environments.',
     areaServed: ['India', 'United States', 'Europe'],
     url: 'https://vriso.ai',
   };
@@ -138,7 +138,7 @@ export default function InteractiveDemoPage() {
   const itemListJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'VRISO Interactive AI Tools Demo Systems',
+    name: 'Invisigent Interactive AI Tools Demo Systems',
     itemListElement: TOOLS.map((tool, index) => ({
       '@type': 'ListItem',
       position: index + 1,
@@ -169,7 +169,7 @@ export default function InteractiveDemoPage() {
     ].join(', '),
     creator: {
       '@type': 'Organization',
-      name: 'VRISO',
+      name: 'Invisigent',
     },
   }));
 
@@ -231,17 +231,17 @@ export default function InteractiveDemoPage() {
         aria-labelledby="tools-grid-heading"
       >
         <div className="section-wrapper">
-          <div className="mx-auto w-full max-w-[min(100%,85rem)]">
-          <h2 id="tools-grid-heading" className="text-section-h max-w-5xl shrink-0 break-words font-serif font-semibold leading-[1.1]">
+          <div className="interactive-demo-tools-inner text-center">
+          <h2 id="tools-grid-heading" className="text-section-h shrink-0 break-words font-serif font-semibold leading-[1.1]">
             Interactive AI Tools Demo Systems
           </h2>
-          <p className="text-body mt-5 max-w-4xl shrink-0 break-words font-serif text-[clamp(1rem,1.1vw+0.6rem,1.2rem)] leading-relaxed text-text-secondary">
+          <p className="text-body mt-5 shrink-0 break-words font-serif text-[clamp(1rem,1.1vw+0.6rem,1.2rem)] leading-relaxed text-text-secondary">
             A premium showcase of enterprise AI systems, AI automation demos, and AI workflow systems designed to reflect real production environments.
           </p>
 
           <div className="h-8 sm:h-10 lg:h-12" aria-hidden="true" />
 
-          <div className="interactive-demo-tools-grid grid w-full grid-cols-1 items-stretch gap-6 sm:grid-cols-2 sm:gap-8 lg:gap-10 xl:grid-cols-3 xl:gap-9">
+          <div className="interactive-demo-tools-grid grid w-full grid-cols-1 items-stretch gap-6 sm:grid-cols-2 sm:gap-8 lg:gap-10 xl:grid-cols-3 xl:gap-9 2xl:grid-cols-4">
             {TOOLS.map((tool, index) => (
               <article
                 id={tool.id}
@@ -256,10 +256,10 @@ export default function InteractiveDemoPage() {
                       }`
                 } ${
                   tool.featured
-                    ? 'col-span-1 sm:col-span-2 lg:col-span-2 xl:col-span-3'
+                    ? 'col-span-1 sm:col-span-2 lg:col-span-2 xl:col-span-3 2xl:col-span-4'
                     : index === TOOLS.length - 1
                       ? lastStandardCardFullWidthXl
-                        ? 'sm:col-span-2 lg:col-span-2 xl:col-span-3'
+                        ? 'sm:col-span-2 lg:col-span-2 xl:col-span-3 2xl:col-span-1'
                         : 'sm:col-span-2 lg:col-span-2 xl:col-span-1'
                       : ''
                 }`}
@@ -329,7 +329,7 @@ export default function InteractiveDemoPage() {
                     {tool.ctaHref ? (
                       <Link
                         href={tool.ctaHref}
-                        className="btn-primary mt-0 w-full shrink-0 whitespace-nowrap sm:w-auto sm:self-center"
+                        className="btn-primary mt-0 w-auto shrink-0 justify-self-center whitespace-nowrap"
                         aria-label={`${tool.cta} for ${tool.name}`}
                       >
                         {tool.cta}
@@ -337,7 +337,7 @@ export default function InteractiveDemoPage() {
                     ) : (
                       <button
                         type="button"
-                        className="btn-primary mt-0 w-full shrink-0 whitespace-nowrap sm:w-auto sm:self-center"
+                        className="btn-primary mt-0 w-auto shrink-0 justify-self-center whitespace-nowrap"
                         aria-label={`${tool.cta} for ${tool.name}`}
                       >
                         {tool.cta}
@@ -358,17 +358,17 @@ export default function InteractiveDemoPage() {
       >
         <div className="section-grid-overlay" aria-hidden="true" />
         <div className="section-wrapper interactive-demo-built-for-business-inner">
-          <div className="mx-auto w-full max-w-3xl px-4 text-center">
-          <h2 id="built-for-business-heading" className="text-section-h font-serif font-semibold leading-tight">
+          <div className="built-for-business-text w-full text-center">
+          <h2 id="built-for-business-heading" className="text-section-h text-center font-serif font-semibold leading-tight">
             Built for Real Businesses
           </h2>
-          <p className="text-body mt-6 font-serif leading-relaxed text-text-secondary">
-            These are simplified versions of the systems VRISO designs and deploys for organizations.
+          <p className="text-body mt-6 text-center font-serif leading-relaxed text-text-secondary">
+            These are simplified versions of the systems Invisigent designs and deploys for organizations.
           </p>
-          <p className="text-body mt-4 font-serif leading-relaxed text-text-secondary">
+          <p className="text-body mt-4 text-center font-serif leading-relaxed text-text-secondary">
             Every implementation is customized — built around your workflows, data infrastructure, and operational scale.
           </p>
-          <p className="text-body mt-6 font-serif leading-relaxed text-text-primary">
+          <p className="text-body mt-6 text-center font-serif leading-relaxed text-text-primary">
             We don&apos;t build demos. <br />
             We build systems that run inside real businesses.
           </p>
@@ -381,7 +381,7 @@ export default function InteractiveDemoPage() {
         aria-labelledby="demo-to-deployment-heading"
       >
         <div className="section-wrapper">
-          <div className="mx-auto w-full max-w-7xl">
+          <div className="mx-auto w-full max-w-7xl 2xl:max-w-[min(100%,110rem)]">
           <h2 id="demo-to-deployment-heading" className="text-section-h font-serif font-semibold leading-tight text-center">
             From Demo to Deployment
           </h2>
@@ -420,8 +420,8 @@ export default function InteractiveDemoPage() {
         aria-labelledby="conversion-heading"
       >
         <div className="section-wrapper">
-          <div className="mx-auto w-full max-w-6xl">
-          <div className="interactive-demo-conversion-card glass-card flex flex-col gap-8 sm:gap-9 md:gap-10">
+          <div className="mx-auto w-full max-w-6xl 2xl:max-w-7xl">
+          <div className="interactive-demo-conversion-card glass-card flex flex-col items-center gap-5 text-center sm:gap-8 md:gap-9">
             <h2
               id="conversion-heading"
               className="text-section-h font-serif font-semibold leading-snug text-text-primary"
@@ -431,8 +431,8 @@ export default function InteractiveDemoPage() {
             <p className="text-body max-w-3xl font-serif leading-[1.7] text-text-secondary">
               We design and build custom AI systems tailored to your workflows, infrastructure, and scale.
             </p>
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-5">
-              <a href="/contact" className="btn-accent w-full whitespace-nowrap sm:w-auto" aria-label="Request a custom AI solution">
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-5">
+              <a href="/contact" className="btn-accent w-auto whitespace-nowrap" aria-label="Request a custom AI solution">
                 Request Custom Solution
               </a>
             </div>
@@ -451,7 +451,7 @@ export default function InteractiveDemoPage() {
         aria-labelledby="global-ai-infrastructure-heading"
       >
         <div className="section-wrapper interactive-demo-global-infra-inner">
-          <div className="mx-auto flex w-full max-w-6xl flex-col items-center text-center">
+          <div className="mx-auto flex w-full max-w-6xl 2xl:max-w-7xl flex-col items-center text-center">
             <h2
               id="global-ai-infrastructure-heading"
               className="text-section-h font-serif font-semibold leading-tight text-text-primary"
@@ -460,7 +460,7 @@ export default function InteractiveDemoPage() {
             </h2>
             <div className="mt-10 flex w-full max-w-3xl flex-col gap-5 sm:mt-12 sm:gap-6 md:mt-14">
               <p className="text-body font-serif leading-relaxed text-text-secondary">
-                VRISO designs enterprise AI systems, automation workflows, and scalable infrastructure for organizations operating across regions, teams, and complex environments.
+                Invisigent designs enterprise AI systems, automation workflows, and scalable infrastructure for organizations operating across regions, teams, and complex environments.
               </p>
               <p className="text-body font-serif leading-relaxed text-text-secondary">
                 From search intelligence to automation systems, we build AI that runs in production — not just in demos.

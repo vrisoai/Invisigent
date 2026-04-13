@@ -58,7 +58,7 @@ export function GlobalContext({ reducedMotion = false }: GlobalContextProps) {
               animate={inView ? 'visible' : 'hidden'}
             >
               <p className="text-body font-display leading-[1.8] text-[var(--color-text-secondary)]">
-                Although founded in Jaipur, VRISO works with organizations building AI systems across
+                Although founded in Jaipur, Invisigent works with organizations building AI systems across
                 global markets. Our focus is helping companies design AI infrastructure that
                 integrates with modern technology stacks and scales across teams, regions, and
                 operational environments without performance or compliance constraints.

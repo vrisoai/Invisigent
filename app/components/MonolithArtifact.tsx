@@ -64,7 +64,7 @@ export function MonolithArtifact({
       className={`relative flex items-center justify-center ${className}`}
       style={{ width, height }}
       role="img"
-      aria-label="Sovereign AI Monolith representing Vriso AI's Valuable, Rare, Inimitable, and Organized framework for US/EU enterprise systems."
+      aria-label="Sovereign AI Monolith representing Invisigent's Valuable, Rare, Inimitable, and Organized framework for US/EU enterprise systems."
     >
       {/* Concentric rings — slow spin */}
       <svg

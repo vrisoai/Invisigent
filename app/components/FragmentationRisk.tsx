@@ -30,7 +30,7 @@ const RIGHT_PARAGRAPHS = [
 const RIGHT_EMPHASIS = 'They cannot replicate your integrated system.';
 
 const POSITIONING = [
-  'Vriso AI does not deploy wrappers',
+  'Invisigent does not deploy wrappers',
   'We design sovereign AI infrastructures vertically integrated systems that convert experimentation into owned economic leverage.',
 ];
 

@@ -142,16 +142,16 @@ const STRATEGIC_ITEM = {
 const JSON_LD_ORG = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'VRISO',
-  description: 'VRISO is an enterprise AI infrastructure consulting firm that designs sovereign AI systems and agent orchestration architecture for global organizations.',
+  name: 'Invisigent',
+  description: 'Invisigent is an enterprise AI infrastructure consulting firm that designs sovereign AI systems and agent orchestration architecture for global organizations.',
 };
 
 const JSON_LD_SERVICE = {
   '@context': 'https://schema.org',
   '@type': 'Service',
   name: 'Enterprise AI Infrastructure Consulting',
-  provider: { '@type': 'Organization', name: 'VRISO' },
-  description: 'VRISO designs sovereign AI systems, agent orchestration systems, and AI automation architecture for enterprise AI transformation strategy.',
+  provider: { '@type': 'Organization', name: 'Invisigent' },
+  description: 'Invisigent designs sovereign AI systems, agent orchestration systems, and AI automation architecture for enterprise AI transformation strategy.',
   areaServed: ['United States', 'European Union', 'India', 'Global'],
 };
 
@@ -159,15 +159,15 @@ const JSON_LD_RESERVE = {
   '@context': 'https://schema.org',
   '@type': 'ReserveAction',
   name: 'Discuss Your AI Architecture',
-  provider: { '@type': 'Organization', name: 'VRISO' },
-  description: 'Discuss your AI architecture with VRISO for enterprise AI infrastructure consulting.',
+  provider: { '@type': 'Organization', name: 'Invisigent' },
+  description: 'Discuss your AI architecture with Invisigent for enterprise AI infrastructure consulting.',
   areaServed: ['United States', 'European Union', 'India', 'Global'],
 };
 
 /* ─── Trust signals ─── */
 const TRUST_SIGNALS = [
   'Enterprise Engagements — Limited to 4 per Quarter',
-  'VRISO Framework — Strategic Systems Architecture',
+  'Invisigent Framework — Strategic Systems Architecture',
   'Compliance Ready — GDPR / SOC2 / DPDP',
 ] as const;
 
@@ -326,7 +326,7 @@ export default function StrategicCTASection() {
               It comes from building AI systems that integrate with your infrastructure, data, and operations.
               <br />
               <br />
-              VRISO partners with leadership teams to design scalable AI architectures, automation
+              Invisigent partners with leadership teams to design scalable AI architectures, automation
               platforms, and intelligent systems that create long-term operational advantage.
             </motion.p>
 
@@ -340,7 +340,7 @@ export default function StrategicCTASection() {
                 lineHeight: 1.6,
               }}
             >
-              Discuss your AI architecture with VRISO.
+              Discuss your AI architecture with Invisigent.
             </motion.p>
             <motion.div
               variants={STRATEGIC_ITEM}
@@ -353,16 +353,16 @@ export default function StrategicCTASection() {
                 className="strategic-cta-btn-primary"
                 onMouseEnter={handleCtaEnter}
                 onMouseLeave={handleCtaLeave}
-                aria-label="Discuss your AI architecture with VRISO"
+                aria-label="Discuss your AI architecture with Invisigent"
               >
                 Discuss Your AI Architecture
               </MagneticButton>
               <MagneticButton
                 type="button"
                 className="strategic-cta-btn-secondary"
-                aria-label="Explore the VRISO Framework"
+                aria-label="Explore the Invisigent Framework"
               >
-                Explore VRISO Framework
+                Explore Invisigent Framework
               </MagneticButton>
             </motion.div>
 
@@ -407,9 +407,9 @@ export default function StrategicCTASection() {
 
       {/* SEO — hidden semantic signals */}
       <div className="sr-only">
-        VRISO is an enterprise AI infrastructure consulting firm that designs scalable AI
+        Invisigent is an enterprise AI infrastructure consulting firm that designs scalable AI
         architectures, automation platforms, and intelligent systems. Enterprise AI infrastructure.
-        Discuss your AI architecture. Explore the VRISO Framework.
+        Discuss your AI architecture. Explore the Invisigent Framework.
       </div>
     </section>
   );

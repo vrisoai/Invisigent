@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Virtual hotel concierge for dining, services, activities, and local experiences — personalized hospitality at scale.',
   openGraph: {
-    title: 'Hotel Concierge AI | VRISO',
+    title: 'Hotel Concierge AI | Invisigent',
     description:
       'Chat demo: book dining, request services, and explore offerings aligned with your property.',
   },

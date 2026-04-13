@@ -369,6 +369,19 @@ main.interactive-demo-page
   width: 100%;
   padding-top: clamp(1.5rem, 4vh, 3rem);
   padding-bottom: clamp(1.5rem, 4vh, 3rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main.interactive-demo-page
+  > section.interactive-demo-built-for-business
+  .built-for-business-text {
+  width: 100%;
+  max-width: min(100%, 48rem);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Global AI infrastructure — center copy in viewport below nav (interactive demo §6) */
@@ -415,12 +428,38 @@ main.interactive-demo-page > section.vriso-logo-section {
   flex-direction: unset !important;
 }
 
-/* Want This for Your Business — taller glass card (interactive demo §5) */
+/* Conversion section: vertically center the card, no forced 100svh blank space */
+main.interactive-demo-page > section.interactive-demo-conversion {
+  justify-content: center;
+  min-height: 0 !important;
+  height: auto !important;
+  padding-top: clamp(3rem, 8svh, 6rem);
+  padding-bottom: clamp(3rem, 8svh, 6rem);
+  scroll-snap-align: none !important;
+}
+
+/* Conversion section wrapper: flex-column + align-items:center centers the card */
+main.interactive-demo-page > section.interactive-demo-conversion > .section-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+main.interactive-demo-page > section.interactive-demo-conversion > .section-wrapper > div {
+  width: 100%;
+  max-width: min(100%, 72rem);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Want This for Your Business — glass card (interactive demo §5) */
 main.interactive-demo-page
   section.interactive-demo-conversion
   .interactive-demo-conversion-card.glass-card {
   box-sizing: border-box;
-  min-height: clamp(19rem, 50svh, 30rem);
+  min-height: 0;
   padding-top: clamp(1.5rem, 3.5vw + 0.75rem, 2.5rem);
   padding-bottom: clamp(1.5rem, 3.5vw + 0.75rem, 2.5rem);
   padding-left: clamp(1.5rem, 4vw + 0.75rem, 2.85rem);
@@ -431,7 +470,7 @@ main.interactive-demo-page
   main.interactive-demo-page
     section.interactive-demo-conversion
     .interactive-demo-conversion-card.glass-card {
-    min-height: clamp(21rem, 46svh, 32rem);
+    min-height: 0;
     padding-top: clamp(1.65rem, 3vw + 0.85rem, 2.65rem);
     padding-bottom: clamp(1.65rem, 3vw + 0.85rem, 2.65rem);
     padding-left: clamp(1.65rem, 3.5vw + 0.85rem, 3rem);
@@ -451,9 +490,52 @@ main.interactive-demo-page
   }
 }
 
+/* ── Tools section wrapper: flex-row + justify-content:center is the most
+   reliable CSS centering technique — works regardless of margin:auto issues  */
 main.interactive-demo-page > section.interactive-demo-tools .section-wrapper {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: flex-start;
   padding-top: clamp(3rem, 5vw, 5rem);
   padding-bottom: clamp(4rem, 6vw, 6rem);
+  /* Remove base .section-wrapper horizontal padding — inner div handles it */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Inner tools container: sized with max-width + its own horizontal padding */
+main.interactive-demo-page > section.interactive-demo-tools .section-wrapper > .interactive-demo-tools-inner {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(100%, 85rem);
+  padding-left: max(var(--section-px), env(safe-area-inset-left));
+  padding-right: max(var(--section-px), env(safe-area-inset-right));
+}
+
+@media (min-width: 1536px) {
+  main.interactive-demo-page > section.interactive-demo-tools .section-wrapper > .interactive-demo-tools-inner {
+    max-width: min(100%, 110rem);
+  }
+}
+
+/* ── Heading: full width of the inner container, text centered             */
+main.interactive-demo-page > section.interactive-demo-tools #tools-grid-heading {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* ── Description: centered block via margin auto — works because this rule's
+   specificity (0,3,2) beats the * { margin:0 } reset (0,0,0)              */
+main.interactive-demo-page > section.interactive-demo-tools .interactive-demo-tools-inner > p {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 /* Featured tool card: comfortable inset so copy and mocks never hug the glass edge */
@@ -598,6 +680,19 @@ main.interactive-demo-page
   .interactive-demo-tool-copy {
   min-height: 0;
   align-self: stretch;
+}
+
+/* Standard tool card CTA: auto width, centered in grid column */
+main.interactive-demo-page
+  section.interactive-demo-tools
+  article.interactive-demo-tool-card.glass-card
+  a.btn-primary,
+main.interactive-demo-page
+  section.interactive-demo-tools
+  article.interactive-demo-tool-card.glass-card
+  button.btn-primary {
+  width: auto;
+  justify-self: center;
 }
 
 main.interactive-demo-page
@@ -1075,6 +1170,60 @@ main.interactive-demo-page .interactive-demo-hero .text-body {
 
   main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-status {
     margin-top: clamp(0.35rem, 1.5vh, 0.75rem) !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Ultra-wide (≥1536px / 2xl): widen interactive demo containers so the page
+ * fills more of the viewport at resolutions like 2480×1010 instead of
+ * centering a narrow column with large dead margins on each side.
+ * ───────────────────────────────────────────────────────────────────────────── */
+@media (min-width: 1536px) {
+  /* Hero content column: hero has its own paddings, widen the content block */
+  main.interactive-demo-page > section.interactive-demo-hero .interactive-demo-hero-content {
+    width: min(100%, 1440px);
+    max-width: 1440px;
+  }
+
+  /* Hero title — allow it to grow slightly on ultra-wide */
+  main.interactive-demo-page .interactive-demo-hero h1.interactive-demo-hero-title {
+    font-size: clamp(2rem, 4.5vw + 0.5rem, 6rem);
+    width: min(100%, 64rem);
+    max-width: 64rem;
+  }
+
+  /* Body copy — slightly wider reading column */
+  main.interactive-demo-page .interactive-demo-hero .interactive-demo-hero-copy {
+    max-width: 52rem;
+  }
+
+  /* Conversion glass card — taller min-height on wide viewports */
+  main.interactive-demo-page
+    section.interactive-demo-conversion
+    .interactive-demo-conversion-card.glass-card {
+    min-height: clamp(22rem, 38svh, 34rem);
+  }
+
+  /* Standard tool cards — min-height grows with viewport width so cards fill the
+     wider grid columns at ultra-wide resolutions instead of looking short/squat */
+  main.interactive-demo-page
+    section.interactive-demo-tools
+    article.interactive-demo-tool-card.glass-card {
+    min-height: clamp(21rem, 22vw, 28rem);
+    padding-left: clamp(1.75rem, 1.8vw, 2.5rem);
+    padding-right: clamp(1.75rem, 1.8vw, 2.5rem);
+    padding-top: clamp(1.65rem, 1.6vw, 2.2rem);
+    padding-bottom: clamp(1.65rem, 1.6vw, 2.2rem);
+  }
+
+  /* Featured card — larger inset padding on ultra-wide */
+  main.interactive-demo-page
+    > section.interactive-demo-tools
+    article.interactive-demo-featured-card.glass-card {
+    padding-top: clamp(1.85rem, 1.8vw, 2.75rem);
+    padding-left: clamp(2rem, 2vw, 3rem);
+    padding-right: clamp(2rem, 2vw, 3rem);
+    padding-bottom: clamp(1.85rem, 1.8vw, 2.75rem);
   }
 }
 
@@ -1895,4 +2044,429 @@ main.ecommerce-assistant-page {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LET'S TALK PAGE
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Entry animation */
+@keyframes lets-talk-fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Ambient orb */
+.lets-talk-orb {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(500px, 100vw, 1200px);
+  height: clamp(300px, 50vw, 600px);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 0%,
+    rgba(45, 91, 255, 0.055) 0%,
+    rgba(45, 91, 255, 0.02) 50%,
+    transparent 75%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Page shell */
+.lets-talk-page > .lets-talk-shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: min(100%, 90rem);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+  /* Cap horizontal padding so content doesn't feel squeezed on wide screens */
+  padding-left: clamp(1.5rem, 4vw, 5rem) !important;
+  padding-right: clamp(1.5rem, 4vw, 5rem) !important;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+@media (min-width: 1536px) {
+  .lets-talk-page > .lets-talk-shell {
+    max-width: min(100%, 110rem);
+  }
+}
+
+/* ── Hero ──────────────────────────────────────────────────────────────── */
+.lets-talk-hero {
+  animation: lets-talk-fade-up 0.6s ease both;
+}
+
+.lets-talk-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: 1.25rem;
+}
+
+.lets-talk-eyebrow-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-action-accent);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.lets-talk-heading {
+  font-size: clamp(2.75rem, 6vw, 7rem);
+  font-weight: 700;
+  line-height: 1.0;
+  color: var(--color-text-primary);
+  letter-spacing: -0.025em;
+}
+
+.lets-talk-heading-accent {
+  display: block;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--color-text-tertiary);
+  font-family: var(--font-mono);
+  margin-top: 0.5rem;
+}
+
+.lets-talk-subheading {
+  margin-top: 1.25rem;
+  font-size: clamp(1rem, 1.2vw + 0.5rem, 1.35rem);
+  line-height: 1.6;
+  max-width: 42rem;
+  color: var(--color-text-secondary);
+}
+
+/* ── Two-column body ──────────────────────────────────────────────────── */
+.lets-talk-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3rem);
+  animation: lets-talk-fade-up 0.6s 0.15s ease both;
+}
+
+@media (min-width: 900px) {
+  .lets-talk-body {
+    grid-template-columns: minmax(0, 340px) 1fr;
+    align-items: start;
+    gap: clamp(2.5rem, 4vw, 4rem);
+  }
+}
+
+@media (min-width: 1200px) {
+  .lets-talk-body {
+    grid-template-columns: minmax(0, 400px) 1fr;
+  }
+}
+
+@media (min-width: 1536px) {
+  .lets-talk-body {
+    grid-template-columns: minmax(0, 460px) 1fr;
+    gap: clamp(3rem, 5vw, 6rem);
+  }
+}
+
+/* ── Left column ──────────────────────────────────────────────────────── */
+.lets-talk-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .lets-talk-left {
+    position: sticky;
+    top: calc(var(--nav-h, 64px) + 2rem);
+    gap: 1.75rem;
+  }
+}
+
+/* On mobile show trust items horizontally if space allows */
+@media (max-width: 899px) {
+  .lets-talk-trust-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.625rem;
+  }
+  .lets-talk-trust-item {
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    background: rgba(31,31,31,0.6);
+  }
+  .lets-talk-timeline,
+  .lets-talk-divider {
+    display: none;
+  }
+}
+
+.lets-talk-divider {
+  border: none;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Trust chips */
+.lets-talk-trust-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.lets-talk-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.lets-talk-trust-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-action-accent);
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+/* Timeline */
+.lets-talk-timeline {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.375rem;
+}
+
+.lets-talk-timeline-item {
+  display: grid;
+  grid-template-columns: 1.75rem 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.lets-talk-timeline-step {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  color: var(--color-action-accent);
+  opacity: 0.65;
+  padding-top: 0.15rem;
+}
+
+/* ── Form card ──────────────────────────────────────────────────────── */
+.lets-talk-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.375rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+@media (min-width: 480px) {
+  .lets-talk-form {
+    padding: clamp(1.5rem, 4vw, 2.25rem) clamp(1.5rem, 4vw, 2.25rem);
+  }
+}
+
+.lets-talk-form-header {
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 0.25rem;
+}
+
+.lets-talk-success {
+  min-height: clamp(20rem, 40vh, 28rem);
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+/* Two-column rows inside the form */
+.lets-talk-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.125rem;
+}
+
+@media (min-width: 520px) {
+  .lets-talk-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Field wrapper */
+.lets-talk-field {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Label */
+.lets-talk-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 0.45rem;
+}
+
+.lets-talk-label-index {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--color-action-accent);
+  opacity: 0.65;
+}
+
+.lets-talk-optional {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-left: auto;
+}
+
+/* Hint text */
+.lets-talk-hint {
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--color-text-tertiary);
+  margin-bottom: 0.45rem;
+  margin-top: -0.15rem;
+}
+
+/* Input base */
+.lets-talk-input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.65rem 0.875rem;
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--color-text-primary);
+  background-color: rgba(12, 12, 12, 0.85);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.lets-talk-input::placeholder {
+  color: var(--color-text-micro);
+}
+
+.lets-talk-input:hover:not(:disabled) {
+  border-color: var(--color-btn-hover-border);
+  background-color: rgba(18, 18, 20, 0.95);
+}
+
+.lets-talk-input:focus {
+  outline: none;
+}
+
+.lets-talk-input:focus-visible {
+  outline: none;
+  border-color: var(--color-action-accent);
+  box-shadow: 0 0 0 3px rgba(45, 91, 255, 0.15);
+  background-color: rgba(14, 14, 22, 1);
+}
+
+.lets-talk-input--error {
+  border-color: var(--color-trust-amber-alt);
+}
+
+.lets-talk-input--error:focus-visible {
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+.lets-talk-textarea {
+  resize: vertical;
+  min-height: 7rem;
+}
+
+.lets-talk-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%236B7280' d='M5 7L0.5 2h9z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  padding-right: 2.25rem;
+  cursor: pointer;
+}
+
+.lets-talk-select option {
+  background-color: var(--color-bg-card);
+  color: var(--color-text-primary);
+}
+
+/* Error message */
+.lets-talk-error {
+  margin-top: 0.35rem;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-trust-amber-alt);
+}
+
+/* Error banner */
+.lets-talk-banner-error {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: rgba(245, 158, 11, 0.05);
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* Actions row */
+.lets-talk-actions {
+  display: flex;
+  justify-content: stretch;
+  padding-top: 0.375rem;
+}
+
+@media (min-width: 480px) {
+  .lets-talk-actions {
+    justify-content: flex-end;
+  }
+}
+
+.lets-talk-submit {
+  width: 100%;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+}
+
+@media (min-width: 480px) {
+  .lets-talk-submit {
+    width: auto;
+    min-width: 10rem;
+  }
+}
+
+.lets-talk-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  filter: none;
+  box-shadow: none;
+}
+
+/* Success icon */
+.lets-talk-success-icon {
+  color: var(--color-action-accent);
 }

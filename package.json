@@ -1,5 +1,5 @@
 {
-  "name": "vriso-ai",
+  "name": "invisigent",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,13 +14,16 @@
     "framer-motion": "^11.11.17",
     "gsap": "^3.14.2",
     "next": "^15.0.0",
+    "nodemailer": "^8.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "resend": "^6.11.0",
     "three": "^0.183.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "25.3.3",
+    "@types/nodemailer": "^8.0.0",
     "@types/react": "19.2.14",
     "@types/three": "^0.183.1",
     "postcss": "^8.4.49",

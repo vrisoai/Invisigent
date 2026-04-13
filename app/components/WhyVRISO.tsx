@@ -13,8 +13,8 @@ const IntelligenceCore = dynamic(() => import('./3d/IntelligenceCoreWrapper'), {
 const JSON_LD_ORG = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'VRISO',
-  description: 'VRISO builds AI systems your team owns, your security team approves, and your operations team can run at scale. Most AI projects stall because the infrastructure wasn\'t built for production.',
+  name: 'Invisigent',
+  description: 'Invisigent builds AI systems your team owns, your security team approves, and your operations team can run at scale. Most AI projects stall because the infrastructure wasn\'t built for production.',
   url: 'https://vriso.com',
   areaServed: ['US', 'EU', 'India', 'Global'],
   serviceType: ['Enterprise AI Consulting', 'AI Infrastructure Systems', 'AI Automation Systems', 'Agent Orchestration Systems'],
@@ -23,8 +23,8 @@ const JSON_LD_ORG = {
 const JSON_LD_SERVICE = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  name: 'VRISO AI Infrastructure',
-  provider: { '@type': 'Organization', name: 'VRISO' },
+  name: 'Invisigent AI Infrastructure',
+  provider: { '@type': 'Organization', name: 'Invisigent' },
   description: 'AI infrastructure designed for production: you own your stack, every decision is auditable, built to pass security review, and scaled for real workloads.',
   areaServed: ['US', 'EU', 'India', 'Global'],
 };
@@ -175,7 +175,7 @@ export function WhyVRISO() {
             viewport={{ once: true, margin: '-60px' }}
             custom={0}
           >
-            [ WHY VRISO ]
+            [ WHY INVISIGENT ]
           </motion.p>
 
           <motion.h2
@@ -195,7 +195,7 @@ export function WhyVRISO() {
             custom={1}
           >
             Why Organizations Partner With{' '}
-            <span className="gradient-text">VRISO</span>
+            <span className="gradient-text">Invisigent</span>
           </motion.h2>
 
           <motion.div
@@ -217,7 +217,7 @@ export function WhyVRISO() {
               Most AI projects stall — not because the technology fails, but because the infrastructure wasn&apos;t built for production.
             </p>
             <p style={{ marginTop: '1em' }}>
-              VRISO builds AI systems your team owns, your security team approves, and your operations team can actually run at scale.
+              Invisigent builds AI systems your team owns, your security team approves, and your operations team can actually run at scale.
             </p>
           </motion.div>
         </header>
@@ -364,7 +364,7 @@ export function WhyVRISO() {
 
       {/* SEO — hidden semantic signals */}
       <div className="sr-only">
-        Why partner with VRISO. You own your AI stack. Vendor lock-in avoided.
+        Why partner with Invisigent. You own your AI stack. Vendor lock-in avoided.
         Every decision auditable. Traceability and explainability. Built to pass security review.
         Designed for production. AI systems at scale.
       </div>

@@ -11,11 +11,11 @@ const JSON_LD = {
   '@type': 'Service',
   provider: {
     '@type': 'Organization',
-    name: 'VRISO',
+    name: 'Invisigent',
   },
   serviceType: 'Enterprise AI Systems',
   description:
-    'VRISO designs enterprise AI infrastructure, autonomous workflow systems, and AI decision intelligence platforms for organizations.',
+    'Invisigent designs enterprise AI infrastructure, autonomous workflow systems, and AI decision intelligence platforms for organizations.',
   areaServed: 'Global',
 };
 
@@ -37,7 +37,7 @@ const CARDS: ValueCard[] = [
     label: '[ AUTOMATION ]',
     title: 'Autonomous Workflow Systems',
     description:
-      'VRISO builds agentic automation systems that coordinate intelligent workflows across departments, reducing operational complexity and increasing efficiency.',
+      'Invisigent builds agentic automation systems that coordinate intelligent workflows across departments, reducing operational complexity and increasing efficiency.',
   },
   {
     label: '[ INTELLIGENCE ]',
@@ -164,7 +164,7 @@ export function ValueProposition() {
             viewport={{ once: true, margin: '-60px' }}
             custom={2}
           >
-            VRISO designs and deploys enterprise AI systems that integrate models,
+            Invisigent designs and deploys enterprise AI systems that integrate models,
             workflows, and data into unified intelligent infrastructure. Our
             platforms automate operations, orchestrate agentic workflows, and
             transform enterprise data into real-time decision intelligence.

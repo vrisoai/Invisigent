@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import './Navbar.css';
 
-import vrisoLogo from '@/app/assets/VRISO LOGO.png';
+import vrisoLogo from '@/app/assets/Invisigent.png';
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -42,14 +42,14 @@ export function Navbar() {
           <Link
             href="/"
             className="siteLogo"
-            aria-label="VRISO home"
+            aria-label="Invisigent home"
           >
             <Image
               src={vrisoLogo}
-              alt="VRISO"
+              alt="Invisigent"
               className="siteLogoImg"
-              height={32}
-              width={120}
+              height={44}
+              width={160}
               priority
             />
           </Link>
@@ -97,7 +97,7 @@ export function Navbar() {
                 <Link
                   href="/contact"
                   className="navCta"
-                  aria-label="Open contact form to talk with VRISO"
+                  aria-label="Open contact form to talk with Invisigent"
                   onClick={() => setOpenState(false)}
                 >
                   Let&apos;s Talk
@@ -111,7 +111,7 @@ export function Navbar() {
             <Link
               href="/contact"
               className="navCta"
-              aria-label="Open contact form to talk with VRISO"
+              aria-label="Open contact form to talk with Invisigent"
             >
               Let&apos;s Talk
             </Link>

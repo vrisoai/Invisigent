@@ -18,7 +18,7 @@ const PARAGRAPHS = [
   },
   {
     editorial: false,
-    text: "VRISO exists to close that gap — helping organizations move from AI experimentation to AI infrastructure that operates reliably, scales globally, and creates durable operational advantage.",
+    text: "Invisigent exists to close that gap — helping organizations move from AI experimentation to AI infrastructure that operates reliably, scales globally, and creates durable operational advantage.",
   },
 ];
 

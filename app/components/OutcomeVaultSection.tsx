@@ -290,7 +290,7 @@ export default function OutcomeVaultSection() {
           animate={sectionInView ? 'visible' : 'hidden'}
           custom={2}
         >
-          Vriso AI systems are engineered to produce measurable economic impact. From
+          Invisigent systems are engineered to produce measurable economic impact. From
           procurement intelligence to compliance automation, our architectures convert
           fragmented AI adoption into durable operational advantage.
         </motion.p>
@@ -448,7 +448,7 @@ export default function OutcomeVaultSection() {
                 textTransform: 'uppercase',
               }}
             >
-              VRISO SYSTEM ARCHITECTURE
+              INVISIGENT SYSTEM ARCHITECTURE
             </p>
           </div>
         </motion.div>

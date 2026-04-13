@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Virtual shopping assistant for recommendations, orders, and catalog help — personalized customer service at scale.',
   openGraph: {
-    title: 'E-commerce AI Assistant | VRISO',
+    title: 'E-commerce AI Assistant | Invisigent',
     description:
       'Chat demo: product help, order questions, and brand-aligned shopping support.',
   },

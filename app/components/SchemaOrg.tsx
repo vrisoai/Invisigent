@@ -10,7 +10,7 @@ export default function SchemaOrg() {
       {
         '@type': 'Organization',
         '@id': 'https://vriso.ai/#organization',
-        name: 'VRISO',
+        name: 'Invisigent',
         url: 'https://vriso.ai',
         logo: {
           '@type': 'ImageObject',
@@ -19,7 +19,7 @@ export default function SchemaOrg() {
           height: 60,
         },
         description:
-          'VRISO architects sovereign, multi-agent AI systems for enterprise workflow automation, governance, and execution.',
+          'Invisigent architects sovereign, multi-agent AI systems for enterprise workflow automation, governance, and execution.',
         knowsAbout: [
           'Agentic Orchestration',
           'Multi-Agent Governance',
@@ -36,7 +36,7 @@ export default function SchemaOrg() {
         '@type': 'WebSite',
         '@id': 'https://vriso.ai/#website',
         url: 'https://vriso.ai',
-        name: 'VRISO',
+        name: 'Invisigent',
         publisher: { '@id': 'https://vriso.ai/#organization' },
         potentialAction: {
           '@type': 'SearchAction',

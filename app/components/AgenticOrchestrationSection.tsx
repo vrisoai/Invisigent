@@ -298,7 +298,7 @@ export function AgenticOrchestrationSection() {
             They are coordinated networks of specialized agents.
           </motion.p>
           <motion.p variants={STAGGER_CHILD} style={{ marginTop: 16 }}>
-            Vriso designs orchestration layers that supervise reasoning,
+            Invisigent designs orchestration layers that supervise reasoning,
             distribute tasks, and maintain operational control across the
             enterprise.
           </motion.p>

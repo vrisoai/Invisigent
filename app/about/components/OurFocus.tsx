@@ -61,7 +61,7 @@ export function OurFocus({ reducedMotion = false }: OurFocusProps) {
               viewport={{ once: true, margin }}
               custom={1}
             >
-              VRISO specialises in four categories of enterprise AI infrastructure.
+              Invisigent specialises in four categories of enterprise AI infrastructure.
             </motion.p>
           </div>
 

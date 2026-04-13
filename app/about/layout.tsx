@@ -3,9 +3,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'VRISO designs scalable AI systems, automation architectures, and intelligent infrastructure for organizations building production AI capabilities. Founded in Jaipur. Built for global enterprise.',
+    'Invisigent designs scalable AI systems, automation architectures, and intelligent infrastructure for organizations building production AI capabilities. Founded in Jaipur. Built for global enterprise.',
   openGraph: {
-    title: 'About | VRISO',
+    title: 'About | Invisigent',
     description:
       'Building the infrastructure behind enterprise AI. Scalable systems, automation architectures, and intelligent infrastructure.',
     url: 'https://vriso.ai/about',
@@ -17,9 +17,9 @@ const aboutJsonLd = {
   '@graph': [
     {
       '@type': 'Organization',
-      name: 'VRISO',
+      name: 'Invisigent',
       description:
-        'VRISO is an enterprise AI infrastructure consulting firm that designs scalable AI systems, agent orchestration, and intelligent automation for global organizations.',
+        'Invisigent is an enterprise AI infrastructure consulting firm that designs scalable AI systems, agent orchestration, and intelligent automation for global organizations.',
       foundingLocation: { '@type': 'Place', name: 'Jaipur, India' },
       url: 'https://vriso.ai',
       serviceType: [
@@ -33,15 +33,15 @@ const aboutJsonLd = {
       '@type': 'AboutPage',
       '@id': 'https://vriso.ai/about#aboutpage',
       url: 'https://vriso.ai/about',
-      name: 'About VRISO',
+      name: 'About Invisigent',
       description:
-        'Building the infrastructure behind enterprise AI. VRISO designs scalable AI systems and intelligent infrastructure for global enterprise.',
+        'Building the infrastructure behind enterprise AI. Invisigent designs scalable AI systems and intelligent infrastructure for global enterprise.',
       mainEntity: { '@id': 'https://vriso.ai/#organization' },
     },
     {
       '@type': 'HowTo',
       '@id': 'https://vriso.ai/about#howwebuild',
-      name: 'How VRISO Builds AI Infrastructure',
+      name: 'How Invisigent Builds AI Infrastructure',
       description:
         'Four-phase process: Discovery & AI Strategy, Architecture Design, Deployment & Integration, Optimization & Scaling.',
       step: [

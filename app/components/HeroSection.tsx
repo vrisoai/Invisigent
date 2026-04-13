@@ -16,9 +16,9 @@ import MagneticButton from './MagneticButton';
 const JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'VRISO',
+  name: 'Invisigent',
   description:
-    'VRISO designs and deploys enterprise AI systems, agentic automation platforms, and intelligent infrastructure for businesses.',
+    'Invisigent designs and deploys enterprise AI systems, agentic automation platforms, and intelligent infrastructure for businesses.',
   url: 'https://vriso.com',
   areaServed: 'Global',
   foundingDate: '2026',
@@ -56,7 +56,7 @@ export function HeroSection() {
   const wordsB = LINE_B.split(' ');
 
   return (
-    <header aria-label="VRISO homepage hero">
+    <header aria-label="Invisigent homepage hero">
       <Script
         id="hero-org-jsonld"
         type="application/ld+json"
@@ -154,7 +154,7 @@ export function HeroSection() {
               initial="hidden"
               animate="visible"
             >
-              VRISO designs and deploys enterprise AI systems, agentic automation
+              Invisigent designs and deploys enterprise AI systems, agentic automation
               platforms, and intelligent infrastructure that automate operations,
               optimize decision-making, and create long-term competitive advantage
               for businesses.

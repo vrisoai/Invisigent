@@ -20,9 +20,9 @@ gsap.registerPlugin(ScrollTrigger);
 const JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  provider: { '@type': 'Organization', name: 'VRISO' },
+  provider: { '@type': 'Organization', name: 'Invisigent' },
   serviceType: 'Enterprise AI Systems',
-  description: 'VRISO helps organizations design, build, and scale enterprise AI systems — from architecture strategy and agent orchestration to knowledge retrieval and AI-native product development.',
+  description: 'Invisigent helps organizations design, build, and scale enterprise AI systems — from architecture strategy and agent orchestration to knowledge retrieval and AI-native product development.',
   areaServed: ['US', 'EU', 'India'],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
@@ -304,7 +304,7 @@ export function CoreServices() {
             Enterprise AI Systems &amp; Infrastructure
           </motion.h2>
           <motion.p className="font-serif" style={{ fontSize: 'clamp(15px, 1.3vw, 18px)', lineHeight: 1.7, marginTop: 'clamp(18px, 2.5vw, 28px)', color: 'var(--color-text-secondary)', maxWidth: 480 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, delay: 0.2, ease: EASE }}>
-            VRISO helps organizations design, build, and scale enterprise AI systems — from architecture strategy and agent orchestration to knowledge retrieval and AI-native product development.
+            Invisigent helps organizations design, build, and scale enterprise AI systems — from architecture strategy and agent orchestration to knowledge retrieval and AI-native product development.
           </motion.p>
         </div>
 

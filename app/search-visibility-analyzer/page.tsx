@@ -6,9 +6,9 @@ import FooterSection from '@/app/components/FooterSection';
 export const metadata: Metadata = {
   title: 'Search Visibility Analyzer',
   description:
-    'Submit your keyword, location, website, and email for a tailored search visibility snapshot from VRISO.',
+    'Submit your keyword, location, website, and email for a tailored search visibility snapshot from Invisigent.',
   openGraph: {
-    title: 'Search Visibility Analyzer | VRISO',
+    title: 'Search Visibility Analyzer | Invisigent',
     description:
       'Analyze how your site shows up for the queries and markets that matter — enterprise AI infrastructure context.',
   },
