@@ -68,7 +68,8 @@ export function PhilosophySection({ reducedMotion = false }: PhilosophySectionPr
               Our Philosophy
             </motion.h2>
             <motion.p
-              className="about-description text-body mx-auto max-w-[480px] font-display leading-[1.75] text-[var(--color-text-secondary)]"
+              className="about-description text-body mx-auto max-w-[480px] 2xl:max-w-[640px] min-[2800px]:max-w-[900px] font-display leading-[1.75] text-[var(--color-text-secondary)] text-center"
+              style={{ textAlign: 'center' }}
               variants={reducedMotion ? undefined : fadeUp}
               initial="hidden"
               whileInView={reducedMotion ? undefined : 'visible'}

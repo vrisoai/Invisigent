@@ -29,9 +29,13 @@ export function AboutCTA({ reducedMotion = false }: AboutCTAProps) {
       aria-labelledby="about-cta-heading"
     >
       <div className="section-wrapper">
-        <div className="section-inner-max section-inner flex flex-col items-center text-center">
+        <div className="section-inner-max section-inner">
           <motion.div
-            className="mx-auto w-full max-w-[640px] 2xl:max-w-[860px] text-center"
+            style={{
+              maxWidth: 'clamp(320px, 55vw, 860px)',
+              margin: '0 auto',
+              textAlign: 'center',
+            }}
             initial={reducedMotion ? false : { opacity: 0, scale: 0.96 }}
             animate={inView && !reducedMotion ? { opacity: 1, scale: 1 } : undefined}
             transition={{ duration: 0.6, ease: EASE }}
@@ -39,7 +43,13 @@ export function AboutCTA({ reducedMotion = false }: AboutCTAProps) {
             <SectionLabel text="[ LET'S BUILD ]" reducedMotion={reducedMotion} />
             <h2
               id="about-cta-heading"
-              className="about-heading text-section-h font-serif font-semibold leading-[1.15] text-[var(--color-text-primary)]"
+              className="about-heading font-serif font-semibold text-[var(--color-text-primary)]"
+              style={{
+                fontSize: 'clamp(2rem, 4vw, 4.5rem)',
+                lineHeight: 1.15,
+                marginTop: '1rem',
+                textAlign: 'center',
+              }}
             >
               {isMobile || reducedMotion ? (
                 <motion.span
@@ -73,7 +83,16 @@ export function AboutCTA({ reducedMotion = false }: AboutCTAProps) {
                 </>
               )}
             </h2>
-            <p className="about-description text-body mx-auto max-w-[480px] 2xl:max-w-[640px] font-display leading-[1.75] text-[var(--color-text-secondary)]">
+            <p
+              className="about-description font-display text-[var(--color-text-secondary)]"
+              style={{
+                textAlign: 'center',
+                margin: '1.5rem auto 0',
+                maxWidth: '38em',
+                fontSize: 'clamp(0.9375rem, 1.1vw, 1.125rem)',
+                lineHeight: 1.75,
+              }}
+            >
               If your organization is ready to move from AI experimentation to production-ready AI
               systems, we would like to hear about what you are building.
             </p>

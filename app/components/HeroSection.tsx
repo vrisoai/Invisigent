@@ -19,9 +19,8 @@ const JSON_LD = {
   name: 'Invisigent',
   description:
     'Invisigent designs and deploys enterprise AI systems, agentic automation platforms, and intelligent infrastructure for businesses.',
-  url: 'https://vriso.com',
+  url: 'https://vriso.ai',
   areaServed: 'Global',
-  foundingDate: '2026',
   serviceType: [
     'Enterprise AI Systems',
     'AI Automation',
@@ -190,8 +189,8 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 0.4, ease: EASE }}
           >
             <div
-              className="flex items-center justify-center overflow-hidden"
-              style={{ width: 'min(800px, 44vw)', aspectRatio: '1 / 1' }}
+              className="flex items-center justify-center"
+              style={{ width: 'min(800px, 44vw)', height: 'min(800px, 44vw)' }}
             >
               <DecisionEngineVis />
             </div>

@@ -4,11 +4,29 @@ export const metadata: Metadata = {
   title: 'About',
   description:
     'Invisigent designs scalable AI systems, automation architectures, and intelligent infrastructure for organizations building production AI capabilities. Founded in Jaipur. Built for global enterprise.',
+  alternates: {
+    canonical: 'https://vriso.ai/about',
+  },
   openGraph: {
     title: 'About | Invisigent',
     description:
       'Building the infrastructure behind enterprise AI. Scalable systems, automation architectures, and intelligent infrastructure.',
     url: 'https://vriso.ai/about',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'About Invisigent — Enterprise AI Systems Architecture',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About | Invisigent',
+    description:
+      'Building the infrastructure behind enterprise AI. Scalable systems, automation architectures, and intelligent infrastructure.',
+    images: ['/og-image.png'],
   },
 };
 

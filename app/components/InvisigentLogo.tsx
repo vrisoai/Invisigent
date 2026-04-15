@@ -8,11 +8,11 @@ const WORD = 'Invisigent';
 // Fixed-length — one value per letter (10 chars)
 const LEN = WORD.length;
 
-interface VrisoLogoProps {
+interface InvisigentLogoProps {
   size?: 'sm' | 'lg' | 'full';
 }
 
-export function VrisoLogo({ size = 'sm' }: VrisoLogoProps) {
+export function InvisigentLogo({ size = 'sm' }: InvisigentLogoProps) {
   const hasHover = useMediaQuery('(hover: hover)');
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);

@@ -364,6 +364,14 @@ main.interactive-demo-page > section.interactive-demo-built-for-business {
   }
 }
 
+/* Mobile: remove full-viewport min-height to eliminate blank space */
+@media (max-width: 639px) {
+  main.interactive-demo-page > section.interactive-demo-built-for-business {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+}
+
 main.interactive-demo-page
   > section.interactive-demo-built-for-business
   > .section-wrapper.interactive-demo-built-for-business-inner {
@@ -395,6 +403,14 @@ main.interactive-demo-page > section.interactive-demo-global-infra {
 @supports (height: 100dvh) {
   main.interactive-demo-page > section.interactive-demo-global-infra {
     min-height: calc(100dvh - var(--nav-h, 64px));
+  }
+}
+
+/* Mobile: remove full-viewport min-height to eliminate blank space */
+@media (max-width: 639px) {
+  main.interactive-demo-page > section.interactive-demo-global-infra {
+    min-height: 0 !important;
+    height: auto !important;
   }
 }
 
@@ -438,6 +454,21 @@ main.interactive-demo-page > section.interactive-demo-conversion {
   padding-top: clamp(3rem, 8svh, 6rem);
   padding-bottom: clamp(3rem, 8svh, 6rem);
   scroll-snap-align: none !important;
+}
+
+@media (max-width: 639px) {
+  main.interactive-demo-page > section.interactive-demo-conversion {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  main.interactive-demo-page > section.interactive-demo-deployment {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+  main.interactive-demo-page > section.interactive-demo-deployment .section-wrapper {
+    padding-top: 2rem !important;
+    padding-bottom: 1.5rem !important;
+  }
 }
 
 /* Conversion section wrapper: flex-column + align-items:center centers the card */
@@ -1442,6 +1473,14 @@ button {
   .text-pullquote   { font-size: clamp(1.375rem, 1.4vw, 1.75rem); }
 }
 
+@media (min-width: 2800px) {
+  .text-hero        { font-size: clamp(7rem,   5vw,  10rem);   }
+  .text-section-h   { font-size: clamp(5rem,   3.5vw,  7rem);  }
+  .text-card-title  { font-size: clamp(2rem,   1.5vw, 2.5rem); }
+  .text-body        { font-size: clamp(1.375rem, 0.9vw, 1.75rem); }
+  .text-pullquote   { font-size: clamp(1.75rem, 1.4vw, 2.25rem); }
+}
+
 /* About page — section wrapper (padding + safe area) */
 .section-wrapper {
   width: 100%;
@@ -1472,6 +1511,12 @@ button {
 @media (min-width: 2400px) {
   .section-inner-max {
     max-width: 2200px;
+  }
+}
+
+@media (min-width: 2800px) {
+  .section-inner-max {
+    max-width: min(2700px, 88vw);
   }
 }
 

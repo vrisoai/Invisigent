@@ -43,12 +43,18 @@ export const metadata: Metadata = {
     'AI Consulting',
     'GDPR Compliant AI',
     'DPDP AI Compliance',
+    'EU AI Act Compliance',
+    'SOC2 AI',
   ],
   authors: [{ name: 'Invisigent', url: 'https://vriso.ai' }],
   creator: 'Invisigent',
+  applicationName: 'Invisigent',
+  referrer: 'origin-when-cross-origin',
+  formatDetection: { telephone: false },
   openGraph: {
     type: 'website',
     locale: 'en_US',
+    alternateLocale: ['en_IN', 'en_GB'],
     url: 'https://vriso.ai',
     siteName: 'Invisigent',
     title: 'Invisigent — Enterprise AI Systems Architecture',
@@ -90,6 +96,8 @@ export default function RootLayout({
       className={`${spaceGrotesk.variable} ${playfairDisplay.variable} ${jetbrainsMono.variable}`}
     >
       <head>
+        <meta name="theme-color" content="#121212" />
+        <meta name="color-scheme" content="dark" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <SchemaOrg />

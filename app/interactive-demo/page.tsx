@@ -1,6 +1,7 @@
 // app/interactive-demo/page.tsx
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { FooterSection, VrisoLogoSection } from '@/app/components';
+import { FooterSection, InvisigentLogoSection } from '@/app/components';
 import { InteractiveDemoDeploymentCarousel } from '@/app/components/InteractiveDemoDeploymentCarousel';
 import { InteractiveDemoDeploymentTiltCard } from '@/app/components/InteractiveDemoDeploymentTiltCard';
 
@@ -92,10 +93,34 @@ const TOOLS: Tool[] = [
   },
 ];
 
-export const metadata = {
-  title: 'Interactive Demos | Invisigent',
+export const metadata: Metadata = {
+  title: 'Interactive Demos',
   description:
-    'AI tools demo page by Invisigent showcasing enterprise AI systems, AI automation demos, and AI workflow systems for businesses across India, US, and Europe.',
+    'Live AI tool demos by Invisigent — enterprise AI systems, automation workflows, and intelligent infrastructure for businesses across India, US, and Europe.',
+  alternates: {
+    canonical: 'https://vriso.ai/interactive-demo',
+  },
+  openGraph: {
+    title: 'Interactive Demos | Invisigent',
+    description:
+      'Live AI tool demos — enterprise AI systems, automation workflows, and intelligent infrastructure.',
+    url: 'https://vriso.ai/interactive-demo',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Invisigent Interactive AI Demos',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Interactive Demos | Invisigent',
+    description:
+      'Live AI tool demos — enterprise AI systems, automation workflows, and intelligent infrastructure.',
+    images: ['/og-image.png'],
+  },
 };
 
 function getToolVisual(id: string) {
@@ -470,7 +495,7 @@ export default function InteractiveDemoPage() {
         </div>
       </section>
 
-      <VrisoLogoSection />
+      <InvisigentLogoSection />
       <FooterSection />
 
       <script

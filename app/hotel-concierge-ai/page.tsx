@@ -1,16 +1,27 @@
 import type { Metadata } from 'next';
 import { HotelConciergeChat } from '@/app/components/HotelConciergeChat';
-import { VrisoLogoSection } from '@/app/components/VrisoLogoSection';
+import { InvisigentLogoSection } from '@/app/components/InvisigentLogoSection';
 import FooterSection from '@/app/components/FooterSection';
 
 export const metadata: Metadata = {
   title: 'Hotel Concierge AI',
   description:
     'Virtual hotel concierge for dining, services, activities, and local experiences — personalized hospitality at scale.',
+  alternates: {
+    canonical: 'https://vriso.ai/hotel-concierge-ai',
+  },
   openGraph: {
     title: 'Hotel Concierge AI | Invisigent',
     description:
       'Chat demo: book dining, request services, and explore offerings aligned with your property.',
+    url: 'https://vriso.ai/hotel-concierge-ai',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Hotel Concierge AI — Invisigent' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Hotel Concierge AI | Invisigent',
+    description: 'Chat demo: book dining, request services, and explore offerings aligned with your property.',
+    images: ['/og-image.png'],
   },
 };
 
@@ -38,7 +49,7 @@ export default function HotelConciergeAiPage() {
           </div>
         </div>
       </div>
-      <VrisoLogoSection />
+      <InvisigentLogoSection />
       <FooterSection />
     </main>
   );

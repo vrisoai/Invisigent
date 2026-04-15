@@ -92,3 +92,11 @@
     --section-py: clamp(200px, 9vw, 360px);
   }
 }
+
+/* 3K+ (≥2800px): allow content to breathe on very wide displays like 3048px */
+@media (min-width: 2800px) {
+  :root {
+    --section-px: clamp(4rem, 3.5vw, 10rem);
+    --section-py: clamp(240px, 8vw, 420px);
+  }
+}

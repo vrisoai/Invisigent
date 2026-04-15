@@ -1,16 +1,27 @@
 import type { Metadata } from 'next';
 import { SEOArticleGeneratorForm } from './SEOArticleGeneratorForm';
-import { VrisoLogoSection } from '@/app/components/VrisoLogoSection';
+import { InvisigentLogoSection } from '@/app/components/InvisigentLogoSection';
 import FooterSection from '@/app/components/FooterSection';
 
 export const metadata: Metadata = {
   title: 'SEO Article Generator',
   description:
     'Generate high-quality, keyword-optimized articles instantly. Enter your keyword and generate SEO-ready content tailored for your audience.',
+  alternates: {
+    canonical: 'https://vriso.ai/seo-article-generator',
+  },
   openGraph: {
     title: 'SEO Article Generator | Invisigent',
     description:
       'AI-powered SEO article generation — keyword-rich, audience-tailored content at scale.',
+    url: 'https://vriso.ai/seo-article-generator',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'SEO Article Generator — Invisigent' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SEO Article Generator | Invisigent',
+    description: 'AI-powered SEO article generation — keyword-rich, audience-tailored content at scale.',
+    images: ['/og-image.png'],
   },
 };
 
@@ -55,7 +66,7 @@ export default function SEOArticleGeneratorPage() {
         </div>
       </div>
 
-      <VrisoLogoSection />
+      <InvisigentLogoSection />
       <FooterSection />
     </main>
   );

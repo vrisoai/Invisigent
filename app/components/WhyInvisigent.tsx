@@ -15,7 +15,7 @@ const JSON_LD_ORG = {
   '@type': 'Organization',
   name: 'Invisigent',
   description: 'Invisigent builds AI systems your team owns, your security team approves, and your operations team can run at scale. Most AI projects stall because the infrastructure wasn\'t built for production.',
-  url: 'https://vriso.com',
+  url: 'https://vriso.ai',
   areaServed: ['US', 'EU', 'India', 'Global'],
   serviceType: ['Enterprise AI Consulting', 'AI Infrastructure Systems', 'AI Automation Systems', 'Agent Orchestration Systems'],
 };
@@ -101,7 +101,7 @@ function NeuralParticles({ visible }: { visible: boolean }) {
 }
 
 /* ─── Component ─── */
-export function WhyVRISO() {
+export function WhyInvisigent() {
   const sectionRef = useRef<HTMLElement>(null);
   const sectionInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
@@ -291,13 +291,13 @@ export function WhyVRISO() {
                     {CARDS[i].label}
                   </p>
                 )}
-                <div style={{ height: 'clamp(140px, 12vw, 260px)' }}>
+                <div style={{ height: 'clamp(120px, 14vw, 260px)' }}>
                   <WhyVRisoCardScene variant={i} hovered={hoveredCard === i} />
                 </div>
-                <h3 className="font-serif mt-4" style={{ fontSize: 'clamp(18px, 1.5vw, 42px)', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                <h3 className="font-serif mt-4" style={{ fontSize: 'clamp(16px, 2vw, 42px)', fontWeight: 600, color: 'var(--color-text-primary)' }}>
                   {CARDS[i].title}
                 </h3>
-                <p className="font-serif mt-2" style={{ fontSize: 'clamp(14px, 1vw, 26px)', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
+                <p className="font-serif mt-2" style={{ fontSize: 'clamp(13px, 1.2vw, 26px)', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
                   {CARDS[i].description}
                 </p>
               </motion.article>
@@ -344,13 +344,13 @@ export function WhyVRISO() {
                     {CARDS[i].label}
                   </p>
                 )}
-                <div style={{ height: 'clamp(140px, 12vw, 260px)' }}>
+                <div style={{ height: 'clamp(120px, 14vw, 260px)' }}>
                   <WhyVRisoCardScene variant={i} hovered={hoveredCard === i} />
                 </div>
-                <h3 className="font-serif mt-4" style={{ fontSize: 'clamp(18px, 1.5vw, 42px)', fontWeight: 600, color: 'var(--color-text-primary)' }}>
+                <h3 className="font-serif mt-4" style={{ fontSize: 'clamp(16px, 2vw, 42px)', fontWeight: 600, color: 'var(--color-text-primary)' }}>
                   {CARDS[i].title}
                 </h3>
-                <p className="font-serif mt-2" style={{ fontSize: 'clamp(14px, 1vw, 26px)', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
+                <p className="font-serif mt-2" style={{ fontSize: 'clamp(13px, 1.2vw, 26px)', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
                   {CARDS[i].description}
                 </p>
               </motion.article>

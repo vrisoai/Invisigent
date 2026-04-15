@@ -3,26 +3,24 @@
 import { motion } from 'framer-motion';
 import { EASE } from '@/app/lib/animations';
 
-/* Precomputed positions for hydration (avoid Math.cos/sin float variance) */
+/* Label positions as % of half-container (label.x / 160 * 50 = label.x / 3.2) */
 const LABELS = [
-  { text: 'REASONING_ENGINE', x: 140, y: 0 },
-  { text: 'KNOWLEDGE_GRAPH', x: -70, y: 121 },
-  { text: 'AUTONOMOUS_WORKFLOWS', x: -70, y: -121 },
+  { text: 'REASONING_ENGINE',    x: 43.75,   y: 0       },
+  { text: 'KNOWLEDGE_GRAPH',     x: -21.875, y: 37.8125 },
+  { text: 'AUTONOMOUS_WORKFLOWS',x: -21.875, y: -37.8125},
 ] as const;
 
-const ORBIT_R = 110;
-
 const beamPaths = [
-  { from: { x: 0, y: -ORBIT_R }, color: 'var(--color-action-accent)' },
-  { from: { x: ORBIT_R * 0.866, y: ORBIT_R * 0.5 }, color: 'var(--color-trust-amber)' },
-  { from: { x: -ORBIT_R * 0.866, y: ORBIT_R * 0.5 }, color: 'var(--color-action-accent)' },
+  { from: { x: 0,       y: -110  }, color: 'var(--color-action-accent)' },
+  { from: { x:  95.263, y:  55   }, color: 'var(--color-trust-amber)'   },
+  { from: { x: -95.263, y:  55   }, color: 'var(--color-action-accent)' },
 ];
 
 export function DecisionEngineVis() {
   return (
     <div
       className="relative"
-      style={{ width: 320, height: 320, isolation: 'isolate' }}
+      style={{ width: '100%', height: '100%', isolation: 'isolate' }}
       role="img"
       aria-label="AI Decision Engine visualization with reasoning core, knowledge graph, and autonomous workflow nodes"
     >
@@ -35,12 +33,12 @@ export function DecisionEngineVis() {
         aria-hidden="true"
       />
 
-      {/* Glass container */}
+      {/* Glass container — 81.25% of root (mirrors 260/320) */}
       <div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl"
         style={{
-          width: 260,
-          height: 260,
+          width: '81.25%',
+          height: '81.25%',
           background: 'rgba(31,31,31,0.6)',
           backdropFilter: 'blur(20px)',
           WebkitBackdropFilter: 'blur(20px)',
@@ -48,7 +46,7 @@ export function DecisionEngineVis() {
           boxShadow: 'inset 0 1px 0 0 rgba(255,255,255,0.04)',
         }}
       >
-        {/* SVG — beams + orbit ring */}
+        {/* SVG — beams + orbit ring, fills glass container */}
         <svg
           className="absolute inset-0 h-full w-full"
           viewBox="-130 -130 260 260"
@@ -56,9 +54,7 @@ export function DecisionEngineVis() {
         >
           {/* Orbit ring */}
           <circle
-            cx={0}
-            cy={0}
-            r={ORBIT_R}
+            cx={0} cy={0} r={110}
             fill="none"
             stroke="var(--color-border)"
             strokeWidth={1}
@@ -70,17 +66,13 @@ export function DecisionEngineVis() {
           {beamPaths.map((beam, i) => (
             <line
               key={i}
-              x1={beam.from.x}
-              y1={beam.from.y}
-              x2={0}
-              y2={0}
+              x1={beam.from.x} y1={beam.from.y}
+              x2={0} y2={0}
               stroke={beam.color}
               strokeWidth={1.5}
               strokeDasharray="8 12"
               opacity={0.6}
-              style={{
-                animation: `hero-beam-dash ${2 + i * 0.4}s linear infinite`,
-              }}
+              style={{ animation: `hero-beam-dash ${2 + i * 0.4}s linear infinite` }}
             />
           ))}
 
@@ -88,8 +80,7 @@ export function DecisionEngineVis() {
           {beamPaths.map((beam, i) => (
             <circle
               key={`node-${i}`}
-              cx={beam.from.x}
-              cy={beam.from.y}
+              cx={beam.from.x} cy={beam.from.y}
               r={3}
               fill={beam.color}
               opacity={0.8}
@@ -98,12 +89,12 @@ export function DecisionEngineVis() {
           ))}
         </svg>
 
-        {/* Rotating intelligence core */}
+        {/* Rotating intelligence core — 17.5% of glass = same ratio as 56/320 of root */}
         <div
           className="absolute left-1/2 top-1/2"
           style={{
-            width: 56,
-            height: 56,
+            width: '21.5%',
+            height: '21.5%',
             animation: 'hero-core-spin 30s linear infinite',
             willChange: 'transform',
           }}
@@ -116,32 +107,25 @@ export function DecisionEngineVis() {
                 <stop offset="100%" stopColor="var(--color-trust-amber)" stopOpacity="0.6" />
               </linearGradient>
             </defs>
-            <rect
-              x={4}
-              y={4}
-              width={48}
-              height={48}
-              rx={12}
-              fill="none"
-              stroke="url(#core-grad)"
-              strokeWidth={1.5}
-            />
+            <rect x={4} y={4} width={48} height={48} rx={12}
+              fill="none" stroke="url(#core-grad)" strokeWidth={1.5} />
             <circle cx={28} cy={28} r={6} fill="var(--color-trust-amber)" opacity={0.9} />
-            <circle cx={28} cy={28} r={12} fill="none" stroke="var(--color-action-accent)" strokeWidth={0.8} opacity={0.4} />
+            <circle cx={28} cy={28} r={12} fill="none"
+              stroke="var(--color-action-accent)" strokeWidth={0.8} opacity={0.4} />
           </svg>
         </div>
       </div>
 
-      {/* Floating system labels */}
+      {/* Floating system labels — percentage-based offsets from center */}
       {LABELS.map((label, i) => (
         <motion.span
           key={label.text}
           className="pointer-events-none absolute whitespace-nowrap font-mono text-text-tertiary"
           style={{
-            fontSize: 11,
+            fontSize: 'clamp(8px, 1vw, 11px)',
             left: '50%',
             top: '50%',
-            transform: `translate(calc(-50% + ${label.x}px), calc(-50% + ${label.y}px))`,
+            transform: `translate(calc(-50% + ${label.x}%), calc(-50% + ${label.y}%))`,
           }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

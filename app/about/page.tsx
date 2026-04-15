@@ -11,7 +11,7 @@ import {
   GlobalContext,
   AboutCTA,
 } from '@/app/about/components';
-import { VrisoLogoSection, FooterSection } from '@/app/components';
+import { InvisigentLogoSection, FooterSection } from '@/app/components';
 
 /**
  * Section 1: sticky hero inside a tall stage — stays pinned while you scroll through the stage.
@@ -72,7 +72,7 @@ export default function AboutPage() {
       <OurFocus reducedMotion={reducedMotion} />
       <GlobalContext reducedMotion={reducedMotion} />
       <AboutCTA reducedMotion={reducedMotion} />
-      <VrisoLogoSection />
+      <InvisigentLogoSection />
       <FooterSection />
     </main>
   );

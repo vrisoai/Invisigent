@@ -1,16 +1,27 @@
 import type { Metadata } from 'next';
 import { SearchVisibilityAnalyzerForm } from '@/app/components/SearchVisibilityAnalyzerForm';
-import { VrisoLogoSection } from '@/app/components/VrisoLogoSection';
+import { InvisigentLogoSection } from '@/app/components/InvisigentLogoSection';
 import FooterSection from '@/app/components/FooterSection';
 
 export const metadata: Metadata = {
   title: 'Search Visibility Analyzer',
   description:
     'Submit your keyword, location, website, and email for a tailored search visibility snapshot from Invisigent.',
+  alternates: {
+    canonical: 'https://vriso.ai/search-visibility-analyzer',
+  },
   openGraph: {
     title: 'Search Visibility Analyzer | Invisigent',
     description:
       'Analyze how your site shows up for the queries and markets that matter — enterprise AI infrastructure context.',
+    url: 'https://vriso.ai/search-visibility-analyzer',
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Search Visibility Analyzer — Invisigent' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Search Visibility Analyzer | Invisigent',
+    description: 'Analyze how your site shows up for the queries and markets that matter.',
+    images: ['/og-image.png'],
   },
 };
 
@@ -43,7 +54,7 @@ export default function SearchVisibilityAnalyzerPage() {
           </div>
         </div>
       </div>
-      <VrisoLogoSection />
+      <InvisigentLogoSection />
       <FooterSection />
     </main>
   );

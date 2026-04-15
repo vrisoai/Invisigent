@@ -2,9 +2,9 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { VrisoLogo } from './VrisoLogo';
+import { InvisigentLogo } from './InvisigentLogo';
 
-export function VrisoLogoSection() {
+export function InvisigentLogoSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: '-80px' });
 
@@ -21,7 +21,7 @@ export function VrisoLogoSection() {
           animate={inView ? { y: 0, opacity: 1 } : { y: 60, opacity: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <VrisoLogo size="full" />
+          <InvisigentLogo size="full" />
         </motion.div>
       </div>
     </section>

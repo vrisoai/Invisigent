@@ -6,10 +6,10 @@ import {
   HeroSection,
   ValueProposition,
   CoreServices,
-  WhyVRISO,
+  WhyInvisigent,
   HowWeWork,
   StrategicCTASection,
-  VrisoLogoSection,
+  InvisigentLogoSection,
   FooterSection,
 } from '@/app/components';
 import { EASE } from '@/app/lib/animations';
@@ -97,7 +97,7 @@ export default function Home() {
             <CoreServices />
           </HomeOverHeroSlab>
           <HomeOverHeroSlab slab={3}>
-            <WhyVRISO />
+            <WhyInvisigent />
           </HomeOverHeroSlab>
           <HomeOverHeroSlab slab={4}>
             <HowWeWork />
@@ -106,7 +106,7 @@ export default function Home() {
             <StrategicCTASection />
           </HomeOverHeroSlab>
           <HomeOverHeroSlab slab={6}>
-            <VrisoLogoSection />
+            <InvisigentLogoSection />
           </HomeOverHeroSlab>
           <HomeOverHeroSlab slab={7}>
             <FooterSection />
@@ -171,7 +171,7 @@ export default function Home() {
             <CoreServices />
           </HomeMobileSlab>
           <HomeMobileSlab slab={3}>
-            <WhyVRISO />
+            <WhyInvisigent />
           </HomeMobileSlab>
           <HomeMobileSlab slab={4}>
             <HowWeWork />
@@ -180,7 +180,7 @@ export default function Home() {
             <StrategicCTASection />
           </HomeMobileSlab>
           <HomeMobileSlab slab={6}>
-            <VrisoLogoSection />
+            <InvisigentLogoSection />
           </HomeMobileSlab>
           <HomeMobileSlab slab={7}>
             <FooterSection />

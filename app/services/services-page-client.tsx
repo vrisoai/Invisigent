@@ -4,7 +4,7 @@ import Script from 'next/script';
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { EASE } from '@/app/lib/animations';
-import { FooterSection, VrisoLogoSection } from '@/app/components';
+import { FooterSection, InvisigentLogoSection } from '@/app/components';
 import { MagneticButton } from './components/MagneticButton';
 import { useMediaQuery } from '@/app/hooks/useMediaQuery';
 
@@ -1382,8 +1382,8 @@ function ServicesCTA() {
             flexWrap: 'wrap',
           }}
         >
-          <button
-            type="button"
+          <a
+            href="/contact"
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 500,
@@ -1398,6 +1398,8 @@ function ServicesCTA() {
               transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
               whiteSpace: 'nowrap',
               width: 'auto',
+              textDecoration: 'none',
+              display: 'inline-block',
             }}
             onMouseEnter={(e) => {
               const el = e.currentTarget;
@@ -1411,7 +1413,7 @@ function ServicesCTA() {
             }}
           >
             Start the Conversation
-          </button>
+          </a>
 
           <button
             type="button"
@@ -1500,7 +1502,7 @@ export default function ServicesPageClient() {
       <WhoWeWorkWith />
       <GlobalBlock />
       <ServicesCTA />
-      <VrisoLogoSection />
+      <InvisigentLogoSection />
       <FooterSection />
     </main>
   );

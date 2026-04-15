@@ -335,7 +335,7 @@ interface WhyVRisoCardSceneProps {
 export function WhyVRisoCardScene({ variant, hovered }: WhyVRisoCardSceneProps) {
   const Scene = CARD_SCENES[variant] ?? SovereignClusterScene;
   return (
-    <div style={{ height: 140, width: '100%' }} aria-hidden="true">
+    <div style={{ height: '100%', width: '100%' }} aria-hidden="true">
       <Canvas camera={{ position: [0, 0, 2.2], fov: 42 }} dpr={[1, 1.5]} gl={{ antialias: true }} style={{ background: 'transparent' }}>
         <ambientLight intensity={0.3} />
         <pointLight position={[2, 2, 2]} intensity={0.8} color="#3B82F6" />

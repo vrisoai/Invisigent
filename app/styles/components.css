@@ -2100,6 +2100,32 @@ a:focus-visible {
   margin-top: 1.5rem;
 }
 
+/* Force center alignment on all centered sections of the About page */
+.about-page .about-cta,
+.about-page .about-focus,
+.about-page .about-philosophy,
+.about-page .about-hero {
+  text-align: center !important;
+}
+.about-page .about-cta .about-description,
+.about-page .about-focus .about-description,
+.about-page .about-philosophy .about-description,
+.about-page .about-hero .about-description {
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media (min-width: 2800px) {
+  .about-page .about-cta .about-description {
+    font-size: clamp(1.5rem, 1vw, 2rem) !important;
+    line-height: 1.8 !important;
+  }
+  .about-page .about-cta .about-heading {
+    font-size: clamp(5.5rem, 4vw, 8rem) !important;
+  }
+}
+
 @media (min-width: 640px) {
   .about-page .about-description,
   .about-page .about-intro {
@@ -2149,6 +2175,16 @@ a:focus-visible {
 .about-page .section-inner {
   padding-left: var(--section-px);
   padding-right: var(--section-px);
+}
+
+/* CTA section — override double-padding from section-inner + section-wrapper and force center */
+.about-page .about-cta .section-inner {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
 }
 
 /* Card system — responsive padding, hover only on hover devices */

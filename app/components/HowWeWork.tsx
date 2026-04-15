@@ -163,9 +163,11 @@ export default function HowWeWork() {
   return (
     <section
       ref={sectionRef}
+      id="how-we-work"
       className="how-we-work-section relative w-full overflow-hidden"
       style={{
         background: 'var(--color-bg-primary)',
+        scrollMarginTop: 'var(--nav-h, 64px)',
         paddingTop: 'clamp(80px, 10vw, 240px)',
         paddingBottom: 'clamp(80px, 10vw, 240px)',
         paddingLeft: 'max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-left))',

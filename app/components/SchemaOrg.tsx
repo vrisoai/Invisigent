@@ -11,6 +11,7 @@ export default function SchemaOrg() {
         '@type': 'Organization',
         '@id': 'https://vriso.ai/#organization',
         name: 'Invisigent',
+        alternateName: 'VRISO',
         url: 'https://vriso.ai',
         logo: {
           '@type': 'ImageObject',
@@ -19,7 +20,11 @@ export default function SchemaOrg() {
           height: 60,
         },
         description:
-          'Invisigent architects sovereign, multi-agent AI systems for enterprise workflow automation, governance, and execution.',
+          'Invisigent architects sovereign, multi-agent AI systems for enterprise workflow automation, governance, and execution. Compliance-ready AI infrastructure for EU AI Act, GDPR, DPDP, and SOC2 regulated environments.',
+        foundingLocation: {
+          '@type': 'Place',
+          name: 'Jaipur, India',
+        },
         knowsAbout: [
           'Agentic Orchestration',
           'Multi-Agent Governance',
@@ -28,9 +33,27 @@ export default function SchemaOrg() {
           'Sovereign AI Infrastructure',
           'GDPR Compliance',
           'DPDP Compliance',
+          'EU AI Act Compliance',
+          'SOC2 Compliance',
+          'ISO 42001 AI Management',
+          'RAG Knowledge Systems',
+          'AI Automation Architecture',
         ],
-        areaServed: ['EU', 'IN', 'US'],
-        sameAs: ['https://linkedin.com/company/vriso'],
+        areaServed: [
+          { '@type': 'Country', name: 'India' },
+          { '@type': 'Country', name: 'United States' },
+          { '@type': 'AdministrativeArea', name: 'European Union' },
+        ],
+        hasCredential: [
+          { '@type': 'EducationalOccupationalCredential', credentialCategory: 'GDPR Compliant' },
+          { '@type': 'EducationalOccupationalCredential', credentialCategory: 'EU AI Act Ready' },
+          { '@type': 'EducationalOccupationalCredential', credentialCategory: 'DPDP Compliant' },
+          { '@type': 'EducationalOccupationalCredential', credentialCategory: 'SOC2' },
+        ],
+        sameAs: [
+          'https://linkedin.com/company/invisigent',
+          'https://linkedin.com/company/vriso',
+        ],
       },
       {
         '@type': 'WebSite',
