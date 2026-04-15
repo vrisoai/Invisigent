@@ -129,10 +129,11 @@ export function HeroSection({ reducedMotion = false }: HeroSectionProps) {
           animate={inView && !reducedMotion ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
         >
-          Invisigent designs scalable AI systems, automation architectures, and intelligent
-          infrastructure for organizations building production AI capabilities. We work with
-          leadership teams to design systems their organizations own, operate, and scale — not
-          rent.
+          Invisigent designs production AI systems — multi-agent orchestration architectures, RAG
+          knowledge pipelines, and compliance-ready AI infrastructure — for organizations that need
+          AI systems their teams actually own and operate, not SaaS subscriptions they depend on
+          forever. Built by engineers who have deployed agentic AI systems in production across
+          operations, fintech, and knowledge management environments.
         </motion.p>
 
         {/* <motion.p

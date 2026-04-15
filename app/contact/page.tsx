@@ -46,14 +46,15 @@ const WHAT_HAPPENS = [
   {
     step: '03',
     title: 'Proposal or referral',
-    body: "We either send a tailored proposal or — if we're not the right fit — point you in the right direction.",
+    body: "We either send a tailored proposal outlining scope, approach, and investment — or, if we're not the right fit, we'll point you toward someone who is. No pressure, no awkward follow-up sequences.",
   },
 ];
 
 const TRUST = [
   'Response within 24 hours',
-  'Limited engagements per quarter',
+  'Limited to 4 engagements per quarter',
   'No cold-call follow-ups',
+  'NDA available on request before scoping call',
 ];
 
 export default function ContactPage() {
@@ -72,13 +73,13 @@ export default function ContactPage() {
               Invisigent · Engagements
             </p>
             <h1 className="lets-talk-heading font-serif">
-              Let&apos;s Talk.
+              Start an AI Infrastructure Engagement
               <span className="lets-talk-heading-accent font-mono">
                 // start a conversation
               </span>
             </h1>
             <p className="lets-talk-subheading font-serif">
-              Tell us what you&apos;re building. We&apos;ll tell you if we can help.
+              Tell us what you&apos;re building. We&apos;ll tell you if we can help — and what it would look like if we did.
             </p>
           </header>
 
@@ -144,6 +145,69 @@ export default function ContactPage() {
 
         </div>
       </main>
+
+      {/* Engagement Types */}
+      <section
+        aria-labelledby="engagement-types-heading"
+        style={{
+          background: '#121212',
+          paddingTop: 'clamp(60px, 8vw, 120px)',
+          paddingBottom: 'clamp(60px, 8vw, 120px)',
+          paddingLeft: 'max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-left))',
+          paddingRight: 'max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-right))',
+        }}
+      >
+        <div className="section-container section-inner">
+          <p
+            className="font-mono text-center"
+            style={{ fontSize: 12, letterSpacing: '0.14em', fontWeight: 500, color: 'var(--color-text-tertiary)', textTransform: 'uppercase', marginBottom: '1.5rem' }}
+          >
+            [ ENGAGEMENT TYPES ]
+          </p>
+          <h2
+            id="engagement-types-heading"
+            className="font-serif text-center"
+            style={{ fontSize: 'clamp(24px, 3vw, 56px)', fontWeight: 500, color: 'var(--color-text-primary)', marginBottom: 'clamp(32px, 4vw, 56px)' }}
+          >
+            How Organizations Engage With Invisigent
+          </h2>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+            {[
+              {
+                label: '[ AI STRATEGY ]',
+                title: 'Strategy & Architecture Review',
+                body: 'A focused engagement to audit your current AI infrastructure, identify gaps, and produce a prioritized technical roadmap. Ideal for organizations planning their first production AI deployment.',
+              },
+              {
+                label: '[ SYSTEM BUILD ]',
+                title: 'Full System Build',
+                body: 'End-to-end design, development, and deployment of a production AI system — from orchestration architecture to monitoring infrastructure. Our most common engagement type.',
+              },
+              {
+                label: '[ PARTNERSHIP ]',
+                title: 'Ongoing AI Partnership',
+                body: 'Continuous optimization, monitoring, and expansion of AI systems already in production. Includes monthly performance reviews, model updates, and architecture evolution as your usage scales.',
+              },
+            ].map((card) => (
+              <div
+                key={card.label}
+                className="glass-card"
+                style={{ padding: 'clamp(24px, 2.5vw, 36px)' }}
+              >
+                <p className="font-mono" style={{ fontSize: 11, letterSpacing: '0.12em', fontWeight: 500, color: 'var(--color-text-tertiary)', marginBottom: 12 }}>
+                  {card.label}
+                </p>
+                <h3 className="font-serif" style={{ fontSize: 'clamp(18px, 1.6vw, 32px)', fontWeight: 600, color: 'var(--color-text-primary)', marginBottom: 12 }}>
+                  {card.title}
+                </h3>
+                <p className="font-serif" style={{ fontSize: 'clamp(14px, 1.1vw, 22px)', lineHeight: 1.7, color: 'var(--color-text-secondary)' }}>
+                  {card.body}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <InvisigentLogoSection />
       <FooterSection />

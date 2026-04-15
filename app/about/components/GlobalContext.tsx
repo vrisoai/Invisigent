@@ -63,6 +63,11 @@ export function GlobalContext({ reducedMotion = false }: GlobalContextProps) {
                 integrates with modern technology stacks and scales across teams, regions, and
                 operational environments without performance or compliance constraints.
               </p>
+              <p className="text-body font-display leading-[1.8] text-[var(--color-text-secondary)]" style={{ marginTop: '1em' }}>
+                All systems are designed to meet applicable compliance requirements for the jurisdictions
+                they operate in — including GDPR for EU deployments, DPDP Act for Indian operations,
+                and EU AI Act frameworks for organizations subject to that regulation.
+              </p>
               <p
                 className="about-description flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[var(--color-text-micro)] text-label sm:text-xs"
                 style={{ letterSpacing: '0.08em' }}
@@ -74,7 +79,7 @@ export function GlobalContext({ reducedMotion = false }: GlobalContextProps) {
                     animation: reducedMotion ? 'none' : 'status-pulse 2s ease-in-out infinite',
                   }}
                 />
-                 SERVING GLOBAL ENTERPRISE
+                 SERVING GLOBAL ENTERPRISE · GDPR · DPDP · EU AI ACT
               </p>
             </motion.div>
           </div>

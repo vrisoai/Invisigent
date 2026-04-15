@@ -29,21 +29,21 @@ interface ValueCard {
 const CARDS: ValueCard[] = [
   {
     label: '[ INFRASTRUCTURE ]',
-    title: 'Enterprise AI Infrastructure',
+    title: 'Production-First AI Infrastructure',
     description:
-      'We architect scalable enterprise AI infrastructure that connects models, knowledge systems, and operational workflows into a unified platform.',
+      'We architect the orchestration layer, data pipelines, and monitoring systems before any agent is built. Infrastructure first. Automation second.',
   },
   {
     label: '[ AUTOMATION ]',
-    title: 'Autonomous Workflow Systems',
+    title: 'Autonomous Workflows That Actually Run',
     description:
-      'Invisigent builds agentic automation systems that coordinate intelligent workflows across departments, reducing operational complexity and increasing efficiency.',
+      'Multi-agent systems built with LangGraph and orchestrated with full observability via LangSmith — so you can see exactly what every agent did and why.',
   },
   {
     label: '[ INTELLIGENCE ]',
-    title: 'AI Decision Engines',
+    title: 'Knowledge Systems Grounded in Your Data',
     description:
-      'We design AI reasoning engines that transform enterprise data into real-time strategic insights and operational intelligence.',
+      'RAG pipelines connected to your internal documents, databases, and knowledge bases — context-aware answers, sub-3-second retrieval latency, no hallucinations.',
   },
 ];
 
@@ -164,10 +164,15 @@ export function ValueProposition() {
             viewport={{ once: true, margin: '-60px' }}
             custom={2}
           >
-            Invisigent designs and deploys enterprise AI systems that integrate models,
-            workflows, and data into unified intelligent infrastructure. Our
-            platforms automate operations, orchestrate agentic workflows, and
-            transform enterprise data into real-time decision intelligence.
+            Most AI projects die before they reach production. Not because the model
+            was wrong — because the infrastructure holding it together wasn&apos;t built
+            for real workloads.
+            <br /><br />
+            Invisigent designs AI systems from the ground up with production constraints
+            in mind: orchestration logic that survives failure, retrieval pipelines that
+            stay accurate at scale, and compliance controls baked into the architecture
+            before the first line of code is written — not added six months later when
+            your security team flags it.
           </motion.p>
         </header>
 

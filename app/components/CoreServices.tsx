@@ -40,37 +40,37 @@ const JSON_LD = {
 
 const CARDS = [
   {
-    label: '[ STRATEGY ]',
+    label: '[ AI STRATEGY CONSULTING ]',
     title: 'AI & Technology Strategy Consulting',
     description:
       'Design the right AI architecture for your organization. We help teams plan AI adoption, infrastructure strategy, and scalable automation roadmaps.',
   },
   {
-    label: '[ ORCHESTRATION ]',
+    label: '[ AGENTIC ORCHESTRATION ]',
     title: 'Agent Orchestration & AI Workflows',
     description:
       'Build intelligent multi-agent systems that coordinate tasks, automate complex workflows, and power scalable AI-driven operations.',
   },
   {
-    label: '[ KNOWLEDGE ]',
+    label: '[ RAG KNOWLEDGE SYSTEMS ]',
     title: 'RAG & Knowledge Retrieval Systems',
     description:
       'Develop enterprise knowledge systems using Retrieval-Augmented Generation to deliver accurate, context-aware answers from internal data.',
   },
   {
-    label: '[ PERFORMANCE ]',
+    label: '[ AI PERFORMANCE OPTIMIZATION ]',
     title: 'AI Performance & Latency Optimization',
     description:
       'Optimize AI systems for speed, reliability, and cost efficiency by improving inference performance, latency, and infrastructure scalability.',
   },
   {
-    label: '[ PRODUCTS ]',
+    label: '[ AI-NATIVE PRODUCT DEVELOPMENT ]',
     title: 'AI-Native Product Development',
     description:
       'Design and build AI-first applications, copilots, and intelligent platforms that integrate AI directly into user workflows.',
   },
   {
-    label: '[ COMPLIANCE ]',
+    label: '[ COMPLIANCE-READY AI SYSTEMS ]',
     title: 'Compliance-Ready AI Systems',
     description:
       'Build AI systems with governance, security, and regulatory compliance aligned with standards like General Data Protection Regulation.',

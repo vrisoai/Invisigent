@@ -37,19 +37,19 @@ const STEPS = [
     label: 'DISCOVERY_PHASE',
     title: 'Understand the Problem',
     description:
-      'We analyze your business goals, existing infrastructure, and data environment to identify where AI systems can deliver real operational impact.',
+      'We analyze your infrastructure, data environment, and operational constraints — not just your AI goals. We ask the hard questions first: data ownership, model governance, security requirements — before anything is built.',
   },
   {
     label: 'ARCHITECTURE_DESIGN',
     title: 'Design the AI Architecture',
     description:
-      'Our team designs scalable AI architectures, orchestration layers, and knowledge systems using modern patterns like Retrieval-Augmented Generation and intelligent automation frameworks.',
+      'We design the full system architecture — LangGraph orchestration, Pinecone vector pipelines, n8n or FastAPI automation frameworks, and Docker deployment scaffolding. Every architectural decision is documented.',
   },
   {
     label: 'DEPLOYMENT_OPTIMIZATION',
     title: 'Deploy, Monitor, and Optimize',
     description:
-      'AI systems are deployed into production environments with monitoring, performance tuning, and continuous optimization to ensure long-term reliability and scalability.',
+      'Systems are deployed with LangSmith monitoring, defined performance baselines, and operational runbooks — not handed over as a black box. Continuous optimization is included in every engagement.',
   },
 ];
 
@@ -379,6 +379,68 @@ export default function HowWeWork() {
             </span>{' '}
             that continuously learns, adapts, and optimizes.
           </p>
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4" style={{ marginTop: 'clamp(20px, 2vw, 28px)' }}>
+            <a
+              href="/services"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 9999,
+                fontFamily: 'var(--font-display)',
+                fontWeight: 500,
+                fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
+                padding: '0.875rem 2rem',
+                whiteSpace: 'nowrap',
+                textDecoration: 'none',
+                background: 'var(--color-btn-bg)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                color: 'var(--color-text-primary)',
+                transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#2D5BFF';
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(45,91,255,0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              See Full Service Breakdown
+            </a>
+            <a
+              href="/contact"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 9999,
+                fontFamily: 'var(--font-display)',
+                fontWeight: 500,
+                fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
+                padding: '0.875rem 2rem',
+                whiteSpace: 'nowrap',
+                textDecoration: 'none',
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.1)',
+                color: 'var(--color-text-secondary)',
+                transition: 'border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#FBBF24';
+                e.currentTarget.style.color = '#FBBF24';
+                e.currentTarget.style.boxShadow = '0 0 16px rgba(251,191,36,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                e.currentTarget.style.color = 'var(--color-text-secondary)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              Start a Conversation
+            </a>
+          </div>
         </motion.div>
       </div>
 

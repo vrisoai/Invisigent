@@ -86,7 +86,7 @@ export default function FooterSection() {
               {footerColumns.company.map((item) => (
                 <li key={item}>
                   <a
-                    href={item === 'Services' ? '/services' : '#'}
+                    href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
                     className="vriso-footer-link vriso-footer-link--company"
                     aria-label={item}
                   >
@@ -110,7 +110,7 @@ export default function FooterSection() {
               </a>
               <div className="vriso-footer-contact-actions">
                 <a
-                  href="https://www.linkedin.com"
+                  href="https://www.linkedin.com/company/invisigent"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Invisigent on LinkedIn"
@@ -125,11 +125,11 @@ export default function FooterSection() {
                   <span>LinkedIn</span>
                 </a>
                 <a
-                  href="#"
+                  href="/contact"
                   className="vriso-footer-cta-btn vriso-footer-contact-item"
-                  aria-label="Book a call with Invisigent"
+                  aria-label="Start an engagement with Invisigent"
                 >
-                  Book a call
+                  Start an Engagement
                 </a>
               </div>
             </div>

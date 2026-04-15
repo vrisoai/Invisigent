@@ -165,8 +165,8 @@ const JSON_LD_RESERVE = {
 /* ─── Trust signals ─── */
 const TRUST_SIGNALS = [
   'Enterprise Engagements — Limited to 4 per Quarter',
-  'Invisigent Framework — Strategic Systems Architecture',
-  'Compliance Ready — GDPR / SOC2 / DPDP',
+  'Model-Agnostic Architecture — OpenAI · Claude · Llama · Cohere',
+  'Compliance Ready — EU AI Act · GDPR · SOC2 · DPDP Act · ISO 42001',
 ] as const;
 
 /* ─── Neural particles ─── */
@@ -320,12 +320,18 @@ export default function StrategicCTASection() {
                 lineHeight: 1.7,
               }}
             >
-              Competitive advantage no longer comes from simply using AI tools.
-              It comes from building AI systems that integrate with your infrastructure, data, and operations.
+              Competitive advantage no longer comes from which AI model your
+              organization uses. It comes from how deeply AI is embedded into
+              your infrastructure, operations, and decision-making.
               <br />
               <br />
-              Invisigent partners with leadership teams to design scalable AI architectures, automation
-              platforms, and intelligent systems that create long-term operational advantage.
+              Invisigent partners with 4 organizations per quarter — by design,
+              not by capacity. Every engagement gets full senior-level attention
+              from architecture through production deployment.
+              <br />
+              <br />
+              If you are moving from AI experiments to AI infrastructure, the
+              conversation starts here.
             </motion.p>
 
             {/* CTA intro + Buttons */}

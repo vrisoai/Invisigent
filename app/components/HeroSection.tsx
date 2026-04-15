@@ -47,8 +47,8 @@ const fadeUp = {
 };
 
 /* ─── Headline words ─── */
-const LINE_A = 'Architecting Enterprise AI Systems';
-const LINE_B = 'for Durable Competitive Advantage';
+const LINE_A = 'Architecting Production AI Systems';
+const LINE_B = "for Enterprises That Can't Afford to Fail";
 
 export function HeroSection() {
   const wordsA = LINE_A.split(' ');
@@ -153,10 +153,9 @@ export function HeroSection() {
               initial="hidden"
               animate="visible"
             >
-              Invisigent designs and deploys enterprise AI systems, agentic automation
-              platforms, and intelligent infrastructure that automate operations,
-              optimize decision-making, and create long-term competitive advantage
-              for businesses.
+              Invisigent builds multi-agent orchestration systems, RAG knowledge pipelines,
+              and production AI infrastructure — model-agnostic, fully auditable, and
+              engineered to pass your security team&apos;s review before handoff.
             </motion.p>
 
             {/* CTA buttons */}
@@ -183,14 +182,17 @@ export function HeroSection() {
 
           {/* ── RIGHT COLUMN — AI Decision Engine Visualization ── */}
           <motion.div
-            className="relative hidden w-full items-center justify-center overflow-hidden pr-8 lg:flex xl:pr-16"
+            className="relative hidden w-full items-center justify-center lg:flex"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: EASE }}
           >
             <div
               className="flex items-center justify-center"
-              style={{ width: 'min(800px, 44vw)', height: 'min(800px, 44vw)' }}
+              style={{
+                width: 'min(100%, clamp(280px, 34vw, 460px))',
+                aspectRatio: '1',
+              }}
             >
               <DecisionEngineVis />
             </div>

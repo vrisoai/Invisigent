@@ -33,23 +33,23 @@ const JSON_LD_SERVICE = {
 const CARDS = [
   {
     label: '[ INDEPENDENCE ]',
-    title: 'You Own Your AI Stack',
-    description: 'Architectures designed to avoid vendor lock-in so your organization keeps full control of its AI infrastructure.',
+    title: 'You Own Your Entire Stack',
+    description: 'Model-agnostic infrastructure — switch from OpenAI to Claude to Llama without rebuilding your orchestration layer. No API lock-in. No platform dependency. Full portability guaranteed.',
   },
   {
     label: '[ TRANSPARENCY ]',
-    title: 'Every Decision Is Auditable',
-    description: 'AI systems designed with traceability and explainability so teams can monitor, audit, and trust automated decisions.',
+    title: 'Every Decision Is Logged and Replayable',
+    description: 'Full LangSmith tracing across every agent run — every tool call, every decision branch, every retrieval event is logged, auditable, and replayable. Your compliance team will actually be satisfied.',
   },
   {
     label: '[ SECURITY ]',
-    title: 'Built to Pass Security Review',
-    description: 'Infrastructure engineered with governance, access control, and enterprise security requirements built in from the start.',
+    title: 'Security-First, Not Security-Retrofitted',
+    description: 'RBAC, audit trails, data residency controls, and GDPR/DPDP-compliant system architecture designed in from day one — not patched on after your security team raises a flag at deployment.',
   },
   {
     label: '[ SCALE ]',
-    title: 'Designed for Production, Not Demos',
-    description: 'AI systems built for real workloads — capable of scaling across teams, infrastructure environments, and global operations.',
+    title: 'Production Load, Not Demo Load',
+    description: 'Systems designed with defined SLAs, performance baselines, monitoring pipelines, and operational runbooks — because demonstrating AI in a boardroom is easy. Running it reliably for 10,000 requests a day is the hard part.',
   },
 ];
 
@@ -357,6 +357,98 @@ export function WhyInvisigent() {
             ))}
           </motion.div>
 
+        </div>
+
+        {/* ── Bottom insight strip ── */}
+        <div
+          className="glass-card"
+          style={{
+            marginTop: 'clamp(32px, 4vw, 56px)',
+            padding: 'clamp(20px, 2.5vw, 32px)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+            gap: 'clamp(16px, 2vw, 32px)',
+            alignItems: 'center',
+          }}
+        >
+          {[
+            { num: '4', label: 'Engagements per quarter' },
+            { num: '5', label: 'Compliance frameworks' },
+            { num: '<3s', label: 'RAG retrieval latency' },
+            { num: '100%', label: 'Model-agnostic stack' },
+          ].map((stat) => (
+            <div key={stat.label} style={{ textAlign: 'center' }}>
+              <p className="font-mono" style={{ fontSize: 'clamp(24px, 2.5vw, 48px)', fontWeight: 700, color: 'var(--color-trust-amber)', lineHeight: 1 }}>
+                {stat.num}
+              </p>
+              <p className="font-serif" style={{ fontSize: 'clamp(11px, 0.9vw, 18px)', color: 'var(--color-text-tertiary)', marginTop: 6 }}>
+                {stat.label}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4" style={{ marginTop: 'clamp(20px, 2.5vw, 36px)' }}>
+          <a
+            href="/services"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 9999,
+              fontFamily: 'var(--font-display)',
+              fontWeight: 500,
+              fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
+              padding: '0.875rem 2rem',
+              whiteSpace: 'nowrap',
+              textDecoration: 'none',
+              background: 'var(--color-btn-bg)',
+              border: '1px solid rgba(255,255,255,0.15)',
+              color: 'var(--color-text-primary)',
+              transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#2D5BFF';
+              e.currentTarget.style.boxShadow = '0 0 20px rgba(45,91,255,0.2)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            See Full Service Breakdown
+          </a>
+          <a
+            href="/contact"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 9999,
+              fontFamily: 'var(--font-display)',
+              fontWeight: 500,
+              fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
+              padding: '0.875rem 2rem',
+              whiteSpace: 'nowrap',
+              textDecoration: 'none',
+              background: 'transparent',
+              border: '1px solid rgba(255,255,255,0.1)',
+              color: 'var(--color-text-secondary)',
+              transition: 'border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#FBBF24';
+              e.currentTarget.style.color = '#FBBF24';
+              e.currentTarget.style.boxShadow = '0 0 16px rgba(251,191,36,0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+              e.currentTarget.style.color = 'var(--color-text-secondary)';
+              e.currentTarget.style.boxShadow = 'none';
+            }}
+          >
+            Start a Conversation
+          </a>
         </div>
       </div>
 

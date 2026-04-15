@@ -4,10 +4,12 @@ import { motion } from 'framer-motion';
 import { EASE } from '@/app/lib/animations';
 
 const ITEMS = [
-  'ENTERPRISE_AI_SYSTEMS',
-  'AGENTIC_AUTOMATION',
-  'INTELLIGENT_INFRASTRUCTURE',
-  'SECURE_AI_DEPLOYMENT',
+  'MULTI_AGENT_ORCHESTRATION',
+  'LANGGRAPH_PIPELINES',
+  'PRODUCTION_RAG',
+  'COMPLIANCE_READY_SYSTEMS',
+  'AI_INFRASTRUCTURE',
+  'AGENTIC_WORKFLOWS',
 ];
 
 const SEPARATOR = '·';

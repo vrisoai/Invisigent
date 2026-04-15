@@ -17,13 +17,13 @@ const STEPS = [
     num: '02',
     label: 'ARCHITECTURE_DESIGN',
     title: 'Architecture Design',
-    body: 'Our team designs the full system architecture — orchestration layers, knowledge retrieval pipelines, automation frameworks, and infrastructure required for production AI systems.',
+    body: 'Our team designs the full system architecture — LangGraph orchestration layers, Pinecone vector retrieval pipelines, n8n or FastAPI automation frameworks, and the Docker/cloud infrastructure scaffolding required for production deployment. Every architectural decision is documented and explained.',
   },
   {
     num: '03',
     label: 'DEPLOYMENT_INTEGRATION',
     title: 'Deployment & Integration',
-    body: 'Systems are deployed directly into production environments with security controls, monitoring infrastructure, and operational safeguards implemented from the start — not retrofitted after launch.',
+    body: 'Systems are deployed with LangSmith monitoring, defined performance baselines, and operational runbooks — not handed over as a black box. Security controls, RBAC configuration, and audit trail setup are included in every deployment, not added later.',
   },
   {
     num: '04',

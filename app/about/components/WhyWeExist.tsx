@@ -20,6 +20,10 @@ const PARAGRAPHS = [
     editorial: false,
     text: "Invisigent exists to close that gap — helping organizations move from AI experimentation to AI infrastructure that operates reliably, scales globally, and creates durable operational advantage.",
   },
+  {
+    editorial: false,
+    text: "Invisigent was founded by engineers who spent years building agentic AI systems in production — and became frustrated watching organizations spend six months building the wrong architecture. We built Invisigent to give enterprises a faster, more reliable path to AI systems that actually work.",
+  },
 ];
 
 interface WhyWeExistProps {
@@ -109,6 +113,80 @@ export function WhyWeExist({ reducedMotion = false }: WhyWeExistProps) {
                 </motion.div>
               ))}
             </div>
+
+            <motion.div
+              style={{ marginTop: '2.5rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}
+              variants={
+                reducedMotion
+                  ? undefined
+                  : { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }
+              }
+              initial="hidden"
+              whileInView={reducedMotion ? undefined : 'visible'}
+              viewport={{ once: true, margin }}
+              transition={{ duration: 0.7, delay: 0.6, ease: EASE }}
+            >
+              <a
+                href="/services"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 9999,
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 500,
+                  fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
+                  padding: '0.875rem 2rem',
+                  whiteSpace: 'nowrap',
+                  textDecoration: 'none',
+                  background: 'var(--color-btn-bg)',
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  color: 'var(--color-text-primary)',
+                  transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#2D5BFF';
+                  e.currentTarget.style.boxShadow = '0 0 20px rgba(45,91,255,0.2)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                See What We Build
+              </a>
+              <a
+                href="/contact"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 9999,
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 500,
+                  fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
+                  padding: '0.875rem 2rem',
+                  whiteSpace: 'nowrap',
+                  textDecoration: 'none',
+                  background: 'transparent',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  color: 'var(--color-text-secondary)',
+                  transition: 'border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#FBBF24';
+                  e.currentTarget.style.color = '#FBBF24';
+                  e.currentTarget.style.boxShadow = '0 0 16px rgba(251,191,36,0.15)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                  e.currentTarget.style.color = 'var(--color-text-secondary)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                Start a Conversation
+              </a>
+            </motion.div>
           </div>
         </div>
       </div>

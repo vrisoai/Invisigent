@@ -10,48 +10,46 @@ import { useMediaQuery } from '@/app/hooks/useMediaQuery';
 
 const SERVICES = [
   {
-    label: '[ STRATEGY ]',
+    label: '[ AI STRATEGY CONSULTING ]',
     name: 'AI & Technology Strategy Consulting',
     when: "You don't know where AI fits in your business or what to build first.",
-    what: 'We design your AI roadmap, architecture direction, and infrastructure strategy aligned with your business outcomes.',
-    outcome: 'A clear, executable plan for AI adoption — not experiments, but systems.',
+    what: 'We design your AI roadmap, infrastructure strategy, and architecture direction aligned with your actual business constraints — not a generic AI adoption template. We identify where multi-agent systems make sense vs. where a simpler pipeline will outperform them.',
+    outcome: 'A clear, executable architecture plan — documented, prioritized, and ready to build.',
   },
   {
-    label: '[ ORCHESTRATION ]',
+    label: '[ AGENTIC ORCHESTRATION ]',
     name: 'Agentic Orchestration & AI Workflows',
     when: 'You want AI systems that automate real workflows, not just generate outputs.',
-    what: 'We build multi-agent systems that coordinate tasks, delegate decisions, and automate operations across departments.',
-    outcome: 'End-to-end automation where AI actually runs workflows — not assists them.',
+    what: 'We build multi-agent systems using LangGraph with LangSmith observability throughout. Supervisor agents, specialist subagents, shared memory layers, tool-calling pipelines — the full orchestration stack, designed for production reliability and full decision traceability.',
+    outcome: 'End-to-end automation where AI systems run workflows autonomously — not just assist them. Every decision logged and replayable.',
   },
   {
-    label: '[ KNOWLEDGE ]',
+    label: '[ RAG KNOWLEDGE SYSTEMS ]',
     name: 'RAG & Knowledge Retrieval Systems',
     when: 'Your AI needs access to internal data, documents, or knowledge bases.',
-    what: 'We design secure retrieval pipelines using Retrieval-Augmented Generation to connect AI systems to your enterprise knowledge sources.',
-    outcome:
-      'Accurate, context-aware AI responses grounded in your own data — not hallucinated from general training.',
+    what: 'We design retrieval pipelines using Pinecone vector stores, Cohere re-ranking, and chunking strategies tuned for your document types — PDFs, databases, internal wikis, or structured data. Built with sub-3-second retrieval targets and hybrid search for accuracy at scale.',
+    outcome: 'Context-aware AI responses grounded in your internal data — accurate, fast, and hallucination-resistant.',
   },
   {
-    label: '[ PERFORMANCE ]',
+    label: '[ AI PERFORMANCE OPTIMIZATION ]',
     name: 'AI Performance & Latency Optimization',
     when: 'Your AI system is slow, expensive, or unreliable in production.',
-    what: 'We optimize inference pipelines, caching layers, and system architecture to improve speed and reduce cost at scale.',
-    outcome: 'Fast, scalable, and cost-efficient AI systems that perform under real production load.',
+    what: 'We audit your current AI system architecture, identify the bottlenecks — inference latency, over-retrieval, redundant API calls, cold-start delays — and redesign the pipeline for production-grade speed and cost efficiency. We also design caching layers that reduce repeat inference costs significantly.',
+    outcome: 'AI systems that perform under real production load — faster responses, lower operating costs, and infrastructure that scales without degrading.',
   },
   {
-    label: '[ PRODUCTS ]',
+    label: '[ AI-NATIVE PRODUCT DEVELOPMENT ]',
     name: 'AI-Native Product Development',
     when: 'You want to build an AI-first product, copilot, or intelligent platform.',
-    what: 'We design and develop AI-native applications with embedded intelligence, automated workflows, and production-grade architecture.',
-    outcome: 'Products that are AI-powered at the core — not retrofitted with AI features after the fact.',
+    what: 'We design and develop AI-first products using FastAPI or Node.js/Express backends, MongoDB for operational data, and Docker for portable deployment. AI is embedded into the product\'s core logic — not bolted on as a feature after the product was already built without it.',
+    outcome: 'AI-powered products with embedded intelligence, automated internal workflows, and production-grade infrastructure built for scale.',
   },
   {
-    label: '[ COMPLIANCE ]',
+    label: '[ COMPLIANCE-READY AI SYSTEMS ]',
     name: 'Compliance-Ready AI Systems',
     when: 'You are deploying AI in regulated or enterprise environments where governance matters.',
-    what: 'We build systems with governance, security, audit trails, and regulatory compliance designed into the architecture from day one — not retrofitted.',
-    outcome:
-      "AI systems ready for enterprise deployment — aligned with the EU AI Act, ISO 42001, GDPR, and India's DPDP Act.",
+    what: 'We build AI systems with governance designed into the architecture from day one — not retrofitted at deployment. This means: data residency controls at the vector store layer, RBAC from the first sprint, audit logs that satisfy enterprise security review, and system design aligned with EU AI Act risk classification requirements before a line of code is written.',
+    outcome: "AI systems that pass your compliance team's review — aligned with EU AI Act, GDPR, India's DPDP Act, ISO 42001, and SOC2. Regulated industry ready.",
   },
   {
     label: '[ ADVISORY ]',
@@ -279,9 +277,11 @@ function ServicesHero() {
               color: 'var(--color-text-secondary)',
             }}
           >
-            We design and build AI systems that integrate with your infrastructure, data, and operations. From
-            strategy to deployment, Invisigent delivers production-ready AI architecture built for scale, performance, and
-            control.
+            We design and build AI systems that integrate with your infrastructure,
+            data, and operations. From architecture strategy to production deployment,
+            Invisigent delivers AI systems built on LangGraph, Pinecone, FastAPI,
+            and your existing stack — not a proprietary platform you&apos;ll be locked
+            into forever.
           </motion.p>
 
           <motion.div
@@ -461,6 +461,21 @@ function PositioningBlock() {
             className="text-base sm:text-lg lg:text-[1.25rem] 2xl:text-[1.625rem] min-[1920px]:text-[2.125rem]"
           >
             Only systems designed for production.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, ease: EASE, delay: 1.1 }}
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'clamp(10px, 0.65vw, 13px)',
+              letterSpacing: '0.08em',
+              color: 'var(--color-text-tertiary)',
+              marginTop: '1.5rem',
+            }}
+          >
+            Built on: LangGraph · LangSmith · OpenAI API · Cohere · Pinecone · n8n · FastAPI · Node.js · MongoDB · Docker
           </motion.p>
         </div>
       </div>
@@ -1480,6 +1495,398 @@ function ServicesCTA() {
   );
 }
 
+const COMPLIANCE_ITEMS = [
+  { code: 'GDPR', region: 'European Union', detail: 'Data residency controls, right-to-erasure architecture, and processing lawfulness design for EU deployments.' },
+  { code: 'DPDP Act', region: 'India', detail: 'Consent management architecture and data fiduciary obligations aligned with India\'s Digital Personal Data Protection Act 2023.' },
+  { code: 'EU AI Act', region: 'European Union', detail: 'Risk classification assessment and prohibited/high-risk AI system design review for EU-regulated deployments.' },
+  { code: 'ISO 42001', region: 'Global', detail: 'AI Management System documentation, policy frameworks, and operational controls aligned with international AI governance standards.' },
+  { code: 'SOC2', region: 'United States', detail: 'Security, availability, and confidentiality controls designed into system architecture from the first sprint.' },
+] as const;
+
+const FAQ_ITEMS = [
+  {
+    q: 'What makes Invisigent different from other AI consulting firms?',
+    a: 'We build the infrastructure, not just the strategy deck. Most AI consultancies advise on what to build and hand it back to your team. Invisigent designs, builds, and deploys production AI systems — with monitoring, documentation, and compliance controls included. We also do not lock you into our platform or tooling; everything we build, you own.',
+  },
+  {
+    q: 'How long does a typical engagement take?',
+    a: 'Strategy engagements typically run 2–4 weeks and end with a documented architecture plan. Full system builds range from 6–16 weeks depending on complexity and integration requirements. Ongoing partnerships are scoped quarterly with defined deliverables.',
+  },
+  {
+    q: 'Do you work with organizations that have no existing AI infrastructure?',
+    a: 'Yes — and these are often the best engagements. Starting without legacy AI infrastructure means we can design the right architecture from the beginning rather than working around technical decisions made in a prototype phase. The discovery phase is specifically designed for organizations in this position.',
+  },
+  {
+    q: 'Which compliance frameworks do you support?',
+    a: 'We design systems aligned with GDPR, India\'s DPDP Act, EU AI Act risk classification requirements, ISO 42001, and SOC2. Compliance architecture is included in every system build — not offered as a separate add-on.',
+  },
+  {
+    q: 'What happens after the system is deployed?',
+    a: 'Deployment is not the end of the engagement. Every system we deliver includes operational runbooks, LangSmith monitoring configuration, and a defined performance baseline. For organizations on ongoing partnership engagements, we provide monthly performance reviews, model updates, and architecture evolution as usage scales.',
+  },
+] as const;
+
+function ComplianceDeepDive() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '0px' });
+
+  return (
+    <section
+      ref={ref}
+      style={{
+        background: 'var(--color-bg-primary)',
+        paddingTop: 'clamp(4rem, 7vw, 16rem)',
+        paddingBottom: 'clamp(4rem, 7vw, 16rem)',
+        paddingLeft: 'max(1.5rem, 5vw)',
+        paddingRight: 'max(1.5rem, 5vw)',
+      }}
+    >
+      <div className="section-inner-max" style={{ margin: '0 auto' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: EASE }}
+          style={{ marginBottom: 'clamp(2rem, 4vw, 9rem)' }}
+        >
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'clamp(0.625rem, 0.55vw, 0.8125rem)',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: 'var(--color-text-tertiary)',
+              borderLeft: '2px solid var(--color-trust-amber)',
+              paddingLeft: '0.75rem',
+              marginBottom: '1.25rem',
+              display: 'inline-block',
+            }}
+          >
+            [ COMPLIANCE ]
+          </div>
+          <h2
+            style={{
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 500,
+              color: 'var(--color-text-primary)',
+              lineHeight: 1.1,
+              margin: '0 0 1rem 0',
+            }}
+            className="text-[1.75rem] sm:text-[2.25rem] lg:text-[2.75rem] 2xl:text-[3.75rem] min-[1920px]:text-[5rem]"
+          >
+            Compliance Designed In, Not Bolted On
+          </h2>
+          <p
+            style={{
+              fontFamily: 'var(--font-display)',
+              color: 'var(--color-text-secondary)',
+              lineHeight: 1.7,
+              maxWidth: 'clamp(520px, 42vw, 900px)',
+            }}
+            className="text-sm sm:text-base 2xl:text-[1.125rem] min-[1920px]:text-[1.375rem]"
+          >
+            Every Invisigent engagement includes compliance architecture from the first sprint. No
+            separate compliance add-on. No retrofitting controls after your security team flags a
+            problem at deployment.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09, delayChildren: 0.15 } } }}
+          style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vw, 1.5rem)' }}
+        >
+          {COMPLIANCE_ITEMS.map((item) => (
+            <motion.div
+              key={item.code}
+              variants={{ hidden: { opacity: 0, x: -24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: EASE } } }}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'clamp(80px, 10vw, 160px) clamp(80px, 10vw, 140px) 1fr',
+                gap: 'clamp(1rem, 2vw, 3rem)',
+                alignItems: 'start',
+                padding: 'clamp(1rem, 1.5vw, 2rem) 0',
+                borderBottom: '1px solid rgba(255,255,255,0.06)',
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'clamp(10px, 0.65vw, 13px)',
+                  fontWeight: 600,
+                  letterSpacing: '0.06em',
+                  color: 'var(--color-trust-amber)',
+                }}
+              >
+                {item.code}
+              </span>
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 'clamp(9px, 0.55vw, 12px)',
+                  letterSpacing: '0.06em',
+                  color: 'var(--color-text-micro)',
+                  textTransform: 'uppercase',
+                  paddingTop: 2,
+                }}
+              >
+                {item.region}
+              </span>
+              <p
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: 'clamp(0.875rem, 0.9vw, 1.75rem)',
+                  lineHeight: 1.65,
+                  color: 'var(--color-text-secondary)',
+                  margin: 0,
+                }}
+              >
+                {item.detail}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function ServicesFAQ() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '0px' });
+  const [open, setOpen] = useState<number | null>(null);
+
+  return (
+    <section
+      ref={ref}
+      style={{
+        background: '#121212',
+        paddingTop: 'clamp(4rem, 7vw, 16rem)',
+        paddingBottom: 'clamp(4rem, 7vw, 16rem)',
+        paddingLeft: 'max(1.5rem, 5vw)',
+        paddingRight: 'max(1.5rem, 5vw)',
+      }}
+    >
+      <div className="section-inner-max" style={{ margin: '0 auto' }}>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: EASE }}
+          style={{ marginBottom: 'clamp(2rem, 4vw, 9rem)' }}
+        >
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 'clamp(0.625rem, 0.55vw, 0.8125rem)',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: 'var(--color-text-tertiary)',
+              borderLeft: '2px solid var(--color-trust-amber)',
+              paddingLeft: '0.75rem',
+              marginBottom: '1.25rem',
+              display: 'inline-block',
+            }}
+          >
+            [ FAQ ]
+          </div>
+          <h2
+            style={{
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 500,
+              color: 'var(--color-text-primary)',
+              lineHeight: 1.1,
+              margin: 0,
+            }}
+            className="text-[1.75rem] sm:text-[2.25rem] lg:text-[2.75rem] 2xl:text-[3.75rem] min-[1920px]:text-[5rem]"
+          >
+            Common Questions
+          </h2>
+        </motion.div>
+
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } } }}
+          style={{ display: 'flex', flexDirection: 'column' }}
+        >
+          {FAQ_ITEMS.map((item, i) => (
+            <motion.div
+              key={i}
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } }}
+              style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}
+            >
+              <button
+                type="button"
+                onClick={() => setOpen(open === i ? null : i)}
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  justifyContent: 'space-between',
+                  gap: '1.5rem',
+                  width: '100%',
+                  textAlign: 'left',
+                  padding: 'clamp(1rem, 1.5vw, 2rem) 0',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  color: 'var(--color-text-primary)',
+                }}
+                aria-expanded={open === i}
+              >
+                <span
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontWeight: 600,
+                    lineHeight: 1.4,
+                    fontSize: 'clamp(0.9375rem, 0.95vw, 1.875rem)',
+                  }}
+                >
+                  {item.q}
+                </span>
+                <span
+                  style={{
+                    flexShrink: 0,
+                    width: 20,
+                    height: 20,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--color-trust-amber)',
+                    fontSize: 18,
+                    lineHeight: 1,
+                    transition: 'transform 0.25s ease',
+                    transform: open === i ? 'rotate(45deg)' : 'rotate(0deg)',
+                    marginTop: 2,
+                  }}
+                  aria-hidden="true"
+                >
+                  +
+                </span>
+              </button>
+              {open === i && (
+                <p
+                  style={{
+                    fontFamily: 'var(--font-display)',
+                    fontSize: 'clamp(0.875rem, 0.9vw, 1.75rem)',
+                    lineHeight: 1.75,
+                    color: 'var(--color-text-secondary)',
+                    paddingBottom: 'clamp(1rem, 1.5vw, 2rem)',
+                    margin: 0,
+                  }}
+                >
+                  {item.a}
+                </p>
+              )}
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+function WhoWeWorkWithCTA() {
+  const ref = useRef<HTMLElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '0px' });
+
+  return (
+    <section
+      ref={ref}
+      style={{
+        background: '#121212',
+        paddingTop: 'clamp(2.5rem, 4vw, 8rem)',
+        paddingBottom: 'clamp(4rem, 7vw, 16rem)',
+        paddingLeft: 'max(1.5rem, 5vw)',
+        paddingRight: 'max(1.5rem, 5vw)',
+        textAlign: 'center',
+      }}
+    >
+      <motion.p
+        initial={{ opacity: 0, y: 16 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, ease: EASE }}
+        style={{
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(0.875rem, 0.9vw, 1.75rem)',
+          lineHeight: 1.75,
+          color: 'var(--color-text-secondary)',
+          maxWidth: 'clamp(480px, 38vw, 860px)',
+          margin: '0 auto 2rem',
+        }}
+      >
+        Not sure which engagement type fits your situation? Send us a brief description of what you&apos;re building and we&apos;ll tell you how we&apos;d approach it.
+      </motion.p>
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
+        style={{ display: 'flex', justifyContent: 'center', gap: 'clamp(0.75rem, 1.2vw, 1.5rem)', flexWrap: 'wrap' }}
+      >
+        <a
+          href="/contact"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 9999,
+            fontFamily: 'var(--font-display)',
+            fontWeight: 500,
+            fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
+            padding: 'clamp(0.75rem, 0.8vw, 1rem) clamp(1.5rem, 2vw, 2.5rem)',
+            whiteSpace: 'nowrap',
+            textDecoration: 'none',
+            background: 'var(--color-btn-bg)',
+            border: '1px solid rgba(255,255,255,0.15)',
+            color: 'var(--color-text-primary)',
+            transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = '#2D5BFF';
+            e.currentTarget.style.boxShadow = '0 0 20px rgba(45,91,255,0.2)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+            e.currentTarget.style.boxShadow = 'none';
+          }}
+        >
+          Start a Conversation
+        </a>
+        <a
+          href="/about"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 9999,
+            fontFamily: 'var(--font-display)',
+            fontWeight: 500,
+            fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
+            padding: 'clamp(0.75rem, 0.8vw, 1rem) clamp(1.5rem, 2vw, 2.5rem)',
+            whiteSpace: 'nowrap',
+            textDecoration: 'none',
+            background: 'transparent',
+            border: '1px solid rgba(255,255,255,0.1)',
+            color: 'var(--color-text-secondary)',
+            transition: 'border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = '#FBBF24';
+            e.currentTarget.style.color = '#FBBF24';
+            e.currentTarget.style.boxShadow = '0 0 16px rgba(251,191,36,0.15)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+            e.currentTarget.style.color = 'var(--color-text-secondary)';
+            e.currentTarget.style.boxShadow = 'none';
+          }}
+        >
+          Learn About Invisigent
+        </a>
+      </motion.div>
+    </section>
+  );
+}
+
 export default function ServicesPageClient() {
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -1498,8 +1905,11 @@ export default function ServicesPageClient() {
       <ServicesHero />
       <PositioningBlock />
       <ServiceCards />
+      <ComplianceDeepDive />
       <HowToEngage />
       <WhoWeWorkWith />
+      <WhoWeWorkWithCTA />
+      <ServicesFAQ />
       <GlobalBlock />
       <ServicesCTA />
       <InvisigentLogoSection />

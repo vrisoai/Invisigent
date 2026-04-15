@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(grep -l \"export const metadata\" /d/C/VRISO/app/**/page.tsx)",
-      "Bash(ls /d/C/VRISO/app/components/*.tsx)"
+      "Bash(ls /d/C/VRISO/app/components/*.tsx)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

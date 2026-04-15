@@ -12,19 +12,19 @@ const PILLARS = [
     number: '01',
     topBorder: 'amber' as const,
     title: 'Architecture Before Automation',
-    body: 'Automation built on weak infrastructure fails at scale. Before any agent, pipeline, or workflow is built, Invisigent designs the architectural foundation it will run on — including data access, orchestration logic, monitoring, and failure handling.',
+    body: 'We define the orchestration logic, data access patterns, failure handling, and monitoring architecture before any LangGraph agent or automation pipeline is instantiated. Infrastructure decisions made late are expensive. Made early, they are competitive advantages.',
   },
   {
     number: '02',
     topBorder: 'blue' as const,
     title: 'Ownership Over Vendor Lock-In',
-    body: 'Organizations should control their AI stack. Invisigent builds model-agnostic infrastructure — systems not dependent on a single provider, platform, or API. Teams can change models, switch vendors, or deploy on-prem without rebuilding from scratch.',
+    body: 'Invisigent builds model-agnostic infrastructure — OpenAI today, Claude or Llama tomorrow, on-prem the quarter after. No provider lock-in. No platform dependency. Your orchestration layer, your retrieval system, your deployment environment. Yours, permanently.',
   },
   {
     number: '03',
     topBorder: 'amber' as const,
     title: 'Production Systems Over Prototypes',
-    body: 'A demo is not a system. Invisigent builds AI infrastructure designed for real production environments — with monitoring, access controls, performance baselines, and operational safeguards required for enterprise deployment.',
+    body: 'Every system includes defined SLAs, operational runbooks, LangSmith monitoring pipelines, and RBAC access controls. We do not hand over black-box systems. We hand over systems your operations team can run, your security team can audit, and your engineering team can extend.',
   },
 ];
 

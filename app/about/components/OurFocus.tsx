@@ -8,10 +8,10 @@ import { useMediaQuery } from '@/app/hooks/useMediaQuery';
 import { fadeUp, fadeLeft, fadeRight, CARD_FADE } from '@/app/lib/animations';
 
 const FOCUS_CARDS = [
-  { tag: 'ORCH', number: '01', title: 'Agent Orchestration', body: 'Multi-agent systems that coordinate tasks, automate workflows, and enable complex AI-driven operations at enterprise scale.' },
-  { tag: 'AUTO', number: '02', title: 'AI Automation Infrastructure', body: 'End-to-end automation pipelines designed for reliability, performance, and production deployment.' },
-  { tag: 'KNOW', number: '03', title: 'Enterprise Knowledge Systems', body: 'AI retrieval pipelines and knowledge architectures that allow systems to access internal data and deliver accurate, context-aware answers.' },
-  { tag: 'PROD', number: '04', title: 'AI-Native Product Architecture', body: 'Infrastructure for AI-first products, copilots, and intelligent platforms designed for scalable deployment.' },
+  { tag: 'ORCH', number: '01', title: 'Agent Orchestration Systems', body: 'LangGraph-based multi-agent frameworks that coordinate complex task sequences, manage state across agent runs, and execute multi-step reasoning pipelines in production environments.' },
+  { tag: 'AUTO', number: '02', title: 'AI Automation Infrastructure', body: 'n8n and FastAPI-based automation pipelines that connect your existing systems to AI decision layers — eliminating manual workflows and enabling autonomous operations at scale.' },
+  { tag: 'KNOW', number: '03', title: 'Enterprise Knowledge Systems', body: 'Pinecone and Cohere-powered RAG pipelines connected to your internal documents, databases, and knowledge bases. Sub-3-second retrieval latency. Audit-ready retrieval traces. No hallucinations.' },
+  { tag: 'PROD', number: '04', title: 'AI-Native Product Development', body: 'AI infrastructure for copilots, intelligent assistants, and AI-first SaaS products — including backend API design, model integration, observability pipelines, and production deployment architecture.' },
 ];
 
 interface OurFocusProps {
@@ -98,6 +98,77 @@ export function OurFocus({ reducedMotion = false }: OurFocusProps) {
                 </p>
               </AnimatedCard>
             ))}
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
+            style={{ marginTop: '2.5rem' }}
+            variants={reducedMotion ? undefined : fadeUp}
+            initial="hidden"
+            whileInView={reducedMotion ? undefined : 'visible'}
+            viewport={{ once: true, margin }}
+            custom={2}
+          >
+            <a
+              href="/services"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 9999,
+                fontFamily: 'var(--font-display)',
+                fontWeight: 500,
+                fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
+                padding: '0.875rem 2rem',
+                whiteSpace: 'nowrap',
+                textDecoration: 'none',
+                background: 'var(--color-btn-bg)',
+                border: '1px solid rgba(255,255,255,0.15)',
+                color: 'var(--color-text-primary)',
+                transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#2D5BFF';
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(45,91,255,0.2)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              Full Service Breakdown
+            </a>
+            <a
+              href="/contact"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 9999,
+                fontFamily: 'var(--font-display)',
+                fontWeight: 500,
+                fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
+                padding: '0.875rem 2rem',
+                whiteSpace: 'nowrap',
+                textDecoration: 'none',
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.1)',
+                color: 'var(--color-text-secondary)',
+                transition: 'border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#FBBF24';
+                e.currentTarget.style.color = '#FBBF24';
+                e.currentTarget.style.boxShadow = '0 0 16px rgba(251,191,36,0.15)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                e.currentTarget.style.color = 'var(--color-text-secondary)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              Start a Conversation
+            </a>
           </motion.div>
         </div>
       </div>
