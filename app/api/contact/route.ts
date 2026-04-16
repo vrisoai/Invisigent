@@ -4,6 +4,7 @@ import nodemailer from 'nodemailer';
 type Body = {
   name?: string;
   email?: string;
+  phone?: string;
   company?: string;
   brief?: string;
 };
@@ -11,7 +12,7 @@ type Body = {
 export async function POST(req: Request) {
   try {
     const body: Body = await req.json();
-    const { name, email, company, brief } = body;
+    const { name, email, phone, company, brief } = body;
 
     if (!name?.trim() || !email?.trim()) {
       return NextResponse.json({ error: 'Missing required fields.' }, { status: 400 });
@@ -44,6 +45,11 @@ export async function POST(req: Request) {
               <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb; font-weight: 600; vertical-align: top;">Email</td>
               <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb;"><a href="mailto:${email.trim()}">${email.trim()}</a></td>
             </tr>
+            ${phone?.trim() ? `
+            <tr>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb; font-weight: 600; vertical-align: top;">Phone</td>
+              <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb;">${phone.trim()}</td>
+            </tr>` : ''}
             ${company?.trim() ? `
             <tr>
               <td style="padding: 10px 0; border-bottom: 1px solid #e5e7eb; font-weight: 600; vertical-align: top;">Company</td>

@@ -1343,13 +1343,13 @@ button {
   50% { transform: translate(10%, 0); }
 }
 
-/* LCP-safe headline fade — CSS-only, runs before JS hydration */
+/* LCP-safe headline slide — no opacity, so element is always visible for LCP */
 @keyframes hero-headline-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { transform: translateY(12px); }
+  to   { transform: translateY(0); }
 }
 .hero-headline {
-  animation: hero-headline-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: hero-headline-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes hero-core-spin {
@@ -2646,11 +2646,7 @@ main.ecommerce-assistant-page {
   .contact-right {
     position: sticky;
     top: calc(var(--nav-h, 64px) + 1.5rem);
-    max-height: calc(100vh - var(--nav-h, 64px) - 3rem);
-    overflow-y: auto;
-    scrollbar-width: none;
   }
-  .contact-right::-webkit-scrollbar { display: none; }
 }
 
 /* ── Form wrapper (glass card) ── */
