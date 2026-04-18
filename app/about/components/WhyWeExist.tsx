@@ -1,28 +1,30 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionLabel } from './shared/SectionLabel';
 import { GradientDivider } from './shared/GradientDivider';
-import { useMediaQuery } from '@/app/hooks/useMediaQuery';
-import { EASE, fadeUp } from '@/app/lib/animations';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const PARAGRAPHS = [
   {
     editorial: true,
-    text: "The next wave of competitive advantage will not come from which AI tools an organization uses. It will come from how deeply AI is embedded into their infrastructure, operations, and decision-making.",
+    text: 'The next wave of competitive advantage will not come from which AI tools an organization uses. It will come from how deeply AI is embedded into their infrastructure, operations, and decision-making.',
   },
   {
     editorial: false,
-    text: "Most organizations are not there yet. They are running AI experiments, not AI systems. They are using models, not owning infrastructure.",
+    text: 'Most organizations are not there yet. They are running AI experiments, not AI systems. They are using models, not owning infrastructure.',
   },
   {
     editorial: false,
-    text: "Invisigent exists to close that gap — helping organizations move from AI experimentation to AI infrastructure that operates reliably, scales globally, and creates durable operational advantage.",
+    text: 'Invisigent exists to close that gap — helping organizations move from AI experimentation to AI infrastructure that operates reliably, scales globally, and creates durable operational advantage.',
   },
   {
     editorial: false,
-    text: "Invisigent was founded by engineers who spent years building agentic AI systems in production — and became frustrated watching organizations spend six months building the wrong architecture. We built Invisigent to give enterprises a faster, more reliable path to AI systems that actually work.",
+    text: 'Invisigent was founded by engineers who spent years building agentic AI systems in production — and became frustrated watching organizations spend six months building the wrong architecture. We built Invisigent to give enterprises a faster, more reliable path to AI systems that actually work.',
   },
 ];
 
@@ -31,60 +33,109 @@ interface WhyWeExistProps {
 }
 
 export function WhyWeExist({ reducedMotion = false }: WhyWeExistProps) {
-  const ref = useRef<HTMLElement>(null);
-  const isMobile = useMediaQuery('(max-width: 639px)');
-  const margin = isMobile ? '-40px 0px' : '-80px 0px';
-  const inView = useInView(ref, { once: true, margin });
+  const sectionRef    = useRef<HTMLElement>(null);
+  const headingRef    = useRef<HTMLHeadingElement>(null);
+  const paragraphRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const dashRefs      = useRef<(HTMLSpanElement | null)[]>([]);
+  const ctaRef        = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const heading = headingRef.current;
+    const paras   = paragraphRefs.current.filter(Boolean) as HTMLDivElement[];
+    const dashes  = dashRefs.current.filter(Boolean) as HTMLSpanElement[];
+    const cta     = ctaRef.current;
+
+    if (reducedMotion) {
+      if (heading) gsap.set(heading, { opacity: 1, y: 0 });
+      gsap.set(paras,  { opacity: 1, y: 0 });
+      gsap.set(dashes, { scaleX: 1 });
+      if (cta) gsap.set(cta, { opacity: 1, y: 0 });
+      return;
+    }
+
+    // heading
+    if (heading) {
+      gsap.set(heading, { opacity: 0, y: 24 });
+      gsap.to(heading, {
+        opacity: 1, y: 0, duration: 0.7, ease: 'expo.out',
+        scrollTrigger: { trigger: heading, start: 'top 85%', once: true },
+      });
+    }
+
+    // paragraphs — scroll-scrubbed
+    paras.forEach((para, i) => {
+      const dash        = dashes[i];
+      const isEditorial = PARAGRAPHS[i]?.editorial ?? false;
+
+      gsap.set(para, { opacity: 0, y: isEditorial ? 32 : 22 });
+
+      // amber dash draws itself with scroll
+      if (dash) {
+        gsap.set(dash, { scaleX: 0 });
+        gsap.to(dash, {
+          scaleX: 1,
+          ease: 'none',
+          scrollTrigger: { trigger: para, start: 'top 88%', end: 'top 62%', scrub: 0.6 },
+        });
+      }
+
+      // text fades with scroll (editorial = wider scrub window)
+      gsap.to(para, {
+        opacity: 1,
+        y: 0,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: para,
+          start: 'top 92%',
+          end: isEditorial ? 'top 55%' : 'top 65%',
+          scrub: isEditorial ? 1.2 : 0.8,
+        },
+      });
+    });
+
+    // CTA
+    if (cta) {
+      gsap.set(cta, { opacity: 0, y: 20 });
+      gsap.to(cta, {
+        opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+        scrollTrigger: { trigger: cta, start: 'top 88%', once: true },
+      });
+    }
+  }, { scope: sectionRef });
 
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       className="about-why overflow-x-hidden"
       style={{ background: '#121212' }}
       aria-labelledby="about-why-heading"
     >
-      <div
-        className="section-wrapper"
-        style={{
-          paddingTop: 'clamp(40px, 6vw, 80px)',
-        }}
-      >
+      <div className="section-wrapper" style={{ paddingTop: 'clamp(40px, 6vw, 80px)' }}>
         <div className="section-inner-max section-inner">
           <div className="mx-auto w-full max-w-[720px] 2xl:max-w-[960px] min-[2800px]:max-w-[1400px] text-left">
+
             <SectionLabel text="[ OUR POSITION ]" reducedMotion={reducedMotion} />
-            <motion.h2
+
+            <h2
+              ref={headingRef}
               id="about-why-heading"
               className="about-heading text-section-h font-serif font-medium text-[var(--color-text-primary)]"
-              variants={reducedMotion ? undefined : fadeUp}
-              initial="hidden"
-              whileInView={reducedMotion ? undefined : 'visible'}
-              viewport={{ once: true, margin }}
             >
-              Why We Exist
-            </motion.h2>
+              Why Invisigent Exists
+            </h2>
 
-            <GradientDivider
-              reducedMotion={reducedMotion}
-              className="mt-6 mb-8 sm:mt-8 sm:mb-10"
-            />
+            <GradientDivider reducedMotion={reducedMotion} className="mt-6 mb-8 sm:mt-8 sm:mb-10" />
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
               {PARAGRAPHS.map((p, i) => (
-                <motion.div
+                <div
                   key={i}
+                  ref={el => { paragraphRefs.current[i] = el; }}
                   className={p.editorial ? 'text-pullquote' : 'text-body'}
                   style={{ position: 'relative', paddingLeft: '3rem' }}
-                  variants={
-                    reducedMotion
-                      ? undefined
-                      : { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }
-                  }
-                  initial="hidden"
-                  whileInView={reducedMotion ? undefined : 'visible'}
-                  viewport={{ once: true, margin }}
-                  transition={{ duration: 0.7, delay: i * 0.15, ease: EASE }}
                 >
-                  <motion.span
+                  <span
+                    ref={el => { dashRefs.current[i] = el; }}
                     aria-hidden="true"
                     style={{
                       position: 'absolute',
@@ -96,10 +147,6 @@ export function WhyWeExist({ reducedMotion = false }: WhyWeExistProps) {
                       background: 'var(--color-trust-amber)',
                       transformOrigin: 'left',
                     }}
-                    initial={reducedMotion ? false : { scaleX: 0 }}
-                    whileInView={reducedMotion ? undefined : { scaleX: 1 }}
-                    viewport={{ once: true, margin }}
-                    transition={{ duration: 0.5, delay: 0.2 + i * 0.15, ease: EASE }}
                   />
                   <p
                     className={
@@ -110,83 +157,48 @@ export function WhyWeExist({ reducedMotion = false }: WhyWeExistProps) {
                   >
                     {p.text}
                   </p>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            <motion.div
+            <div
+              ref={ctaRef}
               style={{ marginTop: '2.5rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}
-              variants={
-                reducedMotion
-                  ? undefined
-                  : { hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }
-              }
-              initial="hidden"
-              whileInView={reducedMotion ? undefined : 'visible'}
-              viewport={{ once: true, margin }}
-              transition={{ duration: 0.7, delay: 0.6, ease: EASE }}
             >
               <a
                 href="/services"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 9999,
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 500,
-                  fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
-                  padding: '0.875rem 2rem',
-                  whiteSpace: 'nowrap',
-                  textDecoration: 'none',
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  borderRadius: 9999, fontFamily: 'var(--font-display)', fontWeight: 500,
+                  fontSize: 'clamp(0.875rem, 0.8vw, 1rem)', padding: '0.875rem 2rem',
+                  whiteSpace: 'nowrap', textDecoration: 'none',
                   background: 'var(--color-btn-bg)',
-                  border: '1px solid rgba(255,255,255,0.15)',
-                  color: 'var(--color-text-primary)',
+                  border: '1px solid rgba(255,255,255,0.15)', color: 'var(--color-text-primary)',
                   transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#2D5BFF';
-                  e.currentTarget.style.boxShadow = '0 0 20px rgba(45,91,255,0.2)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = '#2D5BFF'; e.currentTarget.style.boxShadow = '0 0 20px rgba(45,91,255,0.2)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; e.currentTarget.style.boxShadow = 'none'; }}
               >
                 See What We Build
               </a>
               <a
                 href="/contact"
                 style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: 9999,
-                  fontFamily: 'var(--font-display)',
-                  fontWeight: 500,
-                  fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
-                  padding: '0.875rem 2rem',
-                  whiteSpace: 'nowrap',
-                  textDecoration: 'none',
+                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                  borderRadius: 9999, fontFamily: 'var(--font-display)', fontWeight: 500,
+                  fontSize: 'clamp(0.875rem, 0.8vw, 1rem)', padding: '0.875rem 2rem',
+                  whiteSpace: 'nowrap', textDecoration: 'none',
                   background: 'transparent',
-                  border: '1px solid rgba(255,255,255,0.1)',
-                  color: 'var(--color-text-secondary)',
+                  border: '1px solid rgba(255,255,255,0.1)', color: 'var(--color-text-secondary)',
                   transition: 'border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease',
                 }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = '#FBBF24';
-                  e.currentTarget.style.color = '#FBBF24';
-                  e.currentTarget.style.boxShadow = '0 0 16px rgba(251,191,36,0.15)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                  e.currentTarget.style.color = 'var(--color-text-secondary)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = '#FBBF24'; e.currentTarget.style.color = '#FBBF24'; e.currentTarget.style.boxShadow = '0 0 16px rgba(251,191,36,0.15)'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'var(--color-text-secondary)'; e.currentTarget.style.boxShadow = 'none'; }}
               >
                 Start a Conversation
               </a>
-            </motion.div>
+            </div>
+
           </div>
         </div>
       </div>

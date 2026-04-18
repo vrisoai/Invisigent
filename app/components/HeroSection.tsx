@@ -1,5 +1,6 @@
 'use client';
 
+import { useRef } from 'react';
 import Script from 'next/script';
 import { motion } from 'framer-motion';
 import {
@@ -9,6 +10,12 @@ import {
 import { DecisionEngineVis } from './hero/DecisionEngineVis';
 import { HeroTrustTicker } from './hero/HeroTrustTicker';
 import MagneticButton from './MagneticButton';
+import { gsap } from 'gsap';
+import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(useGSAP, ScrambleTextPlugin, ScrollTrigger);
 
 /* ─── JSON-LD (Organization) ─── */
 const JSON_LD = {
@@ -49,7 +56,59 @@ const LINE_A = 'Architecting Production AI Systems';
 const LINE_B = "for Enterprises That Can't Afford to Fail";
 
 export function HeroSection() {
-  const wordsB = LINE_B.split(' ');
+  const wordsB        = LINE_B.split(' ');
+  const heroRef       = useRef<HTMLElement>(null);
+  const statusRef     = useRef<HTMLSpanElement>(null);
+  const leftParaRef   = useRef<HTMLDivElement>(null);
+  const rightParaRef  = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    /* ── ScrambleText: status badge ── */
+    gsap.to(statusRef.current, {
+      duration: 1.8,
+      scrambleText: {
+        text: 'SYSTEM · NODE ACTIVE',
+        chars: '01!@#XYZ▓▒░',
+        revealDelay: 0.35,
+        speed: 0.45,
+      },
+      delay: 0.3,
+      ease: 'none',
+    });
+
+    /* ── ScrollTrigger parallax: desktop only (lg = 1024px+) ── */
+    const mm = gsap.matchMedia();
+    mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
+      // Scroll distance that covers the hero (until content slides fully over it)
+      const scrollEnd = () => window.innerHeight * 0.85;
+
+      // Left column — copy exits upward faster than the page scroll
+      gsap.to(leftParaRef.current, {
+        yPercent: -22,
+        ease: 'none',
+        scrollTrigger: {
+          start: 0,
+          end: scrollEnd,
+          scrub: 0.7,
+        },
+      });
+
+      // Right column — visualization drifts up slower, fades and shrinks
+      gsap.to(rightParaRef.current, {
+        yPercent: -10,
+        scale: 0.9,
+        opacity: 0,
+        ease: 'none',
+        scrollTrigger: {
+          start: 0,
+          end: scrollEnd,
+          scrub: 1.1,
+        },
+      });
+    });
+
+    return () => mm.revert();
+  }, { scope: heroRef });
 
   return (
     <header aria-label="Invisigent homepage hero">
@@ -62,6 +121,7 @@ export function HeroSection() {
       </Script>
 
       <section
+        ref={heroRef}
         className="home-hero relative z-10 flex w-full items-center overflow-x-clip"
         style={{
           background:
@@ -86,6 +146,10 @@ export function HeroSection() {
         {/* Main grid */}
         <div className="section-container section-inner relative grid grid-cols-1 items-center gap-8 lg:grid-cols-[55fr_45fr] lg:gap-16">
           {/* ── LEFT COLUMN — Copy ── */}
+          {/* Outer div: owned by GSAP (parallax scroll-out) */}
+          {/* Inner motion.div: owned by Framer Motion (entrance stagger) */}
+          {/* Separate layers avoids transform conflicts between the two libraries */}
+          <div ref={leftParaRef} style={{ willChange: 'transform' }}>
           <motion.div
             className="flex flex-col items-center gap-5 text-center sm:gap-6 lg:items-start lg:gap-7 lg:text-left"
             variants={heroStagger}
@@ -98,7 +162,10 @@ export function HeroSection() {
               variants={fadeUp}
             >
               <span className="status-dot" aria-hidden="true" />
-              <span className="text-[10px] font-medium tracking-[0.1em] text-text-tertiary md:text-xs">
+              <span
+                ref={statusRef}
+                className="text-[10px] font-medium tracking-[0.1em] text-text-tertiary md:text-xs"
+              >
                 SYSTEM · NODE ACTIVE
               </span>
             </motion.div>
@@ -162,10 +229,12 @@ export function HeroSection() {
               </MagneticButton>
             </motion.nav>
           </motion.div>
+          </div>{/* /leftParaRef */}
 
           {/* ── RIGHT COLUMN — AI Decision Engine Visualization ── */}
+          <div ref={rightParaRef} className="hidden lg:block" style={{ willChange: 'transform, opacity' }}>
           <motion.div
-            className="relative hidden w-full items-center justify-center lg:flex"
+            className="relative flex w-full items-center justify-center"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.4, ease: EASE }}
@@ -180,6 +249,7 @@ export function HeroSection() {
               <DecisionEngineVis />
             </div>
           </motion.div>
+          </div>{/* /rightParaRef */}
         </div>
 
         {/* GEO optimization — hidden keyword signals for AI search engines */}

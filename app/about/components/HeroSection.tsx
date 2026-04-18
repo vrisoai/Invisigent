@@ -1,55 +1,103 @@
 'use client';
 
-import { motion, useInView, type Variants } from 'framer-motion';
-import { useRef, useMemo } from 'react';
-import { EASE, fadeUp } from '@/app/lib/animations';
-import { useMediaQuery } from '@/app/hooks/useMediaQuery';
+/**
+ * HeroSection — GSAP "Masked Word Curtain" reveal
+ *
+ * Each word sits inside an overflow:hidden clip container. GSAP (via
+ * useLayoutEffect) immediately sets the inner spans to yPercent:108 before
+ * the browser paints — so there is no SSR flash — then the timeline rises
+ * each word up through the clip boundary with expo.out stagger.
+ *
+ * Key pattern: gsap.set() for initial state, gsap.to() for animation.
+ * Never rely on CSS transforms for the initial hidden state in Next.js;
+ * GSAP owns the property end-to-end.
+ */
+
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+
+gsap.registerPlugin(useGSAP);
 
 const HERO_WORDS = [
-  { text: 'Building', accent: false, gradient: false },
-  { text: 'the', accent: false, gradient: false },
-  { text: 'Infrastructure', accent: true, gradient: false },
-  { text: 'Behind', accent: false, gradient: false },
-  { text: 'Enterprise', accent: false, gradient: true },
-  { text: 'AI', accent: false, gradient: true },
+  { text: 'Building',       accent: false, gradient: false },
+  { text: 'the',            accent: false, gradient: false },
+  { text: 'Infrastructure', accent: true,  gradient: false },
+  { text: 'Behind',         accent: false, gradient: false },
+  { text: 'Enterprise',     accent: false, gradient: true  },
+  { text: 'AI',             accent: false, gradient: true  },
 ];
-
-const wordVariants = {
-  hidden: { opacity: 0, y: 8 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, delay: i * 0.06, ease: EASE },
-  }),
-};
 
 interface HeroSectionProps {
   reducedMotion?: boolean;
 }
 
 export function HeroSection({ reducedMotion = false }: HeroSectionProps) {
-  const ref = useRef<HTMLElement>(null);
-  const isMobile = useMediaQuery('(max-width: 639px)');
-  const inViewMargin = isMobile ? '-40px 0px' : '-80px 0px';
-  const inView = useInView(ref, { once: true, margin: inViewMargin });
+  const sectionRef   = useRef<HTMLElement>(null);
+  const labelRef     = useRef<HTMLParagraphElement>(null);
+  const wordRefs     = useRef<(HTMLSpanElement | null)[]>([]);
+  const descRef      = useRef<HTMLParagraphElement>(null);
+  const dotRef       = useRef<HTMLSpanElement>(null);
+  const indicatorRef = useRef<HTMLDivElement>(null);
 
-  const containerVariants = useMemo<Variants>(
-    () => ({
-      hidden: { opacity: 0 },
-      visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+  useGSAP(() => {
+    const words = wordRefs.current.filter(Boolean) as HTMLSpanElement[];
+
+    // ── reduced motion: show everything immediately ───────────────────────
+    if (reducedMotion) {
+      gsap.set(words, { yPercent: 0, opacity: 1 });
+      gsap.set(
+        [labelRef.current, descRef.current, indicatorRef.current],
+        { opacity: 1, y: 0 }
+      );
+      return;
+    }
+
+    // ── set initial hidden states (runs in useLayoutEffect → before paint) ─
+    // GSAP owns the transform/opacity — no CSS initial-state needed.
+    gsap.set(words,               { yPercent: 108 });
+    gsap.set(labelRef.current,    { opacity: 0, y: 10 });
+    gsap.set(descRef.current,     { opacity: 0, y: 22 });
+    gsap.set(indicatorRef.current,{ opacity: 0 });
+
+    // ── animation timeline ────────────────────────────────────────────────
+    const tl = gsap.timeline({ delay: 0.15 });
+
+    // Section label slides in
+    tl.to(labelRef.current, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+
+    // Words curtain up — each word rises from below its clip boundary
+    tl.to(
+      words,
+      {
+        yPercent: 0,
+        duration: 0.9,
+        ease: 'expo.out',
+        stagger: { each: 0.075, from: 'start' },
       },
-    }),
-    []
-  );
+      '-=0.25'
+    );
 
-  const headingVariants = isMobile || reducedMotion ? fadeUp : containerVariants;
-  const wordAnimationVariants = isMobile || reducedMotion ? undefined : wordVariants;
+    // Description fades up
+    tl.to(descRef.current, { opacity: 1, y: 0, duration: 0.65, ease: 'power2.out' }, '-=0.45');
+
+    // Scroll indicator appears
+    tl.to(indicatorRef.current, { opacity: 1, duration: 0.5 }, '-=0.3');
+
+    // Dot bounces infinitely
+    gsap.to(dotRef.current, {
+      y: 6,
+      duration: 1.0,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true,
+      delay: 1.4,
+    });
+  }, { scope: sectionRef });
 
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       className="about-hero flex min-h-0 w-full flex-col items-center justify-center overflow-x-clip px-4 py-16 sm:px-[var(--section-px)] sm:py-24"
       style={{
         height: '100%',
@@ -60,32 +108,35 @@ export function HeroSection({ reducedMotion = false }: HeroSectionProps) {
       aria-labelledby="about-hero-heading"
     >
       <div className="section-container mx-auto flex w-full max-w-[1152px] 2xl:max-w-[1400px] min-[1920px]:max-w-[1680px] min-[2800px]:max-w-[2600px] flex-col items-center text-center">
-        <motion.p
+
+        {/* Section label */}
+        <p
+          ref={labelRef}
           aria-hidden="true"
-          initial={reducedMotion ? false : { opacity: 0, y: 12 }}
-          animate={inView && !reducedMotion ? { opacity: 1, y: 0 } : undefined}
-          transition={{ duration: 0.5, ease: EASE }}
           className="section-label"
         >
           [ ABOUT INVISIGENT ]
-        </motion.p>
+        </p>
 
-        <motion.h1
+        {/* Heading — each word: outer span clips, inner span is the animated target */}
+        <h1
           id="about-hero-heading"
           className="about-heading font-serif font-semibold leading-[1.1] text-[var(--color-text-primary)] text-hero mx-auto max-w-[900px] 2xl:max-w-[1200px] min-[2800px]:max-w-[1800px]"
-          variants={reducedMotion ? undefined : headingVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
         >
-          {isMobile || reducedMotion ? (
-            <span className="flex flex-wrap justify-center gap-x-2 gap-y-1">
-              {HERO_WORDS.map((w, i) => (
+          <span className="flex flex-wrap justify-center gap-x-2 gap-y-1">
+            {HERO_WORDS.map((w, i) => (
+              // Outer span = the overflow:hidden clip wall
+              // Inner span = the element that GSAP slides upward
+              <span
+                key={`${w.text}-${i}`}
+                style={{ overflow: 'hidden', display: 'inline-block' }}
+              >
                 <span
-                  key={`${w.text}-${i}`}
+                  ref={el => { wordRefs.current[i] = el; }}
                   style={{
-                    color: w.accent
-                      ? 'var(--color-trust-amber)'
-                      : undefined,
+                    display: 'inline-block',
+                    // Gradient / accent colours live on the inner animated span
+                    color: w.accent ? 'var(--color-trust-amber)' : undefined,
                     background: w.gradient ? 'var(--gradient-headline)' : undefined,
                     WebkitBackgroundClip: w.gradient ? 'text' : undefined,
                     WebkitTextFillColor: w.gradient ? 'transparent' : undefined,
@@ -94,69 +145,35 @@ export function HeroSection({ reducedMotion = false }: HeroSectionProps) {
                 >
                   {w.text}
                 </span>
-              ))}
-            </span>
-          ) : (
-            <span className="flex flex-wrap justify-center gap-x-2 gap-y-1">
-              {HERO_WORDS.map((w, i) => (
-                <motion.span
-                  key={`${w.text}-${i}`}
-                  variants={wordAnimationVariants}
-                  custom={i}
-                  style={{
-                    display: 'inline-block',
-                    marginRight: '0.25em',
-                    color: w.accent
-                      ? 'var(--color-trust-amber)'
-                      : undefined,
-                    background: w.gradient ? 'var(--gradient-headline)' : undefined,
-                    WebkitBackgroundClip: w.gradient ? 'text' : undefined,
-                    WebkitTextFillColor: w.gradient ? 'transparent' : undefined,
-                    backgroundClip: w.gradient ? 'text' : undefined,
-                  }}
-                >
-                  {w.text}
-                </motion.span>
-              ))}
-            </span>
-          )}
-        </motion.h1>
+              </span>
+            ))}
+          </span>
+        </h1>
 
-        <motion.p
+        {/* Description */}
+        <p
+          ref={descRef}
           className="about-description text-body mx-auto max-w-[600px] 2xl:max-w-[780px] min-[2800px]:max-w-[1100px] font-display leading-[1.75] text-[var(--color-text-secondary)] text-center"
           style={{ textAlign: 'center' }}
-          initial={reducedMotion ? false : { opacity: 0, y: 20 }}
-          animate={inView && !reducedMotion ? { opacity: 1, y: 0 } : undefined}
-          transition={{ duration: 0.6, delay: 0.5, ease: EASE }}
         >
           Invisigent designs production AI systems — multi-agent orchestration architectures, RAG
           knowledge pipelines, and compliance-ready AI infrastructure — for organizations that need
           AI systems their teams actually own and operate, not SaaS subscriptions they depend on
           forever. Built by engineers who have deployed agentic AI systems in production across
           operations, fintech, and knowledge management environments.
-        </motion.p>
+        </p>
 
-        {/* <motion.p
-          className="about-description-tight text-label font-mono tracking-wider text-[var(--color-text-tertiary)]"
-          initial={reducedMotion ? false : { opacity: 0 }}
-          animate={inView && !reducedMotion ? { opacity: 1 } : undefined}
-          transition={{ duration: 0.5, delay: 0.7, ease: EASE }}
-        >
-          Founded in Jaipur. Built for global enterprise AI systems.
-        </motion.p> */}
-
-        <motion.div
+        {/* Scroll indicator */}
+        <div
+          ref={indicatorRef}
           aria-hidden="true"
           className="absolute bottom-5 left-1/2 flex flex-col items-center gap-1 sm:bottom-8"
           style={{ transform: 'translateX(-50%)' }}
-          initial={reducedMotion ? false : { opacity: 0 }}
-          animate={inView && !reducedMotion ? { opacity: 1 } : undefined}
-          transition={{ delay: 1, duration: 0.5 }}
         >
-          <motion.span
+          <span
+            ref={dotRef}
             className="h-1.5 w-1.5 rounded-full bg-[var(--color-trust-amber)]"
-            animate={reducedMotion ? undefined : { y: [0, 6, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ display: 'block' }}
           />
           <svg
             width={16}
@@ -169,7 +186,8 @@ export function HeroSection({ reducedMotion = false }: HeroSectionProps) {
           >
             <path d="M12 5v14M19 12l-7 7-7-7" />
           </svg>
-        </motion.div>
+        </div>
+
       </div>
     </section>
   );

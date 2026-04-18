@@ -1,9 +1,15 @@
 'use client';
 
 import Script from 'next/script';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef } from 'react';
-import { EASE, FADE_UP } from '@/app/lib/animations';
+import { FADE_UP } from '@/app/lib/animations';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
+import { useGSAP } from '@gsap/react';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
 /* ─── JSON-LD (Service) ─── */
 const JSON_LD = {
@@ -47,31 +53,107 @@ const CARDS: ValueCard[] = [
   },
 ];
 
-/* ─── Animation variants ─── */
-const cardStagger = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.3 },
-  },
-};
-
-const cardReveal = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: EASE },
-  },
-};
-
 /* ─── Component ─── */
 export function ValueProposition() {
-  const gridRef = useRef<HTMLDivElement>(null);
-  const gridInView = useInView(gridRef, { once: true, margin: '-60px' });
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useGSAP((_ctx, contextSafe) => {
+    const cards   = gsap.utils.toArray<HTMLElement>('.vp-card', sectionRef.current);
+    const heading = sectionRef.current?.querySelector<HTMLElement>('#vriso-value-heading');
+
+    /* ── 1. ScrollTrigger.batch card entrance ── */
+    // Set all cards hidden before the trigger fires
+    gsap.set(cards, { clipPath: 'inset(100% 0 0 0)', opacity: 0 });
+
+    ScrollTrigger.batch(cards, {
+      once: true,
+      interval: 0.1,     // collect the whole row in one batch
+      batchMax: 3,
+      start: 'top 88%',
+      onEnter: (batch) => {
+        gsap.to(batch, {
+          clipPath: 'inset(0% 0 0 0)',
+          opacity: 1,
+          duration: 0.85,
+          stagger: 0.13,
+          ease: 'power3.out',
+          // remove clip-path after animation so CSS hover and flip keep working
+          onComplete: () => { gsap.set(batch, { clearProps: 'clipPath,opacity' }); },
+        });
+      },
+    });
+
+    /* ── 2. SplitText H2 word reveal ── */
+    if (heading) {
+      const split = new SplitText(heading, { type: 'words' });
+
+      // Hide words immediately so there's no flash before the trigger fires
+      gsap.set(split.words, { clipPath: 'inset(0 0 100% 0)', yPercent: 110 });
+
+      ScrollTrigger.create({
+        trigger: heading,
+        start: 'top 82%',
+        once: true,
+        onEnter: () => {
+          gsap.to(split.words, {
+            clipPath: 'inset(0 0 0% 0)',
+            yPercent: 0,
+            duration: 0.8,
+            stagger: 0.07,
+            ease: 'power3.out',
+            // restore original DOM so gradient-text span is intact afterwards
+            onComplete: () => split.revert(),
+          });
+        },
+      });
+    }
+
+    /* ── 3. GSAP spring flip — desktop only, respects reduce-motion ── */
+    const mm = gsap.matchMedia();
+    mm.add(
+      '(min-width: 1024px) and (prefers-reduced-motion: no-preference)',
+      () => {
+        const cleanups: (() => void)[] = [];
+
+        cards.forEach((card) => {
+          const inner = card.querySelector<HTMLElement>('.vp-card__inner')!;
+
+          const onEnter = contextSafe!(() => {
+            gsap.to(inner, { rotateY: 180, duration: 0.65, ease: 'back.out(1.4)' });
+            gsap.to(card, {
+              borderColor: 'var(--color-action-accent)',
+              boxShadow: '0 0 32px rgba(59,130,246,0.28)',
+              duration: 0.3,
+            });
+          });
+
+          const onLeave = contextSafe!(() => {
+            gsap.to(inner, { rotateY: 0, duration: 0.55, ease: 'power3.out' });
+            gsap.to(card, {
+              borderColor: 'var(--color-border)',
+              boxShadow: 'none',
+              duration: 0.3,
+            });
+          });
+
+          card.addEventListener('mouseenter', onEnter);
+          card.addEventListener('mouseleave', onLeave);
+          cleanups.push(() => {
+            card.removeEventListener('mouseenter', onEnter);
+            card.removeEventListener('mouseleave', onLeave);
+          });
+        });
+
+        return () => cleanups.forEach((fn) => fn());
+      }
+    );
+
+    return () => mm.revert();
+  }, { scope: sectionRef });
 
   return (
     <section
+      ref={sectionRef}
       className="relative w-full overflow-x-hidden"
       style={{
         background: '#121212',
@@ -105,7 +187,7 @@ export function ValueProposition() {
             marginInline: 'auto',
           }}
         >
-          {/* Label */}
+          {/* Label — Framer FADE_UP unchanged */}
           <motion.p
             className="font-mono"
             style={{
@@ -124,8 +206,8 @@ export function ValueProposition() {
             [ VALUE PROPOSITION ]
           </motion.p>
 
-          {/* H2 heading */}
-          <motion.h2
+          {/* H2 — plain element; GSAP SplitText handles the reveal */}
+          <h2
             id="vriso-value-heading"
             className="font-serif"
             style={{
@@ -137,16 +219,11 @@ export function ValueProposition() {
               color: 'var(--color-text-primary)',
               width: '100%',
             }}
-            variants={FADE_UP}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-            custom={1}
           >
             <span className="gradient-text">AI Systems</span>, Not AI Experiments
-          </motion.h2>
+          </h2>
 
-          {/* Description */}
+          {/* Description — Framer FADE_UP unchanged */}
           <motion.p
             className="font-serif"
             style={{
@@ -176,29 +253,21 @@ export function ValueProposition() {
           </motion.p>
         </header>
 
-        {/* ── Value cards grid ── */}
-        <motion.div
-          ref={gridRef}
+        {/* ── Value cards grid — plain div; GSAP ScrollTrigger.batch handles entrance ── */}
+        <div
           className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 2xl:gap-12 min-[1920px]:gap-16"
           style={{ marginTop: 'clamp(40px, 5vw, 120px)' }}
-          variants={cardStagger}
-          initial="hidden"
-          animate={gridInView ? 'visible' : 'hidden'}
         >
           {CARDS.map((card) => (
-            <motion.article
+            <article
               key={card.label}
               className="vp-card"
-              variants={cardReveal}
               aria-label={card.title}
             >
               <div className="vp-card__inner">
-                {/* Front: heading only */}
+                {/* Front: label + title */}
                 <div className="vp-card__front">
-                  <div
-                    className="flex items-center gap-3"
-                    style={{ marginBottom: 24 }}
-                  >
+                  <div className="flex items-center gap-3" style={{ marginBottom: 24 }}>
                     <span className="vp-card__signal" aria-hidden="true" />
                     <span className="vp-card__label">{card.label}</span>
                   </div>
@@ -211,9 +280,9 @@ export function ValueProposition() {
                   <p className="vp-card__desc">{card.description}</p>
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
-        </motion.div>
+        </div>
       </div>
 
       {/* GEO — hidden semantic keyword signals */}

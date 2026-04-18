@@ -1,7 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { EASE } from '@/app/lib/animations';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 interface SectionLabelProps {
   text: string;
@@ -9,21 +13,36 @@ interface SectionLabelProps {
   reducedMotion?: boolean;
 }
 
-export function SectionLabel({
-  text,
-  className = '',
-  reducedMotion = false,
-}: SectionLabelProps) {
+export function SectionLabel({ text, className = '', reducedMotion = false }: SectionLabelProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!ref.current) return;
+
+    if (reducedMotion) {
+      gsap.set(ref.current, { opacity: 1, x: 0 });
+      return;
+    }
+
+    // gsap.set owns initial state — no CSS opacity needed
+    gsap.set(ref.current, { opacity: 0, x: -14 });
+
+    gsap.to(ref.current, {
+      opacity: 1,
+      x: 0,
+      duration: 0.55,
+      ease: 'power2.out',
+      scrollTrigger: { trigger: ref.current, start: 'top 92%', once: true },
+    });
+  }, { scope: ref });
+
   return (
-    <motion.div
+    <div
+      ref={ref}
       aria-hidden="true"
-      initial={reducedMotion ? false : { opacity: 0, x: -12 }}
-      whileInView={reducedMotion ? undefined : { opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.5, ease: EASE }}
       className={`section-label ${className}`}
     >
       {text}
-    </motion.div>
+    </div>
   );
 }

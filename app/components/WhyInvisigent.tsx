@@ -3,7 +3,7 @@
 import Script from 'next/script';
 import dynamic from 'next/dynamic';
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import { EASE, FADE_UP, CARD_FADE } from '@/app/lib/animations';
 
 const WhyVRisoCardScene = dynamic(() => import('./3d/WhyVRisoCardSceneWrapper'), { ssr: false });
@@ -106,6 +106,27 @@ export function WhyInvisigent() {
   const sectionInView = useInView(sectionRef, { once: true, margin: '-100px' });
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const handleLeave = useCallback(() => setHoveredCard(null), []);
+  const whyCarouselRef = useRef<HTMLDivElement>(null);
+  const [whyActiveCard, setWhyActiveCard] = useState(0);
+
+  useEffect(() => {
+    const carousel = whyCarouselRef.current;
+    if (!carousel) return;
+    const onScroll = () => {
+      const cards = Array.from(carousel.querySelectorAll<HTMLElement>('.why-vriso-carousel-card'));
+      if (!cards.length) return;
+      const carouselCenter = carousel.getBoundingClientRect().left + carousel.getBoundingClientRect().width / 2;
+      let closest = 0, minDist = Infinity;
+      cards.forEach((card, i) => {
+        const rect = card.getBoundingClientRect();
+        const dist = Math.abs(rect.left + rect.width / 2 - carouselCenter);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      });
+      setWhyActiveCard(closest);
+    };
+    carousel.addEventListener('scroll', onScroll, { passive: true });
+    return () => carousel.removeEventListener('scroll', onScroll);
+  }, []);
   const handleEnter = useCallback((i: number) => () => setHoveredCard(i), []);
 
   const handleCardMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
@@ -219,36 +240,38 @@ export function WhyInvisigent() {
 
         {/* ── Cards: flex column on mobile, 2x2 grid with core on desktop ── */}
         <div className="relative mt-16 sm:mt-14 md:mt-20">
-          {/* Mobile: simple flex column, 4 cards */}
-          <motion.div
-            className="flex flex-col gap-5 sm:hidden"
-            initial="hidden"
-            animate={sectionInView ? 'visible' : 'hidden'}
-            variants={{
-              hidden: { opacity: 1 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.08, delayChildren: 0.1 },
-              },
-            }}
-          >
-            {CARDS.map((card, i) => (
-              <motion.article
-                key={card.title}
-                className="why-vriso-card-mobile glass-card"
-                variants={CARD_FADE}
-                aria-label={card.title}
-              >
-                {card.label && (
-                  <p className="font-mono text-[11px] sm:text-xs mb-2" style={{ letterSpacing: '0.12em', fontWeight: 500, color: 'var(--color-text-tertiary)' }}>
-                    {card.label}
-                  </p>
-                )}
-                <h3 className="why-vriso-card-mobile__title">{card.title}</h3>
-                <p className="why-vriso-card-mobile__desc">{card.description}</p>
-              </motion.article>
-            ))}
-          </motion.div>
+          {/* Mobile: horizontal carousel */}
+          <div className="why-vriso-carousel-wrapper sm:hidden">
+            <div className="why-vriso-carousel" ref={whyCarouselRef}>
+              {CARDS.map((card, i) => (
+                <article key={card.title} className="why-vriso-carousel-card glass-card" aria-label={card.title}>
+                  {card.label && (
+                    <p className="font-mono" style={{ fontSize: 10, letterSpacing: '0.12em', fontWeight: 500, color: 'var(--color-text-tertiary)', borderLeft: '2px solid var(--color-trust-amber)', paddingLeft: 10, marginBottom: 12 }}>
+                      {card.label}
+                    </p>
+                  )}
+                  <h3 className="why-vriso-card-mobile__title">{card.title}</h3>
+                  <p className="why-vriso-card-mobile__desc">{card.description}</p>
+                </article>
+              ))}
+            </div>
+            <div className="why-vriso-carousel-dots">
+              {CARDS.map((_, i) => (
+                <button
+                  key={i}
+                  className={`why-vriso-carousel-dot${i === whyActiveCard ? ' active' : ''}`}
+                  onClick={() => {
+                    const carousel = whyCarouselRef.current;
+                    if (!carousel) return;
+                    const card = carousel.querySelectorAll<HTMLElement>('.why-vriso-carousel-card')[i];
+                    if (card) carousel.scrollTo({ left: card.offsetLeft - 16, behavior: 'smooth' });
+                    setWhyActiveCard(i);
+                  }}
+                  aria-label={`Go to card ${i + 1}`}
+                />
+              ))}
+            </div>
+          </div>
 
           {/* Desktop: grid with 3D core */}
           <motion.div

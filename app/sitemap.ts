@@ -49,12 +49,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
-      url: `${BASE_URL}/hotel-concierge-ai`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
       url: `${BASE_URL}/market-intelligence-engine`,
       lastModified: now,
       changeFrequency: 'weekly',

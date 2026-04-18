@@ -1,46 +1,119 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+/**
+ * AboutCTA — GSAP
+ *
+ * Orb: the blue radial-gradient background breathes (scale oscillates) via
+ *      a custom property animated by GSAP, giving the CTA section a living glow.
+ * Heading: each word sharpens from blur(10px) → blur(0) with a left→right
+ *          stagger — words materialise out of a soft haze as you scroll in.
+ * Body + buttons: clean fadeUp after the heading settles.
+ */
+
 import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionLabel } from './shared/SectionLabel';
 import { MagneticLinkButton } from './shared/MagneticLinkButton';
-import { useMediaQuery } from '@/app/hooks/useMediaQuery';
-import { EASE, fadeUp, fadeLeft, fadeRight } from '@/app/lib/animations';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
+// Split "Ready to Build Your AI Infrastructure?" into words for the blur reveal
+const CTA_WORDS = ['Ready', 'to', 'Build', 'Your', 'AI', 'Infrastructure?'];
 
 interface AboutCTAProps {
   reducedMotion?: boolean;
 }
 
 export function AboutCTA({ reducedMotion = false }: AboutCTAProps) {
-  const ref = useRef<HTMLElement>(null);
-  const isMobile = useMediaQuery('(max-width: 639px)');
-  const margin = isMobile ? '-40px 0px' : '-80px 0px';
-  const inView = useInView(ref, { once: true, margin });
+  const sectionRef  = useRef<HTMLElement>(null);
+  const orbRef      = useRef<HTMLDivElement>(null);
+  const wordRefs    = useRef<(HTMLSpanElement | null)[]>([]);
+  const bodyRef     = useRef<HTMLParagraphElement>(null);
+  const ctaRowRef   = useRef<HTMLDivElement>(null);
+  const badgeRef    = useRef<HTMLParagraphElement>(null);
+
+  useGSAP(() => {
+    if (reducedMotion) {
+      gsap.set(wordRefs.current.filter(Boolean), { opacity: 1, filter: 'blur(0px)', y: 0 });
+      gsap.set([bodyRef.current, ctaRowRef.current, badgeRef.current], { opacity: 1, y: 0 });
+      return;
+    }
+
+    // ── breathing orb ─────────────────────────────────────────────────────
+    if (orbRef.current) {
+      gsap.to(orbRef.current, {
+        '--orb-x': '110%',   // backgroundSize X
+        '--orb-y': '55%',    // backgroundSize Y
+        duration: 3.5,
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
+    }
+
+    // ── heading blur word reveal — GSAP owns opacity/filter/y from before paint
+    const words = wordRefs.current.filter(Boolean) as HTMLSpanElement[];
+    gsap.set(words, { opacity: 0, filter: 'blur(10px)', y: 12 });
+    gsap.to(words, {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
+      duration: 0.7,
+      ease: 'power2.out',
+      stagger: { each: 0.08, from: 'start' },
+      scrollTrigger: { trigger: sectionRef.current, start: 'top 75%', once: true },
+    });
+
+    // ── body copy ─────────────────────────────────────────────────────────
+    gsap.set(bodyRef.current, { opacity: 0, y: 20 });
+    gsap.to(bodyRef.current, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+      scrollTrigger: { trigger: bodyRef.current, start: 'top 85%', once: true },
+      delay: 0.3,
+    });
+
+    // ── CTA buttons + badge ───────────────────────────────────────────────
+    gsap.set([ctaRowRef.current, badgeRef.current], { opacity: 0, y: 16 });
+    gsap.to([ctaRowRef.current, badgeRef.current], {
+      opacity: 1, y: 0, duration: 0.55, ease: 'power2.out', stagger: 0.1,
+      scrollTrigger: { trigger: ctaRowRef.current, start: 'top 88%', once: true },
+    });
+  }, { scope: sectionRef });
 
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       className="about-cta overflow-x-hidden"
-      style={{
-        background: '#121212',
-        backgroundImage:
-          'radial-gradient(ellipse 80% 40% at 50% 0%, rgba(45,91,255,0.05) 0%, transparent 60%)',
-      }}
       aria-labelledby="about-cta-heading"
+      style={{ background: '#121212' }}
     >
-      <div className="section-wrapper">
+      {/* Breathing orb — CSS custom props let us animate gradients without layout cost */}
+      <div
+        ref={orbRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          ['--orb-x' as string]: '80%',
+          ['--orb-y' as string]: '40%',
+          backgroundImage:
+            'radial-gradient(ellipse var(--orb-x) var(--orb-y) at 50% 0%, rgba(45,91,255,0.07) 0%, transparent 65%)',
+        }}
+      />
+
+      <div className="section-wrapper relative">
         <div className="section-inner-max section-inner">
-          <motion.div
+          <div
             style={{
               maxWidth: 'clamp(320px, 55vw, 860px)',
               margin: '0 auto',
               textAlign: 'center',
             }}
-            initial={reducedMotion ? false : { opacity: 0, scale: 0.96 }}
-            animate={inView && !reducedMotion ? { opacity: 1, scale: 1 } : undefined}
-            transition={{ duration: 0.6, ease: EASE }}
           >
             <SectionLabel text="[ LET'S BUILD ]" reducedMotion={reducedMotion} />
+
+            {/* Heading — words blur-reveal individually */}
             <h2
               id="about-cta-heading"
               className="about-heading font-serif font-semibold text-[var(--color-text-primary)]"
@@ -51,39 +124,22 @@ export function AboutCTA({ reducedMotion = false }: AboutCTAProps) {
                 textAlign: 'center',
               }}
             >
-              {isMobile || reducedMotion ? (
-                <motion.span
-                  className="block"
-                  variants={reducedMotion ? undefined : fadeUp}
-                  initial="hidden"
-                  animate={inView ? 'visible' : 'hidden'}
-                >
-                  Ready to Build Your AI Infrastructure?
-                </motion.span>
-              ) : (
-                <>
-                  <motion.span
-                    className="block"
-                    variants={reducedMotion ? undefined : fadeLeft}
-                    initial="hidden"
-                    animate={inView ? 'visible' : 'hidden'}
-                    transition={{ duration: 0.6 }}
+              <span className="flex flex-wrap justify-center gap-x-[0.3em] gap-y-1">
+                {CTA_WORDS.map((word, i) => (
+                  <span
+                    key={i}
+                    ref={el => { wordRefs.current[i] = el; }}
+                    style={{ display: 'inline-block' }}
                   >
-                    Ready to Build Your
-                  </motion.span>
-                  <motion.span
-                    className="block"
-                    variants={reducedMotion ? undefined : fadeRight}
-                    initial="hidden"
-                    animate={inView ? 'visible' : 'hidden'}
-                    transition={{ duration: 0.6, delay: 0.05 }}
-                  >
-                    AI Infrastructure?
-                  </motion.span>
-                </>
-              )}
+                    {word}
+                  </span>
+                ))}
+              </span>
             </h2>
+
+            {/* Body */}
             <p
+              ref={bodyRef}
               className="about-description font-display text-[var(--color-text-secondary)]"
               style={{
                 textAlign: 'center',
@@ -96,7 +152,12 @@ export function AboutCTA({ reducedMotion = false }: AboutCTAProps) {
               If your organization is ready to move from AI experimentation to production-ready AI
               systems, we would like to hear about what you are building.
             </p>
-            <div className="about-block-spacing flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+
+            {/* Buttons */}
+            <div
+              ref={ctaRowRef}
+              className="about-block-spacing flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
+            >
               <MagneticLinkButton
                 href="/contact"
                 primary
@@ -113,15 +174,17 @@ export function AboutCTA({ reducedMotion = false }: AboutCTAProps) {
                 See How We Work
               </MagneticLinkButton>
             </div>
+
+            {/* Compliance badge */}
             <p
+              ref={badgeRef}
               className="about-description text-label flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-mono text-[var(--color-text-micro)] sm:gap-x-4"
               style={{ letterSpacing: '0.06em' }}
-              aria-hidden="true"
             >
-              <span className="text-[var(--color-trust-amber)]">●</span>
-              EU AI Act · GDPR · SOC2 · DPDP
+              <span className="text-[var(--color-trust-amber)]" aria-hidden="true">●</span>
+              <span>EU AI Act · GDPR · SOC 2 · DPDP Act compliant infrastructure</span>
             </p>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

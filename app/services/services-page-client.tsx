@@ -1,9 +1,11 @@
 'use client';
 
-import Script from 'next/script';
-import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import { EASE } from '@/app/lib/animations';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 import { FooterSection, InvisigentLogoSection } from '@/app/components';
 import { MagneticButton } from './components/MagneticButton';
 import { useMediaQuery } from '@/app/hooks/useMediaQuery';
@@ -81,20 +83,6 @@ const ENGAGEMENTS = [
   },
 ] as const;
 
-const PERSONAS = [
-  {
-    title: 'Builders moving to production',
-    body: 'Startups and product teams who have validated their AI idea and need infrastructure that can scale beyond the prototype.',
-  },
-  {
-    title: 'Companies integrating AI into operations',
-    body: 'Established businesses embedding AI into workflows, products, and decision-making — and need systems that actually integrate with what they already run.',
-  },
-  {
-    title: 'Enterprises with compliance requirements',
-    body: 'Organizations in regulated industries or global markets where AI governance, security, and auditability are non-negotiable from the start.',
-  },
-] as const;
 
 function ColLabel({ children, amber }: { children: React.ReactNode; amber?: boolean }) {
   return (
@@ -133,20 +121,36 @@ const SERVICES_CORE_SECTION_ID = 'services-core';
 const SERVICES_HOW_WE_ENGAGE_SECTION_ID = 'services-how-we-engage';
 
 function ServicesHero() {
-  const [phase, setPhase] = useState(0);
-
-  useEffect(() => {
-    const timings = [100, 400, 900, 1400];
-    const timers = timings.map((t, i) => window.setTimeout(() => setPhase(i + 1), t));
-    return () => timers.forEach((id) => window.clearTimeout(id));
-  }, []);
+  const sectionRef = useRef<HTMLElement>(null);
+  const badgeRef   = useRef<HTMLDivElement>(null);
+  const labelRef   = useRef<HTMLDivElement>(null);
+  const h1Ref      = useRef<HTMLHeadingElement>(null);
+  const descRef    = useRef<HTMLParagraphElement>(null);
+  const btnsRef    = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion() ?? false;
 
   const scrollToCoreServices = () => {
     document.getElementById(SERVICES_CORE_SECTION_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  useGSAP(() => {
+    const els = [badgeRef.current, labelRef.current, h1Ref.current, descRef.current, btnsRef.current];
+    if (reducedMotion) {
+      gsap.set(els, { opacity: 1, y: 0 });
+      return;
+    }
+      gsap.set(els, { opacity: 0, y: 20 });
+    const tl = gsap.timeline({ delay: 0.15 });
+    tl.to(badgeRef.current,  { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' })
+      .to(labelRef.current,  { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }, '-=0.15')
+      .to(h1Ref.current,     { opacity: 1, y: 0, duration: 0.75, ease: 'expo.out' }, '-=0.1')
+      .to(descRef.current,   { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.35')
+      .to(btnsRef.current,   { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.25');
+  }, { scope: sectionRef, dependencies: [reducedMotion] });
+
   return (
     <section
+      ref={sectionRef}
       className="relative flex items-center overflow-x-hidden overflow-y-visible"
       style={{ background: '#121212', minHeight: 'calc(100svh - var(--nav-h, 64px))' }}
     >
@@ -177,16 +181,15 @@ function ServicesHero() {
             paddingRight: 'max(1.5rem, 5vw)',
           }}
         >
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: phase >= 1 ? 1 : 0 }}
-            transition={{ duration: 0.4, ease: EASE }}
+          <div
+            ref={badgeRef}
             style={{
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
               gap: '0.5rem',
               marginBottom: '1.5rem',
+              opacity: 0,
             }}
           >
             <span
@@ -209,13 +212,11 @@ function ServicesHero() {
             >
               System · Services Active
             </span>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: phase >= 1 ? 1 : 0 }}
-            transition={{ duration: 0.3, ease: EASE }}
-            style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}
+          <div
+            ref={labelRef}
+            style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem', opacity: 0 }}
           >
             <div
               style={{
@@ -231,12 +232,10 @@ function ServicesHero() {
             >
               [ SERVICES ]
             </div>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: phase >= 2 ? 1 : 0, y: phase >= 2 ? 0 : 24 }}
-            transition={{ duration: 0.8, ease: EASE }}
+          <h1
+            ref={h1Ref}
             style={{
               fontFamily: 'var(--font-serif)',
               fontWeight: 600,
@@ -245,6 +244,7 @@ function ServicesHero() {
               margin: '0 0 1.25rem 0',
               paddingBottom: '0.1em',
               color: 'var(--color-text-primary)',
+              opacity: 0,
             }}
             className="text-[2rem] sm:text-[2.75rem] md:text-[3.25rem] lg:text-[3.75rem] xl:text-[4rem] 2xl:text-[5.5rem] min-[1920px]:text-[7rem]"
           >
@@ -262,12 +262,10 @@ function ServicesHero() {
             >
               Beyond Tools
             </span>
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: phase >= 3 ? 1 : 0, y: phase >= 3 ? 0 : 16 }}
-            transition={{ duration: 0.7, ease: EASE }}
+          <p
+            ref={descRef}
             className="text-sm sm:text-base lg:text-[1.0625rem] 2xl:text-[1.25rem] min-[1920px]:text-[1.625rem]"
             style={{
               maxWidth: 'clamp(400px, 42vw, 960px)',
@@ -275,6 +273,7 @@ function ServicesHero() {
               textAlign: 'center',
               lineHeight: 1.75,
               color: 'var(--color-text-secondary)',
+              opacity: 0,
             }}
           >
             We design and build AI systems that integrate with your infrastructure,
@@ -282,18 +281,16 @@ function ServicesHero() {
             Invisigent delivers AI systems built on LangGraph, Pinecone, FastAPI,
             and your existing stack — not a proprietary platform you&apos;ll be locked
             into forever.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: phase >= 4 ? 1 : 0, y: phase >= 4 ? 0 : 12 }}
-            transition={{ duration: 0.5, ease: EASE }}
-            style={{ display: 'flex', justifyContent: 'center', gap: 'clamp(0.75rem, 1.2vw, 2rem)' }}
+          <div
+            ref={btnsRef}
+            style={{ display: 'flex', justifyContent: 'center', gap: 'clamp(0.75rem, 1.2vw, 2rem)', opacity: 0 }}
             className="flex-col sm:flex-row"
           >
             <MagneticButton primary>Start the Conversation</MagneticButton>
             <MagneticButton onClick={scrollToCoreServices}>Explore Services</MagneticButton>
-          </motion.div>
+          </div>
         </div>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: 'var(--gradient-divider)' }} />
@@ -302,12 +299,65 @@ function ServicesHero() {
 }
 
 function PositioningBlock() {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '0px' });
+  const sectionRef = useRef<HTMLElement>(null);
+  const h2Ref      = useRef<HTMLHeadingElement>(null);
+  const p1Ref      = useRef<HTMLParagraphElement>(null);
+  const p2Ref      = useRef<HTMLParagraphElement>(null);
+  const negRef     = useRef<HTMLDivElement>(null);
+  const quoteRef   = useRef<HTMLParagraphElement>(null);
+  const techRef    = useRef<HTMLParagraphElement>(null);
+  const reducedMotion = useReducedMotion() ?? false;
   const negations = ['No fragile demos.', 'No vendor lock-in.', 'No disconnected automation.'];
 
+  useGSAP(() => {
+    const staticEls = [h2Ref.current, p1Ref.current, p2Ref.current, quoteRef.current, techRef.current];
+    if (reducedMotion) {
+      gsap.set(staticEls, { opacity: 1, x: 0, y: 0 });
+      gsap.set('.neg-dash', { scaleX: 1 });
+      gsap.set('.neg-item', { opacity: 1, x: 0 });
+      return;
+    }
+
+    gsap.set(h2Ref.current, { opacity: 0, x: -32 });
+    gsap.to(h2Ref.current, {
+      opacity: 1, x: 0, duration: 0.7, ease: 'expo.out',
+      scrollTrigger: { trigger: h2Ref.current, start: 'top 85%', once: true },
+    });
+    gsap.set([p1Ref.current, p2Ref.current], { opacity: 0, y: 16 });
+    gsap.to([p1Ref.current, p2Ref.current], {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1,
+      scrollTrigger: { trigger: p1Ref.current, start: 'top 88%', once: true },
+    });
+
+    const negItems = negRef.current?.querySelectorAll<HTMLElement>('.neg-item');
+    const dashes   = negRef.current?.querySelectorAll<HTMLElement>('.neg-dash');
+    if (negItems && dashes) {
+      gsap.set(dashes, { scaleX: 0, transformOrigin: 'left' });
+      gsap.set(negItems, { opacity: 0, x: -24 });
+      ScrollTrigger.batch(negItems, {
+        start: 'top 88%',
+        once: true,
+        onEnter: els => {
+          gsap.to(els,    { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.12 });
+          gsap.to(dashes, { scaleX: 1,         duration: 0.4, ease: 'power2.out', stagger: 0.12 });
+        },
+      });
+    }
+
+    gsap.set(quoteRef.current, { opacity: 0, y: 12 });
+    gsap.to(quoteRef.current, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
+      scrollTrigger: { trigger: quoteRef.current, start: 'top 88%', once: true },
+    });
+    gsap.set(techRef.current, { opacity: 0, y: 12 });
+    gsap.to(techRef.current, {
+      opacity: 1, y: 0, duration: 0.5, ease: 'power2.out',
+      scrollTrigger: { trigger: techRef.current, start: 'top 90%', once: true },
+    });
+  }, { scope: sectionRef, dependencies: [reducedMotion] });
+
   return (
-    <section ref={ref} className="services-positioning-section">
+    <section ref={sectionRef} className="services-positioning-section">
       <div aria-hidden="true" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
         {Array.from({ length: 10 }).map((_, i) => (
           <span
@@ -339,10 +389,8 @@ function PositioningBlock() {
         }}
       >
         <div className="services-positioning-content">
-          <motion.h2
-            initial={{ opacity: 0, x: -32 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, ease: EASE }}
+          <h2
+            ref={h2Ref}
             style={{
               fontFamily: 'var(--font-serif)',
               fontWeight: 600,
@@ -353,12 +401,10 @@ function PositioningBlock() {
             className="text-[2rem] sm:text-[2.5rem] lg:text-[3.25rem] 2xl:text-[4.5rem] min-[1920px]:text-[6rem]"
           >
             Not Tools. Systems.
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.15 }}
+          <p
+            ref={p1Ref}
             style={{
               fontFamily: 'var(--font-display)',
               color: 'var(--color-text-secondary)',
@@ -368,12 +414,10 @@ function PositioningBlock() {
             className="text-sm sm:text-base 2xl:text-[1.125rem] min-[1920px]:text-[1.375rem]"
           >
             Most AI vendors sell tools, dashboards, or wrappers.
-          </motion.p>
+          </p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.25 }}
+          <p
+            ref={p2Ref}
             style={{
               fontFamily: 'var(--font-display)',
               color: 'var(--color-text-secondary)',
@@ -384,28 +428,13 @@ function PositioningBlock() {
           >
             Invisigent builds infrastructure — the systems that connect models, data, and workflows into something your
             organization can actually run.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.12, delayChildren: 0.4 } },
-            }}
-            style={{ marginBottom: '2rem' }}
-          >
+          <div ref={negRef} style={{ marginBottom: '2rem' }}>
             {negations.map((line, i) => (
-              <motion.div
+              <div
                 key={i}
-                variants={{
-                  hidden: { opacity: 0, x: -24 },
-                  visible: {
-                    opacity: 1,
-                    x: 0,
-                    transition: { duration: 0.5, ease: EASE },
-                  },
-                }}
+                className="neg-item"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -414,14 +443,8 @@ function PositioningBlock() {
                   borderBottom: '1px solid var(--color-border)',
                 }}
               >
-                <motion.span
-                  variants={{
-                    hidden: { scaleX: 0 },
-                    visible: {
-                      scaleX: 1,
-                      transition: { duration: 0.4, ease: EASE },
-                    },
-                  }}
+                <span
+                  className="neg-dash"
                   style={{
                     display: 'inline-block',
                     width: 24,
@@ -441,14 +464,12 @@ function PositioningBlock() {
                 >
                   {line}
                 </span>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE, delay: 0.9 }}
+          <p
+            ref={quoteRef}
             style={{
               fontFamily: 'var(--font-serif)',
               fontStyle: 'italic',
@@ -461,12 +482,10 @@ function PositioningBlock() {
             className="text-base sm:text-lg lg:text-[1.25rem] 2xl:text-[1.625rem] min-[1920px]:text-[2.125rem]"
           >
             Only systems designed for production.
-          </motion.p>
+          </p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: EASE, delay: 1.1 }}
+          <p
+            ref={techRef}
             style={{
               fontFamily: 'var(--font-mono)',
               fontSize: 'clamp(10px, 0.65vw, 13px)',
@@ -476,16 +495,234 @@ function PositioningBlock() {
             }}
           >
             Built on: LangGraph · LangSmith · OpenAI API · Cohere · Pinecone · n8n · FastAPI · Node.js · MongoDB · Docker
-          </motion.p>
+          </p>
         </div>
       </div>
     </section>
   );
 }
 
+/** Detail panel shown in the right column of the two-panel layout */
+function ServiceDetail({
+  service,
+  index,
+}: {
+  service: (typeof SERVICES)[number];
+  index: number;
+}) {
+  const cardRef   = useRef<HTMLDivElement>(null);
+  const spotRef   = useRef<HTMLDivElement>(null);
+  const hasHover  = useMediaQuery('(hover: hover)');
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+  const reducedMotion = useReducedMotion() ?? false;
+  const [isHovered, setIsHovered] = useState(false);
+  const rafRef = useRef<number | undefined>(undefined);
+  const isBorderAmber = index % 2 === 0;
+  const accentHex = isBorderAmber ? '#FBBF24' : '#3B82F6';
+  const accentRgb = isBorderAmber ? '251,191,36' : '59,130,246';
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!hasHover || !spotRef.current) return;
+    if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      const rect = cardRef.current?.getBoundingClientRect();
+      if (!rect || !spotRef.current) return;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      spotRef.current.style.background = `radial-gradient(260px circle at ${x}px ${y}px, rgba(${accentRgb},0.07), transparent 72%)`;
+      rafRef.current = undefined;
+    });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => { setIsHovered(true); if (spotRef.current && !reducedMotion) spotRef.current.style.opacity = '1'; }}
+      onMouseLeave={() => { setIsHovered(false); if (spotRef.current) spotRef.current.style.opacity = '0'; }}
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: 16,
+        background: 'rgba(24, 24, 24, 0.85)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        border: `1px solid ${isHovered ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.06)'}`,
+        borderTop: `2px solid ${isHovered ? accentHex : `rgba(${accentRgb},0.7)`}`,
+        padding: 'clamp(1.75rem, 3vw, 5rem)',
+        transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+        boxShadow: isHovered
+          ? `0 12px 48px rgba(0,0,0,0.5), 0 0 0 1px rgba(${accentRgb},0.06)`
+          : '0 4px 16px rgba(0,0,0,0.3)',
+        minHeight: 'clamp(300px, 38vw, 520px)',
+      }}
+    >
+      {/* Ambient gradient */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
+        background: `linear-gradient(135deg, rgba(${accentRgb},0.05) 0%, transparent 55%)`,
+        opacity: isHovered ? 1 : 0.6,
+        transition: 'opacity 0.4s ease',
+      }} />
+
+      {/* Mouse spotlight */}
+      {hasHover && (
+        <div ref={spotRef} aria-hidden="true" style={{
+          position: 'absolute', inset: 0, zIndex: 0, pointerEvents: 'none',
+          opacity: 0,
+          transition: 'opacity 0.3s',
+        }} />
+      )}
+
+      {/* Top shimmer on hover */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', top: 0, left: 0, right: 0, height: 2,
+        overflow: 'hidden', borderRadius: '16px 16px 0 0', zIndex: 0,
+        opacity: isHovered && !reducedMotion ? 1 : 0,
+        transition: 'opacity 0.3s ease', pointerEvents: 'none',
+      }}>
+        <div style={{
+          position: 'absolute', top: 0, left: '-60%', width: '50%', height: '100%',
+          background: `linear-gradient(90deg, transparent, rgba(${accentRgb},0.9), transparent)`,
+          animation: isHovered && !reducedMotion ? 'shimmer-scan 1.8s ease-in-out infinite' : 'none',
+        }} />
+      </div>
+
+      {/* Watermark index */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', bottom: '1rem', right: '1.5rem',
+        fontFamily: "'JetBrains Mono','Courier New',monospace",
+        fontWeight: 700,
+        fontSize: 'clamp(6rem, 10vw, 12rem)',
+        lineHeight: 1,
+        color: `rgba(${accentRgb},${isHovered ? '0.06' : '0.03'})`,
+        transition: 'color 0.4s ease',
+        userSelect: 'none', pointerEvents: 'none', zIndex: 0,
+      }}>
+        {String(index + 1).padStart(2, '0')}
+      </div>
+
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        {/* Label row */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: 'clamp(1rem, 2vw, 3.5rem)' }}>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(10px, 0.6vw, 13px)', color: 'var(--color-text-micro)', letterSpacing: '0.04em' }}>
+            {String(index + 1).padStart(2, '0')} —
+          </span>
+          <span style={{
+            fontFamily: 'var(--font-mono)', fontSize: 'clamp(10px, 0.6vw, 13px)',
+            letterSpacing: '0.1em', textTransform: 'uppercase',
+            color: 'var(--color-text-tertiary)',
+            borderLeft: '1px solid rgba(255,255,255,0.12)', paddingLeft: '0.75rem',
+          }}>
+            {service.label}
+          </span>
+        </div>
+
+        {/* Service name — larger, this is the focus */}
+        <h3
+          style={{ fontFamily: 'var(--font-display)', fontWeight: 600, color: 'var(--color-text-primary)', lineHeight: 1.15, margin: '0 0 clamp(1.5rem, 2.5vw, 5rem) 0' }}
+          className="text-xl sm:text-2xl lg:text-[1.75rem] 2xl:text-[2.25rem] min-[1920px]:text-[2.75rem]"
+        >
+          {service.name}
+        </h3>
+
+        {/* 3-col content grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: isDesktop ? '1fr 1fr 1fr' : '1fr', gap: 0 }}>
+          <div style={{
+            paddingRight: isDesktop ? 'clamp(1.5rem, 1.5vw, 4rem)' : 0,
+            paddingBottom: isDesktop ? 0 : '1rem',
+            borderRight: isDesktop ? SERVICE_GRID_SEP : 'none',
+            borderBottom: isDesktop ? 'none' : SERVICE_GRID_SEP,
+          }}>
+            <ColLabel>When you need it</ColLabel>
+            <ColText>{service.when}</ColText>
+          </div>
+          <div style={{
+            paddingLeft: isDesktop ? 'clamp(1.5rem, 1.5vw, 4rem)' : 0,
+            paddingRight: isDesktop ? 'clamp(1.5rem, 1.5vw, 4rem)' : 0,
+            paddingTop: isDesktop ? 0 : '1rem',
+            paddingBottom: isDesktop ? 0 : '1rem',
+            borderRight: isDesktop ? SERVICE_GRID_SEP : 'none',
+            borderBottom: isDesktop ? 'none' : SERVICE_GRID_SEP,
+          }}>
+            <ColLabel>What we do</ColLabel>
+            <ColText>{service.what}</ColText>
+          </div>
+          <div style={{ paddingLeft: isDesktop ? 'clamp(1.5rem, 1.5vw, 4rem)' : 0, paddingTop: isDesktop ? 0 : '1rem' }}>
+            <ColLabel amber>Outcome</ColLabel>
+            <p style={{
+              fontFamily: 'var(--font-display)', fontWeight: 600,
+              lineHeight: 1.6, margin: 0,
+              fontSize: 'clamp(0.9375rem, 0.95vw, 1.875rem)',
+              color: isBorderAmber ? 'var(--color-trust-amber)' : 'var(--color-link)',
+            }}>
+              {service.outcome}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function ServiceCards() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: '0px' });
+  const sectionRef    = useRef<HTMLElement>(null);
+  const headerRef     = useRef<HTMLDivElement>(null);
+  const navWrapRef    = useRef<HTMLDivElement>(null);
+  const indicatorRef  = useRef<HTMLDivElement>(null);
+  const detailRef     = useRef<HTMLDivElement>(null);
+  const navItemRefs   = useRef<(HTMLButtonElement | null)[]>([]);
+  const isCrossfadeReady = useRef(false);
+  const isIndicatorReady = useRef(false);
+  const [activeIndex, setActiveIndex] = useState(0);       // desktop nav
+  const [mobileOpen, setMobileOpen] = useState<number | null>(0); // mobile accordion
+  const reducedMotion = useReducedMotion() ?? false;
+  const isDesktop = useMediaQuery('(min-width: 768px)');
+
+  // Scroll entrance
+  useGSAP(() => {
+    if (reducedMotion) {
+      gsap.set([headerRef.current, navWrapRef.current, detailRef.current], { opacity: 1, y: 0, x: 0 });
+      return;
+    }
+    gsap.set(headerRef.current, { opacity: 0, y: 24 });
+    gsap.to(headerRef.current, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: headerRef.current, start: 'top 85%', once: true },
+    });
+    const navItems = navWrapRef.current?.querySelectorAll<HTMLElement>('.service-nav-item');
+    if (navItems?.length) {
+      gsap.set(navItems, { opacity: 0, x: -16 });
+      ScrollTrigger.create({
+        trigger: navWrapRef.current,
+        start: 'top 82%', once: true,
+        onEnter: () => gsap.to(navItems, { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out', stagger: 0.055 }),
+      });
+    }
+    gsap.set(detailRef.current, { opacity: 0, x: 20 });
+    gsap.to(detailRef.current, {
+      opacity: 1, x: 0, duration: 0.65, ease: 'power2.out', delay: 0.15,
+      scrollTrigger: { trigger: detailRef.current, start: 'top 85%', once: true },
+    });
+  }, { scope: sectionRef, dependencies: [reducedMotion, isDesktop] });
+
+  // Slide amber indicator to active nav item (desktop only)
+  useEffect(() => {
+    if (!isDesktop) return;
+    const activeEl = navItemRefs.current[activeIndex];
+    if (!activeEl || !indicatorRef.current) return;
+    const dur = isIndicatorReady.current && !reducedMotion ? 0.32 : 0;
+    gsap.to(indicatorRef.current, { y: activeEl.offsetTop, height: activeEl.offsetHeight, duration: dur, ease: 'power2.inOut' });
+    isIndicatorReady.current = true;
+  }, [activeIndex, isDesktop, reducedMotion]);
+
+  // Crossfade detail panel when switching services (skip first mount)
+  useEffect(() => {
+    if (!isCrossfadeReady.current) { isCrossfadeReady.current = true; return; }
+    if (!detailRef.current || reducedMotion) return;
+    gsap.fromTo(detailRef.current, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out' });
+  }, [activeIndex, reducedMotion]);
+
   return (
     <section
       id={SERVICES_CORE_SECTION_ID}
@@ -497,10 +734,8 @@ function ServiceCards() {
       }}
     >
       <div className="section-inner-max">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.7 }}
+        <div
+          ref={headerRef}
           style={{
             textAlign: 'center',
             marginBottom: 'clamp(2rem, 4vw, 9rem)',
@@ -551,309 +786,220 @@ function ServiceCards() {
             <br />
             Here is what we do about it.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'clamp(0.75rem, 1.5vw, 3.5rem)',
-          }}
-        >
-          {SERVICES.map((service, i) => (
-            <ServiceCard key={service.name} service={service} index={i} />
-          ))}
-        </motion.div>
+        {/* ── Two-panel layout ── */}
+        {isDesktop ? (
+          /* Desktop: sticky left nav + right detail panel */
+          <div style={{ display: 'flex', gap: 'clamp(2.5rem, 4vw, 7rem)', alignItems: 'flex-start' }}>
+
+            {/* Left: service navigation list */}
+            <div style={{ flexShrink: 0, width: 'clamp(200px, 26vw, 340px)', position: 'sticky', top: 'calc(var(--nav-h, 64px) + 2rem)' }}>
+              <div ref={navWrapRef} style={{ position: 'relative' }}>
+
+                {/* Sliding amber indicator bar */}
+                <div
+                  ref={indicatorRef}
+                  aria-hidden="true"
+                  style={{
+                    position: 'absolute', left: 0, top: 0,
+                    width: 2, height: 60,
+                    background: 'var(--color-trust-amber)',
+                    borderRadius: 1, zIndex: 0,
+                  }}
+                />
+
+                {SERVICES.map((service, i) => {
+                  const isActive = activeIndex === i;
+                  return (
+                    <button
+                      key={i}
+                      ref={el => { navItemRefs.current[i] = el; }}
+                      className="service-nav-item"
+                      onClick={() => setActiveIndex(i)}
+                      style={{
+                        display: 'block', width: '100%', textAlign: 'left', cursor: 'pointer',
+                        padding: 'clamp(0.75rem, 0.85vw, 1.375rem) clamp(1rem, 1.2vw, 1.75rem)',
+                        paddingLeft: 'clamp(1.25rem, 1.5vw, 2.5rem)',
+                        background: isActive ? 'rgba(251,191,36,0.05)' : 'transparent',
+                        border: 'none', borderRadius: 8,
+                        transition: 'background 0.22s ease',
+                        position: 'relative', zIndex: 1,
+                      }}
+                      onMouseEnter={e => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.03)'; }}
+                      onMouseLeave={e => { if (!isActive) (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; }}
+                    >
+                      <div style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: 'clamp(9px, 0.5vw, 11px)',
+                        letterSpacing: '0.08em',
+                        color: isActive ? 'var(--color-trust-amber)' : 'var(--color-text-micro)',
+                        marginBottom: '0.2rem',
+                        transition: 'color 0.2s ease',
+                      }}>
+                        {String(i + 1).padStart(2, '0')}
+                      </div>
+                      <div style={{
+                        fontFamily: 'var(--font-display)',
+                        fontSize: 'clamp(0.8125rem, 0.85vw, 1.0625rem)',
+                        fontWeight: isActive ? 600 : 400,
+                        color: isActive ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+                        lineHeight: 1.3,
+                        transition: 'color 0.2s ease',
+                      }}>
+                        {service.name}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right: detail panel */}
+            <div ref={detailRef} style={{ flex: 1, minWidth: 0 }}>
+              <ServiceDetail service={SERVICES[activeIndex]} index={activeIndex} />
+            </div>
+          </div>
+        ) : (
+          /* Mobile: accordion list */
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {SERVICES.map((service, i) => {
+              const isOpen = mobileOpen === i;
+              const isBorderAmber = i % 2 === 0;
+              const accentColor = isBorderAmber ? '#FBBF24' : '#3B82F6';
+              const accentRgb   = isBorderAmber ? '251,191,36' : '59,130,246';
+              return (
+                <div
+                  key={i}
+                  style={{
+                    borderBottom: '1px solid rgba(255,255,255,0.07)',
+                    borderTop: i === 0 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                  }}
+                >
+                  {/* Tap row */}
+                  <button
+                    type="button"
+                    aria-expanded={isOpen}
+                    aria-controls={`m-service-${i}`}
+                    onClick={() => setMobileOpen(isOpen ? null : i)}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '0.875rem',
+                      width: '100%', textAlign: 'left',
+                      padding: 'clamp(1rem, 3vw, 1.375rem) 0',
+                      background: 'none', border: 'none', cursor: 'pointer',
+                    }}
+                  >
+                    <span style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.625rem', letterSpacing: '0.08em',
+                      color: isOpen ? accentColor : 'var(--color-text-micro)',
+                      flexShrink: 0, minWidth: '2ch',
+                      transition: 'color 0.2s ease',
+                    }}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <span style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: isOpen ? 600 : 400,
+                      fontSize: 'clamp(0.9375rem, 4vw, 1.125rem)',
+                      color: isOpen ? 'var(--color-text-primary)' : 'var(--color-text-secondary)',
+                      lineHeight: 1.3, flex: 1,
+                      transition: 'color 0.22s ease',
+                    }}>
+                      {service.name}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      style={{
+                        flexShrink: 0, width: 22, height: 22,
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                        color: accentColor, fontSize: 20, lineHeight: 1,
+                        transition: 'transform 0.26s ease',
+                        transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                      }}
+                    >+</span>
+                  </button>
+
+                  {/* Expandable body — always in DOM for crawlers */}
+                  <div
+                    id={`m-service-${i}`}
+                    role="region"
+                    style={{
+                      display: 'grid',
+                      gridTemplateRows: isOpen ? '1fr' : '0fr',
+                      transition: 'grid-template-rows 0.32s ease',
+                    }}
+                  >
+                    <div style={{ overflow: 'hidden' }}>
+                      <div style={{
+                        paddingBottom: 'clamp(1.25rem, 4vw, 2rem)',
+                        borderLeft: `2px solid rgba(${accentRgb},0.4)`,
+                        paddingLeft: '1rem',
+                        marginLeft: 'calc(2ch + 0.875rem)',
+                      }}>
+                        {/* Label */}
+                        <div style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '0.5625rem', letterSpacing: '0.1em',
+                          textTransform: 'uppercase',
+                          color: 'var(--color-text-tertiary)',
+                          marginBottom: '1.125rem',
+                        }}>
+                          {service.label}
+                        </div>
+
+                        {/* When / What / Outcome stacked */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.125rem' }}>
+                          <div>
+                            <ColLabel>When you need it</ColLabel>
+                            <ColText>{service.when}</ColText>
+                          </div>
+                          <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '1.125rem' }}>
+                            <ColLabel>What we do</ColLabel>
+                            <ColText>{service.what}</ColText>
+                          </div>
+                          <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '1.125rem' }}>
+                            <ColLabel amber>Outcome</ColLabel>
+                            <p style={{
+                              fontFamily: 'var(--font-display)', fontWeight: 600,
+                              fontSize: 'clamp(0.9375rem, 4vw, 1.0625rem)',
+                              lineHeight: 1.6, margin: 0,
+                              color: isBorderAmber ? 'var(--color-trust-amber)' : 'var(--color-link)',
+                            }}>
+                              {service.outcome}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
-function ServiceCard({ service, index }: { service: (typeof SERVICES)[number]; index: number }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const hasHover = useMediaQuery('(hover: hover)');
-  const isDesktop = useMediaQuery('(min-width: 768px)');
-  const reducedMotion = useReducedMotion() ?? false;
-  const [spotlight, setSpotlight] = useState({ x: 0, y: 0, active: false });
-  const [isHovered, setIsHovered] = useState(false);
-  const rafRef = useRef<number | undefined>(undefined);
-  const isBorderAmber = index % 2 === 0;
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!hasHover) return;
-    if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
-    rafRef.current = requestAnimationFrame(() => {
-      const rect = cardRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top, active: true });
-      rafRef.current = undefined;
-    });
-  };
-
-  const spotlightTint = isBorderAmber ? 'rgba(251, 191, 36, 0.06)' : 'rgba(45, 91, 255, 0.06)';
-
-  return (
-    <motion.div
-      ref={cardRef}
-      className="service-card"
-      variants={{
-        hidden: { opacity: 0, y: 32 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        setSpotlight((s) => ({ ...s, active: false }));
-      }}
-      whileHover={hasHover && !reducedMotion ? { y: -4, transition: { duration: 0.3, ease: EASE } } : {}}
-      transition={{ duration: 0.3 }}
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-        borderRadius: 12,
-        background: 'rgba(31, 31, 31, 0.75)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        border: `1px solid ${isHovered ? 'rgba(255, 255, 255, 0.12)' : 'rgba(255, 255, 255, 0.06)'}`,
-        borderTop: `2px solid ${
-          isHovered
-            ? isBorderAmber
-              ? '#FBBF24'
-              : '#3B82F6'
-            : isBorderAmber
-              ? 'rgba(251, 191, 36, 0.7)'
-              : 'rgba(45, 91, 255, 0.7)'
-        }`,
-        padding: 'clamp(1.25rem, 2.5vw, 5rem)',
-        transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-        boxShadow: isHovered
-          ? isBorderAmber
-            ? '0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(251, 191, 36, 0.08)'
-            : '0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(45, 91, 255, 0.08)'
-          : '0 2px 8px rgba(0,0,0,0.2)',
-      }}
-    >
-      {/* Hover: top-down gradient */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          zIndex: 0,
-          opacity: isHovered && hasHover && !reducedMotion ? 1 : 0,
-          transition: 'opacity 0.5s ease',
-          background: isBorderAmber
-            ? 'linear-gradient(180deg, rgba(251,191,36,0.04) 0%, transparent 50%)'
-            : 'linear-gradient(180deg, rgba(45,91,255,0.04) 0%, transparent 50%)',
-        }}
-      />
-
-      {/* Mouse spotlight */}
-      {hasHover && (
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            zIndex: 0,
-            pointerEvents: 'none',
-            background: `radial-gradient(180px circle at ${spotlight.x}px ${spotlight.y}px, ${spotlightTint}, transparent 72%)`,
-            opacity: spotlight.active ? 1 : 0,
-            transition: 'opacity 0.3s',
-          }}
-        />
-      )}
-
-      {/* Top-edge shimmer */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 2,
-          overflow: 'hidden',
-          borderRadius: '12px 12px 0 0',
-          zIndex: 0,
-          opacity: isHovered && hasHover && !reducedMotion ? 1 : 0,
-          transition: 'opacity 0.3s ease',
-          pointerEvents: 'none',
-        }}
-      >
-        <div
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: '-60%',
-            width: '50%',
-            height: '100%',
-            background: isBorderAmber
-              ? 'linear-gradient(90deg, transparent, rgba(251,191,36,0.9), transparent)'
-              : 'linear-gradient(90deg, transparent, rgba(59,130,246,0.9), transparent)',
-            animation:
-              isHovered && hasHover && !reducedMotion ? 'shimmer-scan 1.8s ease-in-out infinite' : 'none',
-          }}
-        />
-      </div>
-
-      {/* Watermark */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none select-none text-[4rem] sm:text-[5rem]"
-        style={{
-          position: 'absolute',
-          bottom: '0.5rem',
-          right: '0.75rem',
-          maxWidth: '33%',
-          overflow: 'hidden',
-          fontFamily: "'JetBrains Mono', 'Courier New', monospace",
-          fontWeight: 700,
-          lineHeight: 1,
-          color: isHovered && hasHover && !reducedMotion
-            ? isBorderAmber
-              ? 'rgba(251, 191, 36, 0.07)'
-              : 'rgba(45, 91, 255, 0.07)'
-            : 'rgba(251, 191, 36, 0.03)',
-          transition: 'color 0.4s ease',
-          zIndex: 0,
-        }}
-      >
-        {String(index + 1).padStart(2, '0')}
-      </div>
-
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-            marginBottom: 'clamp(0.75rem, 2vw, 3.5rem)',
-          }}
-        >
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(10px, 0.6vw, 13px)',
-              color: 'var(--color-text-micro)',
-              letterSpacing: '0.04em',
-            }}
-          >
-            {String(index + 1).padStart(2, '0')} —
-          </span>
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 'clamp(10px, 0.6vw, 13px)',
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              color: 'var(--color-text-tertiary)',
-              borderLeft: '1px solid rgba(255,255,255,0.12)',
-              paddingLeft: '0.75rem',
-            }}
-          >
-            {service.label}
-          </span>
-        </div>
-
-        <h3
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 600,
-            color: 'var(--color-text-primary)',
-            lineHeight: 1.2,
-            margin: '0 0 clamp(1rem, 2vw, 4rem) 0',
-          }}
-          className="text-base sm:text-lg lg:text-xl 2xl:text-[1.75rem] min-[1920px]:text-[2.25rem]"
-        >
-          {service.name}
-        </h3>
-
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: isDesktop ? '1fr 1fr 1fr' : '1fr',
-            gap: 0,
-          }}
-        >
-          <div
-            style={{
-              paddingRight: isDesktop ? 'clamp(1.5rem, 1.5vw, 4rem)' : 0,
-              paddingBottom: isDesktop ? 0 : '1rem',
-              borderRight: isDesktop ? SERVICE_GRID_SEP : 'none',
-              borderBottom: isDesktop ? 'none' : SERVICE_GRID_SEP,
-            }}
-          >
-            <ColLabel>When you need it</ColLabel>
-            <ColText>{service.when}</ColText>
-          </div>
-
-          <div
-            style={{
-              paddingLeft: isDesktop ? 'clamp(1.5rem, 1.5vw, 4rem)' : 0,
-              paddingRight: isDesktop ? 'clamp(1.5rem, 1.5vw, 4rem)' : 0,
-              paddingTop: isDesktop ? 0 : '1rem',
-              paddingBottom: isDesktop ? 0 : '1rem',
-              borderRight: isDesktop ? SERVICE_GRID_SEP : 'none',
-              borderBottom: isDesktop ? 'none' : SERVICE_GRID_SEP,
-            }}
-          >
-            <ColLabel>What we do</ColLabel>
-            <ColText>{service.what}</ColText>
-          </div>
-
-          <div
-            style={{
-              paddingLeft: isDesktop ? 'clamp(1.5rem, 1.5vw, 4rem)' : 0,
-              paddingTop: isDesktop ? 0 : '1rem',
-            }}
-          >
-            <ColLabel amber>Outcome</ColLabel>
-            <p
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontWeight: 600,
-                lineHeight: 1.6,
-                margin: 0,
-                fontSize: 'clamp(0.9375rem, 0.95vw, 1.875rem)',
-                color:
-                  isHovered && hasHover
-                    ? isBorderAmber
-                      ? 'var(--color-trust-amber)'
-                      : 'var(--color-link)'
-                    : 'var(--color-text-primary)',
-                transition: 'color 0.4s ease',
-              }}
-            >
-              {service.outcome}
-            </p>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 function EngageCard({ item, index }: { item: (typeof ENGAGEMENTS)[number]; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
+  const spotRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const [spotlight, setSpotlight] = useState({ x: 0, y: 0 });
   const hasHover = useMediaQuery('(hover: hover)');
   const reducedMotion = useReducedMotion() ?? false;
   const rafRef = useRef<number | undefined>(undefined);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!hasHover || !isHovered) return;
+    if (!hasHover || !spotRef.current) return;
     if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(() => {
       const rect = cardRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+      if (!rect || !spotRef.current) return;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      spotRef.current.style.background = `radial-gradient(240px circle at ${x}px ${y}px, rgba(${accentRgb}, 0.07), transparent 70%)`;
       rafRef.current = undefined;
     });
   };
@@ -863,19 +1009,20 @@ function EngageCard({ item, index }: { item: (typeof ENGAGEMENTS)[number]; index
   const accentRgb = isAmber ? '251,191,36' : '45,91,255';
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
-      variants={{
-        hidden: { opacity: 0, y: 32 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
-      }}
+      className="engage-card"
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseEnter={() => {
+        setIsHovered(true);
+        if (spotRef.current && !reducedMotion) spotRef.current.style.opacity = '1';
+        if (cardRef.current && !reducedMotion) gsap.to(cardRef.current, { y: -3, duration: 0.3, ease: 'power2.out' });
+      }}
       onMouseLeave={() => {
         setIsHovered(false);
-        setSpotlight({ x: 0, y: 0 });
+        if (spotRef.current) spotRef.current.style.opacity = '0';
+        if (cardRef.current && !reducedMotion) gsap.to(cardRef.current, { y: 0, duration: 0.3, ease: 'power2.out' });
       }}
-      whileHover={hasHover && !reducedMotion ? { y: -3, transition: { duration: 0.3, ease: EASE } } : {}}
       style={{
         position: 'relative',
         overflow: 'hidden',
@@ -906,15 +1053,15 @@ function EngageCard({ item, index }: { item: (typeof ENGAGEMENTS)[number]; index
 
       {hasHover && (
         <div
+          ref={spotRef}
           aria-hidden="true"
           style={{
             position: 'absolute',
             inset: 0,
             pointerEvents: 'none',
             zIndex: 0,
-            opacity: isHovered && !reducedMotion ? 1 : 0,
+            opacity: 0,
             transition: 'opacity 0.3s ease',
-            background: `radial-gradient(240px circle at ${spotlight.x}px ${spotlight.y}px, rgba(${accentRgb}, 0.07), transparent 70%)`,
           }}
         />
       )}
@@ -993,13 +1140,63 @@ function EngageCard({ item, index }: { item: (typeof ENGAGEMENTS)[number]; index
           {item.body}
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
 function HowToEngage() {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '0px' });
+  const ref          = useRef<HTMLElement>(null);
+  const headerRef    = useRef<HTMLDivElement>(null);
+  const carouselRef  = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion() ?? false;
+  const isDesktop     = useMediaQuery('(min-width: 768px)');
+  const [activeSlide, setActiveSlide] = useState(0);
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
+
+  useGSAP(() => {
+    if (reducedMotion) {
+      gsap.set(headerRef.current, { opacity: 1, y: 0 });
+      if (isDesktop) gsap.set('.engage-card', { opacity: 1, y: 0 });
+      else gsap.set(carouselRef.current, { opacity: 1, y: 0 });
+      return;
+    }
+    gsap.set(headerRef.current, { opacity: 0, y: 24 });
+    gsap.to(headerRef.current, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: headerRef.current, start: 'top 85%', once: true },
+    });
+    if (isDesktop) {
+      gsap.set('.engage-card', { opacity: 0, y: 32 });
+      ScrollTrigger.batch('.engage-card', {
+        start: 'top 88%',
+        once: true,
+        onEnter: batch => gsap.to(batch, {
+          opacity: 1, y: 0, duration: 0.65, ease: 'back.out(1.2)', stagger: 0.12,
+        }),
+      });
+    } else {
+      gsap.set(carouselRef.current, { opacity: 0, y: 32 });
+      gsap.to(carouselRef.current, {
+        opacity: 1, y: 0, duration: 0.65, ease: 'back.out(1.2)',
+        scrollTrigger: { trigger: carouselRef.current, start: 'top 88%', once: true },
+      });
+    }
+  }, { scope: ref, dependencies: [reducedMotion, isDesktop] });
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      if (dx < 0) setActiveSlide(s => Math.min(ENGAGEMENTS.length - 1, s + 1));
+      else        setActiveSlide(s => Math.max(0, s - 1));
+    }
+  };
 
   return (
     <section
@@ -1015,10 +1212,9 @@ function HowToEngage() {
       }}
     >
       <div className="section-inner-max" style={{ margin: '0 auto' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE }}
+        {/* Header */}
+        <div
+          ref={headerRef}
           style={{ marginBottom: 'clamp(2rem, 4vw, 9rem)', textAlign: 'center' }}
         >
           <div
@@ -1063,245 +1259,171 @@ function HowToEngage() {
             Every engagement starts with understanding your environment. From there, we work in one of three ways
             depending on where you are.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
-          }}
-          className="grid grid-cols-1 md:grid-cols-3"
-          style={{ gap: 'clamp(0.75rem, 2vw, 4.5rem)' }}
-        >
-          {ENGAGEMENTS.map((item, i) => (
-            <EngageCard key={item.num} item={item} index={i} />
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
+        {/* Desktop: 3-col grid */}
+        {isDesktop ? (
+          <div
+            className="grid grid-cols-3"
+            style={{ gap: 'clamp(0.75rem, 2vw, 4.5rem)' }}
+          >
+            {ENGAGEMENTS.map((item, i) => (
+              <EngageCard key={item.num} item={item} index={i} />
+            ))}
+          </div>
+        ) : (
+          /* Mobile: carousel */
+          <div>
+            {/*
+              Viewport breaks out of section padding so cards swipe edge-to-edge.
+              Each slide re-applies the padding internally.
+            */}
+            <div
+              ref={carouselRef}
+              style={{
+                overflow: 'hidden',
+                marginLeft: 'calc(-1 * max(1.5rem, 5vw))',
+                marginRight: 'calc(-1 * max(1.5rem, 5vw))',
+              }}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              aria-label="Engagement models carousel"
+            >
+              <div
+                role="list"
+                style={{
+                  display: 'flex',
+                  transform: `translateX(-${activeSlide * 100}%)`,
+                  transition: reducedMotion ? 'none' : 'transform 0.38s cubic-bezier(0.4, 0, 0.2, 1)',
+                }}
+              >
+                {ENGAGEMENTS.map((item, i) => (
+                  <div
+                    key={item.num}
+                    role="listitem"
+                    aria-hidden={activeSlide !== i}
+                    style={{
+                      flex: '0 0 100%',
+                      minWidth: 0,
+                      padding: '0 max(1.5rem, 5vw)',
+                    }}
+                  >
+                    <EngageCard item={item} index={i} />
+                  </div>
+                ))}
+              </div>
+            </div>
 
-function PersonaCard({ persona }: { persona: (typeof PERSONAS)[number] }) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [spotlight, setSpotlight] = useState({ x: 0, y: 0 });
-  const hasHover = useMediaQuery('(hover: hover)');
-  const reducedMotion = useReducedMotion() ?? false;
-  const rafRef = useRef<number | undefined>(undefined);
-
-  const sideBorder = isHovered ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.06)';
-  const leftAccent = isHovered ? '#FBBF24' : 'rgba(251,191,36,0.5)';
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!hasHover || !isHovered) return;
-    if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
-    rafRef.current = requestAnimationFrame(() => {
-      const rect = cardRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-      rafRef.current = undefined;
-    });
-  };
-
-  return (
-    <motion.div
-      ref={cardRef}
-      variants={{
-        hidden: { opacity: 0, y: 28 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        setSpotlight({ x: 0, y: 0 });
-      }}
-      whileHover={hasHover && !reducedMotion ? { y: -3, transition: { duration: 0.3, ease: EASE } } : {}}
-      style={{
-        position: 'relative',
-        overflow: 'hidden',
-        background: 'var(--color-bg-card)',
-        borderTop: `1px solid ${sideBorder}`,
-        borderRight: `1px solid ${sideBorder}`,
-        borderBottom: `1px solid ${sideBorder}`,
-        borderLeft: `2px solid ${leftAccent}`,
-        borderRadius: 12,
-        padding: 'clamp(1.25rem, 2.5vw, 5rem)',
-        boxShadow: isHovered
-          ? '0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(251,191,36,0.08)'
-          : '0 2px 8px rgba(0,0,0,0.2)',
-        transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-      }}
-    >
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          zIndex: 0,
-          opacity: isHovered && !reducedMotion ? 1 : 0,
-          transition: 'opacity 0.5s ease',
-          background: 'linear-gradient(90deg, rgba(251,191,36,0.06) 0%, transparent 50%)',
-        }}
-      />
-
-      {hasHover && (
-        <div
-          aria-hidden="true"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            pointerEvents: 'none',
-            zIndex: 0,
-            opacity: isHovered && !reducedMotion ? 1 : 0,
-            transition: 'opacity 0.3s ease',
-            background: `radial-gradient(220px circle at ${spotlight.x}px ${spotlight.y}px, rgba(251,191,36,0.06), transparent 70%)`,
-          }}
-        />
-      )}
-
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        <h3
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 600,
-            lineHeight: 1.3,
-            margin: '0 0 0.875rem 0',
-            color: isHovered ? '#FFFFFF' : 'var(--color-text-primary)',
-            transition: 'color 0.3s ease',
-          }}
-          className="text-base sm:text-lg 2xl:text-[1.375rem] min-[1920px]:text-[1.875rem]"
-        >
-          {persona.title}
-        </h3>
-
-        <p
-          style={{
-            fontFamily: 'var(--font-display)',
-            lineHeight: 1.7,
-            margin: 0,
-            fontSize: 'clamp(0.875rem, 0.9vw, 1.75rem)',
-            color: isHovered ? 'var(--color-text-secondary)' : '#6B7280',
-            transition: 'color 0.3s ease',
-          }}
-        >
-          {persona.body}
-        </p>
-      </div>
-    </motion.div>
-  );
-}
-
-function WhoWeWorkWith() {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '0px' });
-
-  return (
-    <section
-      ref={ref}
-      style={{
-        background: 'var(--color-bg-primary)',
-        paddingTop: 'clamp(4rem, 7vw, 16rem)',
-        paddingBottom: 'clamp(4rem, 7vw, 16rem)',
-        paddingLeft: 'max(1.5rem, 5vw)',
-        paddingRight: 'max(1.5rem, 5vw)',
-      }}
-    >
-      <div className="section-inner-max" style={{ margin: '0 auto' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE }}
-          style={{
-            textAlign: 'center',
-            marginBottom: 'clamp(2rem, 4vw, 9rem)',
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+            {/* Dot indicators + prev/next */}
             <div
               style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 'clamp(0.625rem, 0.55vw, 0.8125rem)',
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                color: 'var(--color-text-tertiary)',
-                borderLeft: '2px solid var(--color-trust-amber)',
-                paddingLeft: '0.75rem',
-                display: 'inline-block',
-                textAlign: 'left',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '1rem',
+                marginTop: '1.5rem',
               }}
             >
-              [ WHO THIS IS FOR ]
+              <button
+                type="button"
+                aria-label="Previous engagement model"
+                onClick={() => setActiveSlide(s => Math.max(0, s - 1))}
+                style={{
+                  width: 32, height: 32,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  borderRadius: '50%',
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  color: activeSlide === 0 ? 'rgba(255,255,255,0.2)' : 'var(--color-text-secondary)',
+                  cursor: activeSlide === 0 ? 'default' : 'pointer',
+                  transition: 'color 0.2s, background 0.2s',
+                  fontSize: 14, lineHeight: 1,
+                }}
+              >
+                ‹
+              </button>
+
+              <div style={{ display: 'flex', gap: '0.375rem', alignItems: 'center' }}>
+                {ENGAGEMENTS.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setActiveSlide(i)}
+                    aria-label={`Go to slide ${i + 1} of ${ENGAGEMENTS.length}`}
+                    aria-current={activeSlide === i ? 'true' : undefined}
+                    style={{
+                      width: activeSlide === i ? 20 : 7,
+                      height: 7,
+                      borderRadius: 4,
+                      background: activeSlide === i ? 'var(--color-trust-amber)' : 'rgba(255,255,255,0.2)',
+                      border: 'none',
+                      cursor: 'pointer',
+                      padding: 0,
+                      transition: 'width 0.3s ease, background 0.3s ease',
+                    }}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                aria-label="Next engagement model"
+                onClick={() => setActiveSlide(s => Math.min(ENGAGEMENTS.length - 1, s + 1))}
+                style={{
+                  width: 32, height: 32,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  borderRadius: '50%',
+                  background: 'rgba(255,255,255,0.06)',
+                  border: '1px solid rgba(255,255,255,0.1)',
+                  color: activeSlide === ENGAGEMENTS.length - 1 ? 'rgba(255,255,255,0.2)' : 'var(--color-text-secondary)',
+                  cursor: activeSlide === ENGAGEMENTS.length - 1 ? 'default' : 'pointer',
+                  transition: 'color 0.2s, background 0.2s',
+                  fontSize: 14, lineHeight: 1,
+                }}
+              >
+                ›
+              </button>
             </div>
-          </div>
 
-          <h2
-            style={{
-              fontFamily: 'var(--font-serif)',
-              fontWeight: 600,
-              color: 'var(--color-text-primary)',
-              lineHeight: 1.1,
-              margin: 0,
-            }}
-            className="text-[1.75rem] sm:text-[2.25rem] lg:text-[2.75rem] 2xl:text-[3.75rem] min-[1920px]:text-[5rem]"
-          >
-            Who We Work With
-          </h2>
-        </motion.div>
-
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.12, delayChildren: 0.15 } },
-          }}
-          className="grid grid-cols-1 md:grid-cols-3"
-          style={{ gap: 'clamp(0.75rem, 2vw, 4.5rem)' }}
-        >
-          {PERSONAS.map((persona) => (
-            <PersonaCard key={persona.title} persona={persona} />
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-function GlobalBlock() {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '0px' });
-  return (
-    <section ref={ref} className="section-wrapper relative overflow-hidden" style={{ background: '#121212' }}>
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.12]" style={{ backgroundImage: 'radial-gradient(circle, rgba(251,191,36,0.12) 1px, transparent 1px)', backgroundSize: '28px 28px' }} />
-      <div className="section-inner-max relative">
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-5 lg:gap-16">
-          <motion.div initial={{ opacity: 0, x: -32 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7, ease: EASE }} className="lg:col-span-2">
-            <div className="section-label">[ GLOBAL REACH ]</div>
-            <h2 className="mt-4 text-[1.75rem] font-serif font-medium leading-[1.1] text-text-primary sm:text-[2.25rem] lg:text-[2.75rem] 2xl:text-[3.75rem] min-[1920px]:text-[5rem]">Built for Global Enterprise</h2>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 32 }} animate={isInView ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.7, ease: EASE, delay: 0.15 }} className="lg:col-span-3">
-            <p className="text-sm leading-[1.8] text-text-secondary sm:text-base 2xl:text-[1.125rem] min-[1920px]:text-[1.375rem]">
-              Invisigent provides enterprise AI infrastructure consulting, AI automation systems, and agent orchestration architecture for organizations across India, the United States, and Europe. We design scalable AI systems, knowledge retrieval pipelines, and AI-native applications for global businesses building production AI capabilities — with compliance aligned to the EU AI Act, GDPR, and India&apos;s DPDP Act.
+            {/* Step counter */}
+            <p
+              style={{
+                textAlign: 'center',
+                marginTop: '0.75rem',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.625rem',
+                letterSpacing: '0.08em',
+                color: 'var(--color-text-micro)',
+              }}
+            >
+              {activeSlide + 1} / {ENGAGEMENTS.length}
             </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <span className="h-1.5 w-1.5 rounded-full bg-trust-amber" style={{ animation: 'pulse-dot 2s ease-in-out infinite' }} />
-              <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-text-micro">India · United States · Europe</span>
-            </div>
-          </motion.div>
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );
 }
+
 
 function ServicesCTA() {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '0px' });
+  const contentRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion() ?? false;
+
+  useGSAP(() => {
+    const children = contentRef.current ? Array.from(contentRef.current.children) : [];
+    if (!children.length) return;
+    if (reducedMotion) {
+      gsap.set(children, { opacity: 1, y: 0 });
+      return;
+    }
+    gsap.set(children, { opacity: 0, y: 20 });
+    gsap.to(children, {
+      opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1,
+      scrollTrigger: { trigger: contentRef.current, start: 'top 80%', once: true },
+    });
+  }, { scope: ref, dependencies: [reducedMotion] });
 
   return (
     <section
@@ -1325,13 +1447,8 @@ function ServicesCTA() {
         }}
       />
 
-      <div className="services-cta-content">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: EASE }}
-          style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.25rem' }}
-        >
+      <div ref={contentRef} className="services-cta-content">
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.25rem' }}>
           <div
             style={{
               fontFamily: 'var(--font-mono)',
@@ -1346,12 +1463,9 @@ function ServicesCTA() {
           >
             [ LET&apos;S BUILD ]
           </div>
-        </motion.div>
+        </div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
+        <h2
           style={{
             fontFamily: 'var(--font-serif)',
             fontWeight: 600,
@@ -1365,12 +1479,9 @@ function ServicesCTA() {
           Ready to Build AI Systems
           <br />
           That Actually Work?
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.2 }}
+        <p
           style={{
             fontFamily: 'var(--font-display)',
             color: 'var(--color-text-secondary)',
@@ -1383,12 +1494,9 @@ function ServicesCTA() {
         >
           If you are moving beyond AI experiments and want production-ready systems that integrate with how your
           organization actually operates — let&apos;s talk about what you are building.
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.35 }}
+        <div
           style={{
             display: 'flex',
             justifyContent: 'center',
@@ -1467,12 +1575,9 @@ function ServicesCTA() {
           >
             See How We Work
           </button>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.55 }}
+        <div
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -1489,7 +1594,7 @@ function ServicesCTA() {
         >
           <span style={{ color: 'var(--color-trust-amber)', fontSize: 6 }}>●</span>
           EU AI Act · ISO 42001 · GDPR · DPDP Act
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -1505,18 +1610,6 @@ const COMPLIANCE_ITEMS = [
 
 const FAQ_ITEMS = [
   {
-    q: 'What makes Invisigent different from other AI consulting firms?',
-    a: 'We build the infrastructure, not just the strategy deck. Most AI consultancies advise on what to build and hand it back to your team. Invisigent designs, builds, and deploys production AI systems — with monitoring, documentation, and compliance controls included. We also do not lock you into our platform or tooling; everything we build, you own.',
-  },
-  {
-    q: 'How long does a typical engagement take?',
-    a: 'Strategy engagements typically run 2–4 weeks and end with a documented architecture plan. Full system builds range from 6–16 weeks depending on complexity and integration requirements. Ongoing partnerships are scoped quarterly with defined deliverables.',
-  },
-  {
-    q: 'Do you work with organizations that have no existing AI infrastructure?',
-    a: 'Yes — and these are often the best engagements. Starting without legacy AI infrastructure means we can design the right architecture from the beginning rather than working around technical decisions made in a prototype phase. The discovery phase is specifically designed for organizations in this position.',
-  },
-  {
     q: 'Which compliance frameworks do you support?',
     a: 'We design systems aligned with GDPR, India\'s DPDP Act, EU AI Act risk classification requirements, ISO 42001, and SOC2. Compliance architecture is included in every system build — not offered as a separate add-on.',
   },
@@ -1528,7 +1621,29 @@ const FAQ_ITEMS = [
 
 function ComplianceDeepDive() {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '0px' });
+  const headerRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion() ?? false;
+
+  useGSAP(() => {
+    if (reducedMotion) {
+      gsap.set(headerRef.current, { opacity: 1, y: 0 });
+      gsap.set('.compliance-row', { opacity: 1, x: 0 });
+      return;
+    }
+    gsap.set(headerRef.current, { opacity: 0, y: 24 });
+    gsap.to(headerRef.current, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: headerRef.current, start: 'top 85%', once: true },
+    });
+    gsap.set('.compliance-row', { opacity: 0, x: -24 });
+    ScrollTrigger.batch('.compliance-row', {
+      start: 'top 90%',
+      once: true,
+      onEnter: batch => gsap.to(batch, {
+        opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.09,
+      }),
+    });
+  }, { scope: ref, dependencies: [reducedMotion] });
 
   return (
     <section
@@ -1542,10 +1657,8 @@ function ComplianceDeepDive() {
       }}
     >
       <div className="section-inner-max" style={{ margin: '0 auto' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE }}
+        <div
+          ref={headerRef}
           style={{ marginBottom: 'clamp(2rem, 4vw, 9rem)' }}
         >
           <div
@@ -1588,18 +1701,13 @@ function ComplianceDeepDive() {
             separate compliance add-on. No retrofitting controls after your security team flags a
             problem at deployment.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.09, delayChildren: 0.15 } } }}
-          style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vw, 1.5rem)' }}
-        >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(0.5rem, 1vw, 1.5rem)' }}>
           {COMPLIANCE_ITEMS.map((item) => (
-            <motion.div
+            <div
               key={item.code}
-              variants={{ hidden: { opacity: 0, x: -24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: EASE } } }}
+              className="compliance-row"
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'clamp(80px, 10vw, 160px) clamp(80px, 10vw, 140px) 1fr',
@@ -1643,9 +1751,9 @@ function ComplianceDeepDive() {
               >
                 {item.detail}
               </p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -1653,8 +1761,31 @@ function ComplianceDeepDive() {
 
 function ServicesFAQ() {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '0px' });
+  const headerRef = useRef<HTMLDivElement>(null);
+  const itemRefs  = useRef<(HTMLDivElement | null)[]>([]);
   const [open, setOpen] = useState<number | null>(null);
+  const reducedMotion = useReducedMotion() ?? false;
+
+  useGSAP(() => {
+    if (reducedMotion) {
+      gsap.set(headerRef.current, { opacity: 1, y: 0 });
+      gsap.set(itemRefs.current.filter(Boolean), { opacity: 1, y: 0 });
+      return;
+    }
+    gsap.set(headerRef.current, { opacity: 0, y: 24 });
+    gsap.to(headerRef.current, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: headerRef.current, start: 'top 85%', once: true },
+    });
+    itemRefs.current.forEach((item, i) => {
+      if (!item) return;
+      gsap.set(item, { opacity: 0, y: 20 });
+      gsap.to(item, {
+        opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', delay: i * 0.08,
+        scrollTrigger: { trigger: item, start: 'top 90%', once: true },
+      });
+    });
+  }, { scope: ref, dependencies: [reducedMotion] });
 
   return (
     <section
@@ -1668,10 +1799,8 @@ function ServicesFAQ() {
       }}
     >
       <div className="section-inner-max" style={{ margin: '0 auto' }}>
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE }}
+        <div
+          ref={headerRef}
           style={{ marginBottom: 'clamp(2rem, 4vw, 9rem)' }}
         >
           <div
@@ -1701,219 +1830,130 @@ function ServicesFAQ() {
           >
             Common Questions
           </h2>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } } }}
-          style={{ display: 'flex', flexDirection: 'column' }}
-        >
-          {FAQ_ITEMS.map((item, i) => (
-            <motion.div
-              key={i}
-              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } } }}
-              style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}
-            >
-              <button
-                type="button"
-                onClick={() => setOpen(open === i ? null : i)}
-                style={{
-                  display: 'flex',
-                  alignItems: 'flex-start',
-                  justifyContent: 'space-between',
-                  gap: '1.5rem',
-                  width: '100%',
-                  textAlign: 'left',
-                  padding: 'clamp(1rem, 1.5vw, 2rem) 0',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  color: 'var(--color-text-primary)',
-                }}
-                aria-expanded={open === i}
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {FAQ_ITEMS.map((item, i) => {
+            const isOpen = open === i;
+            return (
+              <div
+                key={i}
+                ref={el => { itemRefs.current[i] = el; }}
+                style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}
               >
-                <span
+                <button
+                  type="button"
+                  id={`sfaq-btn-${i}`}
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                  aria-controls={`sfaq-answer-${i}`}
                   style={{
-                    fontFamily: 'var(--font-display)',
-                    fontWeight: 600,
-                    lineHeight: 1.4,
-                    fontSize: 'clamp(0.9375rem, 0.95vw, 1.875rem)',
-                  }}
-                >
-                  {item.q}
-                </span>
-                <span
-                  style={{
-                    flexShrink: 0,
-                    width: 20,
-                    height: 20,
                     display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--color-trust-amber)',
-                    fontSize: 18,
-                    lineHeight: 1,
-                    transition: 'transform 0.25s ease',
-                    transform: open === i ? 'rotate(45deg)' : 'rotate(0deg)',
-                    marginTop: 2,
+                    alignItems: 'flex-start',
+                    justifyContent: 'space-between',
+                    gap: '1.5rem',
+                    width: '100%',
+                    textAlign: 'left',
+                    padding: 'clamp(1rem, 1.5vw, 2rem) 0',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: 'var(--color-text-primary)',
                   }}
-                  aria-hidden="true"
                 >
-                  +
-                </span>
-              </button>
-              {open === i && (
-                <p
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 600,
+                      lineHeight: 1.4,
+                      fontSize: 'clamp(0.9375rem, 0.95vw, 1.875rem)',
+                    }}
+                  >
+                    {item.q}
+                  </span>
+                  <span
+                    style={{
+                      flexShrink: 0,
+                      width: 20,
+                      height: 20,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--color-trust-amber)',
+                      fontSize: 18,
+                      lineHeight: 1,
+                      transition: 'transform 0.25s ease',
+                      transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                      marginTop: 2,
+                    }}
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </button>
+
+                {/*
+                  Answer always in the DOM — SSR-visible for crawlers.
+                  CSS grid-template-rows collapses it visually when closed.
+                */}
+                <div
+                  id={`sfaq-answer-${i}`}
+                  role="region"
+                  aria-labelledby={`sfaq-btn-${i}`}
                   style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 'clamp(0.875rem, 0.9vw, 1.75rem)',
-                    lineHeight: 1.75,
-                    color: 'var(--color-text-secondary)',
-                    paddingBottom: 'clamp(1rem, 1.5vw, 2rem)',
-                    margin: 0,
+                    display: 'grid',
+                    gridTemplateRows: isOpen ? '1fr' : '0fr',
+                    transition: 'grid-template-rows 0.28s ease',
                   }}
                 >
-                  {item.a}
-                </p>
-              )}
-            </motion.div>
-          ))}
-        </motion.div>
+                  <div style={{ overflow: 'hidden' }}>
+                    <p
+                      style={{
+                        fontFamily: 'var(--font-display)',
+                        fontSize: 'clamp(0.875rem, 0.9vw, 1.75rem)',
+                        lineHeight: 1.75,
+                        color: 'var(--color-text-secondary)',
+                        paddingBottom: 'clamp(1rem, 1.5vw, 2rem)',
+                        margin: 0,
+                      }}
+                    >
+                      {item.a}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
 }
 
-function WhoWeWorkWithCTA() {
-  const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: '0px' });
-
-  return (
-    <section
-      ref={ref}
-      style={{
-        background: '#121212',
-        paddingTop: 'clamp(2.5rem, 4vw, 8rem)',
-        paddingBottom: 'clamp(4rem, 7vw, 16rem)',
-        paddingLeft: 'max(1.5rem, 5vw)',
-        paddingRight: 'max(1.5rem, 5vw)',
-        textAlign: 'center',
-      }}
-    >
-      <motion.p
-        initial={{ opacity: 0, y: 16 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6, ease: EASE }}
-        style={{
-          fontFamily: 'var(--font-display)',
-          fontSize: 'clamp(0.875rem, 0.9vw, 1.75rem)',
-          lineHeight: 1.75,
-          color: 'var(--color-text-secondary)',
-          maxWidth: 'clamp(480px, 38vw, 860px)',
-          margin: '0 auto 2rem',
-        }}
-      >
-        Not sure which engagement type fits your situation? Send us a brief description of what you&apos;re building and we&apos;ll tell you how we&apos;d approach it.
-      </motion.p>
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.5, ease: EASE, delay: 0.15 }}
-        style={{ display: 'flex', justifyContent: 'center', gap: 'clamp(0.75rem, 1.2vw, 1.5rem)', flexWrap: 'wrap' }}
-      >
-        <a
-          href="/contact"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 9999,
-            fontFamily: 'var(--font-display)',
-            fontWeight: 500,
-            fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
-            padding: 'clamp(0.75rem, 0.8vw, 1rem) clamp(1.5rem, 2vw, 2.5rem)',
-            whiteSpace: 'nowrap',
-            textDecoration: 'none',
-            background: 'var(--color-btn-bg)',
-            border: '1px solid rgba(255,255,255,0.15)',
-            color: 'var(--color-text-primary)',
-            transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = '#2D5BFF';
-            e.currentTarget.style.boxShadow = '0 0 20px rgba(45,91,255,0.2)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
-            e.currentTarget.style.boxShadow = 'none';
-          }}
-        >
-          Start a Conversation
-        </a>
-        <a
-          href="/about"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            borderRadius: 9999,
-            fontFamily: 'var(--font-display)',
-            fontWeight: 500,
-            fontSize: 'clamp(0.875rem, 0.8vw, 1rem)',
-            padding: 'clamp(0.75rem, 0.8vw, 1rem) clamp(1.5rem, 2vw, 2.5rem)',
-            whiteSpace: 'nowrap',
-            textDecoration: 'none',
-            background: 'transparent',
-            border: '1px solid rgba(255,255,255,0.1)',
-            color: 'var(--color-text-secondary)',
-            transition: 'border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = '#FBBF24';
-            e.currentTarget.style.color = '#FBBF24';
-            e.currentTarget.style.boxShadow = '0 0 16px rgba(251,191,36,0.15)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-            e.currentTarget.style.color = 'var(--color-text-secondary)';
-            e.currentTarget.style.boxShadow = 'none';
-          }}
-        >
-          Learn About Invisigent
-        </a>
-      </motion.div>
-    </section>
-  );
-}
 
 export default function ServicesPageClient() {
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Service',
-    name: 'Enterprise AI Infrastructure Consulting',
-    provider: { '@type': 'Organization', name: 'Invisigent' },
-    description:
-      'Enterprise AI infrastructure consulting, agent orchestration, RAG systems, AI-native product development, and compliance-ready AI for global organizations.',
-  };
-
   return (
     <main className="services-page" style={{ background: '#121212', overflowX: 'clip' }}>
-      <Script id="services-jsonld" type="application/ld+json" strategy="afterInteractive">
-        {JSON.stringify(jsonLd)}
-      </Script>
       <ServicesHero />
       <PositioningBlock />
       <ServiceCards />
-      <ComplianceDeepDive />
       <HowToEngage />
-      <WhoWeWorkWith />
-      <WhoWeWorkWithCTA />
+      <ComplianceDeepDive />
       <ServicesFAQ />
-      <GlobalBlock />
       <ServicesCTA />
       <InvisigentLogoSection />
       <FooterSection />
+
+      {/* GEO — semantic keyword signals for AI search engines */}
+      <div className="sr-only">
+        Enterprise AI infrastructure services. LangGraph agent orchestration consulting.
+        Pinecone RAG knowledge retrieval systems. AI automation with n8n and FastAPI.
+        LangSmith AI observability. Multi-agent AI systems. AI performance optimization.
+        Compliance-ready AI infrastructure. GDPR AI systems. EU AI Act risk classification.
+        DPDP Act India AI compliance. ISO 42001 AI management. SOC2 AI architecture.
+        AI strategy consulting. Production AI deployment. Model-agnostic AI systems.
+        No vendor lock-in AI infrastructure. Enterprise AI consulting India United States Europe.
+      </div>
     </main>
   );
 }

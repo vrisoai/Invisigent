@@ -107,20 +107,31 @@ export function CoreServices() {
     const section = sectionRef.current;
     if (!section) return;
 
+    const isMobile = window.innerWidth < 1280;
+
+    // Kill stale pins BEFORE context so ctx.revert() doesn't undo the cleanup
+    ScrollTrigger.getAll()
+      .filter(st => st.trigger === section || st.pin === section)
+      .forEach(st => st.kill());
+
+    // On mobile: strip any GSAP inline styles the pin may have left on the section
+    if (isMobile) {
+      (['position', 'top', 'left', 'width', 'height', 'transform', 'will-change'] as const)
+        .forEach(p => section.style.removeProperty(p));
+      // Also clear the pin spacer if it still wraps the section
+      const spacer = section.parentElement;
+      if (spacer?.classList.contains('gsap-pin-spacer')) {
+        spacer.replaceWith(section);
+      }
+    }
+
     let pinTrigger: ScrollTrigger | null = null;
     let onWheel: (e: WheelEvent) => void = () => {};
-
-    const isMobile = window.innerWidth < 1280;
 
     const ctx = gsap.context(() => {
       const cards = gsap.utils.toArray<HTMLElement>('.core-services-stack-card', section);
       const total = cards.length;
       if (total === 0) return;
-
-      // Only kill triggers scoped to THIS section, not the whole page
-      ScrollTrigger.getAll()
-        .filter(st => st.trigger === section || st.pin === section)
-        .forEach(st => st.kill());
 
       // Setup all cards hidden below, first card visible
       gsap.set(cards, {
@@ -172,7 +183,6 @@ export function CoreServices() {
           start: 'top top',
           end: `+=${(total - 1) * 100}vh`,
           pin: true,
-          pinnedContainer: section,
           onEnter: () => {
             // Section pinned — release entry lock after short delay
             entryLock = true;
@@ -270,12 +280,13 @@ export function CoreServices() {
       if (!cards.length) return;
 
       // Find the card whose center is closest to the carousel's visible center
-      const carouselCenter = carousel.scrollLeft + carousel.offsetWidth / 2;
+      const cRect = carousel.getBoundingClientRect();
+      const carouselCenter = cRect.left + cRect.width / 2;
       let closestIndex = 0;
       let closestDist = Infinity;
       cards.forEach((card, i) => {
-        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        const dist = Math.abs(cardCenter - carouselCenter);
+        const r = card.getBoundingClientRect();
+        const dist = Math.abs(r.left + r.width / 2 - carouselCenter);
         if (dist < closestDist) {
           closestDist = dist;
           closestIndex = i;

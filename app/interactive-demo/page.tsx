@@ -18,7 +18,6 @@ type Tool = {
 
 /** Standard tool cards with no preview mock (copy + CTA only) */
 const STANDARD_TOOL_IDS_WITHOUT_MOCK = new Set<string>([
-  'hotel-concierge-ai',
   'ecommerce-ai-assistant',
   'market-intelligence-engine',
   'seo-article-generator',
@@ -38,19 +37,6 @@ const TOOLS: Tool[] = [
     cta: 'Generate Report',
     ctaHref: '/search-visibility-analyzer',
     featured: true,
-  },
-  {
-    id: 'hotel-concierge-ai',
-    name: 'Hotel Concierge AI',
-    shortDescription:
-      'AI assistant for hospitality businesses that manages guest interactions, bookings, and recommendations.',
-    capabilities: [
-      '24/7 guest query handling',
-      'Booking and service automation',
-      'Personalized recommendations',
-    ],
-    cta: 'Try Demo',
-    ctaHref: '/hotel-concierge-ai',
   },
   {
     id: 'ecommerce-ai-assistant',

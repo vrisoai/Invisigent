@@ -1,7 +1,11 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { EASE } from '@/app/lib/animations';
+import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 interface GradientDividerProps {
   reducedMotion?: boolean;
@@ -9,13 +13,30 @@ interface GradientDividerProps {
 }
 
 export function GradientDivider({ reducedMotion = false, className = '' }: GradientDividerProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!ref.current) return;
+
+    if (reducedMotion) {
+      gsap.set(ref.current, { scaleX: 1 });
+      return;
+    }
+
+    gsap.set(ref.current, { scaleX: 0 });
+
+    gsap.to(ref.current, {
+      scaleX: 1,
+      duration: 0.9,
+      ease: 'power2.inOut',
+      scrollTrigger: { trigger: ref.current, start: 'top 92%', once: true },
+    });
+  }, { scope: ref });
+
   return (
-    <motion.div
+    <div
+      ref={ref}
       aria-hidden="true"
-      initial={reducedMotion ? false : { scaleX: 0 }}
-      whileInView={reducedMotion ? undefined : { scaleX: 1 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.8, ease: EASE }}
       className={className}
       style={{
         height: 1,

@@ -3,5 +3,7 @@ export { PhilosophySection } from './PhilosophySection';
 export { WhyWeExist } from './WhyWeExist';
 export { HowWeBuild } from './HowWeBuild';
 export { OurFocus } from './OurFocus';
+export { WhoWeWorkWith } from './WhoWeWorkWith';
+export { AboutFAQ } from './AboutFAQ';
 export { GlobalContext } from './GlobalContext';
 export { AboutCTA } from './AboutCTA';

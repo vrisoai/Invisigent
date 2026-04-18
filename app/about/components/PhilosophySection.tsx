@@ -1,11 +1,13 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionLabel } from './shared/SectionLabel';
 import { AnimatedCard } from './shared/AnimatedCard';
-import { useMediaQuery } from '@/app/hooks/useMediaQuery';
-import { EASE, fadeUp, fadeLeft, fadeRight, CARD_FADE } from '@/app/lib/animations';
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const PILLARS = [
   {
@@ -33,22 +35,40 @@ interface PhilosophySectionProps {
 }
 
 export function PhilosophySection({ reducedMotion = false }: PhilosophySectionProps) {
-  const ref = useRef<HTMLElement>(null);
-  const isMobile = useMediaQuery('(max-width: 639px)');
-  const margin = isMobile ? '-40px 0px' : '-80px 0px';
-  const inView = useInView(ref, { once: true, margin });
+  const sectionRef  = useRef<HTMLElement>(null);
+  const headingRef  = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const gridRef     = useRef<HTMLDivElement>(null);
 
-  const cardVariants = (i: number) => {
-    if (reducedMotion) return undefined;
-    if (isMobile) return CARD_FADE;
-    if (i === 0) return fadeLeft;
-    if (i === 1) return fadeRight;
-    return fadeLeft;
-  };
+  useGSAP(() => {
+    const heading  = headingRef.current;
+    const subtitle = subtitleRef.current;
+    if (!heading || !subtitle) return;
+
+    if (reducedMotion) {
+      gsap.set([heading, subtitle], { opacity: 1, y: 0 });
+      return;
+    }
+
+    // gsap.set owns the initial state — runs in useLayoutEffect, before browser paint
+    gsap.set([heading, subtitle], { opacity: 0, y: 24 });
+
+    gsap.to([heading, subtitle], {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: 'expo.out',
+      stagger: 0.1,
+      scrollTrigger: { trigger: heading, start: 'top 85%', once: true },
+    });
+
+    // perspective on card grid for future 3-D effects
+    if (gridRef.current) gsap.set(gridRef.current, { perspective: 900 });
+  }, { scope: sectionRef });
 
   return (
     <section
-      ref={ref}
+      ref={sectionRef}
       id="section-2"
       className="about-philosophy overflow-x-hidden"
       aria-labelledby="about-philosophy-heading"
@@ -57,55 +77,45 @@ export function PhilosophySection({ reducedMotion = false }: PhilosophySectionPr
         <div className="section-inner-max section-inner">
           <div className="text-center">
             <SectionLabel text="[ HOW WE THINK ]" reducedMotion={reducedMotion} />
-            <motion.h2
+
+            <h2
+              ref={headingRef}
               id="about-philosophy-heading"
               className="about-heading text-section-h font-serif font-medium text-[var(--color-text-primary)]"
-              variants={reducedMotion ? undefined : fadeUp}
-              initial="hidden"
-              whileInView={reducedMotion ? undefined : 'visible'}
-              viewport={{ once: true, margin }}
             >
-              Our Philosophy
-            </motion.h2>
-            <motion.p
+              Our Engineering Philosophy
+            </h2>
+
+            <p
+              ref={subtitleRef}
               className="about-description text-body mx-auto max-w-[480px] 2xl:max-w-[640px] min-[2800px]:max-w-[900px] font-display leading-[1.75] text-[var(--color-text-secondary)] text-center"
               style={{ textAlign: 'center' }}
-              variants={reducedMotion ? undefined : fadeUp}
-              initial="hidden"
-              whileInView={reducedMotion ? undefined : 'visible'}
-              viewport={{ once: true, margin }}
-              custom={1}
             >
               Three principles shape how we design every system we build.
-            </motion.p>
+            </p>
           </div>
 
-          <motion.div
+          <div
+            ref={gridRef}
             className="about-philosophy-cards grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6 2xl:gap-8 min-[1920px]:gap-10"
-            variants={
-              reducedMotion
-                ? undefined
-                : { hidden: {}, visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } } }
-            }
-            initial="hidden"
-            animate={inView ? 'visible' : 'hidden'}
           >
             {PILLARS.map((pillar, i) => (
               <AnimatedCard
                 key={pillar.title}
                 topBorder={pillar.topBorder}
                 number={pillar.number}
-                variants={reducedMotion ? undefined : cardVariants(i)}
+                index={i}
+                reducedMotion={reducedMotion}
               >
-                  <h3 className="text-card-title font-display font-semibold text-[var(--color-text-primary)] mb-2 sm:mb-3">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-body font-display leading-[1.7] text-[var(--color-text-secondary)]">
-                    {pillar.body}
-                  </p>
-                </AnimatedCard>
+                <h3 className="text-card-title font-display font-semibold text-[var(--color-text-primary)] mb-2 sm:mb-3">
+                  {pillar.title}
+                </h3>
+                <p className="text-body font-display leading-[1.7] text-[var(--color-text-secondary)]">
+                  {pillar.body}
+                </p>
+              </AnimatedCard>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
