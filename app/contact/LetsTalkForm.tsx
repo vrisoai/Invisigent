@@ -565,8 +565,8 @@ export function LetsTalkForm() {
           {status === 'error' && (
             <p role="alert" className="lets-talk-banner-error">
               Something went wrong. Please try again or email{' '}
-              <a href="mailto:hello@vriso.ai" style={{ color: 'var(--color-action-accent)', textDecoration: 'none' }}>
-                hello@vriso.ai
+              <a href="mailto:hello@invisigent.com" style={{ color: 'var(--color-action-accent)', textDecoration: 'none' }}>
+                hello@invisigent.com
               </a>
             </p>
           )}

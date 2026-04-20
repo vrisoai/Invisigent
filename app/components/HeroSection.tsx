@@ -203,9 +203,8 @@ export function HeroSection() {
               initial="hidden"
               animate="visible"
             >
-              Invisigent builds multi-agent orchestration systems, RAG knowledge pipelines,
-              and production AI infrastructure — model-agnostic, fully auditable, and
-              engineered to pass your security team&apos;s review before handoff.
+              Invisigent is a founder-led AI infrastructure practice. We design multi-agent orchestration systems, RAG knowledge pipelines,
+              and compliance ready AI architecture  and hand you infrastructure your team owns and operates, not a black box you depend on us to maintain.
             </motion.p>
 
             {/* CTA buttons */}

@@ -230,9 +230,6 @@ export function WhyInvisigent() {
             custom={2}
           >
             <p>
-              Most AI projects stall — not because the technology fails, but because the infrastructure wasn&apos;t built for production.
-            </p>
-            <p style={{ marginTop: '1em' }}>
               Invisigent builds AI systems your team owns, your security team approves, and your operations team can actually run at scale.
             </p>
           </motion.div>

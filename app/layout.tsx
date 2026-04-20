@@ -2,6 +2,8 @@
 import type { Metadata } from 'next';
 import { Space_Grotesk, Playfair_Display, JetBrains_Mono } from 'next/font/google';
 import { Navbar } from '@/app/components';
+import { CustomCursor } from '@/app/components/CustomCursor';
+import { ChatbotWidget } from '@/app/components/ChatbotWidget';
 import SchemaOrg from '@/app/components/SchemaOrg';
 import '@/app/styles/globals.css';
 
@@ -103,8 +105,10 @@ export default function RootLayout({
         <SchemaOrg />
       </head>
       <body className="min-h-screen overflow-x-hidden antialiased font-display">
+        <CustomCursor />
         <Navbar />
         {children}
+        <ChatbotWidget />
       </body>
     </html>
   );

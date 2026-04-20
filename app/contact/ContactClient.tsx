@@ -215,11 +215,11 @@ export function ContactClient() {
                 DIRECT LINE
               </p>
               <a
-                href="mailto:hello@vriso.ai"
+                href="mailto:hello@invisigent.com"
                 className="contact-email"
-                aria-label="Email Invisigent at hello@vriso.ai"
+                aria-label="Email Invisigent at hello@invisigent.com"
               >
-                hello@vriso.ai
+                hello@invisigent.com
               </a>
             </div>
 

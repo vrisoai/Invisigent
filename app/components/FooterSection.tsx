@@ -21,7 +21,14 @@ const JSON_LD_PROFESSIONAL_SERVICE = {
 };
 
 const footerColumns = {
-  company: ['Home', 'About', 'Services', 'Insights', 'Contact'],
+  company: [
+    { label: 'Home',             href: '/'                 },
+    { label: 'About',            href: '/about'            },
+    { label: 'Services',         href: '/services'         },
+    { label: 'Insights',         href: '/insights'         },
+    { label: 'Interactive Demo', href: '/interactive-demo' },
+    { label: 'Contact',          href: '/contact'          },
+  ],
 } as const;
 
 export default function FooterSection() {
@@ -84,13 +91,13 @@ export default function FooterSection() {
             <h3 className="vriso-footer-heading">Quick Links</h3>
             <ul className="vriso-footer-list">
               {footerColumns.company.map((item) => (
-                <li key={item}>
+                <li key={item.href}>
                   <a
-                    href={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                    href={item.href}
                     className="vriso-footer-link vriso-footer-link--company"
-                    aria-label={item}
+                    aria-label={item.label}
                   >
-                    {item}
+                    {item.label}
                   </a>
                 </li>
               ))}
@@ -102,11 +109,11 @@ export default function FooterSection() {
             <h3 className="vriso-footer-heading">Contact</h3>
             <div className="vriso-footer-contact-items">
               <a
-                href="mailto:hello@vriso.ai"
+                href="mailto:hello@invisigent.com"
                 className="vriso-footer-email vriso-footer-contact-item"
-                aria-label="Email Invisigent at hello@vriso.ai"
+                aria-label="Email Invisigent at hello@invisigent.com"
               >
-                hello@vriso.ai
+                hello@invisigent.com
               </a>
               <div className="vriso-footer-contact-actions">
                 <a

@@ -13,7 +13,7 @@ import {
   GlobalContext,
   AboutCTA,
 } from '@/app/about/components';
-import { InvisigentLogoSection, FooterSection } from '@/app/components';
+import { InvisigentLogoSection, FooterSection, HowWeWork } from '@/app/components';
 
 /** Native reduced-motion hook — no Framer Motion dependency */
 function useReducedMotion(): boolean {
@@ -84,6 +84,7 @@ export default function AboutPage() {
       </div>
 
       <WhyWeExist      reducedMotion={reducedMotion} />
+      <HowWeWork />
       <HowWeBuild      reducedMotion={reducedMotion} />
       <OurFocus        reducedMotion={reducedMotion} />
       <WhoWeWorkWith   reducedMotion={reducedMotion} />

@@ -7,7 +7,6 @@ import {
   ValueProposition,
   CoreServices,
   WhyInvisigent,
-  HowWeWork,
   StrategicCTASection,
   InvisigentLogoSection,
   FooterSection,
@@ -99,9 +98,6 @@ export default function Home() {
           <HomeOverHeroSlab slab={3}>
             <WhyInvisigent />
           </HomeOverHeroSlab>
-          <HomeOverHeroSlab slab={4}>
-            <HowWeWork />
-          </HomeOverHeroSlab>
           <HomeOverHeroSlab slab={5}>
             <StrategicCTASection />
           </HomeOverHeroSlab>
@@ -172,9 +168,6 @@ export default function Home() {
           </HomeMobileSlab>
           <HomeMobileSlab slab={3}>
             <WhyInvisigent />
-          </HomeMobileSlab>
-          <HomeMobileSlab slab={4}>
-            <HowWeWork />
           </HomeMobileSlab>
           <HomeMobileSlab slab={5}>
             <StrategicCTASection />

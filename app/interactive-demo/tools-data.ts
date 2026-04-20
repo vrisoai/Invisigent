@@ -11,23 +11,22 @@ export type Tool = {
 /** Standard tool cards with no preview mock (copy + CTA only) */
 export const STANDARD_TOOL_IDS_WITHOUT_MOCK = new Set<string>([
   'ecommerce-ai-assistant',
-  'market-intelligence-engine',
-  'seo-article-generator',
+  'search-visibility-analyzer',
 ]);
 
 export const TOOLS: Tool[] = [
   {
-    id: 'search-visibility-analyzer',
-    name: 'Search Visibility Analyzer',
+    id: 'market-intelligence-engine',
+    name: 'Market Intelligence Engine',
     shortDescription:
-      'Analyze your Google rankings, local business visibility, and SEO performance with AI-powered insights.',
+      'AI system that aggregates and analyzes market data to generate actionable insights.',
     capabilities: [
-      'Organic keyword ranking analysis',
-      'Google Business Profile (GMB) visibility insights',
-      'AI-generated SEO recommendations',
+      'News aggregation and analysis',
+      'Trend detection',
+      'Insight generation',
     ],
-    cta: 'Generate Report',
-    ctaHref: '/search-visibility-analyzer',
+    cta: 'Try Demo',
+    ctaHref: '/market-intelligence-engine',
     featured: true,
   },
   {
@@ -44,29 +43,16 @@ export const TOOLS: Tool[] = [
     ctaHref: '/ecommerce-ai-assistant',
   },
   {
-    id: 'market-intelligence-engine',
-    name: 'Market Intelligence Engine',
+    id: 'search-visibility-analyzer',
+    name: 'Search Visibility Analyzer',
     shortDescription:
-      'AI system that aggregates and analyzes market data to generate actionable insights.',
+      'Analyze your Google rankings, local business visibility, and SEO performance with AI-powered insights.',
     capabilities: [
-      'News aggregation and analysis',
-      'Trend detection',
-      'Insight generation',
+      'Organic keyword ranking analysis',
+      'Google Business Profile (GMB) visibility insights',
+      'AI-generated SEO recommendations',
     ],
-    cta: 'Try Demo',
-    ctaHref: '/market-intelligence-engine',
-  },
-  {
-    id: 'seo-article-generator',
-    name: 'SEO Article Generator',
-    shortDescription:
-      'Generate high-quality, keyword-rich articles tailored to your audience. Scale your content production while maintaining consistency and SEO value.',
-    capabilities: [
-      'Audience-tailored, keyword-rich long-form content',
-      'Scaled workflows with consistent tone and structure',
-      'Suitable for bloggers and content teams',
-    ],
-    cta: 'Try Demo',
-    ctaHref: '/seo-article-generator',
+    cta: 'Generate Report',
+    ctaHref: '/search-visibility-analyzer',
   },
 ];

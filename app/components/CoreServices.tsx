@@ -2,20 +2,19 @@
 'use client';
 
 /**
- * Section 3: Core Services (Services section).
- * To change this section, edit:
- *   - app/components/CoreServices.tsx  (layout, cards data, scroll logic)
- *   - app/styles/components.css         (search: "CORE SERVICES" or ".core-services-")
+ * Section 3: Core Services.
+ * Desktop: centered card with GSAP split-direction navigation (arrows + dots).
+ * Mobile:  touch swipe carousel.
  */
 
 import Script from 'next/script';
 import { motion } from 'framer-motion';
-import { useRef, useState, useLayoutEffect } from 'react';
+import { useRef, useState } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { EASE } from '@/app/lib/animations';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP);
 
 const JSON_LD = {
   '@context': 'https://schema.org',
@@ -28,52 +27,31 @@ const JSON_LD = {
     '@type': 'OfferCatalog',
     name: 'Our Services',
     itemListElement: [
-      { '@type': 'Offer', name: 'AI & Technology Strategy Consulting', description: 'Design the right AI architecture for your organization. We help teams plan AI adoption, infrastructure strategy, and scalable automation roadmaps.' },
-      { '@type': 'Offer', name: 'Agent Orchestration & AI Workflows', description: 'Build intelligent multi-agent systems that coordinate tasks, automate complex workflows, and power scalable AI-driven operations.' },
-      { '@type': 'Offer', name: 'RAG & Knowledge Retrieval Systems', description: 'Develop enterprise knowledge systems using Retrieval-Augmented Generation to deliver accurate, context-aware answers from internal data.' },
-      { '@type': 'Offer', name: 'AI Performance & Latency Optimization', description: 'Optimize AI systems for speed, reliability, and cost efficiency by improving inference performance, latency, and infrastructure scalability.' },
-      { '@type': 'Offer', name: 'AI-Native Product Development', description: 'Design and build AI-first applications, copilots, and intelligent platforms that integrate AI directly into user workflows.' },
-      { '@type': 'Offer', name: 'Compliance-Ready AI Systems', description: 'Build AI systems with governance, security, and regulatory compliance aligned with standards like General Data Protection Regulation.' },
+      { '@type': 'Offer', name: 'AI Systems Architecture', description: 'We design the right infrastructure before anything is built. Architecture reviews, roadmap planning, build-vs-buy decisions — senior-level technical guidance from day one.' },
+      { '@type': 'Offer', name: 'Agent Orchestration & Knowledge Systems', description: 'Multi-agent pipelines that run real workflows. RAG retrieval connected to your internal data. Optimized for production latency, cost, and reliability — not demo conditions.' },
+      { '@type': 'Offer', name: 'AI-Native Product & Compliance', description: 'AI-first products, copilots, and intelligent platforms — built with governance, RBAC, audit trails, and regulatory compliance designed in from the first sprint.' },
     ],
   },
 };
 
 const CARDS = [
   {
-    label: '[ AI STRATEGY CONSULTING ]',
-    title: 'AI & Technology Strategy Consulting',
+    label: '[ AI SYSTEMS ARCHITECTURE ]',
+    title: 'AI Systems Architecture',
     description:
-      'Design the right AI architecture for your organization. We help teams plan AI adoption, infrastructure strategy, and scalable automation roadmaps.',
+      'We design the right infrastructure before anything is built. Architecture reviews, roadmap planning, build-vs-buy decisions — senior-level technical guidance from day one.',
   },
   {
-    label: '[ AGENTIC ORCHESTRATION ]',
-    title: 'Agent Orchestration & AI Workflows',
+    label: '[ AGENT ORCHESTRATION & KNOWLEDGE ]',
+    title: 'Agent Orchestration & Knowledge Systems',
     description:
-      'Build intelligent multi-agent systems that coordinate tasks, automate complex workflows, and power scalable AI-driven operations.',
+      'Multi-agent pipelines that run real workflows. RAG retrieval connected to your internal data. Optimized for production latency, cost, and reliability — not demo conditions.',
   },
   {
-    label: '[ RAG KNOWLEDGE SYSTEMS ]',
-    title: 'RAG & Knowledge Retrieval Systems',
+    label: '[ AI-NATIVE PRODUCT & COMPLIANCE ]',
+    title: 'AI-Native Product & Compliance',
     description:
-      'Develop enterprise knowledge systems using Retrieval-Augmented Generation to deliver accurate, context-aware answers from internal data.',
-  },
-  {
-    label: '[ AI PERFORMANCE OPTIMIZATION ]',
-    title: 'AI Performance & Latency Optimization',
-    description:
-      'Optimize AI systems for speed, reliability, and cost efficiency by improving inference performance, latency, and infrastructure scalability.',
-  },
-  {
-    label: '[ AI-NATIVE PRODUCT DEVELOPMENT ]',
-    title: 'AI-Native Product Development',
-    description:
-      'Design and build AI-first applications, copilots, and intelligent platforms that integrate AI directly into user workflows.',
-  },
-  {
-    label: '[ COMPLIANCE-READY AI SYSTEMS ]',
-    title: 'Compliance-Ready AI Systems',
-    description:
-      'Build AI systems with governance, security, and regulatory compliance aligned with standards like General Data Protection Regulation.',
+      'AI-first products, copilots, and intelligent platforms — built with governance, RBAC, audit trails, and regulatory compliance designed in from the first sprint.',
   },
 ];
 
@@ -98,184 +76,136 @@ const NEURAL_EDGES = (() => {
   return result;
 })();
 
+/* ─── Arrow SVGs ─────────────────────────────────────────────────────────── */
+function ArrowLeft() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+      <path d="M14 5L8 11l6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+function ArrowRight() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+      <path d="M8 5l6 6-6 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/* ─── Component ──────────────────────────────────────────────────────────── */
 export function CoreServices() {
-  const sectionRef    = useRef<HTMLElement>(null);
-  const carouselRef   = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  /* Desktop card refs — GSAP updates text directly, no React re-render */
+  const labelRef        = useRef<HTMLParagraphElement>(null);
+  const titleRef        = useRef<HTMLHeadingElement>(null);
+  const descRef         = useRef<HTMLParagraphElement>(null);
+  const currentIndexRef = useRef(0);
+  const animatingRef    = useRef(false);
+  const dotsRef         = useRef<(HTMLButtonElement | null)[]>([]);
+
+  /* Mobile carousel */
+  const carouselRef = useRef<HTMLDivElement>(null);
   const [activeCard, setActiveCard] = useState(0);
-  const touchStartX   = useRef(0);
-  const touchStartY   = useRef(0);
+  const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
 
-  useLayoutEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+  /* Desktop card — 3D tilt target */
+  const cardStageRef = useRef<HTMLElement>(null);
 
-    const isMobile = window.innerWidth < 1280;
+  /* ── Desktop GSAP navigation ─────────────────────────────────────────── */
+  const { contextSafe } = useGSAP({ scope: sectionRef });
 
-    // Kill stale pins BEFORE context so ctx.revert() doesn't undo the cleanup
-    ScrollTrigger.getAll()
-      .filter(st => st.trigger === section || st.pin === section)
-      .forEach(st => st.kill());
+  /* ── 3D tilt on hover (desktop + no-reduced-motion only) ─────────────── */
+  useGSAP(() => {
+    const card = cardStageRef.current;
+    if (!card) return;
 
-    // On mobile: strip any GSAP inline styles the pin may have left on the section
-    if (isMobile) {
-      (['position', 'top', 'left', 'width', 'height', 'transform', 'will-change'] as const)
-        .forEach(p => section.style.removeProperty(p));
-      // Also clear the pin spacer if it still wraps the section
-      const spacer = section.parentElement;
-      if (spacer?.classList.contains('gsap-pin-spacer')) {
-        spacer.replaceWith(section);
+    const MAX_TILT = 14; // degrees
+
+    const mm = gsap.matchMedia();
+    mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
+      function onMove(e: MouseEvent) {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;   // -0.5 → 0.5
+        const y = (e.clientY - rect.top)  / rect.height - 0.5;
+        gsap.to(card, {
+          rotateY:  x * MAX_TILT * 2,
+          rotateX: -y * MAX_TILT * 2,
+          duration: 0.35,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
       }
-    }
-
-    let pinTrigger: ScrollTrigger | null = null;
-    let onWheel: (e: WheelEvent) => void = () => {};
-
-    const ctx = gsap.context(() => {
-      const cards = gsap.utils.toArray<HTMLElement>('.core-services-stack-card', section);
-      const total = cards.length;
-      if (total === 0) return;
-
-      // Setup all cards hidden below, first card visible
-      gsap.set(cards, {
-        position: 'absolute', top: '50%', yPercent: -50,
-        left: 0, right: 0, force3D: true, y: 120, opacity: 0,
-      });
-      gsap.set(cards[0], { y: 0, opacity: 1 });
-
-      let current = 0;
-      let animating = false;
-      let cooldown = false;          // blocks next scroll until cooldown expires
-      let entryLock = true;   // blocks wheel until section is fully pinned
-      let accDelta = 0;              // accumulates trackpad delta
-      let accTimer: ReturnType<typeof setTimeout> | null = null;
-
-      const goTo = (index: number) => {
-        if (index < 0 || index >= total || animating) return;
-        animating = true;
-
-        const outgoing = cards[current];
-        const incoming = cards[index];
-        const direction = index > current ? 1 : -1;
-
-        const tl = gsap.timeline({
-          onComplete: () => {
-            current = index;
-            animating = false;
-          },
+      function onLeave() {
+        gsap.to(card, {
+          rotateY: 0,
+          rotateX: 0,
+          duration: 0.8,
+          ease: 'elastic.out(1, 0.45)',
+          overwrite: 'auto',
         });
-
-        tl.to(outgoing, {
-          y: -120 * direction,
-          opacity: 0,
-          duration: 0.6,
-          ease: 'power3.inOut',
-        });
-        tl.fromTo(
-          incoming,
-          { y: 120 * direction, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: 'power3.inOut' },
-          '-=0.3'
-        );
+      }
+      card.addEventListener('mousemove', onMove);
+      card.addEventListener('mouseleave', onLeave);
+      return () => {
+        card.removeEventListener('mousemove', onMove);
+        card.removeEventListener('mouseleave', onLeave);
       };
+    });
 
-      // Pin section and intercept scroll only on desktop; mobile uses carousel (no pin)
-      if (!isMobile) {
-        pinTrigger = ScrollTrigger.create({
-          trigger: section,
-          start: 'top top',
-          end: `+=${(total - 1) * 100}vh`,
-          pin: true,
-          onEnter: () => {
-            // Section pinned — release entry lock after short delay
-            entryLock = true;
-            setTimeout(() => { entryLock = false; }, 400);
-          },
-          onLeave: () => {
-            cooldown = false;
-            animating = false;
-            entryLock = true; // re-lock for next entry
-          },
-          onEnterBack: () => {
-            // Re-entering from below — reset to last card state
-            entryLock = true;
-            cooldown = false;
-            setTimeout(() => { entryLock = false; }, 400);
-          },
-          onLeaveBack: () => {
-            entryLock = true; // leaving upward — re-lock
-            cooldown = false;
-            animating = false;
-          },
+    return () => mm.revert();
+  }, { scope: sectionRef });
+
+  const doNavigate = contextSafe((nextIndex: number) => {
+    if (animatingRef.current || nextIndex === currentIndexRef.current) return;
+    animatingRef.current = true;
+
+    const direction  = nextIndex > currentIndexRef.current ? 1 : -1;
+    const titleEl    = titleRef.current;
+    const descEl     = descRef.current;
+    const labelEl    = labelRef.current;
+    if (!titleEl || !descEl || !labelEl) { animatingRef.current = false; return; }
+
+    /*
+     * Right arrow (direction = 1):
+     *   out  → title slides LEFT (-x),  desc slides RIGHT (+x)
+     *   in   ← title from LEFT (-x),    desc from RIGHT (+x)
+     * Left arrow (direction = -1): mirrored
+     */
+    const titleX = -380 * direction;
+    const descX  =  380 * direction;
+
+    gsap.timeline({ onComplete: () => { animatingRef.current = false; } })
+      // Animate out
+      .to(titleEl, { x: titleX, opacity: 0, duration: 0.45, ease: 'power2.in' })
+      .to(descEl,  { x: descX,  opacity: 0, duration: 0.45, ease: 'power2.in' }, 0)
+      .to(labelEl, { opacity: 0, duration: 0.3 }, 0)
+      // Swap content at opacity-0 midpoint
+      .call(() => {
+        const card = CARDS[nextIndex];
+        titleEl.textContent = card.title;
+        descEl.textContent  = card.description;
+        labelEl.textContent = card.label;
+        currentIndexRef.current = nextIndex;
+        dotsRef.current.forEach((dot, i) => {
+          if (dot) dot.className = `cs-dot${i === nextIndex ? ' active' : ''}`;
         });
-      }
+      })
+      // Position for entry
+      .set(titleEl, { x: titleX })
+      .set(descEl,  { x: descX  })
+      // Animate in
+      .to(titleEl, { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' })
+      .to(descEl,  { x: 0, opacity: 1, duration: 0.6, ease: 'power3.out' }, '<')
+      .to(labelEl, { opacity: 1, duration: 0.4, ease: 'power2.out' }, '<+=0.08');
+  });
 
-      onWheel = (e: WheelEvent) => {
-        const rect = section.getBoundingClientRect();
-        const inView = rect.top <= 10 && rect.bottom >= window.innerHeight - 10;
-        if (!inView) return;
-        if (entryLock) return;
-
-        const atStart = current === 0 && e.deltaY < 0;
-        const atEnd = current === total - 1 && e.deltaY > 0;
-
-        // At boundaries — release scroll naturally, no preventDefault
-        if (atStart || atEnd) {
-          // Force unpin: nudge scroll position so ScrollTrigger releases
-          if (atEnd && e.deltaY > 0) {
-            // Temporarily disable the wheel listener so page can scroll freely
-            window.removeEventListener('wheel', onWheel);
-            setTimeout(() => {
-              window.addEventListener('wheel', onWheel, { passive: false });
-            }, 800);
-          }
-          return;
-        }
-
-        e.preventDefault();
-        if (animating || cooldown) return;
-
-        accDelta += e.deltaY;
-
-        if (accTimer) clearTimeout(accTimer);
-        accTimer = setTimeout(() => {
-          accDelta = 0;
-        }, 150);
-
-        const THRESHOLD = 30;
-        if (Math.abs(accDelta) < THRESHOLD) return;
-
-        const direction = accDelta > 0 ? 1 : -1;
-        accDelta = 0;
-        if (accTimer) clearTimeout(accTimer);
-        accTimer = null;
-
-        goTo(current + direction);
-
-        cooldown = true;
-        setTimeout(() => {
-          cooldown = false;
-        }, 900);
-      };
-
-      if (!isMobile) {
-        window.addEventListener('wheel', onWheel, { passive: false });
-      }
-    }, sectionRef);
-
-    return () => {
-      if (!isMobile) {
-        window.removeEventListener('wheel', onWheel);
-        pinTrigger?.kill();
-      }
-      ctx.revert();
-    };
-  }, []);
-
+  /* ── Mobile touch ────────────────────────────────────────────────────── */
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
   };
-
   const handleTouchEnd = (e: React.TouchEvent) => {
     const dx = e.changedTouches[0].clientX - touchStartX.current;
     const dy = e.changedTouches[0].clientY - touchStartY.current;
@@ -288,61 +218,120 @@ export function CoreServices() {
   return (
     <section
       ref={sectionRef}
-      className="core-services-section core-services-section--sticky-scroll relative w-full"
+      className="core-services-section"
       aria-labelledby="core-services-heading"
     >
       <Script id="core-services-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(JSON_LD)}
       </Script>
 
-      <div className="core-services-pin">
-        <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          {NEURAL_EDGES.map((e, i) => (
-            <line key={i} x1={`${e.x1}%`} y1={`${e.y1}%`} x2={`${e.x2}%`} y2={`${e.y2}%`} stroke="var(--color-action-accent)" strokeWidth={0.15} opacity={0.12} />
-          ))}
-          {NEURAL_NODES.map((n, i) => (
-            <circle key={i} cx={`${n.x}%`} cy={`${n.y}%`} r={0.3} fill="var(--color-link)" opacity={0.2} />
-          ))}
-        </svg>
+      {/* Neural background */}
+      <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        {NEURAL_EDGES.map((e, i) => (
+          <line key={i} x1={`${e.x1}%`} y1={`${e.y1}%`} x2={`${e.x2}%`} y2={`${e.y2}%`} stroke="var(--color-action-accent)" strokeWidth={0.15} opacity={0.12} />
+        ))}
+        {NEURAL_NODES.map((n, i) => (
+          <circle key={i} cx={`${n.x}%`} cy={`${n.y}%`} r={0.3} fill="var(--color-link)" opacity={0.2} />
+        ))}
+      </svg>
+      <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 55% 50% at 70% 40%, rgba(59,91,219,0.06) 0%, transparent 70%)' }} aria-hidden="true" />
+      <div className="section-grid-overlay" aria-hidden="true" />
 
-        <div className="pointer-events-none absolute inset-0" style={{ background: 'radial-gradient(ellipse 55% 50% at 70% 40%, rgba(59,91,219,0.06) 0%, transparent 70%)' }} aria-hidden="true" />
-        <div className="section-grid-overlay" aria-hidden="true" />
+      <div className="core-services-inner">
 
-        <div className="core-services-layout">
-        <div className="core-services-left">
-          <motion.p className="section-label font-mono" style={{ fontSize: 'clamp(10px, 2.5vw, 14px)', letterSpacing: '0.14em', fontWeight: 500, color: 'var(--color-text-tertiary)' }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, ease: EASE }}>
+        {/* ── Section header ──────────────────────────────────────────── */}
+        <header className="core-services-header">
+          <motion.p
+            className="section-label font-mono"
+            style={{ fontSize: 'clamp(10px, 2.5vw, 14px)', letterSpacing: '0.14em', fontWeight: 500, color: 'var(--color-text-tertiary)' }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, ease: EASE }}
+          >
             [ OUR SERVICES ]
           </motion.p>
-          <motion.h2 id="core-services-heading" className="font-serif" style={{ fontSize: 'clamp(32px, 4vw, 80px)', fontWeight: 500, lineHeight: 1.15, marginTop: 'clamp(20px, 3vw, 28px)', color: 'var(--color-text-primary)' }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, delay: 0.1, ease: EASE }}>
+          <motion.h2
+            id="core-services-heading"
+            className="font-serif"
+            style={{ fontSize: 'clamp(28px, 3.5vw, 72px)', fontWeight: 500, lineHeight: 1.15, marginTop: 'clamp(14px, 2vw, 24px)', color: 'var(--color-text-primary)' }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+          >
             Enterprise AI Systems &amp; Infrastructure
           </motion.h2>
-          <motion.p className="font-serif" style={{ fontSize: 'clamp(15px, 1.3vw, 28px)', lineHeight: 1.7, marginTop: 'clamp(18px, 2.5vw, 28px)', color: 'var(--color-text-secondary)', maxWidth: 680 }} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, delay: 0.2, ease: EASE }}>
+          <motion.p
+            className="font-serif"
+            style={{ fontSize: 'clamp(14px, 1.2vw, 22px)', lineHeight: 1.7, marginTop: 'clamp(12px, 1.5vw, 20px)', color: 'var(--color-text-secondary)', maxWidth: 620 }}
+            initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.6, delay: 0.2, ease: EASE }}
+          >
             Invisigent helps organizations design, build, and scale enterprise AI systems — from architecture strategy and agent orchestration to knowledge retrieval and AI-native product development.
           </motion.p>
-        </div>
+        </header>
 
-        {/* DESKTOP: existing sticky scroll cards — unchanged */}
-        <div className="core-services-cards-column core-services-cards-desktop">
-          {CARDS.map((card, i) => (
-            <article
-              key={card.title}
-              className="core-services-stack-card glass-card"
-              style={{ zIndex: i + 1 }}
-            >
-              <p className="font-mono" style={{ fontSize: 'clamp(9px, 2.2vw, 13px)', letterSpacing: '0.14em', fontWeight: 500, color: 'var(--color-text-micro)', borderLeft: '2px solid var(--color-trust-amber)', paddingLeft: 10 }}>
-                {card.label}
-              </p>
-              <h3 className="font-serif" style={{ fontSize: 'clamp(18px, 1.5vw, 42px)', fontWeight: 600, lineHeight: 1.3, marginTop: 12, color: 'var(--color-text-primary)' }}>
-                {card.title}
-              </h3>
-              <p className="font-serif" style={{ fontSize: 'clamp(14px, 1vw, 28px)', lineHeight: 1.7, marginTop: 10, color: 'var(--color-text-secondary)' }}>
-                {card.description}
-              </p>
+        {/* ── DESKTOP: centered card with arrow navigation ─────────────── */}
+        <div className="core-services-desktop-nav" aria-label="Service navigation">
+          {/* Left arrow */}
+          <button
+            className="cs-arrow-btn"
+            onClick={() => doNavigate((currentIndexRef.current - 1 + CARDS.length) % CARDS.length)}
+            aria-label="Previous service"
+          >
+            <ArrowLeft />
+          </button>
+
+          {/* Card + dots wrapper */}
+          <div className="cs-card-with-dots">
+            <article ref={cardStageRef} className="cs-card-stage glass-card" aria-live="polite" aria-atomic="true">
+              <div className="cs-card-inner">
+                <p
+                  ref={labelRef}
+                  className="font-mono"
+                  style={{ fontSize: 'clamp(9px, 1vw, 12px)', letterSpacing: '0.16em', fontWeight: 500, color: 'var(--color-text-micro)' }}
+                >
+                  {CARDS[0].label}
+                </p>
+                <h3
+                  ref={titleRef}
+                  className="font-serif"
+                  style={{ fontSize: 'clamp(22px, 2.2vw, 42px)', fontWeight: 600, lineHeight: 1.25, color: 'var(--color-text-primary)' }}
+                >
+                  {CARDS[0].title}
+                </h3>
+                <p
+                  ref={descRef}
+                  className="font-serif"
+                  style={{ fontSize: 'clamp(14px, 1.05vw, 20px)', lineHeight: 1.75, color: 'var(--color-text-secondary)' }}
+                >
+                  {CARDS[0].description}
+                </p>
+              </div>
             </article>
-          ))}
+
+            {/* Dot indicators — outside card, below it */}
+            <div className="cs-dots" role="group" aria-label="Service cards">
+              {CARDS.map((card, i) => (
+                <button
+                  key={i}
+                  ref={el => { dotsRef.current[i] = el; }}
+                  className={`cs-dot${i === 0 ? ' active' : ''}`}
+                  onClick={() => doNavigate(i)}
+                  aria-label={`Go to: ${card.title}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Right arrow */}
+          <button
+            className="cs-arrow-btn"
+            onClick={() => doNavigate((currentIndexRef.current + 1) % CARDS.length)}
+            aria-label="Next service"
+          >
+            <ArrowRight />
+          </button>
         </div>
 
-        {/* MOBILE/TABLET: swipe carousel (translateX — no native scroll, no iOS sticking) */}
+        {/* ── MOBILE / TABLET: swipe carousel ──────────────────────────── */}
         <div
           className="core-services-carousel-wrapper"
           onTouchStart={handleTouchStart}
@@ -368,7 +357,6 @@ export function CoreServices() {
             ))}
           </div>
 
-          {/* Dot indicators */}
           <div className="core-services-carousel-dots">
             {CARDS.map((_, i) => (
               <button
@@ -381,50 +369,6 @@ export function CoreServices() {
           </div>
         </div>
 
-        {/* MOBILE: vertical stacked cards list (replaces the swipe carousel) */}
-        <div className="core-services-mobile-stack" aria-label="Core services list">
-          {CARDS.map((card) => (
-            <article key={card.title} className="core-services-mobile-stack-card glass-card" aria-label={card.title}>
-              <p
-                className="font-mono"
-                style={{
-                  fontSize: 'clamp(9px, 2.2vw, 10px)',
-                  letterSpacing: '0.14em',
-                  fontWeight: 500,
-                  color: 'var(--color-text-micro)',
-                  borderLeft: '2px solid var(--color-trust-amber)',
-                  paddingLeft: 10,
-                }}
-              >
-                {card.label}
-              </p>
-              <h3
-                className="font-serif"
-                style={{
-                  fontSize: 'clamp(18px, 5vw, 22px)',
-                  fontWeight: 600,
-                  lineHeight: 1.3,
-                  marginTop: 12,
-                  color: 'var(--color-text-primary)',
-                }}
-              >
-                {card.title}
-              </h3>
-              <p
-                className="font-serif"
-                style={{
-                  fontSize: 'clamp(14px, 4vw, 16px)',
-                  lineHeight: 1.7,
-                  marginTop: 10,
-                  color: 'var(--color-text-secondary)',
-                }}
-              >
-                {card.description}
-              </p>
-            </article>
-          ))}
-        </div>
-      </div>
       </div>
 
       <div className="sr-only">

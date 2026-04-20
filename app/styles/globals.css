@@ -57,6 +57,44 @@ html {
   text-size-adjust: 100%;
 }
 
+/* ── Custom cursor (mouse / fine-pointer devices only) ──────────────────── */
+@media (hover: hover) and (pointer: fine) {
+  * { cursor: none !important; }
+
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* center via negative margin so GSAP x/y = exact mouse coords */
+    margin-left: -5px;
+    margin-top: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-action-accent);
+    box-shadow: 0 0 8px rgba(45, 91, 255, 0.7);
+    pointer-events: none;
+    z-index: 999999;
+    will-change: transform;
+  }
+
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin-left: -20px;
+    margin-top: -20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-trust-amber);
+    background: transparent;
+    pointer-events: none;
+    z-index: 999998;
+    will-change: transform;
+  }
+}
+
 /* ──────────────────────────────────────────────────────────────────────────
  * Homepage: sticky hero cover effect (Hero pinned, Section 2 covers it)
  * ────────────────────────────────────────────────────────────────────────── */
@@ -101,21 +139,13 @@ html {
 .content-over-hero .home-over-hero-slab--3 {
   z-index: 12 !important;
 }
-/* How We Work (slab 4): below Strategic CTA. Do NOT add overflow:hidden here — .how-we-work-section already clips;
- * a second clip on the slab created compositor layers that painted above the following slab in some browsers. */
-.content-over-hero .home-over-hero-slab--4 {
-  z-index: 13 !important;
-}
-
 /* Home: drop backdrop-filter on glass cards in slabs that animate or composite — blur layers cause flicker on mobile */
-.content-over-hero .home-over-hero-slab--4 .glass-card,
 main.home-page .home-mobile-content-sheet .home-mobile-slab--3 .glass-card,
-main.home-page .home-mobile-content-sheet .home-mobile-slab--4 .glass-card,
 main.home-page .home-mobile-content-sheet .home-mobile-slab--5 .glass-card {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
-/* Strategic CTA (slab 5): z-index above How We Work; ::before = solid underlay behind content */
+/* Strategic CTA (slab 5): z-index above WhyInvisigent; ::before = solid underlay behind content */
 .content-over-hero .home-over-hero-slab--5 {
   z-index: 100 !important;
   transform: translate3d(0, 0, 0);

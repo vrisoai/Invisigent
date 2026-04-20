@@ -151,17 +151,31 @@ export function HeroSection({ reducedMotion = false }: HeroSectionProps) {
         </h1>
 
         {/* Description */}
-        <p
+        <div
           ref={descRef}
           className="about-description text-body mx-auto max-w-[600px] 2xl:max-w-[780px] min-[2800px]:max-w-[1100px] font-display leading-[1.75] text-[var(--color-text-secondary)] text-center"
           style={{ textAlign: 'center' }}
         >
-          Invisigent designs production AI systems — multi-agent orchestration architectures, RAG
-          knowledge pipelines, and compliance-ready AI infrastructure — for organizations that need
-          AI systems their teams actually own and operate, not SaaS subscriptions they depend on
-          forever. Built by engineers who have deployed agentic AI systems in production across
-          operations, fintech, and knowledge management environments.
-        </p>
+          <p>
+            Invisigent was built out of a specific frustration: watching organizations spend months
+            building AI systems that collapsed the moment they hit real data, real load, or a real
+            security review.
+          </p>
+          <p style={{ marginTop: '1em' }}>
+            The pattern was always the same. A prototype looked impressive. Then it hit production.
+            The orchestration had no failure handling. The retrieval pipeline hallucinated on edge
+            cases. The compliance team blocked deployment. Six months of work, restarted.
+          </p>
+          <p style={{ marginTop: '1em' }}>
+            Invisigent exists to skip that cycle entirely. We design the infrastructure that
+            survives production before a single agent is built — so that when you deploy, it
+            actually runs.
+          </p>
+          <p style={{ marginTop: '1em' }}>
+            This is a founder-led practice. Every engagement is handled directly, not delegated.
+            That&apos;s a deliberate choice — not a limitation.
+          </p>
+        </div>
 
         {/* Scroll indicator */}
         <div

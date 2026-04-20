@@ -244,12 +244,6 @@ export function ValueProposition() {
             Most AI projects die before they reach production. Not because the model
             was wrong — because the infrastructure holding it together wasn&apos;t built
             for real workloads.
-            <br /><br />
-            Invisigent designs AI systems from the ground up with production constraints
-            in mind: orchestration logic that survives failure, retrieval pipelines that
-            stay accurate at scale, and compliance controls baked into the architecture
-            before the first line of code is written — not added six months later when
-            your security team flags it.
           </motion.p>
         </header>
 

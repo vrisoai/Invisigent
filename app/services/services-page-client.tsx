@@ -22,14 +22,14 @@ const SERVICES = [
     label: '[ AGENTIC ORCHESTRATION ]',
     name: 'Agentic Orchestration & AI Workflows',
     when: 'You want AI systems that automate real workflows, not just generate outputs.',
-    what: 'We build multi-agent systems using LangGraph with LangSmith observability throughout. Supervisor agents, specialist subagents, shared memory layers, tool-calling pipelines — the full orchestration stack, designed for production reliability and full decision traceability.',
+    what: 'We build multi-agent systems using LangGraph with LangSmith observability throughout. Supervisor agents, specialist subagents, shared memory layers, tool-calling pipelines — the full orchestration stack, designed for production reliability and full decision traceability. Built with LangGraph state machines, full LangSmith observability, and defined failure recovery — not just connected API calls.',
     outcome: 'End-to-end automation where AI systems run workflows autonomously — not just assist them. Every decision logged and replayable.',
   },
   {
     label: '[ RAG KNOWLEDGE SYSTEMS ]',
     name: 'RAG & Knowledge Retrieval Systems',
     when: 'Your AI needs access to internal data, documents, or knowledge bases.',
-    what: 'We design retrieval pipelines using Pinecone vector stores, Cohere re-ranking, and chunking strategies tuned for your document types — PDFs, databases, internal wikis, or structured data. Built with sub-3-second retrieval targets and hybrid search for accuracy at scale.',
+    what: 'We design retrieval pipelines using Pinecone vector stores, Cohere re-ranking, and chunking strategies tuned for your document types — PDFs, databases, internal wikis, or structured data. Built with sub-3-second retrieval targets and hybrid search for accuracy at scale. Pinecone vector retrieval with hybrid search, reranking layers, and retrieval trace logging — not a chatbot wrapper over your documents.',
     outcome: 'Context-aware AI responses grounded in your internal data — accurate, fast, and hallucination-resistant.',
   },
   {
@@ -50,7 +50,7 @@ const SERVICES = [
     label: '[ COMPLIANCE-READY AI SYSTEMS ]',
     name: 'Compliance-Ready AI Systems',
     when: 'You are deploying AI in regulated or enterprise environments where governance matters.',
-    what: 'We build AI systems with governance designed into the architecture from day one — not retrofitted at deployment. This means: data residency controls at the vector store layer, RBAC from the first sprint, audit logs that satisfy enterprise security review, and system design aligned with EU AI Act risk classification requirements before a line of code is written.',
+    what: 'We build AI systems with governance designed into the architecture from day one — not retrofitted at deployment. This means: data residency controls at the vector store layer, RBAC from the first sprint, audit logs that satisfy enterprise security review, and system design aligned with EU AI Act risk classification requirements before a line of code is written. RBAC at the orchestration layer, append-only audit logs, data residency controls, and GDPR/DPDP/EU AI Act alignment documented in writing before deployment.',
     outcome: "AI systems that pass your compliance team's review — aligned with EU AI Act, GDPR, India's DPDP Act, ISO 42001, and SOC2. Regulated industry ready.",
   },
   {
