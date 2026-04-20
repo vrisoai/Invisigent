@@ -125,12 +125,15 @@ export function CoreServices() {
 
     const mm = gsap.matchMedia();
     mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
-      if (!card) return;
+      // Capture as a definite HTMLElement so TypeScript doesn't widen back to
+      // HTMLElement | null inside the nested named function declarations below.
+      const el: HTMLElement = card;
+
       function onMove(e: MouseEvent) {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;   // -0.5 → 0.5
+        const rect = el.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top)  / rect.height - 0.5;
-        gsap.to(card, {
+        gsap.to(el, {
           rotateY:  x * MAX_TILT * 2,
           rotateX: -y * MAX_TILT * 2,
           duration: 0.35,
@@ -139,7 +142,7 @@ export function CoreServices() {
         });
       }
       function onLeave() {
-        gsap.to(card, {
+        gsap.to(el, {
           rotateY: 0,
           rotateX: 0,
           duration: 0.8,
@@ -147,11 +150,11 @@ export function CoreServices() {
           overwrite: 'auto',
         });
       }
-      card.addEventListener('mousemove', onMove);
-      card.addEventListener('mouseleave', onLeave);
+      el.addEventListener('mousemove', onMove);
+      el.addEventListener('mouseleave', onLeave);
       return () => {
-        card.removeEventListener('mousemove', onMove);
-        card.removeEventListener('mouseleave', onLeave);
+        el.removeEventListener('mousemove', onMove);
+        el.removeEventListener('mouseleave', onLeave);
       };
     });
 
