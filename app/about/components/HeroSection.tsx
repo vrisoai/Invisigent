@@ -161,15 +161,12 @@ export function HeroSection({ reducedMotion = false }: HeroSectionProps) {
           style={{ lineHeight: 'clamp(1.55, 2.5svh, 1.75)' }}
         >
           <p>
-            Most AI systems look great in demos. Then they hit production — and collapse under real
-            data, real load, or a real security review.
+            Most AI prototypes look impressive — until they hit production. No failure handling,
+            hallucinations on edge cases, compliance blocks. Months of work, restarted.
           </p>
           <p style={{ marginTop: 'clamp(0.5em, 1.5svh, 1em)' }}>
-            Invisigent exists to skip that cycle. We design the infrastructure that survives
-            production before a single agent is built — so that when you deploy, it actually runs.
-          </p>
-          <p style={{ marginTop: 'clamp(0.5em, 1.5svh, 1em)' }}>
-            Founder-led. Every engagement handled directly, not delegated — by design.
+            Invisigent designs the infrastructure that survives production before a single agent
+            is built. Founder-led — every engagement handled directly, not delegated.
           </p>
         </div>
 
