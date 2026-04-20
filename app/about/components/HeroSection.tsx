@@ -98,9 +98,13 @@ export function HeroSection({ reducedMotion = false }: HeroSectionProps) {
   return (
     <section
       ref={sectionRef}
-      className="about-hero flex min-h-0 w-full flex-col items-center justify-center overflow-x-clip px-4 py-16 sm:px-[var(--section-px)] sm:py-24"
+      className="about-hero flex min-h-0 w-full flex-col items-center justify-center overflow-x-clip px-4 sm:px-[var(--section-px)]"
       style={{
         height: '100%',
+        /* svh-based padding shrinks on short laptop screens instead of
+           overflowing the fixed 88svh sticky container */
+        paddingTop:    'clamp(1.25rem, 4svh, 4rem)',
+        paddingBottom: 'clamp(1.25rem, 4svh, 4rem)',
         background: 'var(--color-bg-primary)',
         backgroundImage:
           'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(45,91,255,0.06) 0%, transparent 60%)',
@@ -153,25 +157,25 @@ export function HeroSection({ reducedMotion = false }: HeroSectionProps) {
         {/* Description */}
         <div
           ref={descRef}
-          className="about-description text-body mx-auto max-w-[600px] 2xl:max-w-[780px] min-[2800px]:max-w-[1100px] font-display leading-[1.75] text-[var(--color-text-secondary)] text-center"
-          style={{ textAlign: 'center' }}
+          className="about-description text-body mx-auto max-w-[600px] 2xl:max-w-[780px] min-[2800px]:max-w-[1100px] font-display text-[var(--color-text-secondary)] text-left"
+          style={{ lineHeight: 'clamp(1.55, 2.5svh, 1.75)' }}
         >
           <p>
             Invisigent was built out of a specific frustration: watching organizations spend months
             building AI systems that collapsed the moment they hit real data, real load, or a real
             security review.
           </p>
-          <p style={{ marginTop: '1em' }}>
+          <p style={{ marginTop: 'clamp(0.5em, 1.5svh, 1em)' }}>
             The pattern was always the same. A prototype looked impressive. Then it hit production.
             The orchestration had no failure handling. The retrieval pipeline hallucinated on edge
             cases. The compliance team blocked deployment. Six months of work, restarted.
           </p>
-          <p style={{ marginTop: '1em' }}>
+          <p style={{ marginTop: 'clamp(0.5em, 1.5svh, 1em)' }}>
             Invisigent exists to skip that cycle entirely. We design the infrastructure that
             survives production before a single agent is built — so that when you deploy, it
             actually runs.
           </p>
-          <p style={{ marginTop: '1em' }}>
+          <p style={{ marginTop: 'clamp(0.5em, 1.5svh, 1em)' }}>
             This is a founder-led practice. Every engagement is handled directly, not delegated.
             That&apos;s a deliberate choice — not a limitation.
           </p>
