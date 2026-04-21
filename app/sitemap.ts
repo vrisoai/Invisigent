@@ -60,11 +60,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.6,
     },
-    {
-      url: `${BASE_URL}/seo-article-generator`,
-      lastModified: now,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
   ];
 }

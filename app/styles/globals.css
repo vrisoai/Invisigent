@@ -1787,169 +1787,7 @@ main.market-intelligence-page {
   padding-top: 0.25rem;
 }
 
-/* SEO Article Generator — page layout + form (tokens only) */
-main.seo-article-generator-page {
-  min-height: 100vh;
-  min-height: 100dvh;
-  background-color: var(--color-bg-primary);
-  display: flex;
-  flex-direction: column;
-}
-
-/* Override section-wrapper's huge --section-py; keep its horizontal safe-area padding */
-.seo-article-generator-page .seo-article-generator-page-inner {
-  flex: 1 1 auto;
-  padding-top: clamp(3rem, 8vw, 5rem) !important;
-  padding-bottom: clamp(3rem, 8vw, 5rem) !important;
-  display: flex;
-  align-items: center;
-}
-
-/* Single-column default: narrow + centered */
-.seo-article-generator-page-grid {
-  display: grid;
-  gap: clamp(1.75rem, 4vw, 3rem);
-  width: 100%;
-  max-width: 38rem;
-  margin: 0 auto;
-  align-items: start;
-}
-
-/* Two-column on desktop: wider max-width */
-@media (min-width: 1024px) {
-  .seo-article-generator-page-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-    max-width: 72rem;
-    align-items: center;
-  }
-}
-
-/* Intro: full-width on single-column, constrained on desktop */
-.seo-article-generator-page .seo-article-generator-page-intro {
-  width: 100%;
-}
-
-@media (min-width: 1024px) {
-  .seo-article-generator-page .seo-article-generator-page-intro {
-    max-width: 36rem;
-  }
-}
-
-/* Center-align intro text on mobile/tablet */
-@media (max-width: 1023px) {
-  .seo-article-generator-page .seo-article-generator-page-intro {
-    text-align: center;
-  }
-
-  .seo-article-generator-page .seo-article-generator-page-lede {
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-.seo-article-generator-page .seo-article-generator-page-eyebrow {
-  margin-bottom: 0.75rem;
-  letter-spacing: 0.14em;
-}
-
-.seo-article-generator-page .seo-article-generator-card.glass-card {
-  box-sizing: border-box;
-  width: 100%;
-  padding: clamp(1.35rem, 3.2vw, 2rem);
-}
-
-.seo-article-generator-form {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.25rem, 2.5vw, 1.75rem);
-}
-
-.seo-article-generator-field-label {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(0.8125rem, 0.9vw + 0.65rem, 0.9375rem);
-  font-weight: 600;
-  color: var(--color-text-primary);
-  margin-bottom: 0.35rem;
-}
-
-.seo-article-generator-field-hint {
-  font-family: var(--font-display);
-  font-size: clamp(0.75rem, 0.5vw + 0.65rem, 0.8125rem);
-  color: var(--color-text-tertiary);
-  line-height: 1.45;
-  margin: 0 0 0.5rem;
-}
-
-.seo-article-generator-input {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 0.65rem 0.85rem;
-  font-family: var(--font-display);
-  font-size: clamp(0.875rem, 0.5vw + 0.75rem, 1rem);
-  line-height: 1.4;
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-card);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  transition: border-color 200ms ease, box-shadow 200ms ease;
-}
-
-.seo-article-generator-input::placeholder {
-  color: var(--color-text-tertiary);
-}
-
-.seo-article-generator-input:hover:not(:disabled) {
-  border-color: var(--color-btn-hover-border);
-}
-
-.seo-article-generator-input:focus {
-  outline: none;
-}
-
-.seo-article-generator-input:focus-visible {
-  outline: 2px solid var(--color-action-accent);
-  outline-offset: 2px;
-  border-color: var(--color-action-accent);
-}
-
-.seo-article-generator-input:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-
-.seo-article-generator-actions {
-  margin-top: 0.25rem;
-  padding-top: 0.25rem;
-}
-
-/* Center the submit button on mobile/tablet */
-@media (max-width: 1023px) {
-  .seo-article-generator-actions {
-    display: flex;
-    justify-content: center;
-  }
-}
-
-/* Tiny screens: tighten vertical padding */
-@media (max-width: 380px) {
-  .seo-article-generator-page .seo-article-generator-page-inner {
-    padding-top: 2rem !important;
-    padding-bottom: 2rem !important;
-  }
-}
-
-/* Landscape phones: reduce vertical padding to avoid overflow */
-@media (max-height: 520px) and (orientation: landscape) {
-  .seo-article-generator-page .seo-article-generator-page-inner {
-    padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
-    align-items: flex-start;
-  }
-}
-
-/* Hotel Concierge + E-commerce assistant — chat demo layouts (tokens only) */
-main.hotel-concierge-page,
+/* E-commerce assistant — chat demo layout (tokens only) */
 main.ecommerce-assistant-page {
   min-height: 100vh;
   min-height: 100dvh;
@@ -1958,14 +1796,12 @@ main.ecommerce-assistant-page {
   flex-direction: column;
 }
 
-.hotel-concierge-page .hotel-concierge-page-inner,
 .ecommerce-assistant-page .ecommerce-assistant-page-inner {
   flex: 1 1 auto;
   padding-top: clamp(3rem, 8vw, 5rem);
   padding-bottom: clamp(3rem, 8vw, 5rem);
 }
 
-.hotel-concierge-page-grid,
 .ecommerce-assistant-page-grid {
   display: grid;
   gap: clamp(2rem, 4vw, 3.5rem);
@@ -1975,24 +1811,20 @@ main.ecommerce-assistant-page {
 }
 
 @media (min-width: 1024px) {
-  .hotel-concierge-page-grid,
   .ecommerce-assistant-page-grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
   }
 }
 
-.hotel-concierge-page .hotel-concierge-page-intro,
 .ecommerce-assistant-page .ecommerce-assistant-page-intro {
   max-width: 36rem;
 }
 
-.hotel-concierge-page .hotel-concierge-page-eyebrow,
 .ecommerce-assistant-page .ecommerce-assistant-page-eyebrow {
   margin-bottom: 0.75rem;
   letter-spacing: 0.14em;
 }
 
-.hotel-concierge-page .hotel-concierge-chat-card.glass-card,
 .ecommerce-assistant-page .ecommerce-assistant-chat-card.glass-card {
   box-sizing: border-box;
   width: 100%;
@@ -2002,7 +1834,6 @@ main.ecommerce-assistant-page {
   flex-direction: column;
 }
 
-.hotel-concierge-chat,
 .ecommerce-assistant-chat {
   display: flex;
   flex-direction: column;
@@ -2011,12 +1842,10 @@ main.ecommerce-assistant-page {
   gap: 1rem;
 }
 
-.hotel-concierge-chat-head,
 .ecommerce-assistant-chat-head {
   flex-shrink: 0;
 }
 
-.hotel-concierge-chat-log,
 .ecommerce-assistant-chat-log {
   flex: 1 1 auto;
   min-height: 12rem;
@@ -2030,7 +1859,6 @@ main.ecommerce-assistant-page {
   scroll-behavior: smooth;
 }
 
-.hotel-concierge-chat-list,
 .ecommerce-assistant-chat-list {
   list-style: none;
   margin: 0;
@@ -2040,23 +1868,19 @@ main.ecommerce-assistant-page {
   gap: 0.75rem;
 }
 
-.hotel-concierge-chat-row,
 .ecommerce-assistant-chat-row {
   display: flex;
   width: 100%;
 }
 
-.hotel-concierge-chat-row--user,
 .ecommerce-assistant-chat-row--user {
   justify-content: flex-end;
 }
 
-.hotel-concierge-chat-row--assistant,
 .ecommerce-assistant-chat-row--assistant {
   justify-content: flex-start;
 }
 
-.hotel-concierge-bubble,
 .ecommerce-assistant-bubble {
   max-width: min(100%, 26rem);
   padding: 0.65rem 0.85rem;
@@ -2067,21 +1891,18 @@ main.ecommerce-assistant-page {
   word-break: break-word;
 }
 
-.hotel-concierge-bubble--assistant,
 .ecommerce-assistant-bubble--assistant {
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   color: var(--color-text-secondary);
 }
 
-.hotel-concierge-bubble--user,
 .ecommerce-assistant-bubble--user {
   background: var(--color-action-accent);
   border: 1px solid transparent;
   color: #ffffff;
 }
 
-.hotel-concierge-chat-composer,
 .ecommerce-assistant-chat-composer {
   flex-shrink: 0;
   display: flex;
@@ -2090,14 +1911,12 @@ main.ecommerce-assistant-page {
 }
 
 @media (min-width: 640px) {
-  .hotel-concierge-chat-composer,
   .ecommerce-assistant-chat-composer {
     flex-direction: row;
     align-items: flex-end;
   }
 }
 
-.hotel-concierge-chat-input,
 .ecommerce-assistant-chat-input {
   box-sizing: border-box;
   flex: 1 1 auto;
@@ -2115,42 +1934,35 @@ main.ecommerce-assistant-page {
   transition: border-color 200ms ease;
 }
 
-.hotel-concierge-chat-input::placeholder,
 .ecommerce-assistant-chat-input::placeholder {
   color: var(--color-text-tertiary);
 }
 
-.hotel-concierge-chat-input:hover:not(:disabled),
 .ecommerce-assistant-chat-input:hover:not(:disabled) {
   border-color: var(--color-btn-hover-border);
 }
 
-.hotel-concierge-chat-input:focus,
 .ecommerce-assistant-chat-input:focus {
   outline: none;
 }
 
-.hotel-concierge-chat-input:focus-visible,
 .ecommerce-assistant-chat-input:focus-visible {
   outline: 2px solid var(--color-action-accent);
   outline-offset: 2px;
   border-color: var(--color-action-accent);
 }
 
-.hotel-concierge-chat-input:disabled,
 .ecommerce-assistant-chat-input:disabled {
   opacity: 0.65;
   cursor: not-allowed;
 }
 
-.hotel-concierge-chat-send,
 .ecommerce-assistant-chat-send {
   flex-shrink: 0;
   align-self: stretch;
 }
 
 @media (min-width: 640px) {
-  .hotel-concierge-chat-send,
   .ecommerce-assistant-chat-send {
     align-self: flex-end;
   }
