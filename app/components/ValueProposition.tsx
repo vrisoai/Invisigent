@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Script from 'next/script';
 import { motion } from 'framer-motion';
@@ -59,7 +59,7 @@ export function ValueProposition() {
 
   useGSAP((_ctx, contextSafe) => {
     const cards   = gsap.utils.toArray<HTMLElement>('.vp-card', sectionRef.current);
-    const heading = sectionRef.current?.querySelector<HTMLElement>('#vriso-value-heading');
+    const heading = sectionRef.current?.querySelector<HTMLElement>('#invisigent-value-heading');
 
     /* ── 1. ScrollTrigger.batch card entrance ── */
     // Set all cards hidden before the trigger fires
@@ -162,7 +162,7 @@ export function ValueProposition() {
         paddingLeft: 'max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-left))',
         paddingRight: 'max(clamp(1.5rem, 5vw, 4rem), env(safe-area-inset-right))',
       }}
-      aria-labelledby="vriso-value-heading"
+      aria-labelledby="invisigent-value-heading"
     >
       <Script
         id="vp-service-jsonld"
@@ -208,7 +208,7 @@ export function ValueProposition() {
 
           {/* H2 — plain element; GSAP SplitText handles the reveal */}
           <h2
-            id="vriso-value-heading"
+            id="invisigent-value-heading"
             className="font-serif"
             style={{
               fontSize: 'clamp(36px, 4vw, 96px)',

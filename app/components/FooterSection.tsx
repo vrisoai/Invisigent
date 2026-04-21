@@ -1,4 +1,4 @@
-// FooterSection.tsx
+﻿// FooterSection.tsx
 'use client';
 
 import Script from 'next/script';
@@ -7,7 +7,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { EASE } from '@/app/lib/animations';
 
-import vrisoLogo from '@/app/assets/Invisigent.png';
+import invisigentLogo from '@/app/assets/Invisigent.png';
 
 const JSON_LD_PROFESSIONAL_SERVICE = {
   '@context': 'https://schema.org',
@@ -17,7 +17,7 @@ const JSON_LD_PROFESSIONAL_SERVICE = {
   description:
     'Enterprise AI infrastructure and automation architecture consulting specializing in scalable AI systems and agent orchestration.',
   areaServed: 'Global',
-  url: 'https://vriso.ai',
+  url: 'https://invisigent.ai',
 };
 
 const footerColumns = {
@@ -38,10 +38,10 @@ export default function FooterSection() {
   return (
     <footer
       ref={sectionRef}
-      className="vriso-footer-section relative w-full border-t border-white/5"
-      aria-labelledby="vriso-footer-heading"
+      className="invisigent-footer-section relative w-full border-t border-white/5"
+      aria-labelledby="invisigent-footer-heading"
     >
-      <Script id="vriso-footer-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script id="invisigent-footer-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(JSON_LD_PROFESSIONAL_SERVICE)}
       </Script>
 
@@ -56,22 +56,22 @@ export default function FooterSection() {
       />
       <div className="section-grid-overlay" aria-hidden="true" />
 
-      <div className="section-container section-inner relative vriso-footer-inner">
+      <div className="section-container section-inner relative invisigent-footer-inner">
         {/* Top grid */}
         <motion.div
-          className="vriso-footer-grid"
+          className="invisigent-footer-grid"
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: 0.6, ease: EASE }}
         >
           {/* Brand column */}
-          <div className="vriso-footer-brand">
-            <div className="vriso-footer-brand-top flex flex-col gap-2 items-start">
+          <div className="invisigent-footer-brand">
+            <div className="invisigent-footer-brand-top flex flex-col gap-2 items-start">
               <Image
-                src={vrisoLogo}
+                src={invisigentLogo}
                 alt="Invisigent"
-                id="vriso-footer-heading"
-                className="vriso-footer-logo-img"
+                id="invisigent-footer-heading"
+                className="invisigent-footer-logo-img"
                 height={100}
                 width={360}
                 sizes="(max-width: 480px) 58vw, (max-width: 1024px) 42vw, 280px"
@@ -81,20 +81,20 @@ export default function FooterSection() {
               </p>
             </div>
 
-            <p className="vriso-footer-brand-desc font-serif">
+            <p className="invisigent-footer-brand-desc font-serif">
               Invisigent designs enterprise AI infrastructure and automation architecture for modern organizations.
             </p>
           </div>
 
           {/* Quick Links column */}
-          <nav aria-label="Invisigent quick links" className="vriso-footer-column vriso-footer-quicklinks">
-            <h3 className="vriso-footer-heading">Quick Links</h3>
-            <ul className="vriso-footer-list">
+          <nav aria-label="Invisigent quick links" className="invisigent-footer-column invisigent-footer-quicklinks">
+            <h3 className="invisigent-footer-heading">Quick Links</h3>
+            <ul className="invisigent-footer-list">
               {footerColumns.company.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="vriso-footer-link vriso-footer-link--company"
+                    className="invisigent-footer-link invisigent-footer-link--company"
                     aria-label={item.label}
                   >
                     {item.label}
@@ -105,23 +105,23 @@ export default function FooterSection() {
           </nav>
 
           {/* Contact section */}
-          <div className="vriso-footer-column vriso-footer-contact-column">
-            <h3 className="vriso-footer-heading">Contact</h3>
-            <div className="vriso-footer-contact-items">
+          <div className="invisigent-footer-column invisigent-footer-contact-column">
+            <h3 className="invisigent-footer-heading">Contact</h3>
+            <div className="invisigent-footer-contact-items">
               <a
                 href="mailto:hello@invisigent.com"
-                className="vriso-footer-email vriso-footer-contact-item"
+                className="invisigent-footer-email invisigent-footer-contact-item"
                 aria-label="Email Invisigent at hello@invisigent.com"
               >
                 hello@invisigent.com
               </a>
-              <div className="vriso-footer-contact-actions">
+              <div className="invisigent-footer-contact-actions">
                 <a
                   href="https://www.linkedin.com/company/invisigent"
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Invisigent on LinkedIn"
-                  className="vriso-footer-linkedin vriso-footer-contact-item"
+                  className="invisigent-footer-linkedin invisigent-footer-contact-item"
                 >
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -133,7 +133,7 @@ export default function FooterSection() {
                 </a>
                 <a
                   href="/contact"
-                  className="vriso-footer-cta-btn vriso-footer-contact-item"
+                  className="invisigent-footer-cta-btn invisigent-footer-contact-item"
                   aria-label="Start an engagement with Invisigent"
                 >
                   Start an Engagement
@@ -144,12 +144,12 @@ export default function FooterSection() {
         </motion.div>
 
         {/* System status row */}
-        <div className="vriso-footer-status-row" aria-label="Invisigent system status">
+        <div className="invisigent-footer-status-row" aria-label="Invisigent system status">
           <span className="font-mono text-[11px] tracking-[0.16em] text-footer-muted">
             SYSTEM STATUS
           </span>
           <div className="flex items-center gap-2">
-            <span className="vriso-footer-status-dot" aria-hidden="true" />
+            <span className="invisigent-footer-status-dot" aria-hidden="true" />
             <p className="font-mono text-xs tracking-[0.12em] text-footer-subtle">
               INVISIGENT NETWORK — ACTIVE
             </p>
@@ -157,7 +157,7 @@ export default function FooterSection() {
         </div>
 
         {/* Copyright */}
-        <div className="vriso-footer-bottom">
+        <div className="invisigent-footer-bottom">
           <p className="font-mono text-[11px] tracking-[0.16em] text-footer-muted">
             © 2026 Invisigent. All rights reserved.
           </p>

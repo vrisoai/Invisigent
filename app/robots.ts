@@ -1,4 +1,4 @@
-import type { MetadataRoute } from 'next';
+﻿import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
       },
     ],
-    sitemap: 'https://vriso.ai/sitemap.xml',
-    host: 'https://vriso.ai',
+    sitemap: 'https://invisigent.ai/sitemap.xml',
+    host: 'https://invisigent.ai',
   };
 }

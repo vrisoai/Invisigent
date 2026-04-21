@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { FooterSection, InvisigentLogoSection } from '@/app/components';
 
 export const metadata: Metadata = {
@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     'Thinking, patterns, and field notes from Invisigent on enterprise AI infrastructure, agent systems, and automation architecture.',
   alternates: {
-    canonical: 'https://vriso.ai/insights',
+    canonical: 'https://invisigent.ai/insights',
   },
   openGraph: {
     title: 'AI Infrastructure Insights | Invisigent',
     description:
       'Thinking, patterns, and field notes on enterprise AI infrastructure, agent systems, and automation architecture.',
-    url: 'https://vriso.ai/insights',
+    url: 'https://invisigent.ai/insights',
     images: [
       {
         url: '/og-image.png',

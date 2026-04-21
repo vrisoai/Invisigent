@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { ContactClient } from './ContactClient';
 
 export const metadata: Metadata = {
@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     'Start a conversation with Invisigent about enterprise AI systems, automation workflows, and intelligent infrastructure for your business.',
   alternates: {
-    canonical: 'https://vriso.ai/contact',
+    canonical: 'https://invisigent.ai/contact',
   },
   openGraph: {
     title: "Let's Talk | Invisigent",
     description:
       'Start a conversation with Invisigent about enterprise AI systems, automation workflows, and intelligent infrastructure.',
-    url: 'https://vriso.ai/contact',
+    url: 'https://invisigent.ai/contact',
     images: [
       {
         url: '/og-image.png',

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Line } from '@react-three/drei';
@@ -327,12 +327,12 @@ const CARD_SCENES = [
   GlobeScene,
 ];
 
-interface WhyVRisoCardSceneProps {
+interface WhyInvisigentCardSceneProps {
   variant: number;
   hovered: boolean;
 }
 
-export function WhyVRisoCardScene({ variant, hovered }: WhyVRisoCardSceneProps) {
+export function WhyInvisigentCardScene({ variant, hovered }: WhyInvisigentCardSceneProps) {
   const Scene = CARD_SCENES[variant] ?? SovereignClusterScene;
   return (
     <div style={{ height: '100%', width: '100%' }} aria-hidden="true">

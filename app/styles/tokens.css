@@ -1,5 +1,5 @@
 /**
- * VRISO Design Tokens — single source of truth.
+ * INVISIGENT Design Tokens — single source of truth.
  * No hex values anywhere else in the codebase. Always use var(--color-*).
  */
 :root {

@@ -1,4 +1,4 @@
-// app/interactive-demo/page.tsx  — server component: metadata + JSON-LD only
+﻿// app/interactive-demo/page.tsx  — server component: metadata + JSON-LD only
 import type { Metadata } from 'next';
 import { TOOLS } from './tools-data';
 import { InteractiveDemoClient } from './InteractiveDemoClient';
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   description:
     'Live AI tool demos by Invisigent — enterprise AI systems, automation workflows, and intelligent infrastructure for businesses across India, US, and Europe.',
   alternates: {
-    canonical: 'https://vriso.ai/interactive-demo',
+    canonical: 'https://invisigent.ai/interactive-demo',
   },
   openGraph: {
     title: 'Interactive Demos | Invisigent',
     description:
       'Live AI tool demos — enterprise AI systems, automation workflows, and intelligent infrastructure.',
-    url: 'https://vriso.ai/interactive-demo',
+    url: 'https://invisigent.ai/interactive-demo',
     images: [
       {
         url: '/og-image.png',
@@ -41,7 +41,7 @@ export default function InteractiveDemoPage() {
     description:
       'Invisigent designs enterprise AI systems, AI workflow systems, and AI automation demos for production environments.',
     areaServed: ['India', 'United States', 'Europe'],
-    url: 'https://vriso.ai',
+    url: 'https://invisigent.ai',
   };
 
   const itemListJsonLd = {
@@ -53,8 +53,8 @@ export default function InteractiveDemoPage() {
       position: index + 1,
       name: tool.name,
       url: tool.ctaHref
-        ? `https://vriso.ai${tool.ctaHref}`
-        : `https://vriso.ai/interactive-demo#${tool.id}`,
+        ? `https://invisigent.ai${tool.ctaHref}`
+        : `https://invisigent.ai/interactive-demo#${tool.id}`,
     })),
   };
 

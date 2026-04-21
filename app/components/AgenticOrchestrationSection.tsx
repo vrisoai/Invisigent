@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Script from 'next/script';
 import { motion, useInView } from 'framer-motion';
@@ -17,10 +17,10 @@ import {
 const JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  '@id': 'https://vriso.ai/#orchestration',
+  '@id': 'https://invisigent.ai/#orchestration',
   name: 'Agentic Orchestration — Multi-Agent AI Systems',
   serviceType: 'Multi-Agent AI Orchestration',
-  provider: { '@id': 'https://vriso.ai/#organization' },
+  provider: { '@id': 'https://invisigent.ai/#organization' },
   description:
     'Enterprise-grade multi-agent orchestration with supervisor reasoning, task distribution, and operational control across legal, finance, and operations domains.',
   areaServed: ['EU', 'IN', 'US'],

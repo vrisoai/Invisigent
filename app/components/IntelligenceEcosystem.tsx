@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Script from 'next/script';
 import { motion, useInView } from 'framer-motion';
@@ -8,10 +8,10 @@ import { CARD_FADE, GRID_STAGGER } from '@/app/lib/animations';
 const JSON_LD = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  '@id': 'https://vriso.ai/#intelligence-ecosystem',
+  '@id': 'https://invisigent.ai/#intelligence-ecosystem',
   name: 'Intelligence Ecosystem — Enterprise AI Strategy',
   serviceType: 'Enterprise AI Architecture',
-  provider: { '@id': 'https://vriso.ai/#organization' },
+  provider: { '@id': 'https://invisigent.ai/#organization' },
   description:
     'Modular AI infrastructure delivering sustainable competitive advantage through outcome ownership, agentic transparency, global compliance, and machine-experience optimization.',
   areaServed: ['EU', 'IN', 'US'],

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About Invisigent — Enterprise AI Infrastructure Firm Built for Production',
@@ -20,13 +20,13 @@ export const metadata: Metadata = {
     'DPDP AI Compliance',
   ],
   alternates: {
-    canonical: 'https://vriso.ai/about',
+    canonical: 'https://invisigent.ai/about',
   },
   openGraph: {
     title: 'About Invisigent — Enterprise AI Infrastructure Built for Production',
     description:
       'Enterprise AI infrastructure firm building LangGraph agent orchestration, Pinecone RAG systems, and multi-agent AI for global organizations. Founded by engineers. No vendor lock-in.',
-    url: 'https://vriso.ai/about',
+    url: 'https://invisigent.ai/about',
     images: [
       {
         url: '/og-image.png',
@@ -51,9 +51,9 @@ const aboutJsonLd = {
     /* ── Organization (self-contained so this page resolves standalone) ── */
     {
       '@type': 'Organization',
-      '@id': 'https://vriso.ai/#organization',
+      '@id': 'https://invisigent.ai/#organization',
       name: 'Invisigent',
-      url: 'https://vriso.ai',
+      url: 'https://invisigent.ai',
       description:
         'Invisigent is an enterprise AI infrastructure firm that designs and deploys production AI systems — LangGraph multi-agent orchestration, Pinecone RAG pipelines, AI automation, and compliance-ready AI infrastructure for global organizations.',
       foundingLocation: {
@@ -83,9 +83,9 @@ const aboutJsonLd = {
     /* ── Founder / Person entity ── */
     {
       '@type': 'Person',
-      '@id': 'https://vriso.ai/#founder',
+      '@id': 'https://invisigent.ai/#founder',
       jobTitle: 'Founder & AI Infrastructure Engineer',
-      worksFor: { '@id': 'https://vriso.ai/#organization' },
+      worksFor: { '@id': 'https://invisigent.ai/#organization' },
       knowsAbout: [
         'Agentic AI Systems',
         'Production AI Infrastructure',
@@ -100,40 +100,40 @@ const aboutJsonLd = {
     /* ── AboutPage ── */
     {
       '@type': 'AboutPage',
-      '@id': 'https://vriso.ai/about#aboutpage',
-      url: 'https://vriso.ai/about',
+      '@id': 'https://invisigent.ai/about#aboutpage',
+      url: 'https://invisigent.ai/about',
       name: 'About Invisigent — Enterprise AI Infrastructure Firm',
       description:
         'Invisigent is an enterprise AI infrastructure firm that designs and builds production AI systems — LangGraph agent orchestration, Pinecone RAG pipelines, AI automation, and compliance-ready AI infrastructure for global organizations.',
       datePublished: '2024-01-01',
       dateModified: '2026-04-18',
       inLanguage: 'en',
-      mainEntity: { '@id': 'https://vriso.ai/#organization' },
-      breadcrumb: { '@id': 'https://vriso.ai/about#breadcrumb' },
+      mainEntity: { '@id': 'https://invisigent.ai/#organization' },
+      breadcrumb: { '@id': 'https://invisigent.ai/about#breadcrumb' },
     },
     /* ── Breadcrumb ── */
     {
       '@type': 'BreadcrumbList',
-      '@id': 'https://vriso.ai/about#breadcrumb',
+      '@id': 'https://invisigent.ai/about#breadcrumb',
       itemListElement: [
         {
           '@type': 'ListItem',
           position: 1,
           name: 'Home',
-          item: 'https://vriso.ai',
+          item: 'https://invisigent.ai',
         },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'About Invisigent',
-          item: 'https://vriso.ai/about',
+          item: 'https://invisigent.ai/about',
         },
       ],
     },
     /* ── HowTo: 4-phase build process ── */
     {
       '@type': 'HowTo',
-      '@id': 'https://vriso.ai/about#howwebuild',
+      '@id': 'https://invisigent.ai/about#howwebuild',
       name: 'How Invisigent Builds Enterprise AI Infrastructure',
       description:
         'Four-phase process for designing and deploying production AI systems: Discovery & AI Strategy, Architecture Design, Deployment & Integration, Optimization & Scaling.',
@@ -167,7 +167,7 @@ const aboutJsonLd = {
     /* ── ItemList: focus areas ── */
     {
       '@type': 'ItemList',
-      '@id': 'https://vriso.ai/about#focus',
+      '@id': 'https://invisigent.ai/about#focus',
       name: 'Invisigent Enterprise AI Focus Areas',
       itemListElement: [
         {
@@ -203,7 +203,7 @@ const aboutJsonLd = {
     /* ── FAQPage ── */
     {
       '@type': 'FAQPage',
-      '@id': 'https://vriso.ai/about#faq',
+      '@id': 'https://invisigent.ai/about#faq',
       mainEntity: [
         {
           '@type': 'Question',

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useRef } from 'react';
 import Script from 'next/script';
@@ -24,7 +24,7 @@ const JSON_LD = {
   name: 'Invisigent',
   description:
     'Invisigent designs and deploys enterprise AI systems, agentic automation platforms, and intelligent infrastructure for businesses.',
-  url: 'https://vriso.ai',
+  url: 'https://invisigent.ai',
   areaServed: 'Global',
   serviceType: [
     'Enterprise AI Systems',

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { MarketIntelligenceStockSearch } from '@/app/components/MarketIntelligenceStockSearch';
 import { InvisigentLogoSection } from '@/app/components/InvisigentLogoSection';
 import FooterSection from '@/app/components/FooterSection';
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   description:
     'Search a stock by name or symbol for AI-assisted market context — news, trends, and insight workflows.',
   alternates: {
-    canonical: 'https://vriso.ai/market-intelligence-engine',
+    canonical: 'https://invisigent.ai/market-intelligence-engine',
   },
   openGraph: {
     title: 'Market Intelligence Engine | Invisigent',
     description:
       'Demo: enter a company or ticker to drive aggregation, trend detection, and insight generation.',
-    url: 'https://vriso.ai/market-intelligence-engine',
+    url: 'https://invisigent.ai/market-intelligence-engine',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Market Intelligence Engine — Invisigent' }],
   },
   twitter: {

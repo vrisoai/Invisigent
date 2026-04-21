@@ -1,6 +1,6 @@
-import type { MetadataRoute } from 'next';
+﻿import type { MetadataRoute } from 'next';
 
-const BASE_URL = 'https://vriso.ai';
+const BASE_URL = 'https://invisigent.ai';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

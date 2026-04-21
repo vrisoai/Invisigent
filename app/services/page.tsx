@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import ServicesPageClient from './services-page-client';
 
 export const metadata: Metadata = {
@@ -22,13 +22,13 @@ export const metadata: Metadata = {
     'Enterprise Knowledge Retrieval',
   ],
   alternates: {
-    canonical: 'https://vriso.ai/services',
+    canonical: 'https://invisigent.ai/services',
   },
   openGraph: {
     title: 'Services | Invisigent — Enterprise AI Infrastructure & Agent Orchestration',
     description:
       'LangGraph agent orchestration, Pinecone RAG pipelines, AI automation, and compliance-ready AI infrastructure. Built for production. No vendor lock-in.',
-    url: 'https://vriso.ai/services',
+    url: 'https://invisigent.ai/services',
     images: [
       {
         url: '/og-image.png',
@@ -53,29 +53,29 @@ const servicesJsonLd = {
   '@graph': [
     {
       '@type': 'WebPage',
-      '@id': 'https://vriso.ai/services#webpage',
-      url: 'https://vriso.ai/services',
+      '@id': 'https://invisigent.ai/services#webpage',
+      url: 'https://invisigent.ai/services',
       name: 'Services — Enterprise AI Infrastructure | Invisigent',
       description:
         'Enterprise AI infrastructure consulting, LangGraph agent orchestration, Pinecone RAG systems, and compliance-ready AI for global organizations.',
       dateModified: '2026-04-18',
       inLanguage: 'en',
-      isPartOf: { '@id': 'https://vriso.ai/#website' },
-      breadcrumb: { '@id': 'https://vriso.ai/services#breadcrumb' },
+      isPartOf: { '@id': 'https://invisigent.ai/#website' },
+      breadcrumb: { '@id': 'https://invisigent.ai/services#breadcrumb' },
     },
     {
       '@type': 'BreadcrumbList',
-      '@id': 'https://vriso.ai/services#breadcrumb',
+      '@id': 'https://invisigent.ai/services#breadcrumb',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vriso.ai' },
-        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://vriso.ai/services' },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://invisigent.ai/services' },
       ],
     },
     {
       '@type': 'OfferCatalog',
-      '@id': 'https://vriso.ai/services#catalog',
+      '@id': 'https://invisigent.ai/services#catalog',
       name: 'Enterprise AI Infrastructure Services',
-      provider: { '@id': 'https://vriso.ai/#organization' },
+      provider: { '@id': 'https://invisigent.ai/#organization' },
       numberOfItems: 7,
       itemListElement: [
         {
@@ -124,7 +124,7 @@ const servicesJsonLd = {
     },
     {
       '@type': 'HowTo',
-      '@id': 'https://vriso.ai/services#engagement',
+      '@id': 'https://invisigent.ai/services#engagement',
       name: 'How Invisigent Engages With Clients',
       description: 'Three engagement models for enterprise AI infrastructure: Strategy Engagement, System Build, and Ongoing Partnership.',
       step: [
@@ -150,7 +150,7 @@ const servicesJsonLd = {
     },
     {
       '@type': 'FAQPage',
-      '@id': 'https://vriso.ai/services#faq',
+      '@id': 'https://invisigent.ai/services#faq',
       mainEntity: [
         {
           '@type': 'Question',

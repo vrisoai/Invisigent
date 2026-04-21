@@ -1,4 +1,4 @@
-/* app/styles/globals.css */
+﻿/* app/styles/globals.css */
 /* Import order matters — tokens must come first */
 @import './tokens.css';
 @import './typography.css';
@@ -474,8 +474,8 @@ main.interactive-demo-page > section.interactive-demo-tools.interactive-demo-too
   flex-direction: unset !important;
 }
 
-/* VRISO wordmark (services §8): natural height — not a full-viewport snap slab */
-main.interactive-demo-page > section.vriso-logo-section {
+/* INVISIGENT wordmark (services §8): natural height — not a full-viewport snap slab */
+main.interactive-demo-page > section.invisigent-logo-section {
   min-height: 0 !important;
   height: auto !important;
   overflow: visible !important;
@@ -3047,7 +3047,7 @@ main.ecommerce-assistant-page {
   }
 
   /* ValueProposition section heading & description */
-  [id="vriso-value-heading"] {
+  [id="invisigent-value-heading"] {
     font-size: clamp(48px, 4vw, 80px) !important;
   }
 
@@ -3078,7 +3078,7 @@ main.ecommerce-assistant-page {
     max-width: min(1000px, 52vw);
   }
 
-  [id="vriso-value-heading"] {
+  [id="invisigent-value-heading"] {
     font-size: clamp(60px, 4.5vw, 100px) !important;
   }
 

@@ -6,7 +6,7 @@ import { useRef, useMemo } from 'react';
 import * as THREE from 'three';
 
 /* ═══════════════════════════════════════════════════════════════════════════
- * VRISO Process Engine — rotating glass ring, 3 nodes, particles
+ * INVISIGENT Process Engine — rotating glass ring, 3 nodes, particles
  * ═══════════════════════════════════════════════════════════════════════════ */
 function ProcessEngineInner({ activeStep }: { activeStep: number | null }) {
   const ringRef = useRef<THREE.Group>(null);

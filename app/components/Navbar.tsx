@@ -1,11 +1,11 @@
-'use client';
+﻿'use client';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import './Navbar.css';
 
-import vrisoLogo from '@/app/assets/Invisigent.png';
+import invisigentLogo from '@/app/assets/Invisigent.png';
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -45,7 +45,7 @@ export function Navbar() {
             aria-label="Invisigent home"
           >
             <Image
-              src={vrisoLogo}
+              src={invisigentLogo}
               alt="Invisigent"
               className="siteLogoImg"
               height={90}

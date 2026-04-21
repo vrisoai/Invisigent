@@ -1,4 +1,4 @@
-// app/layout.tsx
+﻿// app/layout.tsx
 import type { Metadata } from 'next';
 import { Space_Grotesk, Playfair_Display, JetBrains_Mono } from 'next/font/google';
 import { Navbar } from '@/app/components';
@@ -29,7 +29,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://vriso.ai'),
+  metadataBase: new URL('https://invisigent.ai'),
   title: {
     default: 'Invisigent — Enterprise AI Systems Architecture',
     template: '%s | Invisigent',
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     'EU AI Act Compliance',
     'SOC2 AI',
   ],
-  authors: [{ name: 'Invisigent', url: 'https://vriso.ai' }],
+  authors: [{ name: 'Invisigent', url: 'https://invisigent.ai' }],
   creator: 'Invisigent',
   applicationName: 'Invisigent',
   referrer: 'origin-when-cross-origin',
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['en_IN', 'en_GB'],
-    url: 'https://vriso.ai',
+    url: 'https://invisigent.ai',
     siteName: 'Invisigent',
     title: 'Invisigent — Enterprise AI Systems Architecture',
     description:
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
   },
   alternates: {
-    canonical: 'https://vriso.ai',
+    canonical: 'https://invisigent.ai',
   },
 };
 

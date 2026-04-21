@@ -1,4 +1,4 @@
-# VRISO Project Structure
+﻿# INVISIGENT Project Structure
 
 ## Next.js App (primary)
 

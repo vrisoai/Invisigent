@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+﻿import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
 type Body = {
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
 
     await transporter.sendMail({
       from: `"Invisigent Contact" <${process.env.GMAIL_USER}>`,
-      to: 'vrisoai@gmail.com',
+      to: 'invisigentai@gmail.com',
       replyTo: email.trim(),
       subject: `New enquiry from ${name.trim()}`,
       html: `

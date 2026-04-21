@@ -1,4 +1,4 @@
-/**
+﻿/**
  * SchemaOrg.tsx — Server component. No 'use client'.
  * Injects JSON-LD for SEO and GEO (AI engine citation optimization).
  */
@@ -9,13 +9,12 @@ export default function SchemaOrg() {
     '@graph': [
       {
         '@type': 'Organization',
-        '@id': 'https://vriso.ai/#organization',
+        '@id': 'https://invisigent.ai/#organization',
         name: 'Invisigent',
-        alternateName: 'VRISO',
-        url: 'https://vriso.ai',
+        url: 'https://invisigent.ai',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://vriso.ai/logo.png',
+          url: 'https://invisigent.ai/logo.png',
           width: 200,
           height: 60,
         },
@@ -52,29 +51,29 @@ export default function SchemaOrg() {
         ],
         sameAs: [
           'https://linkedin.com/company/invisigent',
-          'https://linkedin.com/company/vriso',
+          'https://linkedin.com/company/invisigent',
         ],
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://vriso.ai/#website',
-        url: 'https://vriso.ai',
+        '@id': 'https://invisigent.ai/#website',
+        url: 'https://invisigent.ai',
         name: 'Invisigent',
-        publisher: { '@id': 'https://vriso.ai/#organization' },
+        publisher: { '@id': 'https://invisigent.ai/#organization' },
         potentialAction: {
           '@type': 'SearchAction',
           target: {
             '@type': 'EntryPoint',
-            urlTemplate: 'https://vriso.ai/search?q={search_term_string}',
+            urlTemplate: 'https://invisigent.ai/search?q={search_term_string}',
           },
           'query-input': 'required name=search_term_string',
         },
       },
       {
         '@type': 'ConsultingService',
-        '@id': 'https://vriso.ai/#service',
+        '@id': 'https://invisigent.ai/#service',
         name: 'Enterprise AI Architecture Retainer',
-        provider: { '@id': 'https://vriso.ai/#organization' },
+        provider: { '@id': 'https://invisigent.ai/#organization' },
         serviceType: 'AI Systems Architecture',
         description:
           'Strategic AI retainer for enterprise organizations requiring sovereign multi-agent orchestration and governance infrastructure.',

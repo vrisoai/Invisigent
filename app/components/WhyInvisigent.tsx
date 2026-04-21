@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import Script from 'next/script';
 import dynamic from 'next/dynamic';
@@ -6,7 +6,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { EASE, FADE_UP, CARD_FADE } from '@/app/lib/animations';
 
-const WhyVRisoCardScene = dynamic(() => import('./3d/WhyVRisoCardSceneWrapper'), { ssr: false });
+const WhyInvisigentCardScene = dynamic(() => import('./3d/WhyInvisigentCardSceneWrapper'), { ssr: false });
 const IntelligenceCore = dynamic(() => import('./3d/IntelligenceCoreWrapper'), { ssr: false });
 
 /* ─── JSON-LD ─── */
@@ -15,7 +15,7 @@ const JSON_LD_ORG = {
   '@type': 'Organization',
   name: 'Invisigent',
   description: 'Invisigent builds AI systems your team owns, your security team approves, and your operations team can run at scale. Most AI projects stall because the infrastructure wasn\'t built for production.',
-  url: 'https://vriso.ai',
+  url: 'https://invisigent.ai',
   areaServed: ['US', 'EU', 'India', 'Global'],
   serviceType: ['Enterprise AI Consulting', 'AI Infrastructure Systems', 'AI Automation Systems', 'Agent Orchestration Systems'],
 };
@@ -113,7 +113,7 @@ export function WhyInvisigent() {
     const carousel = whyCarouselRef.current;
     if (!carousel) return;
     const onScroll = () => {
-      const cards = Array.from(carousel.querySelectorAll<HTMLElement>('.why-vriso-carousel-card'));
+      const cards = Array.from(carousel.querySelectorAll<HTMLElement>('.why-invisigent-carousel-card'));
       if (!cards.length) return;
       const carouselCenter = carousel.getBoundingClientRect().left + carousel.getBoundingClientRect().width / 2;
       let closest = 0, minDist = Infinity;
@@ -138,7 +138,7 @@ export function WhyInvisigent() {
   return (
     <section
       ref={sectionRef}
-      className="why-vriso-section relative w-full overflow-hidden"
+      className="why-invisigent-section relative w-full overflow-hidden"
       style={{
         background: 'var(--color-bg-primary)',
         paddingTop: 'clamp(40px, 8vw, 240px)',
@@ -146,12 +146,12 @@ export function WhyInvisigent() {
         paddingLeft: 'max(clamp(0.75rem, 3vw, 4rem), env(safe-area-inset-left))',
         paddingRight: 'max(clamp(0.75rem, 3vw, 4rem), env(safe-area-inset-right))',
       }}
-      aria-labelledby="why-vriso-heading"
+      aria-labelledby="why-invisigent-heading"
     >
-      <Script id="why-vriso-org-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script id="why-invisigent-org-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(JSON_LD_ORG)}
       </Script>
-      <Script id="why-vriso-service-jsonld" type="application/ld+json" strategy="afterInteractive">
+      <Script id="why-invisigent-service-jsonld" type="application/ld+json" strategy="afterInteractive">
         {JSON.stringify(JSON_LD_SERVICE)}
       </Script>
 
@@ -175,7 +175,7 @@ export function WhyInvisigent() {
 
       <div className="section-container section-inner relative">
         {/* ── Header ── */}
-        <header className="why-vriso-header">
+        <header className="why-invisigent-header">
           <motion.p
             className="font-mono text-[11px] sm:text-xs"
             style={{
@@ -193,7 +193,7 @@ export function WhyInvisigent() {
           </motion.p>
 
           <motion.h2
-            id="why-vriso-heading"
+            id="why-invisigent-heading"
             className="font-serif"
             style={{
               fontWeight: 500,
@@ -214,7 +214,7 @@ export function WhyInvisigent() {
           </motion.h2>
 
           <motion.div
-            className="font-serif why-vriso-desc"
+            className="font-serif why-invisigent-desc"
             style={{
               lineHeight: 1.7,
               fontSize: 'clamp(15px, 1.3vw, 28px)',
@@ -238,29 +238,29 @@ export function WhyInvisigent() {
         {/* ── Cards: flex column on mobile, 2x2 grid with core on desktop ── */}
         <div className="relative mt-16 sm:mt-14 md:mt-20">
           {/* Mobile: horizontal carousel */}
-          <div className="why-vriso-carousel-wrapper sm:hidden">
-            <div className="why-vriso-carousel" ref={whyCarouselRef}>
+          <div className="why-invisigent-carousel-wrapper sm:hidden">
+            <div className="why-invisigent-carousel" ref={whyCarouselRef}>
               {CARDS.map((card, i) => (
-                <article key={card.title} className="why-vriso-carousel-card glass-card" aria-label={card.title}>
+                <article key={card.title} className="why-invisigent-carousel-card glass-card" aria-label={card.title}>
                   {card.label && (
                     <p className="font-mono" style={{ fontSize: 10, letterSpacing: '0.12em', fontWeight: 500, color: 'var(--color-text-tertiary)', borderLeft: '2px solid var(--color-trust-amber)', paddingLeft: 10, marginBottom: 12 }}>
                       {card.label}
                     </p>
                   )}
-                  <h3 className="why-vriso-card-mobile__title">{card.title}</h3>
-                  <p className="why-vriso-card-mobile__desc">{card.description}</p>
+                  <h3 className="why-invisigent-card-mobile__title">{card.title}</h3>
+                  <p className="why-invisigent-card-mobile__desc">{card.description}</p>
                 </article>
               ))}
             </div>
-            <div className="why-vriso-carousel-dots">
+            <div className="why-invisigent-carousel-dots">
               {CARDS.map((_, i) => (
                 <button
                   key={i}
-                  className={`why-vriso-carousel-dot${i === whyActiveCard ? ' active' : ''}`}
+                  className={`why-invisigent-carousel-dot${i === whyActiveCard ? ' active' : ''}`}
                   onClick={() => {
                     const carousel = whyCarouselRef.current;
                     if (!carousel) return;
-                    const card = carousel.querySelectorAll<HTMLElement>('.why-vriso-carousel-card')[i];
+                    const card = carousel.querySelectorAll<HTMLElement>('.why-invisigent-carousel-card')[i];
                     if (card) carousel.scrollTo({ left: card.offsetLeft - 16, behavior: 'smooth' });
                     setWhyActiveCard(i);
                   }}
@@ -312,7 +312,7 @@ export function WhyInvisigent() {
                   </p>
                 )}
                 <div style={{ height: 'clamp(120px, 14vw, 260px)' }}>
-                  <WhyVRisoCardScene variant={i} hovered={hoveredCard === i} />
+                  <WhyInvisigentCardScene variant={i} hovered={hoveredCard === i} />
                 </div>
                 <h3 className="font-serif mt-4" style={{ fontSize: 'clamp(16px, 2vw, 42px)', fontWeight: 600, color: 'var(--color-text-primary)' }}>
                   {CARDS[i].title}
@@ -365,7 +365,7 @@ export function WhyInvisigent() {
                   </p>
                 )}
                 <div style={{ height: 'clamp(120px, 14vw, 260px)' }}>
-                  <WhyVRisoCardScene variant={i} hovered={hoveredCard === i} />
+                  <WhyInvisigentCardScene variant={i} hovered={hoveredCard === i} />
                 </div>
                 <h3 className="font-serif mt-4" style={{ fontSize: 'clamp(16px, 2vw, 42px)', fontWeight: 600, color: 'var(--color-text-primary)' }}>
                   {CARDS[i].title}

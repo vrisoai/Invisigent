@@ -1,4 +1,4 @@
-# VRISO design tokens — use site-wide
+﻿# INVISIGENT design tokens — use site-wide
 
 Single source: **colors and gradient** in `app/styles/tokens.css` (`:root`). **Tailwind** utilities come from `@theme` in `app/styles/globals.css`. **Fonts** are loaded in `app/layout.tsx` (next/font) and exposed as CSS variables on `<html>` (`--font-space-grotesk`, `--font-playfair`, `--font-jetbrains`).
 

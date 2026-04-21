@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { EcommerceAssistantChat } from '@/app/components/EcommerceAssistantChat';
 import { InvisigentLogoSection } from '@/app/components/InvisigentLogoSection';
 import FooterSection from '@/app/components/FooterSection';
@@ -8,13 +8,13 @@ export const metadata: Metadata = {
   description:
     'Virtual shopping assistant for recommendations, orders, and catalog help — personalized customer service at scale.',
   alternates: {
-    canonical: 'https://vriso.ai/ecommerce-ai-assistant',
+    canonical: 'https://invisigent.ai/ecommerce-ai-assistant',
   },
   openGraph: {
     title: 'E-commerce AI Assistant | Invisigent',
     description:
       'Chat demo: product help, order questions, and brand-aligned shopping support.',
-    url: 'https://vriso.ai/ecommerce-ai-assistant',
+    url: 'https://invisigent.ai/ecommerce-ai-assistant',
     images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'E-commerce AI Assistant — Invisigent' }],
   },
   twitter: {
