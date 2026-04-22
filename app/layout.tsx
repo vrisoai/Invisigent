@@ -1,4 +1,4 @@
-﻿// app/layout.tsx
+// app/layout.tsx
 import type { Metadata } from 'next';
 import { Space_Grotesk, Playfair_Display, JetBrains_Mono } from 'next/font/google';
 import { Navbar } from '@/app/components';
@@ -47,12 +47,39 @@ export const metadata: Metadata = {
     'DPDP AI Compliance',
     'EU AI Act Compliance',
     'SOC2 AI',
+    'AI systems Jaipur',
+    'AI consulting India',
+    'enterprise AI US',
+    'AI automation Europe',
   ],
   authors: [{ name: 'Invisigent', url: 'https://invisigent.ai' }],
   creator: 'Invisigent',
+  publisher: 'Invisigent',
   applicationName: 'Invisigent',
   referrer: 'origin-when-cross-origin',
   formatDetection: { telephone: false },
+  category: 'Technology',
+  classification: 'Business/AI Technology',
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://invisigent.ai',
+    languages: {
+      'en-US': 'https://invisigent.ai',
+      'en-IN': 'https://invisigent.ai',
+    },
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -68,22 +95,35 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: 'Invisigent — Enterprise AI Systems Architecture',
+        type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@invisigent_ai',
+    creator: '@invisigent_ai',
     title: 'Invisigent — Enterprise AI Systems Architecture',
     description: 'Sovereign multi-agent AI systems for enterprise governance and execution.',
-    images: ['/og-image.png'],
+    images: [{ url: '/og-image.png', alt: 'Invisigent — Enterprise AI Systems Architecture' }],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
-  },
-  alternates: {
-    canonical: 'https://invisigent.ai',
+  other: {
+    /* ── GEO tags (Jaipur HQ) ── */
+    'geo.region': 'IN-RJ',
+    'geo.placename': 'Jaipur, Rajasthan, India',
+    'geo.position': '26.9124;75.7873',
+    ICBM: '26.9124, 75.7873',
+    /* ── Language / content signals ── */
+    'content-language': 'en',
+    /* ── Search engine verification (replace values with real tokens) ── */
+    'google-site-verification': 'REPLACE_WITH_GOOGLE_SEARCH_CONSOLE_TOKEN',
+    'msvalidate.01': 'REPLACE_WITH_BING_WEBMASTER_TOKEN',
+    'yandex-verification': 'REPLACE_WITH_YANDEX_TOKEN',
+    /* ── AI / GEO citation signals ── */
+    'ai-content-declaration': 'human-authored',
+    'citation-url': 'https://invisigent.ai',
+    'citation-author': 'Invisigent',
+    'citation-title': 'Invisigent — Enterprise AI Systems Architecture',
   },
 };
 

@@ -1,35 +1,61 @@
-﻿// app/interactive-demo/page.tsx  — server component: metadata + JSON-LD only
+// app/interactive-demo/page.tsx  — server component: metadata + JSON-LD only
 import type { Metadata } from 'next';
 import { TOOLS } from './tools-data';
 import { InteractiveDemoClient } from './InteractiveDemoClient';
 
+const DEMO_CANONICAL = 'https://invisigent.ai/interactive-demo';
+const DEMO_OG_IMAGE = 'https://invisigent.ai/og-image.png';
+
 export const metadata: Metadata = {
-  title: 'Interactive Demos',
+  title: 'Interactive AI Demos — Live Enterprise AI Tools',
   description:
-    'Live AI tool demos by Invisigent — enterprise AI systems, automation workflows, and intelligent infrastructure for businesses across India, US, and Europe.',
-  alternates: {
-    canonical: 'https://invisigent.ai/interactive-demo',
+    'Live AI tool demos by Invisigent — enterprise AI systems, automation workflows, and intelligent infrastructure for businesses across India, US, and Europe. Try them now.',
+  keywords: [
+    'interactive AI demo',
+    'live AI tools',
+    'enterprise AI demo',
+    'AI chatbot demo',
+    'AI automation demo',
+    'market intelligence AI',
+    'ecommerce AI assistant demo',
+    'search visibility AI tool',
+    'AI workflow demo',
+    'Invisigent demo',
+    'AI tools India',
+    'AI tools US',
+  ],
+  authors: [{ name: 'Invisigent', url: 'https://invisigent.ai' }],
+  creator: 'Invisigent',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
+  alternates: { canonical: DEMO_CANONICAL },
   openGraph: {
-    title: 'Interactive Demos | Invisigent',
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Invisigent',
+    title: 'Interactive AI Demos | Invisigent',
     description:
       'Live AI tool demos — enterprise AI systems, automation workflows, and intelligent infrastructure.',
-    url: 'https://invisigent.ai/interactive-demo',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Invisigent Interactive AI Demos',
-      },
-    ],
+    url: DEMO_CANONICAL,
+    images: [{ url: DEMO_OG_IMAGE, width: 1200, height: 630, alt: 'Invisigent Interactive AI Demos', type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Interactive Demos | Invisigent',
+    site: '@invisigent_ai',
+    creator: '@invisigent_ai',
+    title: 'Interactive AI Demos | Invisigent',
     description:
       'Live AI tool demos — enterprise AI systems, automation workflows, and intelligent infrastructure.',
-    images: ['/og-image.png'],
+    images: [{ url: DEMO_OG_IMAGE, alt: 'Invisigent Interactive AI Demos' }],
+  },
+  other: {
+    'geo.region': 'IN-RJ',
+    'geo.placename': 'Jaipur, Rajasthan, India',
+    'geo.position': '26.9124;75.7873',
+    ICBM: '26.9124, 75.7873',
   },
 };
 

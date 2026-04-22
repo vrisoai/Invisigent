@@ -1,5 +1,8 @@
-﻿import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import ServicesPageClient from './services-page-client';
+
+const CANONICAL = 'https://invisigent.ai/services';
+const OG_IMAGE = 'https://invisigent.ai/og-image.png';
 
 export const metadata: Metadata = {
   title: 'Services — Enterprise AI Infrastructure & Agent Orchestration',
@@ -20,30 +23,44 @@ export const metadata: Metadata = {
     'SOC2 AI Systems',
     'AI Strategy Consulting',
     'Enterprise Knowledge Retrieval',
+    'AI consulting India',
+    'AI consulting Europe',
+    'AI consulting US',
   ],
-  alternates: {
-    canonical: 'https://invisigent.ai/services',
+  authors: [{ name: 'Invisigent', url: 'https://invisigent.ai' }],
+  creator: 'Invisigent',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
   },
+  alternates: { canonical: CANONICAL },
   openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    siteName: 'Invisigent',
     title: 'Services | Invisigent — Enterprise AI Infrastructure & Agent Orchestration',
     description:
       'LangGraph agent orchestration, Pinecone RAG pipelines, AI automation, and compliance-ready AI infrastructure. Built for production. No vendor lock-in.',
-    url: 'https://invisigent.ai/services',
+    url: CANONICAL,
     images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: 'Invisigent Services — Enterprise AI Infrastructure',
-      },
+      { url: OG_IMAGE, width: 1200, height: 630, alt: 'Invisigent Services — Enterprise AI Infrastructure', type: 'image/png' },
     ],
   },
   twitter: {
     card: 'summary_large_image',
+    site: '@invisigent_ai',
+    creator: '@invisigent_ai',
     title: 'Services | Invisigent — Enterprise AI Infrastructure',
     description:
       'LangGraph agent orchestration, Pinecone RAG pipelines, AI automation, and compliance-ready AI. Built for production.',
-    images: ['/og-image.png'],
+    images: [{ url: OG_IMAGE, alt: 'Invisigent Services — Enterprise AI Infrastructure' }],
+  },
+  other: {
+    'geo.region': 'IN-RJ',
+    'geo.placename': 'Jaipur, Rajasthan, India',
+    'geo.position': '26.9124;75.7873',
+    ICBM: '26.9124, 75.7873',
   },
 };
 
