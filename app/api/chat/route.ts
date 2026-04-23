@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
 import nodemailer from 'nodemailer';
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
-
 const SYSTEM_PROMPT = `You are the AI assistant for Invisigent (invisigent.ai) — an enterprise AI systems architecture firm based in Jaipur, India, serving clients across the US, EU, and India.
 
 ## About Invisigent
@@ -163,6 +161,7 @@ export async function POST(req: NextRequest) {
       { role: 'user', content: message.trim() },
     ];
 
+    const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages,
