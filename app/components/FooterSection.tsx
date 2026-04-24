@@ -26,6 +26,7 @@ const footerColumns = {
     { label: 'About',            href: '/about'            },
     { label: 'Services',         href: '/services'         },
     { label: 'Insights',         href: '/insights'         },
+    { label: 'Case Studies',     href: '/case-studies'     },
     { label: 'Interactive Demo', href: '/interactive-demo' },
     { label: 'Contact',          href: '/contact'          },
   ],
@@ -130,6 +131,32 @@ export default function FooterSection() {
                     <path d="M12 17V10M12 12.5c0-1.38 1.12-2.5 2.5-2.5S17 11.12 17 12.5V17" />
                   </svg>
                   <span>LinkedIn</span>
+                </a>
+                <a
+                  href="https://www.instagram.com/invisigent.ai"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Invisigent on Instagram"
+                  className="invisigent-footer-instagram invisigent-footer-contact-item"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="6" />
+                    <circle cx="12" cy="12" r="4.5" />
+                    <path d="M17.5 6.5 h.01" strokeLinecap="round" strokeWidth="2.5" />
+                  </svg>
+                  <span>Instagram</span>
+                </a>
+                <a
+                  href="https://x.com/invisigent_ai"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Invisigent on X (Twitter)"
+                  className="invisigent-footer-twitter invisigent-footer-contact-item"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 4.5h4.5L12 9l3.5-4.5H20L14.5 12 20.5 19.5H16L12 15l-4 4.5H3.5L9.5 12 4 4.5z" />
+                  </svg>
+                  <span>Twitter</span>
                 </a>
                 <a
                   href="/contact"

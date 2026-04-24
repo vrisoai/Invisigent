@@ -228,7 +228,7 @@ export function InteractiveDemoClient() {
   return (
     <main
       ref={mainRef}
-      className="interactive-demo-page relative overflow-x-hidden bg-bg-primary text-text-primary"
+      className="interactive-demo-page relative overflow-x-clip bg-bg-primary text-text-primary"
     >
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
@@ -352,6 +352,17 @@ export function InteractiveDemoClient() {
                   }`}
                   aria-label={tool.name}
                 >
+                  {/* Overlay link makes the whole card clickable for external tools */}
+                  {!tool.featured && tool.ctaExternal && tool.ctaHref && (
+                    <a
+                      href={tool.ctaHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-hidden="true"
+                      tabIndex={-1}
+                      className="absolute inset-0 z-0"
+                    />
+                  )}
                   {tool.featured ? (
                     <>
                       <span className="interactive-demo-featured-badge inline-flex w-fit items-center justify-center rounded-full border border-trust-amber/40 bg-trust-amber/10 font-mono text-[10px] tracking-[0.12em] text-trust-amber">
@@ -373,13 +384,25 @@ export function InteractiveDemoClient() {
                       </ul>
                       {getToolVisual(tool.id)}
                       {tool.ctaHref ? (
-                        <Link
-                          href={tool.ctaHref}
-                          className="btn-primary interactive-demo-featured-cta mt-auto w-auto self-center px-6 py-2 text-[0.875rem] whitespace-nowrap"
-                          aria-label={`${tool.cta} for ${tool.name}`}
-                        >
-                          {tool.cta}
-                        </Link>
+                        tool.ctaExternal ? (
+                          <a
+                            href={tool.ctaHref}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="btn-primary interactive-demo-featured-cta mt-auto w-auto self-center px-6 py-2 text-[0.875rem] whitespace-nowrap"
+                            aria-label={`${tool.cta} for ${tool.name}`}
+                          >
+                            {tool.cta}
+                          </a>
+                        ) : (
+                          <Link
+                            href={tool.ctaHref}
+                            className="btn-primary interactive-demo-featured-cta mt-auto w-auto self-center px-6 py-2 text-[0.875rem] whitespace-nowrap"
+                            aria-label={`${tool.cta} for ${tool.name}`}
+                          >
+                            {tool.cta}
+                          </Link>
+                        )
                       ) : (
                         <button
                           type="button"
@@ -414,13 +437,25 @@ export function InteractiveDemoClient() {
                         </div>
                       ) : null}
                       {tool.ctaHref ? (
-                        <Link
-                          href={tool.ctaHref}
-                          className="btn-primary mt-0 w-auto shrink-0 justify-self-center whitespace-nowrap"
-                          aria-label={`${tool.cta} for ${tool.name}`}
-                        >
-                          {tool.cta}
-                        </Link>
+                        tool.ctaExternal ? (
+                          <a
+                            href={tool.ctaHref}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="btn-primary mt-0 w-auto shrink-0 justify-self-center whitespace-nowrap"
+                            aria-label={`${tool.cta} for ${tool.name}`}
+                          >
+                            {tool.cta}
+                          </a>
+                        ) : (
+                          <Link
+                            href={tool.ctaHref}
+                            className="btn-primary mt-0 w-auto shrink-0 justify-self-center whitespace-nowrap"
+                            aria-label={`${tool.cta} for ${tool.name}`}
+                          >
+                            {tool.cta}
+                          </Link>
+                        )
                       ) : (
                         <button
                           type="button"

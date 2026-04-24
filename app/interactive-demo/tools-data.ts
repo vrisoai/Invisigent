@@ -5,16 +5,33 @@ export type Tool = {
   capabilities: string[];
   cta: string;
   ctaHref?: string;
+  ctaExternal?: boolean;
   featured?: boolean;
 };
 
 /** Standard tool cards with no preview mock (copy + CTA only) */
 export const STANDARD_TOOL_IDS_WITHOUT_MOCK = new Set<string>([
+  'market-intelligence-engine',
   'ecommerce-ai-assistant',
   'search-visibility-analyzer',
 ]);
 
 export const TOOLS: Tool[] = [
+  {
+    id: 'multi-agent-document-intelligence',
+    name: 'Multi-Agent Document Intelligence',
+    shortDescription:
+      'Full-stack AI application that analyzes PDF contracts in real time using a sequential three-agent pipeline — built for legal teams, business analysts, and C-suite executives.',
+    capabilities: [
+      'Automated contract entity extraction',
+      'Compliance risk flagging & assessment',
+      'Live-streaming executive briefing generation',
+    ],
+    cta: 'Launch Live Demo',
+    ctaHref: 'https://multi-agent-document-intelligence.vercel.app/',
+    ctaExternal: true,
+    featured: true,
+  },
   {
     id: 'market-intelligence-engine',
     name: 'Market Intelligence Engine',
@@ -27,7 +44,6 @@ export const TOOLS: Tool[] = [
     ],
     cta: 'Try Demo',
     ctaHref: '/market-intelligence-engine',
-    featured: true,
   },
   {
     id: 'ecommerce-ai-assistant',

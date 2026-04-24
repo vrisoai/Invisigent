@@ -217,7 +217,7 @@
   bottom: -0.2rem;
   height: 2px;
   border-radius: 999px;
-  background: linear-gradient(135deg, var(--color-border), var(--color-action-accent));
+  background: linear-gradient(90deg, #262626 0%, #262626 12%, #3B82F6 55%, #2D5BFF 100%);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 180ms ease-out, opacity 160ms ease-out;
@@ -274,6 +274,45 @@
 .navCta:focus-visible {
   outline: 2px solid var(--color-action-accent);
   outline-offset: 2px;
+}
+
+.navCaseCta {
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  font-size: 0.875rem;
+  letter-spacing: 0.06em;
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  background-color: rgba(59, 130, 246, 0.07);
+  color: #93C5FD;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.navCaseCta:hover {
+  background-color: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.65);
+  color: #BFDBFE;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.navCaseCta:focus-visible {
+  outline: 2px solid var(--color-action-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .navCaseCta {
+    font-size: 1rem;
+    padding: 0.5rem 1.1rem;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 @media (min-width: 1920px) {
