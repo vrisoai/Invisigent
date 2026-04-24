@@ -12,8 +12,8 @@ export type Tool = {
 /** Standard tool cards with no preview mock (copy + CTA only) */
 export const STANDARD_TOOL_IDS_WITHOUT_MOCK = new Set<string>([
   'market-intelligence-engine',
-  'ecommerce-ai-assistant',
-  'search-visibility-analyzer',
+  // 'ecommerce-ai-assistant',
+  // 'search-visibility-analyzer',
 ]);
 
 export const TOOLS: Tool[] = [
@@ -45,7 +45,7 @@ export const TOOLS: Tool[] = [
     cta: 'Try Demo',
     ctaHref: '/market-intelligence-engine',
   },
-  {
+  /* {
     id: 'ecommerce-ai-assistant',
     name: 'E-commerce AI Assistant',
     shortDescription:
@@ -57,8 +57,8 @@ export const TOOLS: Tool[] = [
     ],
     cta: 'Try Demo',
     ctaHref: '/ecommerce-ai-assistant',
-  },
-  {
+  }, */
+  /* {
     id: 'search-visibility-analyzer',
     name: 'Search Visibility Analyzer',
     shortDescription:
@@ -70,5 +70,5 @@ export const TOOLS: Tool[] = [
     ],
     cta: 'Generate Report',
     ctaHref: '/search-visibility-analyzer',
-  },
+  }, */
 ];

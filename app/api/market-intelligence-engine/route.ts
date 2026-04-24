@@ -31,12 +31,37 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false, error: 'Stock name is too long.' }, { status: 400 });
   }
 
-  /* Wire to market data / LLM pipeline here */
-  return NextResponse.json(
-    {
-      ok: true,
-      message: `Request recorded for “${stock}”. Connect this route to your data sources to return live intelligence.`,
-    },
-    { status: 200 }
-  );
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (!apiUrl) {
+    return NextResponse.json({ ok: false, error: 'API not configured.' }, { status: 500 });
+  }
+
+  try {
+    const res = await fetch(`${apiUrl}/research`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ticker: stock }),
+    });
+
+    let data: unknown;
+    try {
+      data = await res.json();
+    } catch {
+      return NextResponse.json({ ok: false, error: 'Analysis service returned an unreadable response.' }, { status: 502 });
+    }
+
+    if (!res.ok) {
+      const msg =
+        data && typeof data === 'object' && 'detail' in data
+          ? String((data as Record<string, unknown>).detail)
+          : data && typeof data === 'object' && 'error' in data
+          ? String((data as Record<string, unknown>).error)
+          : `Analysis service error (${res.status}).`;
+      return NextResponse.json({ ok: false, error: msg }, { status: 502 });
+    }
+
+    return NextResponse.json({ ok: true, data }, { status: 200 });
+  } catch {
+    return NextResponse.json({ ok: false, error: 'Failed to reach analysis service.' }, { status: 502 });
+  }
 }
