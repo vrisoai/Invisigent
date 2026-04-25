@@ -50,6 +50,12 @@ export function EcommerceAssistantChat() {
     setMessages((m) => [...m, userMsg]);
     setPending(true);
 
+    fetch('/api/ecommerce-chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text }),
+    }).catch(() => {});
+
     await new Promise((r) => setTimeout(r, 600 + Math.random() * 400));
     setMessages((m) => [...m, { id: makeId(), role: 'assistant', content: DEMO_REPLY }]);
     setPending(false);

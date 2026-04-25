@@ -161,12 +161,15 @@ function RiskBadge({
           {level}
         </span>
         <span style={{ fontWeight: 600, color: 'var(--color-text-primary)', fontSize: '0.9rem' }}>{title}</span>
-        <span style={{
-          fontFamily: 'var(--font-mono, monospace)',
-          fontSize: '0.58rem',
-          color: 'rgba(255,255,255,0.3)',
-          marginLeft: 'auto',
-        }}>
+        <span
+          className="cs-risk-clause"
+          style={{
+            fontFamily: 'var(--font-mono, monospace)',
+            fontSize: '0.58rem',
+            color: 'rgba(255,255,255,0.3)',
+            marginLeft: 'auto',
+          }}
+        >
           {clause}
         </span>
       </div>
@@ -189,17 +192,20 @@ function AgentBlock({
     <div className="cs-agent-block" style={{ display: 'flex', gap: '1.25rem', marginBottom: '2.25rem' }}>
       {/* timeline column */}
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', flexShrink: 0 }}>
-        <div style={{
-          width: '2.5rem', height: '2.5rem',
-          borderRadius: '50%',
-          background: 'rgba(59,130,246,0.12)',
-          border: '1px solid rgba(59,130,246,0.35)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontFamily: 'var(--font-mono, monospace)',
-          fontSize: '0.8rem', fontWeight: 700, color: AC,
-          flexShrink: 0,
-          boxShadow: '0 0 20px rgba(59,130,246,0.15)',
-        }}>
+        <div
+          className="cs-agent-node"
+          style={{
+            width: '2.5rem', height: '2.5rem',
+            borderRadius: '50%',
+            background: 'rgba(59,130,246,0.12)',
+            border: '1px solid rgba(59,130,246,0.35)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontFamily: 'var(--font-mono, monospace)',
+            fontSize: '0.8rem', fontWeight: 700, color: AC,
+            flexShrink: 0,
+            boxShadow: '0 0 20px rgba(59,130,246,0.15)',
+          }}
+        >
           {num}
         </div>
         <div
@@ -479,6 +485,16 @@ export default function CaseStudyDocIntelClient() {
           .cs-word { transform: none !important; opacity: 1 !important; }
           .cs-stat  { transform: none !important; opacity: 1 !important; }
         }
+        @media (max-width: 480px) {
+          .cs-agent-block { gap: 0.75rem !important; margin-bottom: 1.75rem !important; }
+          .cs-agent-node  { width: 1.875rem !important; height: 1.875rem !important; font-size: 0.7rem !important; }
+          .cs-risk-clause { margin-left: 0 !important; }
+          .cs-stat-grid   { gap: 0.625rem !important; }
+          .cs-stat        { min-width: calc(50% - 0.35rem) !important; padding: 0.85rem 1rem !important; }
+        }
+        @media (max-width: 360px) {
+          .cs-stat { min-width: 100% !important; }
+        }
       `}</style>
 
       {/* ── main ───────────────────────────────────────────────────────────── */}
@@ -586,7 +602,7 @@ export default function CaseStudyDocIntelClient() {
           </p>
 
           {/* ── stat pills ─────────────────────────────────────────────────── */}
-          <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: 'clamp(3rem, 6vw, 5rem)' }}>
+          <div className="cs-stat-grid" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: 'clamp(3rem, 6vw, 5rem)' }}>
             {[
               { v: '73s', l: 'Full risk assessment' },
               { v: '5', l: 'Issues identified' },
@@ -681,7 +697,7 @@ export default function CaseStudyDocIntelClient() {
 
             {/* Agent 2 */}
             <AgentBlock num={2} name="Compliance & risk analysis agent" time="24 seconds" spineRef={spine2Ref}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '1.25rem', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
                 <RiskGauge arcRef={gaugeArcRef} scoreRef={scoreRef} />
                 <div>
                   <p style={{ ...body, fontSize: '0.8rem', color: 'rgba(255,255,255,0.4)', marginBottom: '0.35rem' }}>

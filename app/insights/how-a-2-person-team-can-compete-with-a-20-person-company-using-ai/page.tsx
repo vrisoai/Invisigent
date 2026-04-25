@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FooterSection } from '@/app/components';
+import { FooterSection, InvisigentLogoSection } from '@/app/components';
 import Breadcrumb from '@/app/components/Breadcrumb';
 
 const CANONICAL =
@@ -604,6 +604,7 @@ export default function BlogPost() {
         </article>
       </main>
 
+      <InvisigentLogoSection />
       <FooterSection />
     </>
   );
