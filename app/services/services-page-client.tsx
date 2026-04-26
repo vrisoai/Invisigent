@@ -321,12 +321,12 @@ function PositioningBlock() {
     gsap.set(h2Ref.current, { opacity: 0, x: -32 });
     gsap.to(h2Ref.current, {
       opacity: 1, x: 0, duration: 0.7, ease: 'expo.out',
-      scrollTrigger: { trigger: h2Ref.current, start: 'top 85%', once: true },
+      scrollTrigger: { trigger: h2Ref.current, start: 'top 100%', once: true },
     });
     gsap.set([p1Ref.current, p2Ref.current], { opacity: 0, y: 16 });
     gsap.to([p1Ref.current, p2Ref.current], {
       opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.1,
-      scrollTrigger: { trigger: p1Ref.current, start: 'top 88%', once: true },
+      scrollTrigger: { trigger: p1Ref.current, start: 'top 100%', once: true },
     });
 
     const negItems = negRef.current?.querySelectorAll<HTMLElement>('.neg-item');
@@ -335,7 +335,7 @@ function PositioningBlock() {
       gsap.set(dashes, { scaleX: 0, transformOrigin: 'left' });
       gsap.set(negItems, { opacity: 0, x: -24 });
       ScrollTrigger.batch(negItems, {
-        start: 'top 88%',
+        start: 'top 100%',
         once: true,
         onEnter: els => {
           gsap.to(els,    { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', stagger: 0.12 });
@@ -347,12 +347,12 @@ function PositioningBlock() {
     gsap.set(quoteRef.current, { opacity: 0, y: 12 });
     gsap.to(quoteRef.current, {
       opacity: 1, y: 0, duration: 0.6, ease: 'power2.out',
-      scrollTrigger: { trigger: quoteRef.current, start: 'top 88%', once: true },
+      scrollTrigger: { trigger: quoteRef.current, start: 'top 100%', once: true },
     });
     gsap.set(techRef.current, { opacity: 0, y: 12 });
     gsap.to(techRef.current, {
       opacity: 1, y: 0, duration: 0.5, ease: 'power2.out',
-      scrollTrigger: { trigger: techRef.current, start: 'top 90%', once: true },
+      scrollTrigger: { trigger: techRef.current, start: 'top 100%', once: true },
     });
   }, { scope: sectionRef, dependencies: [reducedMotion] });
 
@@ -688,21 +688,21 @@ function ServiceCards() {
     gsap.set(headerRef.current, { opacity: 0, y: 24 });
     gsap.to(headerRef.current, {
       opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
-      scrollTrigger: { trigger: headerRef.current, start: 'top 85%', once: true },
+      scrollTrigger: { trigger: headerRef.current, start: 'top 100%', once: true },
     });
     const navItems = navWrapRef.current?.querySelectorAll<HTMLElement>('.service-nav-item');
     if (navItems?.length) {
       gsap.set(navItems, { opacity: 0, x: -16 });
       ScrollTrigger.create({
         trigger: navWrapRef.current,
-        start: 'top 82%', once: true,
+        start: 'top 100%', once: true,
         onEnter: () => gsap.to(navItems, { opacity: 1, x: 0, duration: 0.45, ease: 'power2.out', stagger: 0.055 }),
       });
     }
     gsap.set(detailRef.current, { opacity: 0, x: 20 });
     gsap.to(detailRef.current, {
       opacity: 1, x: 0, duration: 0.65, ease: 'power2.out', delay: 0.15,
-      scrollTrigger: { trigger: detailRef.current, start: 'top 85%', once: true },
+      scrollTrigger: { trigger: detailRef.current, start: 'top 100%', once: true },
     });
   }, { scope: sectionRef, dependencies: [reducedMotion, isDesktop] });
 
