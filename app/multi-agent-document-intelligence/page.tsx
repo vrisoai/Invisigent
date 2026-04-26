@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/app/components/Breadcrumb";
+import { InvisigentLogoSection } from "@/app/components/InvisigentLogoSection";
+import FooterSection from "@/app/components/FooterSection";
 import MultiAgentDemoClient from "./MultiAgentDemoClient";
 
 export const metadata: Metadata = {
@@ -19,6 +21,8 @@ export default function MultiAgentDocumentIntelligencePage() {
         ]}
       />
       <MultiAgentDemoClient />
+      <InvisigentLogoSection />
+      <FooterSection />
     </>
   );
 }

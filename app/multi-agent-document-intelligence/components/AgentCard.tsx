@@ -33,30 +33,45 @@ export default function AgentCard({ agentNumber, agentState }: Props) {
   const { status, streamText, result, metrics, error } = agentState;
 
   return (
-    <div className={`relative w-full rounded-2xl border-2 p-4 sm:p-5 transition-all duration-500 ${STATUS_RING[status]}`}>
-
+    <div
+      className={`relative w-full rounded-2xl border-2 transition-all duration-500 ${STATUS_RING[status]}`}
+      style={{ display: "flex", flexDirection: "column", overflow: "hidden" }}
+    >
       {/* Header */}
-      <div className="flex items-start gap-3 mb-3">
-        <div className="w-9 h-9 rounded-xl bg-bg-primary border border-white/10 flex items-center justify-center text-lg shrink-0">
+      <div style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem", padding: "1.25rem 1.25rem 1rem" }}>
+        <div
+          style={{
+            width: 40, height: 40, borderRadius: "0.75rem", flexShrink: 0,
+            background: "var(--color-bg-primary)", border: "1px solid rgba(255,255,255,0.1)",
+            display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.2rem",
+          }}
+        >
           {meta.icon}
         </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] font-semibold text-text-tertiary uppercase tracking-widest">
+
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+            <span style={{ fontSize: "0.625rem", fontWeight: 600, color: "var(--color-text-tertiary)", textTransform: "uppercase", letterSpacing: "0.12em", fontFamily: "var(--font-mono)" }}>
               Agent {agentNumber}
             </span>
             <span className={`inline-block w-1.5 h-1.5 rounded-full shrink-0 ${STATUS_DOT[status]}`} />
           </div>
-          <h3 className="font-semibold text-text-primary text-xs sm:text-sm leading-snug mt-0.5 font-serif">
+          {/* Use p not h3 — global h3 { font-size: 1.375rem } would override text-sm */}
+          <p style={{ fontWeight: 600, fontSize: "0.9375rem", lineHeight: "1.3", color: "var(--color-text-primary)", margin: "0.25rem 0 0", fontFamily: "var(--font-serif)" }}>
             {meta.name}
-          </h3>
+          </p>
           {status === "pending" && (
-            <p className="text-[11px] text-text-tertiary mt-0.5 leading-snug">{meta.description}</p>
+            <p style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)", margin: "0.3rem 0 0", lineHeight: "1.5" }}>
+              {meta.description}
+            </p>
           )}
         </div>
 
         {STATUS_BADGE[status] && (
-          <span className={`shrink-0 text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded-full ${STATUS_BADGE[status]}`}>
+          <span
+            className={STATUS_BADGE[status]}
+            style={{ flexShrink: 0, fontSize: "0.625rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", padding: "0.3rem 0.75rem", borderRadius: "9999px" }}
+          >
             {status}
           </span>
         )}
@@ -64,21 +79,30 @@ export default function AgentCard({ agentNumber, agentState }: Props) {
 
       {/* Streaming text */}
       {(status === "running" || (status === "done" && streamText)) && (
-        <div className="text-[11px] text-text-secondary bg-bg-primary border border-white/8 rounded-lg p-3 max-h-36 overflow-y-auto whitespace-pre-wrap break-words leading-relaxed font-mono">
-          {streamText || (
-            <span className="text-text-tertiary italic">Waiting for response…</span>
-          )}
-          {status === "running" && (
-            <span className="inline-block w-1.5 h-3.5 bg-link ml-0.5 align-text-bottom animate-pulse rounded-sm" />
-          )}
+        <div style={{ padding: "0 1.25rem" }}>
+          <div
+            style={{
+              fontSize: "0.6875rem", color: "var(--color-text-secondary)", background: "var(--color-bg-primary)",
+              border: "1px solid rgba(255,255,255,0.08)", borderRadius: "0.625rem", padding: "0.875rem",
+              maxHeight: "9rem", overflowY: "auto", whiteSpace: "pre-wrap", wordBreak: "break-word",
+              lineHeight: "1.6", fontFamily: "var(--font-mono)",
+            }}
+          >
+            {streamText || <span style={{ color: "var(--color-text-tertiary)", fontStyle: "italic" }}>Waiting for response…</span>}
+            {status === "running" && (
+              <span style={{ display: "inline-block", width: 6, height: 14, background: "var(--color-link)", marginLeft: 2, verticalAlign: "text-bottom", borderRadius: 2, animation: "pulse 1s ease-in-out infinite" }} />
+            )}
+          </div>
         </div>
       )}
 
       {/* Error */}
       {status === "error" && error && (
-        <p className="text-xs text-red-400 mt-2 bg-red-950/40 rounded-lg p-2 border border-red-800/40">
-          {error}
-        </p>
+        <div style={{ padding: "0 1.25rem" }}>
+          <p style={{ fontSize: "0.75rem", color: "#f87171", background: "rgba(127,29,29,0.3)", borderRadius: "0.625rem", padding: "0.625rem 0.875rem", border: "1px solid rgba(153,27,27,0.4)", margin: 0 }}>
+            {error}
+          </p>
+        </div>
       )}
 
       {/* Agent 2 risk summary */}
@@ -88,13 +112,13 @@ export default function AgentCard({ agentNumber, agentState }: Props) {
 
       {/* Cache metrics */}
       {status === "done" && metrics && (
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-3 text-[11px]">
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.375rem 0.75rem", fontSize: "0.6875rem", padding: "0.875rem 1.25rem", marginTop: "auto", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           {metrics.cache_read_tokens > 0 && agentNumber > 1 && (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-trust-amber/10 text-trust-amber border border-trust-amber/25 font-medium">
-              ⚡ cache hit · {metrics.cache_read_tokens.toLocaleString()} tokens saved
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "0.25rem", padding: "0.2rem 0.7rem", borderRadius: "9999px", background: "rgba(251,191,36,0.08)", color: "var(--color-trust-amber)", border: "1px solid rgba(251,191,36,0.2)", fontWeight: 500 }}>
+              ⚡ {metrics.cache_read_tokens.toLocaleString()} tokens saved
             </span>
           )}
-          <span className="text-text-tertiary font-mono">
+          <span style={{ color: "var(--color-text-tertiary)", fontFamily: "var(--font-mono)" }}>
             {metrics.total_input_tokens.toLocaleString()} in · {metrics.output_tokens.toLocaleString()} out
           </span>
         </div>
@@ -108,17 +132,17 @@ function RiskSummary({ result }: { result: ComplianceResult }) {
   const highCount     = result.risk_flags.filter((f) => f.severity === "high").length;
 
   return (
-    <div className="mt-3 flex flex-wrap gap-2">
-      <span className="text-xs px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-text-secondary">
-        Risk score: <strong className="text-text-primary">{result.overall_risk_score}/10</strong>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.375rem", padding: "0.875rem 1.25rem 0", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+      <span style={{ fontSize: "0.75rem", padding: "0.25rem 0.75rem", borderRadius: "9999px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--color-text-secondary)" }}>
+        Risk score: <strong style={{ color: "var(--color-text-primary)" }}>{result.overall_risk_score}/10</strong>
       </span>
       {criticalCount > 0 && (
-        <span className="text-xs px-2 py-0.5 rounded-full bg-red-950/60 border border-red-800/50 text-red-400">
+        <span style={{ fontSize: "0.75rem", padding: "0.25rem 0.75rem", borderRadius: "9999px", background: "rgba(127,29,29,0.4)", border: "1px solid rgba(153,27,27,0.5)", color: "#f87171" }}>
           {criticalCount} critical
         </span>
       )}
       {highCount > 0 && (
-        <span className="text-xs px-2 py-0.5 rounded-full bg-orange-950/60 border border-orange-800/50 text-orange-400">
+        <span style={{ fontSize: "0.75rem", padding: "0.25rem 0.75rem", borderRadius: "9999px", background: "rgba(124,45,18,0.4)", border: "1px solid rgba(154,52,18,0.5)", color: "#fb923c" }}>
           {highCount} high
         </span>
       )}

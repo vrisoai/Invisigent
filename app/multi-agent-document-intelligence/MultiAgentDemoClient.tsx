@@ -26,9 +26,9 @@ export default function MultiAgentDemoClient() {
         className="border-b border-white/5 bg-bg-primary/95 backdrop-blur-sm sticky z-30"
         style={{ top: "calc(var(--nav-h, 64px) + 37px)" }}
       >
-        <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-between gap-3">
-          <span className="text-[10px] font-mono text-text-tertiary uppercase tracking-widest hidden sm:block">
-            LangGraph · Claude · LangSmith
+        <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-3">
+          <span className="flex-1 text-[10px] font-mono text-text-tertiary uppercase tracking-widest hidden sm:block text-center">
+            LangGraph · OpenAI · LangSmith
           </span>
           <div className="flex items-center gap-3 shrink-0 ml-auto">
             {phase === "streaming" && (
@@ -76,19 +76,11 @@ export default function MultiAgentDemoClient() {
               <UploadZone onFile={startPipeline} disabled={isBusy} />
             </div>
 
-            {phase === "uploading" && !state.wakingUp && (
-              <p className="text-sm text-link animate-pulse font-mono text-center">
-                Uploading and extracting text…
-              </p>
-            )}
-            {phase === "uploading" && state.wakingUp && (
-              <div className="w-full rounded-xl border border-trust-amber/25 bg-trust-amber/5 px-5 py-4 text-center space-y-1.5">
-                <p className="text-sm font-semibold text-trust-amber font-mono animate-pulse">
-                  ⚡ Waking up the server…
-                </p>
-                <p className="text-xs text-text-tertiary leading-relaxed">
-                  The backend is hosted on Render&apos;s free tier and sleeps after inactivity.
-                  First request takes <strong className="text-text-secondary">30–60 seconds</strong> — please hold on.
+            {phase === "uploading" && (
+              <div className="flex flex-col items-center gap-3">
+                <div className="w-7 h-7 rounded-full border-2 border-white/10 border-t-link animate-spin" />
+                <p className="text-xs text-text-tertiary font-mono text-center">
+                  {state.wakingUp ? "Starting up — this may take a moment…" : "Uploading…"}
                 </p>
               </div>
             )}
@@ -102,9 +94,9 @@ export default function MultiAgentDemoClient() {
 
         {/* ── Agent pipeline — full readable width ── */}
         {(phase === "streaming" || phase === "done") && (
-          <section className="w-full max-w-5xl">
-            <div className="flex items-center justify-between mb-5">
-              <p className="text-[11px] font-semibold text-text-tertiary uppercase tracking-widest font-mono">
+          <section className="w-full max-w-5xl pt-4 sm:pt-6">
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.25rem 0", marginBottom: "1.25rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+              <p style={{ fontSize: "0.6875rem", fontWeight: 600, color: "var(--color-text-tertiary)", textTransform: "uppercase", letterSpacing: "0.14em", fontFamily: "var(--font-mono)", margin: 0 }}>
                 {phase === "streaming" ? "Agents processing…" : "Analysis complete"}
               </p>
               {phase === "streaming" && (

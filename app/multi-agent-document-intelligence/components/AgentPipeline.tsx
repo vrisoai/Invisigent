@@ -12,7 +12,7 @@ export default function AgentPipeline({ pipelineState }: Props) {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 relative">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 relative">
         {([1, 2, 3] as const).map((n, idx) => (
           <div key={n} className="relative flex flex-col md:flex-row md:items-stretch">
             <AgentCard agentNumber={n} agentState={agents[n - 1]} />
