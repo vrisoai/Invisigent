@@ -33,7 +33,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.invisigent.ai'),
+  metadataBase: new URL('https://invisigent.ai'),
   title: {
     default: 'Invisigent — Enterprise AI Systems Architecture',
     template: '%s | Invisigent',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     'enterprise AI US',
     'AI automation Europe',
   ],
-  authors: [{ name: 'Invisigent', url: 'https://www.invisigent.ai' }],
+  authors: [{ name: 'Invisigent', url: 'https://invisigent.ai' }],
   creator: 'Invisigent',
   publisher: 'Invisigent',
   applicationName: 'Invisigent',
@@ -79,16 +79,16 @@ export const metadata: Metadata = {
   },
   alternates: {
     languages: {
-      'x-default': 'https://www.invisigent.ai',
-      'en-US': 'https://www.invisigent.ai',
-      'en-IN': 'https://www.invisigent.ai',
+      'x-default': 'https://invisigent.ai',
+      'en-US': 'https://invisigent.ai',
+      'en-IN': 'https://invisigent.ai',
     },
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['en_IN', 'en_GB'],
-    url: 'https://www.invisigent.ai',
+    url: 'https://invisigent.ai',
     siteName: 'Invisigent',
     title: 'Invisigent — Enterprise AI Systems Architecture',
     description:
@@ -121,7 +121,7 @@ export const metadata: Metadata = {
     'content-language': 'en',
     /* ── AI / GEO citation signals ── */
     'ai-content-declaration': 'human-authored',
-    'citation-url': 'https://www.invisigent.ai',
+    'citation-url': 'https://invisigent.ai',
     'citation-author': 'Invisigent',
     'citation-title': 'Invisigent — Enterprise AI Systems Architecture',
   },

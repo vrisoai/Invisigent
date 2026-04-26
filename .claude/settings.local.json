@@ -5,7 +5,8 @@
       "Bash(npx tsc *)",
       "Skill(claude-api)",
       "Skill(claude-api:*)",
-      "Bash(xargs grep *)"
+      "Bash(xargs grep *)",
+      "Bash(xargs sed *)"
     ]
   }
 }

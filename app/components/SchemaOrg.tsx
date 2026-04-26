@@ -9,12 +9,12 @@ export default function SchemaOrg() {
     '@graph': [
       {
         '@type': 'Organization',
-        '@id': 'https://www.invisigent.ai/#organization',
+        '@id': 'https://invisigent.ai/#organization',
         name: 'Invisigent',
-        url: 'https://www.invisigent.ai',
+        url: 'https://invisigent.ai',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://www.invisigent.ai/logo.png',
+          url: 'https://invisigent.ai/logo.png',
           width: 200,
           height: 60,
         },
@@ -56,24 +56,24 @@ export default function SchemaOrg() {
       },
       {
         '@type': 'WebSite',
-        '@id': 'https://www.invisigent.ai/#website',
-        url: 'https://www.invisigent.ai',
+        '@id': 'https://invisigent.ai/#website',
+        url: 'https://invisigent.ai',
         name: 'Invisigent',
-        publisher: { '@id': 'https://www.invisigent.ai/#organization' },
+        publisher: { '@id': 'https://invisigent.ai/#organization' },
         potentialAction: {
           '@type': 'SearchAction',
           target: {
             '@type': 'EntryPoint',
-            urlTemplate: 'https://www.invisigent.ai/search?q={search_term_string}',
+            urlTemplate: 'https://invisigent.ai/search?q={search_term_string}',
           },
           'query-input': 'required name=search_term_string',
         },
       },
       {
         '@type': 'ConsultingService',
-        '@id': 'https://www.invisigent.ai/#service',
+        '@id': 'https://invisigent.ai/#service',
         name: 'Enterprise AI Architecture Retainer',
-        provider: { '@id': 'https://www.invisigent.ai/#organization' },
+        provider: { '@id': 'https://invisigent.ai/#organization' },
         serviceType: 'AI Systems Architecture',
         description:
           'Strategic AI retainer for enterprise organizations requiring sovereign multi-agent orchestration and governance infrastructure.',

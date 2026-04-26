@@ -28,6 +28,18 @@ const HSTS_HEADER = {
 };
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      // Force all www traffic → non-www (301 permanent)
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.invisigent.ai' }],
+        destination: 'https://invisigent.ai/:path*',
+        permanent: true,
+      },
+    ];
+  },
+
   async headers() {
     const isProduction = process.env.VERCEL_ENV === 'production';
 
