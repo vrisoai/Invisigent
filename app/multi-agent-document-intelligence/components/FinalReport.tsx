@@ -88,8 +88,9 @@ export default function FinalReport({ extraction, compliance, summary, traceUrl 
 
       {/* ── Report header ── */}
       <div style={{
-        padding: "1rem 1.25rem", borderBottom: "1px solid rgba(255,255,255,0.07)",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
+        padding: "clamp(0.875rem, 3vw, 1.25rem) clamp(1rem, 4vw, 1.5rem)",
+        borderBottom: "1px solid rgba(255,255,255,0.07)",
+        display: "flex", alignItems: "flex-start", justifyContent: "space-between",
         gap: "0.75rem", flexWrap: "wrap",
       }}>
         <div style={{ minWidth: 0 }}>
@@ -97,7 +98,7 @@ export default function FinalReport({ extraction, compliance, summary, traceUrl 
           <p style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text-primary)", margin: 0, fontFamily: "var(--font-serif)", lineHeight: "1.3" }}>
             Final Report
           </p>
-          <p style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)", margin: "0.2rem 0 0", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+          <p style={{ fontSize: "0.75rem", color: "var(--color-text-tertiary)", margin: "0.2rem 0 0", wordBreak: "break-word" }}>
             {extraction.document_type}
           </p>
         </div>
@@ -132,7 +133,7 @@ export default function FinalReport({ extraction, compliance, summary, traceUrl 
       </div>
 
       {/* ── Body ── */}
-      <div style={{ padding: "1.5rem 1.25rem", display: "flex", flexDirection: "column", gap: "2rem" }}>
+      <div style={{ padding: "clamp(1.25rem, 4vw, 1.75rem) clamp(1rem, 4vw, 1.5rem)", display: "flex", flexDirection: "column", gap: "clamp(1.25rem, 4vw, 2rem)" }}>
 
         {/* Key points */}
         {summary.key_points.length > 0 && (

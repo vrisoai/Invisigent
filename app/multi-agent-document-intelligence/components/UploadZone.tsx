@@ -58,8 +58,7 @@ export default function UploadZone({ onFile, disabled }: Props) {
           border: `2px dashed ${isDragging ? "rgba(45,91,255,0.6)" : "rgba(255,255,255,0.12)"}`,
           borderRadius: "1.25rem",
           background: isDragging ? "rgba(45,91,255,0.06)" : "rgba(255,255,255,0.02)",
-          /* generous padding: 5rem vertical, fluid horizontal */
-          padding: "5rem clamp(1.5rem, 6vw, 4rem)",
+          padding: "clamp(2.5rem, 8vw, 5rem) clamp(1.25rem, 6vw, 4rem)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -75,9 +74,9 @@ export default function UploadZone({ onFile, disabled }: Props) {
         {/* Icon */}
         <div
           style={{
-            width: 60,
-            height: 60,
-            borderRadius: "1rem",
+            width: "clamp(44px, 10vw, 60px)",
+            height: "clamp(44px, 10vw, 60px)",
+            borderRadius: "0.875rem",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

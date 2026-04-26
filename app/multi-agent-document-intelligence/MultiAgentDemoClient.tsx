@@ -26,7 +26,7 @@ export default function MultiAgentDemoClient() {
         className="border-b border-white/5 bg-bg-primary/95 backdrop-blur-sm sticky z-30"
         style={{ top: "calc(var(--nav-h, 64px) + 37px)" }}
       >
-        <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-2.5 flex items-center gap-3">
+        <div className="w-full max-w-5xl mx-auto py-2.5 flex items-center gap-3" style={{ paddingLeft: "clamp(1rem, 4vw, 1.5rem)", paddingRight: "clamp(1rem, 4vw, 1.5rem)" }}>
           <span className="flex-1 text-[10px] font-mono text-text-tertiary uppercase tracking-widest hidden sm:block text-center">
             LangGraph · OpenAI · LangSmith
           </span>
@@ -52,15 +52,21 @@ export default function MultiAgentDemoClient() {
       </div>
 
       {/* ── Page body ── */}
-      <div className="w-full px-4 sm:px-6 py-16 sm:py-20 flex flex-col items-center gap-12 sm:gap-16">
+      <div
+        className="w-full flex flex-col items-center"
+        style={{
+          padding: "clamp(2rem, 5vw, 5rem) clamp(1.25rem, 5vw, 4rem)",
+          gap: "clamp(1.5rem, 4vw, 4rem)",
+        }}
+      >
 
         {/* ── Upload section — narrow + centered ── */}
         {(phase === "idle" || phase === "uploading" || phase === "error") && (
-          <section className="w-full max-w-xl flex flex-col items-center gap-8">
+          <section className="w-full max-w-xl flex flex-col items-center gap-6 sm:gap-8">
             <div className="text-center" style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
               <p
                 className="font-serif font-bold tracking-tight text-text-primary"
-                style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)", lineHeight: "1.2", margin: 0, paddingTop: "2rem" }}
+                style={{ fontSize: "clamp(1.5rem, 5vw, 2.5rem)", lineHeight: "1.2", margin: 0, paddingTop: "1.25rem" }}
               >
                 Analyze any contract in seconds
               </p>
@@ -94,7 +100,7 @@ export default function MultiAgentDemoClient() {
 
         {/* ── Agent pipeline — full readable width ── */}
         {(phase === "streaming" || phase === "done") && (
-          <section className="w-full max-w-5xl pt-4 sm:pt-6">
+          <section className="w-full max-w-5xl">
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "1.25rem 0", marginBottom: "1.25rem", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
               <p style={{ fontSize: "0.6875rem", fontWeight: 600, color: "var(--color-text-tertiary)", textTransform: "uppercase", letterSpacing: "0.14em", fontFamily: "var(--font-mono)", margin: 0 }}>
                 {phase === "streaming" ? "Agents processing…" : "Analysis complete"}

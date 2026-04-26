@@ -38,7 +38,7 @@ export default function AgentCard({ agentNumber, agentState }: Props) {
       style={{ display: "flex", flexDirection: "column", overflow: "hidden" }}
     >
       {/* Header */}
-      <div style={{ display: "flex", alignItems: "flex-start", gap: "0.875rem", padding: "1.25rem 1.25rem 1rem" }}>
+      <div style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem", padding: "clamp(1rem, 3vw, 1.25rem) clamp(1rem, 3vw, 1.25rem) 0.875rem" }}>
         <div
           style={{
             width: 40, height: 40, borderRadius: "0.75rem", flexShrink: 0,
@@ -79,7 +79,7 @@ export default function AgentCard({ agentNumber, agentState }: Props) {
 
       {/* Streaming text */}
       {(status === "running" || (status === "done" && streamText)) && (
-        <div style={{ padding: "0 1.25rem" }}>
+        <div style={{ padding: "0 clamp(1rem, 3vw, 1.25rem)" }}>
           <div
             style={{
               fontSize: "0.6875rem", color: "var(--color-text-secondary)", background: "var(--color-bg-primary)",
@@ -98,7 +98,7 @@ export default function AgentCard({ agentNumber, agentState }: Props) {
 
       {/* Error */}
       {status === "error" && error && (
-        <div style={{ padding: "0 1.25rem" }}>
+        <div style={{ padding: "0 clamp(1rem, 3vw, 1.25rem)" }}>
           <p style={{ fontSize: "0.75rem", color: "#f87171", background: "rgba(127,29,29,0.3)", borderRadius: "0.625rem", padding: "0.625rem 0.875rem", border: "1px solid rgba(153,27,27,0.4)", margin: 0 }}>
             {error}
           </p>
@@ -112,7 +112,7 @@ export default function AgentCard({ agentNumber, agentState }: Props) {
 
       {/* Cache metrics */}
       {status === "done" && metrics && (
-        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.375rem 0.75rem", fontSize: "0.6875rem", padding: "0.875rem 1.25rem", marginTop: "auto", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.375rem 0.75rem", fontSize: "0.6875rem", padding: "0.875rem clamp(1rem, 3vw, 1.25rem)", marginTop: "auto", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
           {metrics.cache_read_tokens > 0 && agentNumber > 1 && (
             <span style={{ display: "inline-flex", alignItems: "center", gap: "0.25rem", padding: "0.2rem 0.7rem", borderRadius: "9999px", background: "rgba(251,191,36,0.08)", color: "var(--color-trust-amber)", border: "1px solid rgba(251,191,36,0.2)", fontWeight: 500 }}>
               ⚡ {metrics.cache_read_tokens.toLocaleString()} tokens saved
@@ -132,7 +132,7 @@ function RiskSummary({ result }: { result: ComplianceResult }) {
   const highCount     = result.risk_flags.filter((f) => f.severity === "high").length;
 
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.375rem", padding: "0.875rem 1.25rem 0", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: "0.375rem", padding: "0.875rem clamp(1rem, 3vw, 1.25rem) 0", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       <span style={{ fontSize: "0.75rem", padding: "0.25rem 0.75rem", borderRadius: "9999px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "var(--color-text-secondary)" }}>
         Risk score: <strong style={{ color: "var(--color-text-primary)" }}>{result.overall_risk_score}/10</strong>
       </span>

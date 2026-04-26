@@ -12,15 +12,15 @@ export default function AgentPipeline({ pipelineState }: Props) {
 
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 relative">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5 relative">
         {([1, 2, 3] as const).map((n, idx) => (
-          <div key={n} className="relative flex flex-col md:flex-row md:items-stretch">
+          <div key={n} className="relative flex flex-col lg:flex-row lg:items-stretch">
             <AgentCard agentNumber={n} agentState={agents[n - 1]} />
 
             {idx < 2 && (
               <>
-                {/* Connector — desktop */}
-                <div className="hidden md:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 items-center">
+                {/* Connector — desktop (lg+) */}
+                <div className="hidden lg:flex absolute -right-5 top-1/2 -translate-y-1/2 z-10 items-center">
                   <div className={`w-10 h-px transition-colors duration-500 ${agents[n - 1].status === "done" ? "bg-link/60" : "bg-white/10"}`} />
                   <svg
                     className={`w-3 h-3 -ml-0.5 transition-colors duration-500 ${agents[n - 1].status === "done" ? "text-link/60" : "text-white/10"}`}
@@ -31,8 +31,8 @@ export default function AgentPipeline({ pipelineState }: Props) {
                   </svg>
                 </div>
 
-                {/* Connector — mobile */}
-                <div className="flex md:hidden justify-center py-1 items-center gap-1 flex-col">
+                {/* Connector — below lg */}
+                <div className="flex lg:hidden justify-center py-1 items-center gap-1 flex-col">
                   <div className={`w-px h-4 transition-colors duration-500 ${agents[n - 1].status === "done" ? "bg-link/60" : "bg-white/10"}`} />
                   <svg
                     className={`w-3 h-3 -mt-0.5 transition-colors duration-500 ${agents[n - 1].status === "done" ? "text-link/60" : "text-white/10"}`}
