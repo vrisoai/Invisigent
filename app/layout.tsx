@@ -6,6 +6,7 @@ import { Navbar } from '@/app/components';
 import { CustomCursor } from '@/app/components/CustomCursor';
 import { ChatbotWidget } from '@/app/components/ChatbotWidget';
 import SchemaOrg from '@/app/components/SchemaOrg';
+import { Analytics } from '@vercel/analytics/next';
 import '@/app/styles/globals.css';
 
 const GA_ID = 'G-WNNNJCTFS1';
@@ -160,6 +161,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <ChatbotWidget />
+        <Analytics />
       </body>
     </html>
   );
