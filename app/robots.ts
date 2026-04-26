@@ -41,7 +41,7 @@ export default function robots(): MetadataRoute.Robots {
       // ByteDance / TikTok
       { userAgent: 'Bytespider',    allow: '/' },
     ],
-    sitemap: 'https://invisigent.ai/sitemap.xml',
-    host: 'https://invisigent.ai',
+    sitemap: 'https://www.invisigent.ai/sitemap.xml',
+    host: 'https://www.invisigent.ai',
   };
 }

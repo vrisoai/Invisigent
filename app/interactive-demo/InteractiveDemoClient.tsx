@@ -352,12 +352,20 @@ export function InteractiveDemoClient() {
                   }`}
                   aria-label={tool.name}
                 >
-                  {/* Overlay link makes the whole card clickable for external tools */}
-                  {!tool.featured && tool.ctaExternal && tool.ctaHref && (
+                  {/* Overlay link makes the whole card clickable */}
+                  {tool.ctaHref && tool.ctaExternal && (
                     <a
                       href={tool.ctaHref}
                       target="_blank"
                       rel="noreferrer"
+                      aria-hidden="true"
+                      tabIndex={-1}
+                      className="absolute inset-0 z-0"
+                    />
+                  )}
+                  {tool.ctaHref && !tool.ctaExternal && (
+                    <Link
+                      href={tool.ctaHref}
                       aria-hidden="true"
                       tabIndex={-1}
                       className="absolute inset-0 z-0"

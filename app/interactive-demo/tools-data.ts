@@ -28,8 +28,8 @@ export const TOOLS: Tool[] = [
       'Live-streaming executive briefing generation',
     ],
     cta: 'Launch Live Demo',
-    ctaHref: 'https://multi-agent-document-intelligence.vercel.app/',
-    ctaExternal: true,
+    ctaHref: '/multi-agent-document-intelligence',
+    ctaExternal: false,
     featured: true,
   },
   {
