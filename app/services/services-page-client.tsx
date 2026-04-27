@@ -2,6 +2,7 @@
 
 import { useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -121,6 +122,7 @@ const SERVICES_CORE_SECTION_ID = 'services-core';
 const SERVICES_HOW_WE_ENGAGE_SECTION_ID = 'services-how-we-engage';
 
 function ServicesHero() {
+  const router     = useRouter();
   const sectionRef = useRef<HTMLElement>(null);
   const badgeRef   = useRef<HTMLDivElement>(null);
   const labelRef   = useRef<HTMLDivElement>(null);
@@ -288,7 +290,7 @@ function ServicesHero() {
             style={{ display: 'flex', justifyContent: 'center', gap: 'clamp(0.75rem, 1.2vw, 2rem)', opacity: 0 }}
             className="flex-col sm:flex-row"
           >
-            <MagneticButton primary>Start the Conversation</MagneticButton>
+            <MagneticButton primary onClick={() => router.push('/contact')}>Start the Conversation</MagneticButton>
             <MagneticButton onClick={scrollToCoreServices}>Explore Services</MagneticButton>
           </div>
         </div>

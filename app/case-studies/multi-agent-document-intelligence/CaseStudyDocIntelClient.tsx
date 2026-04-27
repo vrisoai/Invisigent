@@ -219,7 +219,7 @@ function AgentBlock({
         />
       </div>
       {/* content */}
-      <div style={{ flex: 1, paddingBottom: '1rem' }}>
+      <div style={{ flex: 1, minWidth: 0, paddingBottom: '1rem' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
           <h3 style={{ fontSize: '0.9375rem', fontWeight: 600, color: 'var(--color-text-primary)', margin: 0 }}>
             {name}
@@ -658,7 +658,7 @@ export default function CaseStudyDocIntelClient() {
             {/* Agent 1 */}
             <AgentBlock num={1} name="Entity & clause extraction agent" time="18 seconds" spineRef={spine1Ref}>
               <div style={{ overflowX: 'auto' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '22rem' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '16rem' }}>
                   <tbody>
                     {[
                       ['Parties', 'Cloud infrastructure vendor · SaaS startup (customer)'],

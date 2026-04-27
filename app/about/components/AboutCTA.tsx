@@ -167,7 +167,7 @@ export function AboutCTA({ reducedMotion = false }: AboutCTAProps) {
                 Discuss Your AI Architecture
               </MagneticLinkButton>
               <MagneticLinkButton
-                href="/#how-we-work"
+                href="/about#how-we-work"
                 className="btn-base btn-secondary w-full sm:w-auto"
                 ariaLabel="See how we work"
               >

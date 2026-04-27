@@ -4,6 +4,7 @@
 import Script from 'next/script';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { EASE } from '@/app/lib/animations';
 import MagneticButton from './MagneticButton';
 
@@ -210,6 +211,7 @@ function NeuralParticles() {
 
 /* ─── Main component ─── */
 export default function StrategicCTASection() {
+  const router = useRouter();
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: '-120px' });
   const [ctaHovered, setCtaHovered] = useState(false);
@@ -357,6 +359,7 @@ export default function StrategicCTASection() {
                 className="strategic-cta-btn-primary"
                 onMouseEnter={handleCtaEnter}
                 onMouseLeave={handleCtaLeave}
+                onClick={() => router.push('/contact')}
                 aria-label="Discuss your AI architecture with Invisigent"
               >
                 Discuss Your AI Architecture
@@ -364,6 +367,7 @@ export default function StrategicCTASection() {
               <MagneticButton
                 type="button"
                 className="strategic-cta-btn-secondary"
+                onClick={() => router.push('/services')}
                 aria-label="Explore the Invisigent Framework"
               >
                 Explore Invisigent Framework

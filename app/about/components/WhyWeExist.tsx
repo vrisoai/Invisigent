@@ -166,7 +166,7 @@ export function WhyWeExist({ reducedMotion = false }: WhyWeExistProps) {
               style={{ marginTop: '2.5rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}
             >
               <a
-                href="/services"
+                href="/interactive-demo"
                 style={{
                   display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
                   borderRadius: 9999, fontFamily: 'var(--font-display)', fontWeight: 500,

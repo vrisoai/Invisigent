@@ -1,6 +1,7 @@
 ﻿'use client';
 
 import { useRef } from 'react';
+import { useRouter } from 'next/navigation';
 import Script from 'next/script';
 import { motion } from 'framer-motion';
 import {
@@ -56,6 +57,7 @@ const LINE_A = 'Architecting Production AI Systems';
 const LINE_B = "for Enterprises That Can't Afford to Fail";
 
 export function HeroSection({ headingLevel = 'h1' }: { headingLevel?: 'h1' | 'div' }) {
+  const router        = useRouter();
   const HeadingTag    = headingLevel;
   const wordsB        = LINE_B.split(' ');
   const heroRef       = useRef<HTMLElement>(null);
@@ -221,12 +223,14 @@ export function HeroSection({ headingLevel = 'h1' }: { headingLevel?: 'h1' | 'di
                 type="button"
                 primary
                 className="hero-cta hero-cta--primary w-full sm:w-auto"
+                onClick={() => router.push('/contact')}
               >
                 Book Strategic Session
               </MagneticButton>
               <MagneticButton
                 type="button"
                 className="hero-cta hero-cta--secondary w-full sm:w-auto"
+                onClick={() => router.push('/services')}
               >
                 Explore AI Systems
               </MagneticButton>
