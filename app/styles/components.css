@@ -1267,8 +1267,9 @@ a:focus-visible {
     justify-content: center;
     flex: 1;
     gap: clamp(1.5rem, 2.5vw, 3rem);
-    min-height: clamp(300px, 40vh, 460px);
-    overflow: hidden; /* clip text that exits card boundaries */
+    min-height: clamp(520px, 58vh, 620px);
+    overflow-x: clip; /* clip horizontal text-animation bleed without clipping dots */
+    overflow-y: visible;
   }
 }
 
