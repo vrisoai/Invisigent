@@ -108,6 +108,13 @@ const insightsBlogSchema = {
           datePublished: '2026-05-12',
           image: 'https://invisigent.ai/blog-ai-accuracy-infrastructure.svg',
         },
+        {
+          '@type': 'BlogPosting',
+          headline: 'AI Infrastructure for Businesses in 2026',
+          url: 'https://invisigent.ai/insights/ai-infrastructure-for-businesses-in-2026',
+          datePublished: '2026-05-27',
+          image: 'https://invisigent.ai/blog-ai-infrastructure-2026.svg',
+        },
       ],
     },
     {
@@ -194,6 +201,36 @@ export default function InsightsPage() {
           }}
         >
           <BlogCard
+            imageSrc="/blog-ai-infrastructure-2026.svg"
+            imageAlt="Six-layer AI infrastructure stack for businesses in 2026 showing data, compute, storage, networking, workflows and governance"
+            category="AI Infrastructure"
+            readTime="11 min read"
+            heading="AI Infrastructure for Businesses in 2026"
+            excerpt="It is no longer about buying cloud credits or plugging in a new tool. The businesses that win in 2026 will build the strongest infrastructure around data, compute, security, and operational design."
+            author="Invisigent Research"
+            href="/insights/ai-infrastructure-for-businesses-in-2026"
+          />
+          <BlogCard
+            imageSrc="/blog-ai-accuracy-infrastructure.svg"
+            imageAlt="Four-layer AI accuracy infrastructure stack showing retrieval architecture, data quality, guardrail design, and observability side by side with a degrading accuracy panel"
+            category="AI Infrastructure"
+            readTime="12 min read"
+            heading="Why Enterprise AI Accuracy Is an Infrastructure Problem Not a Model Problem"
+            excerpt="Most organizations debugging AI accuracy problems are looking in the wrong place. They audit the model, adjust the prompt, switch providers. The accuracy problem persists because it was never a model problem."
+            author="Invisigent Research"
+            href="/insights/why-enterprise-ai-accuracy-is-an-infrastructure-problem"
+          />
+          <BlogCard
+            imageSrc="/blog-ai-implementation-mistakes.svg"
+            imageAlt="Executive reviewing AI infrastructure architecture with highlighted failure points and budget burn indicators across seven decision layers"
+            category="AI Infrastructure"
+            readTime="10 min read"
+            heading="7 AI Infrastructure Mistakes That Burn Budget And How Mid-Market Organizations Avoid Them"
+            excerpt="Most AI budget failures trace back to seven structural mistakes made before a single line of code is written. The organizations that avoid them share one thing in common: they build infrastructure before they build features."
+            author="Invisigent Research"
+            href="/insights/7-ai-implementation-mistakes-that-burn-budget-and-how-to-avoid-them"
+          />
+          <BlogCard
             imageSrc="/blog-losing-customers-while-you-sleep.png"
             imageAlt="Mid-market operations dashboard showing slow internal workflows and revenue leakage points across departments"
             category="AI Infrastructure"
@@ -222,26 +259,6 @@ export default function InsightsPage() {
             excerpt="Larger competitors don't win because they have better people. They win because they have systems that compound. AI infrastructure gives mid-market companies the same structural advantage without the headcount."
             author="Invisigent Research"
             href="/insights/how-a-2-person-team-can-compete-with-a-20-person-company-using-ai"
-          />
-          <BlogCard
-            imageSrc="/blog-ai-implementation-mistakes.svg"
-            imageAlt="Executive reviewing AI infrastructure architecture with highlighted failure points and budget burn indicators across seven decision layers"
-            category="AI Infrastructure"
-            readTime="10 min read"
-            heading="7 AI Infrastructure Mistakes That Burn Budget And How Mid-Market Organizations Avoid Them"
-            excerpt="Most AI budget failures trace back to seven structural mistakes made before a single line of code is written. The organizations that avoid them share one thing in common: they build infrastructure before they build features."
-            author="Invisigent Research"
-            href="/insights/7-ai-implementation-mistakes-that-burn-budget-and-how-to-avoid-them"
-          />
-          <BlogCard
-            imageSrc="/blog-ai-accuracy-infrastructure.svg"
-            imageAlt="Four-layer AI accuracy infrastructure stack showing retrieval architecture, data quality, guardrail design, and observability side by side with a degrading accuracy panel"
-            category="AI Infrastructure"
-            readTime="12 min read"
-            heading="Why Enterprise AI Accuracy Is an Infrastructure Problem Not a Model Problem"
-            excerpt="Most organizations debugging AI accuracy problems are looking in the wrong place. They audit the model, adjust the prompt, switch providers. The accuracy problem persists because it was never a model problem."
-            author="Invisigent Research"
-            href="/insights/why-enterprise-ai-accuracy-is-an-infrastructure-problem"
           />
         </div>
       </main>

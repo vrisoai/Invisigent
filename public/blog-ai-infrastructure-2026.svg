@@ -1,0 +1,253 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="bg26" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#060a10"/>
+      <stop offset="50%" style="stop-color:#080c14"/>
+      <stop offset="100%" style="stop-color:#06080f"/>
+    </linearGradient>
+    <linearGradient id="stackGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0d1a2e"/>
+      <stop offset="100%" style="stop-color:#0a1525"/>
+    </linearGradient>
+    <linearGradient id="stackGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0a1f10"/>
+      <stop offset="100%" style="stop-color:#0d2018"/>
+    </linearGradient>
+    <linearGradient id="stackGrad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a140a"/>
+      <stop offset="100%" style="stop-color:#1a1205"/>
+    </linearGradient>
+    <linearGradient id="stackGrad4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0e0a1a"/>
+      <stop offset="100%" style="stop-color:#100a1e"/>
+    </linearGradient>
+    <linearGradient id="stackGrad5" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0f1a0a"/>
+      <stop offset="100%" style="stop-color:#0c1a10"/>
+    </linearGradient>
+    <linearGradient id="stackGrad6" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a0c10"/>
+    </linearGradient>
+    <radialGradient id="amberGlow26" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.18"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="cyanGlow26" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="centerGlow26" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" style="stop-color:#0d1a2e;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#060a10;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow-a26" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-c26" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="blur-heavy26">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <filter id="blur-soft26">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <linearGradient id="connLineGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0.8"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f9fafb"/>
+      <stop offset="60%" style="stop-color:#fbbf24"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base background -->
+  <rect width="1200" height="675" fill="url(#bg26)"/>
+
+  <!-- Ambient glows -->
+  <ellipse cx="600" cy="337" rx="420" ry="280" fill="url(#centerGlow26)"/>
+  <ellipse cx="200" cy="250" rx="260" ry="200" fill="url(#cyanGlow26)" filter="url(#blur-heavy26)" opacity="0.5"/>
+  <ellipse cx="980" cy="420" rx="240" ry="180" fill="url(#amberGlow26)" filter="url(#blur-heavy26)" opacity="0.5"/>
+
+  <!-- Grid lines - subtle background grid -->
+  <g opacity="0.04" stroke="#a0aec0" stroke-width="1">
+    <line x1="0" y1="112" x2="1200" y2="112"/>
+    <line x1="0" y1="225" x2="1200" y2="225"/>
+    <line x1="0" y1="337" x2="1200" y2="337"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <line x1="0" y1="562" x2="1200" y2="562"/>
+    <line x1="150" y1="0" x2="150" y2="675"/>
+    <line x1="300" y1="0" x2="300" y2="675"/>
+    <line x1="450" y1="0" x2="450" y2="675"/>
+    <line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="750" y1="0" x2="750" y2="675"/>
+    <line x1="900" y1="0" x2="900" y2="675"/>
+    <line x1="1050" y1="0" x2="1050" y2="675"/>
+  </g>
+
+  <!-- ── Infrastructure Stack — left panel ── -->
+  <!-- Stack container -->
+  <g transform="translate(80, 80)">
+
+    <!-- Layer 6: Governance (top) -->
+    <rect x="0" y="0" width="460" height="68" rx="6" fill="url(#stackGrad6)" stroke="rgba(239,68,68,0.25)" stroke-width="1"/>
+    <rect x="0" y="0" width="4" height="68" rx="2" fill="#ef4444" opacity="0.7"/>
+    <text x="20" y="22" font-family="monospace" font-size="8" fill="#ef4444" opacity="0.7" letter-spacing="2">LAYER 06</text>
+    <text x="20" y="42" font-family="Georgia, serif" font-size="15" fill="#f9fafb" font-weight="700">Security &amp; Governance</text>
+    <text x="20" y="58" font-family="monospace" font-size="9" fill="rgba(156,163,175,0.7)" letter-spacing="1">access controls · compliance · audit trails</text>
+    <!-- Status dots -->
+    <circle cx="428" cy="24" r="4" fill="#ef4444" opacity="0.8" filter="url(#glow-a26)"/>
+    <circle cx="444" cy="24" r="4" fill="#ef4444" opacity="0.4"/>
+
+    <!-- Layer 5: Workflows -->
+    <rect x="0" y="80" width="460" height="68" rx="6" fill="url(#stackGrad5)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+    <rect x="0" y="80" width="4" height="68" rx="2" fill="#22c55e" opacity="0.7"/>
+    <text x="20" y="102" font-family="monospace" font-size="8" fill="#22c55e" opacity="0.7" letter-spacing="2">LAYER 05</text>
+    <text x="20" y="122" font-family="Georgia, serif" font-size="15" fill="#f9fafb" font-weight="700">Workflow Integration</text>
+    <text x="20" y="138" font-family="monospace" font-size="9" fill="rgba(156,163,175,0.7)" letter-spacing="1">orchestration · agents · automation pipelines</text>
+    <circle cx="428" cy="104" r="4" fill="#22c55e" opacity="0.8" filter="url(#glow-a26)"/>
+    <circle cx="444" cy="104" r="4" fill="#22c55e" opacity="0.4"/>
+
+    <!-- Layer 4: Networking -->
+    <rect x="0" y="160" width="460" height="68" rx="6" fill="url(#stackGrad4)" stroke="rgba(168,85,247,0.2)" stroke-width="1"/>
+    <rect x="0" y="160" width="4" height="68" rx="2" fill="#a855f7" opacity="0.7"/>
+    <text x="20" y="182" font-family="monospace" font-size="8" fill="#a855f7" opacity="0.7" letter-spacing="2">LAYER 04</text>
+    <text x="20" y="202" font-family="Georgia, serif" font-size="15" fill="#f9fafb" font-weight="700">Fast Networking</text>
+    <text x="20" y="218" font-family="monospace" font-size="9" fill="rgba(156,163,175,0.7)" letter-spacing="1">low-latency APIs · edge routing · CDN</text>
+    <circle cx="428" cy="184" r="4" fill="#a855f7" opacity="0.8" filter="url(#glow-a26)"/>
+    <circle cx="444" cy="184" r="4" fill="#a855f7" opacity="0.4"/>
+
+    <!-- Layer 3: Storage -->
+    <rect x="0" y="240" width="460" height="68" rx="6" fill="url(#stackGrad3)" stroke="rgba(251,191,36,0.22)" stroke-width="1"/>
+    <rect x="0" y="240" width="4" height="68" rx="2" fill="#fbbf24" opacity="0.7"/>
+    <text x="20" y="262" font-family="monospace" font-size="8" fill="#fbbf24" opacity="0.7" letter-spacing="2">LAYER 03</text>
+    <text x="20" y="282" font-family="Georgia, serif" font-size="15" fill="#f9fafb" font-weight="700">Scalable Storage</text>
+    <text x="20" y="298" font-family="monospace" font-size="9" fill="rgba(156,163,175,0.7)" letter-spacing="1">vector DBs · data lakes · object storage</text>
+    <circle cx="428" cy="264" r="4" fill="#fbbf24" opacity="0.8" filter="url(#glow-a26)"/>
+    <circle cx="444" cy="264" r="4" fill="#fbbf24" opacity="0.4"/>
+
+    <!-- Layer 2: Compute -->
+    <rect x="0" y="320" width="460" height="68" rx="6" fill="url(#stackGrad2)" stroke="rgba(34,197,94,0.2)" stroke-width="1"/>
+    <rect x="0" y="320" width="4" height="68" rx="2" fill="#06b6d4" opacity="0.7"/>
+    <text x="20" y="342" font-family="monospace" font-size="8" fill="#06b6d4" opacity="0.7" letter-spacing="2">LAYER 02</text>
+    <text x="20" y="362" font-family="Georgia, serif" font-size="15" fill="#f9fafb" font-weight="700">Reliable Compute</text>
+    <text x="20" y="378" font-family="monospace" font-size="9" fill="rgba(156,163,175,0.7)" letter-spacing="1">GPU clusters · cloud · hybrid / edge</text>
+    <circle cx="428" cy="344" r="4" fill="#06b6d4" opacity="0.8" filter="url(#glow-c26)"/>
+    <circle cx="444" cy="344" r="4" fill="#06b6d4" opacity="0.4"/>
+
+    <!-- Layer 1: Data (bottom / foundation) -->
+    <rect x="0" y="400" width="460" height="68" rx="6" fill="url(#stackGrad1)" stroke="rgba(6,182,212,0.25)" stroke-width="1"/>
+    <rect x="0" y="400" width="4" height="68" rx="2" fill="#06b6d4" opacity="0.9"/>
+    <text x="20" y="422" font-family="monospace" font-size="8" fill="#06b6d4" opacity="0.7" letter-spacing="2">LAYER 01 — FOUNDATION</text>
+    <text x="20" y="442" font-family="Georgia, serif" font-size="15" fill="#f9fafb" font-weight="700">Clean Data Pipelines</text>
+    <text x="20" y="458" font-family="monospace" font-size="9" fill="rgba(156,163,175,0.7)" letter-spacing="1">ingestion · validation · transformation · lineage</text>
+    <circle cx="428" cy="424" r="4" fill="#06b6d4" opacity="0.8" filter="url(#glow-c26)"/>
+    <circle cx="444" cy="424" r="4" fill="#06b6d4" opacity="0.4"/>
+
+    <!-- Foundation bar -->
+    <rect x="0" y="478" width="460" height="6" rx="3" fill="url(#connLineGrad)" opacity="0.4"/>
+  </g>
+
+  <!-- ── Right panel: activity / signals ── -->
+  <g transform="translate(600, 80)">
+
+    <!-- Title block -->
+    <text x="0" y="20" font-family="monospace" font-size="8" fill="rgba(156,163,175,0.6)" letter-spacing="3">[ AI INFRASTRUCTURE ]</text>
+    <text x="0" y="62" font-family="Georgia, serif" font-size="38" font-weight="700" fill="url(#titleGrad)" letter-spacing="-1">Built for 2026</text>
+    <text x="0" y="86" font-family="monospace" font-size="10" fill="rgba(156,163,175,0.55)" letter-spacing="1">From experiments to operations — at scale.</text>
+
+    <!-- Divider -->
+    <line x1="0" y1="106" x2="460" y2="106" stroke="rgba(251,191,36,0.2)" stroke-width="1"/>
+
+    <!-- Six metric cards in 2x3 grid -->
+    <!-- Card 1 -->
+    <rect x="0" y="122" width="218" height="84" rx="6" fill="rgba(6,182,212,0.06)" stroke="rgba(6,182,212,0.15)" stroke-width="1"/>
+    <text x="14" y="146" font-family="monospace" font-size="8" fill="#06b6d4" letter-spacing="2" opacity="0.8">DATA QUALITY</text>
+    <text x="14" y="168" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#f9fafb">99.2%</text>
+    <text x="14" y="188" font-family="monospace" font-size="9" fill="rgba(156,163,175,0.6)">validation pass rate</text>
+    <!-- mini sparkline -->
+    <polyline points="140,175 155,168 168,172 182,162 196,166 210,158" stroke="#06b6d4" stroke-width="1.5" fill="none" opacity="0.7"/>
+
+    <!-- Card 2 -->
+    <rect x="232" y="122" width="218" height="84" rx="6" fill="rgba(251,191,36,0.05)" stroke="rgba(251,191,36,0.15)" stroke-width="1"/>
+    <text x="14" y="146" font-family="monospace" font-size="8" fill="#fbbf24" letter-spacing="2" opacity="0.8" transform="translate(232,0)">INFERENCE LATENCY</text>
+    <text x="14" y="168" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#f9fafb" transform="translate(232,0)">148ms</text>
+    <text x="14" y="188" font-family="monospace" font-size="9" fill="rgba(156,163,175,0.6)" transform="translate(232,0)">p95 end-to-end</text>
+    <polyline points="374,175 386,172 398,168 410,171 420,165 440,162" stroke="#fbbf24" stroke-width="1.5" fill="none" opacity="0.7"/>
+
+    <!-- Card 3 -->
+    <rect x="0" y="220" width="218" height="84" rx="6" fill="rgba(34,197,94,0.05)" stroke="rgba(34,197,94,0.15)" stroke-width="1"/>
+    <text x="14" y="244" font-family="monospace" font-size="8" fill="#22c55e" letter-spacing="2" opacity="0.8">AGENT UPTIME</text>
+    <text x="14" y="266" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#f9fafb">99.97%</text>
+    <text x="14" y="286" font-family="monospace" font-size="9" fill="rgba(156,163,175,0.6)">30-day rolling</text>
+    <polyline points="140,272 155,270 168,274 182,268 196,271 210,266" stroke="#22c55e" stroke-width="1.5" fill="none" opacity="0.7"/>
+
+    <!-- Card 4 -->
+    <rect x="232" y="220" width="218" height="84" rx="6" fill="rgba(168,85,247,0.05)" stroke="rgba(168,85,247,0.15)" stroke-width="1"/>
+    <text x="14" y="244" font-family="monospace" font-size="8" fill="#a855f7" letter-spacing="2" opacity="0.8" transform="translate(232,0)">SCALE FACTOR</text>
+    <text x="14" y="266" font-family="Georgia, serif" font-size="22" font-weight="700" fill="#f9fafb" transform="translate(232,0)">12×</text>
+    <text x="14" y="286" font-family="monospace" font-size="9" fill="rgba(156,163,175,0.6)" transform="translate(232,0)">ops capacity vs. headcount</text>
+    <polyline points="374,272 390,268 402,265 416,262 428,258 442,254" stroke="#a855f7" stroke-width="1.5" fill="none" opacity="0.7"/>
+
+    <!-- Observability bar -->
+    <rect x="0" y="320" width="450" height="56" rx="6" fill="rgba(251,191,36,0.04)" stroke="rgba(251,191,36,0.12)" stroke-width="1"/>
+    <text x="14" y="342" font-family="monospace" font-size="8" fill="#fbbf24" letter-spacing="2" opacity="0.8">OBSERVABILITY PIPELINE — LIVE</text>
+    <!-- animated-looking data flow bars -->
+    <rect x="14" y="350" width="18" height="16" rx="2" fill="#fbbf24" opacity="0.7"/>
+    <rect x="36" y="353" width="18" height="13" rx="2" fill="#fbbf24" opacity="0.5"/>
+    <rect x="58" y="348" width="18" height="18" rx="2" fill="#fbbf24" opacity="0.65"/>
+    <rect x="80" y="352" width="18" height="14" rx="2" fill="#fbbf24" opacity="0.45"/>
+    <rect x="102" y="349" width="18" height="17" rx="2" fill="#06b6d4" opacity="0.6"/>
+    <rect x="124" y="354" width="18" height="12" rx="2" fill="#06b6d4" opacity="0.4"/>
+    <rect x="146" y="350" width="18" height="16" rx="2" fill="#22c55e" opacity="0.55"/>
+    <rect x="168" y="352" width="18" height="14" rx="2" fill="#22c55e" opacity="0.45"/>
+    <rect x="190" y="347" width="18" height="19" rx="2" fill="#fbbf24" opacity="0.6"/>
+    <rect x="212" y="351" width="18" height="15" rx="2" fill="#fbbf24" opacity="0.5"/>
+    <rect x="234" y="350" width="18" height="16" rx="2" fill="#a855f7" opacity="0.55"/>
+    <rect x="256" y="354" width="18" height="12" rx="2" fill="#a855f7" opacity="0.4"/>
+    <rect x="278" y="348" width="18" height="18" rx="2" fill="#06b6d4" opacity="0.6"/>
+    <rect x="300" y="352" width="18" height="14" rx="2" fill="#fbbf24" opacity="0.5"/>
+    <rect x="322" y="349" width="18" height="17" rx="2" fill="#22c55e" opacity="0.5"/>
+    <rect x="344" y="350" width="18" height="16" rx="2" fill="#fbbf24" opacity="0.65"/>
+    <rect x="366" y="353" width="18" height="13" rx="2" fill="#06b6d4" opacity="0.4"/>
+    <rect x="388" y="348" width="18" height="18" rx="2" fill="#fbbf24" opacity="0.6"/>
+    <rect x="410" y="351" width="18" height="15" rx="2" fill="#22c55e" opacity="0.45"/>
+    <rect x="432" y="350" width="12" height="16" rx="2" fill="#a855f7" opacity="0.55"/>
+
+    <!-- Bottom tag line -->
+    <text x="0" y="420" font-family="Georgia, serif" font-size="13" fill="rgba(249,250,251,0.4)" font-style="italic">
+      The foundation that makes AI useful in real operations.
+    </text>
+
+    <!-- Year badge -->
+    <rect x="348" y="400" width="100" height="28" rx="4" fill="rgba(251,191,36,0.1)" stroke="rgba(251,191,36,0.3)" stroke-width="1"/>
+    <text x="398" y="419" font-family="monospace" font-size="11" fill="#fbbf24" text-anchor="middle" letter-spacing="2" font-weight="700">2026</text>
+  </g>
+
+  <!-- Connector lines between stack and right panel -->
+  <g opacity="0.15" stroke="#fbbf24" stroke-width="1" stroke-dasharray="4,6">
+    <line x1="545" y1="114" x2="600" y2="200"/>
+    <line x1="545" y1="194" x2="600" y2="262"/>
+    <line x1="545" y1="274" x2="600" y2="304"/>
+    <line x1="545" y1="354" x2="600" y2="362"/>
+    <line x1="545" y1="434" x2="600" y2="400"/>
+  </g>
+
+  <!-- Top scanline effect -->
+  <rect width="1200" height="2" y="0" fill="rgba(251,191,36,0.15)"/>
+  <rect width="1200" height="1" y="672" fill="rgba(6,182,212,0.1)"/>
+
+  <!-- Corner decorations -->
+  <polyline points="20,20 20,40 40,40" stroke="rgba(251,191,36,0.4)" stroke-width="1.5" fill="none"/>
+  <polyline points="1180,20 1180,40 1160,40" stroke="rgba(251,191,36,0.4)" stroke-width="1.5" fill="none"/>
+  <polyline points="20,655 20,635 40,635" stroke="rgba(6,182,212,0.3)" stroke-width="1.5" fill="none"/>
+  <polyline points="1180,655 1180,635 1160,635" stroke="rgba(6,182,212,0.3)" stroke-width="1.5" fill="none"/>
+
+  <!-- Invisigent watermark -->
+  <text x="1185" y="668" font-family="monospace" font-size="8" fill="rgba(156,163,175,0.25)" text-anchor="end" letter-spacing="2">INVISIGENT.AI</text>
+</svg>

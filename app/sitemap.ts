@@ -55,6 +55,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/insights/7-ai-implementation-mistakes-that-burn-budget-and-how-to-avoid-them`,
+      lastModified: new Date('2026-05-04'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/insights/why-enterprise-ai-accuracy-is-an-infrastructure-problem`,
+      lastModified: new Date('2026-05-12'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/insights/ai-infrastructure-for-businesses-in-2026`,
+      lastModified: new Date('2026-05-27'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/case-studies`,
       lastModified: now,
       changeFrequency: 'monthly',
