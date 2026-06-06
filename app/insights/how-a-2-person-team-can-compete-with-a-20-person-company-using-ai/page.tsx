@@ -9,9 +9,9 @@ const CANONICAL =
 const OG_IMAGE = 'https://invisigent.ai/blog-2-person-team-compete-with-ai.png';
 const PUBLISHED = '2026-04-23T10:00:00.000Z';
 const TITLE =
-  'How Mid-Market Companies Build Operational Leverage Against Larger Competitors Using AI Infrastructure';
+  'How Mid-Market Companies Outcompete Larger Rivals with AI';
 const DESCRIPTION =
-  'The competitive gap between a mid-market company and an enterprise used to be headcount and budget. In 2026, it is infrastructure and it is closeable faster than most organizations realize.';
+  'The competitive gap used to be headcount and budget. In 2026, it is infrastructure — and it is closeable faster than most organizations realize. Here is how.';
 
 export const metadata: Metadata = {
   title: `${TITLE} | Invisigent`,

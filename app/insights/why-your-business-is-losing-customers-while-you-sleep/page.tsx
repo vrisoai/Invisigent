@@ -9,9 +9,9 @@ const CANONICAL =
 const OG_IMAGE = 'https://invisigent.ai/blog-losing-customers-while-you-sleep.png';
 const PUBLISHED = '2026-04-23T08:00:00.000Z';
 const TITLE =
-  'Why Mid-Market Companies Lose Revenue to Slow Internal Operations And How AI Infrastructure Fixes It Permanently';
+  'Why Slow Operations Cost Mid-Market Companies Revenue';
 const DESCRIPTION =
-  'Revenue is leaking through the gap between what your operations team can handle manually and what your business demands. Learn how AI infrastructure not AI tools closes that gap permanently.';
+  'Revenue leaks through the gap between what your operations team handles manually and what your business demands. Learn how AI infrastructure — not AI tools — closes that gap permanently.';
 
 export const metadata: Metadata = {
   title: `${TITLE} | Invisigent`,
