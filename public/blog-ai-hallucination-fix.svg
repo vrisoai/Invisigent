@@ -1,0 +1,265 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="amberGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.4" />
+    </linearGradient>
+    <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#fbbf24;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#1e3a5f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e2030;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#141520;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="subtleGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-width="0.3" opacity="0.06"/>
+    </pattern>
+    <clipPath id="svgClip">
+      <rect width="1200" height="675"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bgGrad)"/>
+  <!-- Grid overlay -->
+  <rect width="1200" height="675" fill="url(#grid)"/>
+
+  <!-- Ambient glow spots -->
+  <ellipse cx="200" cy="337" rx="300" ry="200" fill="#fbbf24" opacity="0.03"/>
+  <ellipse cx="1000" cy="337" rx="300" ry="200" fill="#3b82f6" opacity="0.04"/>
+  <ellipse cx="600" cy="337" rx="250" ry="180" fill="#fbbf24" opacity="0.04"/>
+
+  <!-- Top border accent line -->
+  <rect x="0" y="0" width="1200" height="2" fill="url(#amberGlow)" opacity="0.8"/>
+
+  <!-- ===== HEADER SECTION ===== -->
+  <!-- Main title -->
+  <text x="600" y="58" font-family="'Courier New', Courier, monospace" font-size="11" fill="#fbbf24" opacity="0.7" text-anchor="middle" letter-spacing="4">INFRASTRUCTURE OVERVIEW</text>
+  <text x="600" y="102" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="1">AI Hallucination Fix Infrastructure</text>
+  <text x="600" y="128" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#94a3b8" text-anchor="middle" letter-spacing="1">Detection · Monitoring · Correction · Validation</text>
+
+  <!-- Decorative title underline -->
+  <line x1="440" y1="140" x2="760" y2="140" stroke="#fbbf24" stroke-width="1" opacity="0.4"/>
+  <circle cx="440" cy="140" r="2" fill="#fbbf24" opacity="0.6"/>
+  <circle cx="760" cy="140" r="2" fill="#fbbf24" opacity="0.6"/>
+
+  <!-- ===== MAIN PIPELINE (center horizontal) ===== -->
+  <!-- Pipeline track -->
+  <rect x="60" y="318" width="1080" height="6" rx="3" fill="#1e3a5f" opacity="0.6"/>
+  <rect x="60" y="318" width="1080" height="6" rx="3" fill="url(#pipeGrad)" opacity="0.5"/>
+
+  <!-- Animated-style flow dots on pipeline -->
+  <circle cx="120" cy="321" r="3" fill="#fbbf24" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="240" cy="321" r="2" fill="#fbbf24" opacity="0.5"/>
+  <circle cx="360" cy="321" r="2.5" fill="#fbbf24" opacity="0.7"/>
+  <circle cx="500" cy="321" r="3" fill="#fbbf24" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="620" cy="321" r="2" fill="#fbbf24" opacity="0.5"/>
+  <circle cx="750" cy="321" r="2.5" fill="#fbbf24" opacity="0.7"/>
+  <circle cx="900" cy="321" r="3" fill="#fbbf24" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="1040" cy="321" r="2" fill="#fbbf24" opacity="0.5"/>
+
+  <!-- ===== NODE 1: LLM INPUT ===== -->
+  <rect x="62" y="240" width="140" height="80" rx="8" fill="url(#cardGrad)" stroke="#2d3748" stroke-width="1.5"/>
+  <rect x="62" y="240" width="140" height="3" rx="2" fill="#3b82f6" opacity="0.8"/>
+  <text x="132" y="270" font-family="'Courier New', monospace" font-size="9" fill="#64748b" text-anchor="middle" letter-spacing="2">INPUT</text>
+  <text x="132" y="291" font-family="Arial, sans-serif" font-size="13" font-weight="600" fill="#e2e8f0" text-anchor="middle">LLM Query</text>
+  <circle cx="132" cy="307" r="5" fill="#3b82f6" opacity="0.7"/>
+  <!-- Arrow down to pipeline -->
+  <line x1="132" y1="320" x2="132" y2="320" stroke="#3b82f6" stroke-width="2" opacity="0.6"/>
+
+  <!-- ===== NODE 2: RAG PIPELINE ===== -->
+  <rect x="255" y="225" width="155" height="95" rx="8" fill="url(#cardGrad)" stroke="#2d3748" stroke-width="1.5"/>
+  <rect x="255" y="225" width="155" height="3" rx="2" fill="#8b5cf6" opacity="0.8"/>
+  <text x="333" y="253" font-family="'Courier New', monospace" font-size="9" fill="#64748b" text-anchor="middle" letter-spacing="2">RETRIEVAL</text>
+  <text x="333" y="274" font-family="Arial, sans-serif" font-size="13" font-weight="600" fill="#e2e8f0" text-anchor="middle">RAG Pipeline</text>
+  <!-- Mini doc icons -->
+  <rect x="308" y="283" width="10" height="13" rx="1" fill="#8b5cf6" opacity="0.5"/>
+  <rect x="322" y="283" width="10" height="13" rx="1" fill="#8b5cf6" opacity="0.5"/>
+  <rect x="336" y="283" width="10" height="13" rx="1" fill="#8b5cf6" opacity="0.5"/>
+  <rect x="350" y="283" width="10" height="13" rx="1" fill="#8b5cf6" opacity="0.5"/>
+
+  <!-- ===== NODE 3: DETECTION SHIELD (CENTER / HERO) ===== -->
+  <!-- Outer glow ring -->
+  <circle cx="540" cy="295" r="72" fill="none" stroke="#fbbf24" stroke-width="1" opacity="0.2"/>
+  <circle cx="540" cy="295" r="60" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity="0.35"/>
+  <!-- Shield background -->
+  <path d="M540 228 L590 252 L590 295 Q590 335 540 355 Q490 335 490 295 L490 252 Z" fill="#1a1508" opacity="0.9"/>
+  <path d="M540 228 L590 252 L590 295 Q590 335 540 355 Q490 335 490 295 L490 252 Z" fill="none" stroke="#fbbf24" stroke-width="2" filter="url(#glow)"/>
+  <!-- Shield inner details -->
+  <path d="M540 242 L578 261 L578 295 Q578 327 540 344 Q502 327 502 295 L502 261 Z" fill="none" stroke="#fbbf24" stroke-width="0.8" opacity="0.4"/>
+  <!-- Shield center symbol: checkmark / scan lines -->
+  <line x1="518" y1="290" x2="530" y2="304" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="530" y1="304" x2="558" y2="276" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Scan line effect -->
+  <line x1="502" y1="285" x2="578" y2="285" stroke="#fbbf24" stroke-width="0.5" opacity="0.3"/>
+  <line x1="504" y1="300" x2="576" y2="300" stroke="#fbbf24" stroke-width="0.5" opacity="0.2"/>
+  <!-- Label -->
+  <text x="540" y="374" font-family="Arial, sans-serif" font-size="12" font-weight="700" fill="#fbbf24" text-anchor="middle" filter="url(#subtleGlow)">DETECTION</text>
+  <text x="540" y="390" font-family="'Courier New', monospace" font-size="9" fill="#94a3b8" text-anchor="middle" letter-spacing="1">HALLUCINATION SHIELD</text>
+
+  <!-- ===== NODE 4: CONFIDENCE SCORE ===== -->
+  <rect x="680" y="225" width="160" height="95" rx="8" fill="url(#cardGrad)" stroke="#2d3748" stroke-width="1.5"/>
+  <rect x="680" y="225" width="160" height="3" rx="2" fill="#10b981" opacity="0.8"/>
+  <text x="760" y="253" font-family="'Courier New', monospace" font-size="9" fill="#64748b" text-anchor="middle" letter-spacing="2">SCORING</text>
+  <text x="760" y="274" font-family="Arial, sans-serif" font-size="13" font-weight="600" fill="#e2e8f0" text-anchor="middle">Confidence Score</text>
+  <!-- Score bar -->
+  <rect x="700" y="283" width="120" height="10" rx="5" fill="#0f2318" opacity="0.8"/>
+  <rect x="700" y="283" width="86" height="10" rx="5" fill="#10b981" opacity="0.7"/>
+  <text x="793" y="292" font-family="'Courier New', monospace" font-size="8" fill="#10b981" text-anchor="middle">72%</text>
+  <!-- Threshold marker -->
+  <line x1="760" y1="280" x2="760" y2="296" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="2,1" opacity="0.8"/>
+
+  <!-- ===== NODE 5: MONITORING DASHBOARD ===== -->
+  <rect x="900" y="225" width="170" height="95" rx="8" fill="url(#cardGrad)" stroke="#2d3748" stroke-width="1.5"/>
+  <rect x="900" y="225" width="170" height="3" rx="2" fill="#f43f5e" opacity="0.8"/>
+  <text x="985" y="253" font-family="'Courier New', monospace" font-size="9" fill="#64748b" text-anchor="middle" letter-spacing="2">MONITORING</text>
+  <text x="985" y="272" font-family="Arial, sans-serif" font-size="13" font-weight="600" fill="#e2e8f0" text-anchor="middle">Live Dashboard</text>
+  <!-- Mini chart bars -->
+  <rect x="915" y="295" width="8" height="18" rx="2" fill="#f43f5e" opacity="0.5"/>
+  <rect x="928" y="288" width="8" height="25" rx="2" fill="#f43f5e" opacity="0.7"/>
+  <rect x="941" y="291" width="8" height="22" rx="2" fill="#fbbf24" opacity="0.8"/>
+  <rect x="954" y="284" width="8" height="29" rx="2" fill="#f43f5e" opacity="0.5"/>
+  <rect x="967" y="294" width="8" height="19" rx="2" fill="#f43f5e" opacity="0.6"/>
+  <rect x="980" y="286" width="8" height="27" rx="2" fill="#10b981" opacity="0.7"/>
+  <rect x="993" y="289" width="8" height="24" rx="2" fill="#10b981" opacity="0.5"/>
+  <rect x="1006" y="292" width="8" height="21" rx="2" fill="#fbbf24" opacity="0.9"/>
+  <rect x="1019" y="285" width="8" height="28" rx="2" fill="#10b981" opacity="0.6"/>
+  <rect x="1032" y="290" width="8" height="23" rx="2" fill="#f43f5e" opacity="0.4"/>
+  <rect x="1045" y="283" width="8" height="30" rx="2" fill="#fbbf24" opacity="0.7"/>
+
+  <!-- ===== BOTTOM ROW: Metric cards ===== -->
+  <!-- Card: Fact Check -->
+  <rect x="62" y="420" width="200" height="100" rx="8" fill="url(#cardGrad)" stroke="#1e2d3d" stroke-width="1.5"/>
+  <rect x="62" y="420" width="200" height="3" rx="2" fill="#fbbf24" opacity="0.6"/>
+  <text x="82" y="448" font-family="'Courier New', monospace" font-size="8" fill="#64748b" letter-spacing="2">FACT VERIFICATION</text>
+  <text x="82" y="468" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">Fact Check</text>
+  <text x="82" y="488" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">Cross-reference validation</text>
+  <!-- Status pill -->
+  <rect x="82" y="498" width="56" height="14" rx="7" fill="#052e16" opacity="0.9"/>
+  <circle cx="93" cy="505" r="3" fill="#10b981"/>
+  <text x="102" y="509" font-family="'Courier New', monospace" font-size="8" fill="#10b981">ACTIVE</text>
+
+  <!-- Card: Source Grounding -->
+  <rect x="290" y="420" width="200" height="100" rx="8" fill="url(#cardGrad)" stroke="#1e2d3d" stroke-width="1.5"/>
+  <rect x="290" y="420" width="200" height="3" rx="2" fill="#8b5cf6" opacity="0.6"/>
+  <text x="310" y="448" font-family="'Courier New', monospace" font-size="8" fill="#64748b" letter-spacing="2">GROUNDING</text>
+  <text x="310" y="468" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">Source Anchor</text>
+  <text x="310" y="488" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">Citation traceability</text>
+  <rect x="310" y="498" width="66" height="14" rx="7" fill="#1e0a40" opacity="0.9"/>
+  <circle cx="321" cy="505" r="3" fill="#8b5cf6"/>
+  <text x="330" y="509" font-family="'Courier New', monospace" font-size="8" fill="#8b5cf6">ENABLED</text>
+
+  <!-- Card: Feedback Loop -->
+  <rect x="518" y="420" width="200" height="100" rx="8" fill="url(#cardGrad)" stroke="#1e2d3d" stroke-width="1.5"/>
+  <rect x="518" y="420" width="200" height="3" rx="2" fill="#fbbf24" opacity="0.9"/>
+  <text x="538" y="448" font-family="'Courier New', monospace" font-size="8" fill="#64748b" letter-spacing="2">FEEDBACK</text>
+  <text x="538" y="468" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#fbbf24">Correction Loop</text>
+  <text x="538" y="488" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">Adaptive retraining signals</text>
+  <!-- Loop icon -->
+  <path d="M538 505 Q548 498 558 505 Q568 512 578 505" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity="0.7"/>
+  <polygon points="578,502 578,508 582,505" fill="#fbbf24" opacity="0.7"/>
+
+  <!-- Card: Anomaly Alert -->
+  <rect x="746" y="420" width="200" height="100" rx="8" fill="url(#cardGrad)" stroke="#1e2d3d" stroke-width="1.5"/>
+  <rect x="746" y="420" width="200" height="3" rx="2" fill="#f43f5e" opacity="0.6"/>
+  <text x="766" y="448" font-family="'Courier New', monospace" font-size="8" fill="#64748b" letter-spacing="2">ALERTING</text>
+  <text x="766" y="468" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">Anomaly Alert</text>
+  <text x="766" y="488" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">Real-time drift detection</text>
+  <rect x="766" y="498" width="76" height="14" rx="7" fill="#300a14" opacity="0.9"/>
+  <circle cx="777" cy="505" r="3" fill="#f43f5e"/>
+  <text x="786" y="509" font-family="'Courier New', monospace" font-size="8" fill="#f43f5e">WATCHING</text>
+
+  <!-- Card: Audit Log -->
+  <rect x="974" y="420" width="188" height="100" rx="8" fill="url(#cardGrad)" stroke="#1e2d3d" stroke-width="1.5"/>
+  <rect x="974" y="420" width="188" height="3" rx="2" fill="#3b82f6" opacity="0.6"/>
+  <text x="994" y="448" font-family="'Courier New', monospace" font-size="8" fill="#64748b" letter-spacing="2">LOGGING</text>
+  <text x="994" y="468" font-family="Arial, sans-serif" font-size="14" font-weight="600" fill="#e2e8f0">Audit Trail</text>
+  <text x="994" y="488" font-family="Arial, sans-serif" font-size="11" fill="#94a3b8">Immutable event log</text>
+  <!-- Log lines -->
+  <line x1="994" y1="500" x2="1040" y2="500" stroke="#3b82f6" stroke-width="1" opacity="0.5"/>
+  <line x1="994" y1="507" x2="1052" y2="507" stroke="#3b82f6" stroke-width="1" opacity="0.3"/>
+  <line x1="994" y1="514" x2="1036" y2="514" stroke="#3b82f6" stroke-width="1" opacity="0.4"/>
+
+  <!-- ===== VERTICAL CONNECTOR LINES (nodes to pipeline) ===== -->
+  <line x1="132" y1="320" x2="132" y2="340" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.5"/>
+  <line x1="333" y1="320" x2="333" y2="340" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.5"/>
+  <line x1="540" y1="357" x2="540" y2="321" stroke="#fbbf24" stroke-width="2" opacity="0.6" filter="url(#glow)"/>
+  <line x1="760" y1="320" x2="760" y2="340" stroke="#10b981" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.5"/>
+  <line x1="985" y1="320" x2="985" y2="340" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="3,2" opacity="0.5"/>
+
+  <!-- ===== PIPELINE TO BOTTOM CARDS connectors ===== -->
+  <line x1="162" y1="321" x2="162" y2="418" stroke="#fbbf24" stroke-width="1" stroke-dasharray="2,3" opacity="0.2"/>
+  <line x1="390" y1="321" x2="390" y2="418" stroke="#fbbf24" stroke-width="1" stroke-dasharray="2,3" opacity="0.2"/>
+  <line x1="618" y1="321" x2="618" y2="418" stroke="#fbbf24" stroke-width="1" stroke-dasharray="2,3" opacity="0.2"/>
+  <line x1="846" y1="321" x2="846" y2="418" stroke="#fbbf24" stroke-width="1" stroke-dasharray="2,3" opacity="0.2"/>
+  <line x1="1068" y1="321" x2="1068" y2="418" stroke="#fbbf24" stroke-width="1" stroke-dasharray="2,3" opacity="0.2"/>
+
+  <!-- ===== STATUS BAR at bottom ===== -->
+  <rect x="0" y="590" width="1200" height="85" fill="#0a0a0f" opacity="0.8"/>
+  <line x1="0" y1="590" x2="1200" y2="590" stroke="#1e2d3d" stroke-width="1"/>
+
+  <!-- Status indicators -->
+  <circle cx="80" cy="622" r="5" fill="#10b981" filter="url(#subtleGlow)"/>
+  <text x="95" y="627" font-family="'Courier New', monospace" font-size="11" fill="#e2e8f0">System Online</text>
+
+  <line x1="210" y1="610" x2="210" y2="635" stroke="#1e2d3d" stroke-width="1"/>
+
+  <text x="230" y="619" font-family="'Courier New', monospace" font-size="9" fill="#64748b" letter-spacing="1">HALLUCINATIONS BLOCKED</text>
+  <text x="230" y="635" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#fbbf24">1,247</text>
+
+  <line x1="360" y1="610" x2="360" y2="635" stroke="#1e2d3d" stroke-width="1"/>
+
+  <text x="380" y="619" font-family="'Courier New', monospace" font-size="9" fill="#64748b" letter-spacing="1">AVG CONFIDENCE</text>
+  <text x="380" y="635" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#10b981">94.2%</text>
+
+  <line x1="510" y1="610" x2="510" y2="635" stroke="#1e2d3d" stroke-width="1"/>
+
+  <text x="530" y="619" font-family="'Courier New', monospace" font-size="9" fill="#64748b" letter-spacing="1">LATENCY P99</text>
+  <text x="530" y="635" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#e2e8f0">38ms</text>
+
+  <line x1="650" y1="610" x2="650" y2="635" stroke="#1e2d3d" stroke-width="1"/>
+
+  <text x="670" y="619" font-family="'Courier New', monospace" font-size="9" fill="#64748b" letter-spacing="1">SOURCES VERIFIED</text>
+  <text x="670" y="635" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#8b5cf6">18,903</text>
+
+  <!-- Mini sparkline area (far right of status bar) -->
+  <text x="870" y="619" font-family="'Courier New', monospace" font-size="9" fill="#64748b" letter-spacing="1">DETECTION RATE (7D)</text>
+  <polyline points="870,635 890,628 910,632 930,622 950,626 970,618 990,624 1010,614 1030,619 1050,612 1070,616 1090,609 1110,613 1130,606" fill="none" stroke="#fbbf24" stroke-width="1.5" opacity="0.8" filter="url(#subtleGlow)"/>
+  <circle cx="1130" cy="606" r="3" fill="#fbbf24" filter="url(#glow)"/>
+
+  <!-- Bottom credit line -->
+  <text x="600" y="660" font-family="'Courier New', monospace" font-size="9" fill="#2d3748" text-anchor="middle" letter-spacing="2">INVISIGENT · AI RELIABILITY PLATFORM</text>
+
+  <!-- Corner decorations -->
+  <path d="M0 0 L30 0 L30 2 L2 2 L2 30 L0 30 Z" fill="#fbbf24" opacity="0.3"/>
+  <path d="M1200 0 L1170 0 L1170 2 L1198 2 L1198 30 L1200 30 Z" fill="#fbbf24" opacity="0.3"/>
+  <path d="M0 675 L30 675 L30 673 L2 673 L2 645 L0 645 Z" fill="#fbbf24" opacity="0.3"/>
+  <path d="M1200 675 L1170 675 L1170 673 L1198 673 L1198 645 L1200 645 Z" fill="#fbbf24" opacity="0.3"/>
+</svg>

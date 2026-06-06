@@ -75,6 +75,13 @@ const insightsBlogSchema = {
       blogPost: [
         {
           '@type': 'BlogPosting',
+          headline: 'The Problem: When Your AI Model Hallucinates in Production',
+          url: 'https://invisigent.ai/insights/ai-hallucination-fix-infrastructure',
+          datePublished: '2026-06-07',
+          image: 'https://invisigent.ai/blog-ai-hallucination-fix.svg',
+        },
+        {
+          '@type': 'BlogPosting',
           headline: 'Why Mid-Market Companies Lose Revenue to Slow Internal Operations And How AI Infrastructure Fixes It Permanently',
           url: 'https://invisigent.ai/insights/why-your-business-is-losing-customers-while-you-sleep',
           datePublished: '2026-04-23',
@@ -200,6 +207,16 @@ export default function InsightsPage() {
             gap: 'clamp(1.25rem, 3vw, 2rem)',
           }}
         >
+          <BlogCard
+            imageSrc="/blog-ai-hallucination-fix.svg"
+            imageAlt="AI hallucination detection infrastructure dashboard showing monitoring pipeline with confidence scoring and source attribution layers"
+            category="AI Infrastructure"
+            readTime="14 min read"
+            heading="The Problem: When Your AI Model Hallucinates in Production"
+            excerpt="80% of hallucination issues stem from infrastructure-level failures, not model limitations. Here are 7 infrastructure fixes that reduce hallucination rates by 60-80% without changing your underlying model."
+            author="Invisigent Research"
+            href="/insights/ai-hallucination-fix-infrastructure"
+          />
           <BlogCard
             imageSrc="/blog-ai-infrastructure-2026.svg"
             imageAlt="Six-layer AI infrastructure stack for businesses in 2026 showing data, compute, storage, networking, workflows and governance"
