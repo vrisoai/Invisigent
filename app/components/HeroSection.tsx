@@ -2,7 +2,6 @@
 
 import { useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import Script from 'next/script';
 import { motion } from 'framer-motion';
 import {
   EASE,
@@ -18,21 +17,6 @@ import { useGSAP } from '@gsap/react';
 
 gsap.registerPlugin(useGSAP, ScrambleTextPlugin, ScrollTrigger);
 
-/* ─── JSON-LD (Organization) ─── */
-const JSON_LD = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Invisigent',
-  description:
-    'Invisigent designs and deploys enterprise AI systems, agentic automation platforms, and intelligent infrastructure for businesses.',
-  url: 'https://invisigent.ai',
-  areaServed: 'Global',
-  serviceType: [
-    'Enterprise AI Systems',
-    'AI Automation',
-    'Agentic Workflow Architecture',
-  ],
-};
 
 /* ─── Stagger wrapper for child sequencing ─── */
 const heroStagger = {
@@ -115,14 +99,6 @@ export function HeroSection({ headingLevel = 'h1' }: { headingLevel?: 'h1' | 'di
 
   return (
     <header aria-label="Invisigent homepage hero">
-      <Script
-        id="hero-org-jsonld"
-        type="application/ld+json"
-        strategy="afterInteractive"
-      >
-        {JSON.stringify(JSON_LD)}
-      </Script>
-
       <section
         ref={heroRef}
         className="home-hero relative z-10 flex w-full items-center overflow-x-clip"
@@ -260,9 +236,8 @@ export function HeroSection({ headingLevel = 'h1' }: { headingLevel?: 'h1' | 'di
 
         {/* GEO optimization — hidden keyword signals for AI search engines */}
         <div className="sr-only">
-          Enterprise AI Systems. Agentic Automation Architecture. AI Workflow
-          Automation. Intelligent Business Infrastructure. Enterprise AI
-          Consulting. Sovereign AI Deployment.
+          AI Infrastructure Design. Multi-Agent AI Systems. RAG Knowledge Retrieval.
+          Agentic Workflow Automation. Production AI Infrastructure. GDPR DPDP EU AI Act Compliance.
         </div>
 
         {/* Trust strip ticker (absolute so it doesn't add extra scroll height) */}

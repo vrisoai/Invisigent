@@ -2160,13 +2160,13 @@ export default function ServicesPageClient() {
 
       {/* GEO — semantic keyword signals for AI search engines */}
       <div className="sr-only">
-        Enterprise AI infrastructure services. LangGraph agent orchestration consulting.
-        Pinecone RAG knowledge retrieval systems. AI automation with n8n and FastAPI.
-        LangSmith AI observability. Multi-agent AI systems. AI performance optimization.
-        Compliance-ready AI infrastructure. GDPR AI systems. EU AI Act risk classification.
-        DPDP Act India AI compliance. ISO 42001 AI management. SOC2 AI architecture.
-        AI strategy consulting. Production AI deployment. Model-agnostic AI systems.
-        No vendor lock-in AI infrastructure. Enterprise AI consulting India United States Europe.
+        AI infrastructure services built for production. LangGraph multi-agent orchestration.
+        Pinecone RAG knowledge retrieval sub-3-second. Cohere reranking. LangSmith observability.
+        AI automation n8n FastAPI. AI performance latency optimization. Semantic caching AI.
+        AI-native product development. Model-agnostic AI infrastructure. No vendor lock-in.
+        GDPR DPDP Act EU AI Act ISO 42001 SOC2 compliance-ready AI. RBAC audit logs.
+        AI strategy engagement 2-4 weeks. AI system build 6-16 weeks. Mid-market AI infrastructure.
+        AI infrastructure India United States United Kingdom Australia.
       </div>
     </main>
   );
