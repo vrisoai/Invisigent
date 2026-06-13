@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d0d0d"/>
+      <stop offset="50%" style="stop-color:#111111"/>
+      <stop offset="100%" style="stop-color:#0a0a0a"/>
+    </linearGradient>
+    <!-- Amber glow -->
+    <radialGradient id="amberGlow" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.07"/>
+      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0"/>
+    </radialGradient>
+    <!-- Node glow -->
+    <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.25"/>
+      <stop offset="100%" style="stop-color:#fbbf24;stop-opacity:0"/>
+    </radialGradient>
+    <!-- Arrow marker -->
+    <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 z" fill="rgba(251,191,36,0.5)"/>
+    </marker>
+    <!-- Glow filter -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#amberGlow)"/>
+
+  <!-- Subtle grid lines -->
+  <g opacity="0.04" stroke="#fbbf24" stroke-width="0.5">
+    <line x1="0" y1="135" x2="1200" y2="135"/>
+    <line x1="0" y1="270" x2="1200" y2="270"/>
+    <line x1="0" y1="405" x2="1200" y2="405"/>
+    <line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="200" y1="0" x2="200" y2="675"/>
+    <line x1="400" y1="0" x2="400" y2="675"/>
+    <line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="800" y1="0" x2="800" y2="675"/>
+    <line x1="1000" y1="0" x2="1000" y2="675"/>
+  </g>
+
+  <!-- ── Workflow canvas representation ── -->
+
+  <!-- Connector lines between nodes -->
+  <!-- Trigger → AI Agent -->
+  <line x1="248" y1="280" x2="378" y2="280" stroke="rgba(251,191,36,0.35)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <!-- AI Agent → Decision -->
+  <line x1="528" y1="280" x2="638" y2="280" stroke="rgba(251,191,36,0.35)" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <!-- Decision → Action A -->
+  <line x1="700" y1="253" x2="790" y2="195" stroke="rgba(251,191,36,0.25)" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <!-- Decision → Action B -->
+  <line x1="700" y1="307" x2="790" y2="365" stroke="rgba(251,191,36,0.25)" stroke-width="1.2" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+
+  <!-- Tool connections (vertical sub-nodes from AI Agent) -->
+  <line x1="453" y1="320" x2="453" y2="370" stroke="rgba(251,191,36,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="453" y1="370" x2="393" y2="420" stroke="rgba(251,191,36,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="453" y1="370" x2="453" y2="420" stroke="rgba(251,191,36,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+  <line x1="453" y1="370" x2="513" y2="420" stroke="rgba(251,191,36,0.2)" stroke-width="1" stroke-dasharray="3,3"/>
+
+  <!-- ── NODE: Trigger (Webhook/Chat) ── -->
+  <g filter="url(#glow)">
+    <rect x="128" y="248" width="120" height="64" rx="8" fill="#1a1a1a" stroke="rgba(251,191,36,0.4)" stroke-width="1.5"/>
+    <rect x="128" y="248" width="120" height="64" rx="8" fill="url(#nodeGlow)" opacity="0.5"/>
+    <!-- icon -->
+    <circle cx="158" cy="280" r="10" fill="rgba(251,191,36,0.15)" stroke="rgba(251,191,36,0.5)" stroke-width="1"/>
+    <text x="158" y="284" text-anchor="middle" fill="#fbbf24" font-size="10" font-family="monospace">⚡</text>
+    <text x="198" y="276" text-anchor="middle" fill="#e5e5e5" font-size="9" font-family="monospace" font-weight="600">TRIGGER</text>
+    <text x="198" y="290" text-anchor="middle" fill="#888" font-size="7.5" font-family="monospace">Chat / Webhook</text>
+  </g>
+
+  <!-- ── NODE: AI Agent (center star) ── -->
+  <g filter="url(#softGlow)">
+    <rect x="378" y="240" width="150" height="80" rx="10" fill="#1c1a14" stroke="rgba(251,191,36,0.65)" stroke-width="2"/>
+    <!-- amber fill shimmer -->
+    <rect x="378" y="240" width="150" height="80" rx="10" fill="rgba(251,191,36,0.04)"/>
+    <!-- icon pentagon/brain -->
+    <circle cx="413" cy="280" r="13" fill="rgba(251,191,36,0.18)" stroke="rgba(251,191,36,0.6)" stroke-width="1.5"/>
+    <text x="413" y="285" text-anchor="middle" fill="#fbbf24" font-size="13" font-family="monospace">🤖</text>
+    <text x="470" y="274" text-anchor="middle" fill="#fbbf24" font-size="9.5" font-family="monospace" font-weight="700">AI AGENT</text>
+    <text x="470" y="287" text-anchor="middle" fill="#aaa" font-size="7.5" font-family="monospace">GPT-4o · Claude</text>
+    <text x="470" y="299" text-anchor="middle" fill="#888" font-size="7" font-family="monospace">ReAct • Memory</text>
+  </g>
+
+  <!-- ── NODE: IF / Decision ── -->
+  <!-- Diamond shape -->
+  <polygon points="670,260 710,280 670,300 630,280" fill="#1a1a1a" stroke="rgba(251,191,36,0.35)" stroke-width="1.5"/>
+  <text x="670" y="284" text-anchor="middle" fill="#e5e5e5" font-size="8" font-family="monospace" font-weight="600">IF</text>
+
+  <!-- ── NODE: Action A (Slack) ── -->
+  <rect x="790" y="163" width="110" height="56" rx="7" fill="#1a1a1a" stroke="rgba(100,200,100,0.35)" stroke-width="1.2"/>
+  <text x="845" y="186" text-anchor="middle" fill="#6ee7b7" font-size="8.5" font-family="monospace" font-weight="600">SLACK</text>
+  <text x="845" y="200" text-anchor="middle" fill="#888" font-size="7" font-family="monospace">Send message</text>
+
+  <!-- ── NODE: Action B (HTTP / CRM) ── -->
+  <rect x="790" y="337" width="110" height="56" rx="7" fill="#1a1a1a" stroke="rgba(100,150,255,0.35)" stroke-width="1.2"/>
+  <text x="845" y="360" text-anchor="middle" fill="#93c5fd" font-size="8.5" font-family="monospace" font-weight="600">HTTP REQUEST</text>
+  <text x="845" y="374" text-anchor="middle" fill="#888" font-size="7" font-family="monospace">CRM / API</text>
+
+  <!-- ── Sub-nodes (tools) ── -->
+  <!-- Tool hub dot -->
+  <circle cx="453" cy="370" r="5" fill="rgba(251,191,36,0.2)" stroke="rgba(251,191,36,0.4)" stroke-width="1"/>
+
+  <!-- Tool: Order Lookup -->
+  <rect x="355" y="420" width="76" height="38" rx="5" fill="#151515" stroke="rgba(251,191,36,0.2)" stroke-width="1"/>
+  <text x="393" y="436" text-anchor="middle" fill="#fbbf24" font-size="7" font-family="monospace">order_lookup</text>
+  <text x="393" y="449" text-anchor="middle" fill="#666" font-size="6.5" font-family="monospace">REST Tool</text>
+
+  <!-- Tool: FAQ Search -->
+  <rect x="415" y="420" width="76" height="38" rx="5" fill="#151515" stroke="rgba(251,191,36,0.2)" stroke-width="1"/>
+  <text x="453" y="436" text-anchor="middle" fill="#fbbf24" font-size="7" font-family="monospace">faq_search</text>
+  <text x="453" y="449" text-anchor="middle" fill="#666" font-size="6.5" font-family="monospace">Vector Tool</text>
+
+  <!-- Tool: Escalate -->
+  <rect x="475" y="420" width="76" height="38" rx="5" fill="#151515" stroke="rgba(251,191,36,0.2)" stroke-width="1"/>
+  <text x="513" y="436" text-anchor="middle" fill="#fbbf24" font-size="7" font-family="monospace">escalate</text>
+  <text x="513" y="449" text-anchor="middle" fill="#666" font-size="6.5" font-family="monospace">Human Loop</text>
+
+  <!-- ── Right panel: cost comparison ── -->
+  <rect x="960" y="130" width="200" height="415" rx="12" fill="rgba(26,26,26,0.9)" stroke="rgba(251,191,36,0.15)" stroke-width="1"/>
+  <text x="1060" y="160" text-anchor="middle" fill="#fbbf24" font-size="8.5" font-family="monospace" font-weight="700" letter-spacing="2">COST COMPARISON</text>
+  <!-- divider -->
+  <line x1="975" y1="172" x2="1145" y2="172" stroke="rgba(251,191,36,0.15)" stroke-width="0.5"/>
+
+  <!-- Row: n8n self-hosted -->
+  <text x="975" y="196" fill="#e5e5e5" font-size="9" font-family="monospace" font-weight="600">n8n self-hosted</text>
+  <text x="975" y="211" fill="#888" font-size="7.5" font-family="monospace">DO Mumbai droplet</text>
+  <rect x="975" y="218" width="80" height="14" rx="3" fill="rgba(110,231,183,0.12)" stroke="rgba(110,231,183,0.3)" stroke-width="0.8"/>
+  <text x="1015" y="229" text-anchor="middle" fill="#6ee7b7" font-size="8" font-family="monospace">₹800–1,500/mo</text>
+  <text x="1145" y="229" text-anchor="end" fill="#6ee7b7" font-size="8" font-family="monospace">Unlimited runs</text>
+
+  <!-- Row: Zapier -->
+  <line x1="975" y1="244" x2="1145" y2="244" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <text x="975" y="262" fill="#e5e5e5" font-size="9" font-family="monospace" font-weight="600">Zapier Professional</text>
+  <text x="975" y="277" fill="#888" font-size="7.5" font-family="monospace">2,000 tasks</text>
+  <rect x="975" y="284" width="80" height="14" rx="3" fill="rgba(248,113,113,0.12)" stroke="rgba(248,113,113,0.3)" stroke-width="0.8"/>
+  <text x="1015" y="295" text-anchor="middle" fill="#f87171" font-size="8" font-family="monospace">₹4,720/mo</text>
+  <text x="1145" y="295" text-anchor="end" fill="#f87171" font-size="8" font-family="monospace">Per task</text>
+
+  <!-- Row: n8n Cloud -->
+  <line x1="975" y1="310" x2="1145" y2="310" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+  <text x="975" y="328" fill="#e5e5e5" font-size="9" font-family="monospace" font-weight="600">n8n Cloud Starter</text>
+  <text x="975" y="343" fill="#888" font-size="7.5" font-family="monospace">2,500 executions</text>
+  <rect x="975" y="350" width="80" height="14" rx="3" fill="rgba(253,186,116,0.12)" stroke="rgba(253,186,116,0.3)" stroke-width="0.8"/>
+  <text x="1015" y="361" text-anchor="middle" fill="#fdba74" font-size="8" font-family="monospace">₹1,700/mo</text>
+  <text x="1145" y="361" text-anchor="end" fill="#fdba74" font-size="8" font-family="monospace">Metered</text>
+
+  <!-- DPDP badge -->
+  <rect x="975" y="385" width="170" height="40" rx="6" fill="rgba(251,191,36,0.06)" stroke="rgba(251,191,36,0.2)" stroke-width="1"/>
+  <text x="1060" y="401" text-anchor="middle" fill="#fbbf24" font-size="8" font-family="monospace" font-weight="700">🇮🇳 DPDP COMPLIANT</text>
+  <text x="1060" y="416" text-anchor="middle" fill="#888" font-size="7" font-family="monospace">Self-hosted · Data stays in India</text>
+
+  <!-- n8n version badge -->
+  <rect x="975" y="440" width="170" height="32" rx="6" fill="rgba(147,197,253,0.06)" stroke="rgba(147,197,253,0.2)" stroke-width="1"/>
+  <text x="1060" y="454" text-anchor="middle" fill="#93c5fd" font-size="8" font-family="monospace" font-weight="700">n8n 2.0 · Jan 2026</text>
+  <text x="1060" y="466" text-anchor="middle" fill="#666" font-size="7" font-family="monospace">70+ LangChain nodes · MCP</text>
+
+  <!-- ── Left panel: setup stack ── -->
+  <rect x="30" y="370" width="82" height="170" rx="8" fill="rgba(26,26,26,0.7)" stroke="rgba(251,191,36,0.12)" stroke-width="1"/>
+  <text x="71" y="393" text-anchor="middle" fill="#888" font-size="7" font-family="monospace" letter-spacing="1">STACK</text>
+  <!-- Stack items -->
+  <rect x="40" y="402" width="62" height="20" rx="4" fill="rgba(99,102,241,0.15)" stroke="rgba(99,102,241,0.3)" stroke-width="0.8"/>
+  <text x="71" y="415" text-anchor="middle" fill="#a5b4fc" font-size="7.5" font-family="monospace">Docker</text>
+
+  <rect x="40" y="428" width="62" height="20" rx="4" fill="rgba(34,197,94,0.1)" stroke="rgba(34,197,94,0.3)" stroke-width="0.8"/>
+  <text x="71" y="441" text-anchor="middle" fill="#86efac" font-size="7.5" font-family="monospace">PostgreSQL</text>
+
+  <rect x="40" y="454" width="62" height="20" rx="4" fill="rgba(249,115,22,0.1)" stroke="rgba(249,115,22,0.3)" stroke-width="0.8"/>
+  <text x="71" y="467" text-anchor="middle" fill="#fdba74" font-size="7.5" font-family="monospace">Caddy HTTPS</text>
+
+  <rect x="40" y="480" width="62" height="20" rx="4" fill="rgba(239,68,68,0.1)" stroke="rgba(239,68,68,0.3)" stroke-width="0.8"/>
+  <text x="71" y="493" text-anchor="middle" fill="#fca5a5" font-size="7.5" font-family="monospace">Redis Queue</text>
+
+  <rect x="40" y="506" width="62" height="20" rx="4" fill="rgba(251,191,36,0.1)" stroke="rgba(251,191,36,0.3)" stroke-width="0.8"/>
+  <text x="71" y="519" text-anchor="middle" fill="#fbbf24" font-size="7.5" font-family="monospace">n8n Workers</text>
+
+  <!-- ── Title text ── -->
+  <text x="600" y="88" text-anchor="middle" fill="rgba(251,191,36,0.6)" font-size="9" font-family="monospace" letter-spacing="3" text-transform="uppercase">N8N AI AUTOMATION TUTORIAL · 2026</text>
+  <text x="600" y="118" text-anchor="middle" fill="#f5f5f5" font-size="22" font-family="Georgia, serif" font-weight="700">Build Production AI Workflows</text>
+  <text x="600" y="146" text-anchor="middle" fill="#aaaaaa" font-size="12" font-family="Georgia, serif">Setup · AI Agents · LangChain · MCP · India Compliance</text>
+
+  <!-- Subtle bottom brand line -->
+  <line x1="0" y1="650" x2="1200" y2="650" stroke="rgba(251,191,36,0.08)" stroke-width="0.5"/>
+  <text x="30" y="665" fill="rgba(255,255,255,0.2)" font-size="7.5" font-family="monospace">invisigent.ai</text>
+  <text x="1170" y="665" text-anchor="end" fill="rgba(255,255,255,0.2)" font-size="7.5" font-family="monospace">AI Infrastructure</text>
+</svg>

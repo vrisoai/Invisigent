@@ -75,6 +75,13 @@ const insightsBlogSchema = {
       blogPost: [
         {
           '@type': 'BlogPosting',
+          headline: 'n8n AI Automation Tutorial: Complete Workflow Setup Guide (2026)',
+          url: 'https://invisigent.ai/insights/n8n-ai-automation-tutorial',
+          datePublished: '2026-06-14',
+          image: 'https://invisigent.ai/blog-n8n-ai-automation-tutorial.svg',
+        },
+        {
+          '@type': 'BlogPosting',
           headline: 'The Problem: When Your AI Model Hallucinates in Production',
           url: 'https://invisigent.ai/insights/ai-hallucination-fix-infrastructure',
           datePublished: '2026-06-07',
@@ -207,6 +214,16 @@ export default function InsightsPage() {
             gap: 'clamp(1.25rem, 3vw, 2rem)',
           }}
         >
+          <BlogCard
+            imageSrc="/blog-n8n-ai-automation-tutorial.svg"
+            imageAlt="n8n AI automation workflow diagram showing trigger, AI agent, LangChain nodes, cost comparison, and MCP integration for 2026"
+            category="AI Automation"
+            readTime="18 min read"
+            heading="n8n AI Automation Tutorial: Complete Workflow Setup Guide (2026)"
+            excerpt="From Docker self-hosting to production AI agents — n8n 2.0, LangChain nodes, MCP integration, and DPDP-compliant setup for Indian startups. Includes cost comparison vs Zapier and Make."
+            author="Invisigent Research"
+            href="/insights/n8n-ai-automation-tutorial"
+          />
           <BlogCard
             imageSrc="/blog-ai-hallucination-fix.svg"
             imageAlt="AI hallucination detection infrastructure dashboard showing monitoring pipeline with confidence scoring and source attribution layers"

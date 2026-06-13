@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: `${TITLE} | Invisigent`,
   description: DESCRIPTION,
   keywords: [
+    // Core topic
     'AI infrastructure for mid-market',
     'operations automation AI',
     'AI workflow automation',
@@ -25,25 +26,67 @@ export const metadata: Metadata = {
     'AI operations efficiency',
     'LangGraph multi-agent systems',
     'RAG knowledge retrieval',
-    'GDPR DPDP AI compliance',
+    'slow operations revenue loss',
+    'AI operations strategy',
+    // US market
+    'mid-market AI infrastructure USA',
+    'AI operations automation United States',
+    'AI workflow automation US companies',
+    'operations efficiency AI US',
+    'AI infrastructure consulting USA',
+    // UK market
+    'mid-market AI infrastructure UK',
+    'AI operations automation United Kingdom',
+    'AI workflow automation London',
+    'operations efficiency AI UK',
+    'GDPR compliant AI operations UK',
+    // Australia market
+    'mid-market AI infrastructure Australia',
+    'AI operations automation Australia',
+    'AI workflow automation Sydney',
+    'operations efficiency AI Melbourne',
+    // India market
+    'mid-market AI infrastructure India',
+    'AI operations automation India',
+    'DPDP compliant AI operations India',
+    'AI workflow automation Bangalore',
+    // General
     'Invisigent AI',
+    'GDPR DPDP AI compliance',
+    'revenue leakage operations AI',
+    'AI infrastructure ROI',
   ],
   authors: [{ name: 'Invisigent', url: 'https://invisigent.ai' }],
   creator: 'Invisigent',
+  publisher: 'Invisigent',
   category: 'AI Infrastructure',
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
-  alternates: { canonical: CANONICAL },
+  alternates: {
+    canonical: CANONICAL,
+    languages: {
+      'en-US': CANONICAL,
+      'en-GB': CANONICAL,
+      'en-AU': CANONICAL,
+      'en-IN': CANONICAL,
+    },
+  },
   openGraph: {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
     title: TITLE,
     description:
-      'Revenue is leaking through the gap between what your operations team can handle and what your business demands. AI infrastructure closes it permanently.',
+      'Revenue is leaking through the gap between what your operations team can handle and what your business demands. AI infrastructure closes it permanently — for mid-market teams in the US, UK, Australia, and India.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -55,16 +98,10 @@ export const metadata: Metadata = {
       'multi-agent systems',
       'mid-market AI',
       'workflow automation',
+      'revenue operations',
+      'AI ROI',
     ],
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 675,
-        alt: TITLE,
-        type: 'image/png',
-      },
-    ],
+    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -72,8 +109,32 @@ export const metadata: Metadata = {
     creator: '@invisigent_ai',
     title: TITLE,
     description:
-      'Revenue is leaking through the gap between what your operations team can handle and what your business demands. AI infrastructure closes it permanently.',
+      'Revenue leaks through slow operations. AI infrastructure — not AI tools — closes the gap permanently.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
+  },
+  other: {
+    'geo.region': 'IN-RJ',
+    'geo.placename': 'Jaipur, Rajasthan, India',
+    'geo.position': '26.9124;75.7873',
+    ICBM: '26.9124, 75.7873',
+    'og:locale:alternate': 'en_GB,en_AU,en_IN',
+    'article:published_time': PUBLISHED,
+    'article:modified_time': PUBLISHED,
+    'article:author': 'https://invisigent.ai',
+    'article:section': 'AI Infrastructure',
+    'article:tag': 'AI infrastructure,operations automation,mid-market AI,workflow automation,revenue operations',
+    'revisit-after': '7 days',
+    rating: 'general',
+    language: 'en',
+    coverage: 'Worldwide',
+    distribution: 'global',
+    target: 'all',
+    audience: 'CEOs, COOs, technical founders, operations leaders',
+    'DC.coverage': 'United States, United Kingdom, Australia, India',
+    'DC.language': 'en',
+    'DC.subject': 'AI infrastructure, operations automation, mid-market AI, revenue operations',
+    'DC.publisher': 'Invisigent',
+    'theme-color': '#0d0d0d',
   },
 };
 
@@ -110,14 +171,32 @@ const articleSchema = {
     '@id': CANONICAL,
   },
   articleSection: 'AI Infrastructure',
+  articleBody: 'How slow internal operations create invisible revenue leakage for mid-market companies through delayed proposals, unrouted leads, queued requests. Contrasts AI tools (which generate outputs) with AI infrastructure (which runs operations autonomously). Covers four production architecture layers: orchestration with multi-agent supervisor logic and specialist subagents; knowledge layer with sub-3-second RAG retrieval connected to actual internal documents; observability with replayable audit trails; compliance with RBAC and DPDP/GDPR data residency built from sprint one. Emphasizes model-agnostic infrastructure ownership. Addresses India DPDP Act 2023 and cross-border EU/India compliance.',
   keywords:
-    'AI infrastructure, operations automation, multi-agent systems, mid-market AI, workflow automation',
-  inLanguage: 'en-US',
+    'AI infrastructure for mid-market companies, operations automation AI, revenue leakage operations, AI workflow automation, multi-agent AI operations, RAG pipeline internal knowledge retrieval, model-agnostic AI infrastructure, DPDP Act compliance AI India, GDPR AI operations, AI infrastructure ownership, response time automation, inbound request classification AI, operations capacity AI scale, AI infrastructure vs AI tools',
+  wordCount: 2500,
+  timeRequired: 'PT10M',
+  inLanguage: 'en',
   isPartOf: {
     '@type': 'Blog',
     '@id': 'https://invisigent.ai/insights#blog',
     name: 'AI Infrastructure Insights',
     publisher: { '@type': 'Organization', name: 'Invisigent' },
+  },
+  about: [
+    { '@type': 'Thing', name: 'AI operations automation' },
+    { '@type': 'Thing', name: 'mid-market AI infrastructure' },
+    { '@type': 'Thing', name: 'revenue operations' },
+    { '@type': 'Thing', name: 'workflow automation' },
+  ],
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+    ],
   },
 };
 
@@ -137,12 +216,48 @@ const monoLabelStyle = {
   marginBottom: '0.3rem',
 };
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Does AI infrastructure work for companies that are not in the technology industry?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. Professional services, logistics, financial services, healthcare operations, and manufacturing all have repeatable internal workflows that AI infrastructure handles well. The technology is industry-agnostic.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'We are based in India. Does AI infrastructure apply to our compliance requirements?',
+      acceptedAnswer: { '@type': 'Answer', text: "Yes. Every system we build for Indian organizations is designed to meet India's Digital Personal Data Protection Act 2023. Consent management architecture, data fiduciary obligations, and purpose-limitation controls are built in from the first sprint." },
+    },
+    {
+      '@type': 'Question',
+      name: 'We operate across both EU and Indian markets. Can one system cover both GDPR and DPDP compliance?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. We design systems that meet GDPR requirements for EU data subjects and DPDP Act requirements for Indian data simultaneously. Data residency controls, consent architecture, and audit trails are configured per jurisdiction at the infrastructure layer.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What if our team does not have the technical capacity to run AI infrastructure after it is delivered?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Every system we deliver includes full operational documentation, monitoring access, and runbooks written for the team that will actually run it. If your team can manage a modern SaaS platform, they can operate what we build.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How is AI infrastructure different from the AI automation tools we have already tried?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI tools generate outputs. AI infrastructure runs operations. Tools connect existing software with predefined logic. Custom AI infrastructure is a custom orchestration layer designed around your specific workflows, your internal data, and your compliance environment — with full observability and production-grade reliability built in.' },
+    },
+  ],
+};
+
 export default function BlogPost() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Breadcrumb
         items={[

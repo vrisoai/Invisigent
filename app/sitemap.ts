@@ -79,6 +79,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/insights/n8n-ai-automation-tutorial`,
+      lastModified: new Date('2026-06-14'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/case-studies`,
       lastModified: now,
       changeFrequency: 'monthly',

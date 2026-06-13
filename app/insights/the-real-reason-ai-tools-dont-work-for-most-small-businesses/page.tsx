@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: `${TITLE} | Invisigent`,
   description: DESCRIPTION,
   keywords: [
+    // Core topic
     'why AI projects fail',
     'AI implementation mistakes',
     'process audit before AI',
@@ -25,25 +26,70 @@ export const metadata: Metadata = {
     'AI workflow automation',
     'automate the right process',
     'AI operations strategy',
+    'AI project failure reasons',
+    'why AI tools fail organizations',
+    // US market
+    'why AI projects fail USA',
+    'AI implementation failures United States',
+    'process audit before AI US',
+    'AI infrastructure consulting USA',
+    'AI operations strategy US companies',
+    'custom AI vs generic tools USA',
+    // UK market
+    'why AI projects fail UK',
+    'AI implementation failures United Kingdom',
+    'process audit before AI UK',
+    'AI infrastructure consulting London',
+    'AI operations strategy UK companies',
+    'GDPR compliant AI implementation UK',
+    // Australia market
+    'why AI projects fail Australia',
+    'AI implementation failures Australia',
+    'process audit before AI Sydney',
+    'AI infrastructure consulting Australia',
+    'AI operations strategy Australian companies',
+    // India market
+    'why AI projects fail India',
+    'AI implementation failures India',
+    'AI infrastructure mid-market India',
+    'DPDP AI compliance process India',
+    // General
     'GDPR DPDP AI compliance',
     'Invisigent AI consulting',
+    'how to make AI projects succeed',
+    'AI infrastructure process design',
   ],
   authors: [{ name: 'Invisigent', url: 'https://invisigent.ai' }],
   creator: 'Invisigent',
+  publisher: 'Invisigent',
   category: 'AI Infrastructure',
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
-  alternates: { canonical: CANONICAL },
+  alternates: {
+    canonical: CANONICAL,
+    languages: {
+      'en-US': CANONICAL,
+      'en-GB': CANONICAL,
+      'en-AU': CANONICAL,
+      'en-IN': CANONICAL,
+    },
+  },
   openGraph: {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
     title: TITLE,
     description:
-      'Most organizations struggling with AI are not using the wrong model. They are automating the wrong process. Here is what correct AI infrastructure looks like.',
+      'Most organizations struggling with AI are not using the wrong model. They are automating the wrong process. What correct AI infrastructure looks like — for teams in the US, UK, Australia, and India.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -55,16 +101,9 @@ export const metadata: Metadata = {
       'AI implementation',
       'mid-market AI',
       'workflow automation',
+      'AI project failure',
     ],
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 675,
-        alt: TITLE,
-        type: 'image/png',
-      },
-    ],
+    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -72,8 +111,32 @@ export const metadata: Metadata = {
     creator: '@invisigent_ai',
     title: TITLE,
     description:
-      'Most organizations struggling with AI are not using the wrong model. They are automating the wrong process.',
+      'Most organizations struggling with AI are automating the wrong process. The real reason AI infrastructure projects fail.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
+  },
+  other: {
+    'geo.region': 'IN-RJ',
+    'geo.placename': 'Jaipur, Rajasthan, India',
+    'geo.position': '26.9124;75.7873',
+    ICBM: '26.9124, 75.7873',
+    'og:locale:alternate': 'en_GB,en_AU,en_IN',
+    'article:published_time': PUBLISHED,
+    'article:modified_time': PUBLISHED,
+    'article:author': 'https://invisigent.ai',
+    'article:section': 'AI Infrastructure',
+    'article:tag': 'AI infrastructure,process audit,AI implementation,mid-market AI,workflow automation,AI project failure',
+    'revisit-after': '7 days',
+    rating: 'general',
+    language: 'en',
+    coverage: 'Worldwide',
+    distribution: 'global',
+    target: 'all',
+    audience: 'CTOs, operations leaders, technical founders, AI project managers',
+    'DC.coverage': 'United States, United Kingdom, Australia, India',
+    'DC.language': 'en',
+    'DC.subject': 'AI project failure, process audit before AI, AI infrastructure implementation, mid-market AI strategy',
+    'DC.publisher': 'Invisigent',
+    'theme-color': '#0d0d0d',
   },
 };
 
@@ -110,14 +173,32 @@ const articleSchema = {
     '@id': CANONICAL,
   },
   articleSection: 'AI Infrastructure',
+  articleBody: 'The real reason AI infrastructure projects fail: organizations automate the wrong process. Three diagnostic questions for automation readiness: (1) Does the process follow consistent definable logic or depend on undocumentable judgment? (2) Where is the largest response-time gap and what does it cost? (3) What happens if nothing changes for 12 months? Compares generic AI tools (built for millions of use cases, requires manual review) vs custom AI infrastructure (built for specific workflows, connected to internal data, executes end-to-end). Describes Invisigent process audit: identifying automation candidates, ruling out judgment-intensive workflows, mapping internal data assets, defining GDPR/DPDP/EU AI Act compliance architecture from sprint one. Covers agentic workflow systems, knowledge retrieval RAG infrastructure, observability audit trails, and compliance architecture. Process audit takes 2-4 weeks.',
   keywords:
-    'AI infrastructure, process audit, AI implementation, mid-market AI, workflow automation',
-  inLanguage: 'en-US',
+    'why AI projects fail mid-market, automating wrong process AI, process audit before AI implementation, three questions AI automation readiness, custom AI vs generic tools comparison, agentic workflow automation, knowledge retrieval RAG infrastructure, AI compliance architecture GDPR DPDP EU AI Act, AI infrastructure ownership mid-market, failed AI implementation lessons, DPDP Act India AI compliance, process audit architecture plan 2 to 4 weeks',
+  wordCount: 2250,
+  timeRequired: 'PT9M',
+  inLanguage: 'en',
   isPartOf: {
     '@type': 'Blog',
     '@id': 'https://invisigent.ai/insights#blog',
     name: 'AI Infrastructure Insights',
     publisher: { '@type': 'Organization', name: 'Invisigent' },
+  },
+  about: [
+    { '@type': 'Thing', name: 'AI project failure' },
+    { '@type': 'Thing', name: 'process audit before AI' },
+    { '@type': 'Thing', name: 'AI infrastructure design' },
+    { '@type': 'Thing', name: 'mid-market AI strategy' },
+  ],
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+    ],
   },
 };
 
@@ -137,12 +218,48 @@ const monoLabelStyle = {
   marginBottom: '0.3rem',
 };
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'How do we know which processes in our organization are ready for AI infrastructure?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The signals to look for are: workflows that follow consistent logic, workflows where delay has a measurable cost, and workflows where volume is growing faster than your team can scale. The discovery phase determines which processes meet those criteria and prioritizes them by operational impact.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'We are an Indian mid-market company. Are there specific compliance considerations we need to address for AI?',
+      acceptedAnswer: { '@type': 'Answer', text: "Yes. India's Digital Personal Data Protection Act 2023 applies to any AI system that processes personal data of Indian residents. Every system we build for Indian organizations includes DPDP-compliant architecture — consent management, data fiduciary documentation, and purpose-limitation controls from sprint one." },
+    },
+    {
+      '@type': 'Question',
+      name: 'We operate across India and the EU. Can one AI infrastructure system meet both DPDP and GDPR requirements?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. We design systems with jurisdiction-specific data residency controls and consent architecture that meet both GDPR and DPDP simultaneously.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Our previous AI implementation failed. Does that affect what we can build now?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Not negatively — often positively. A failed implementation tells us exactly where the process audit was skipped or where the wrong workflow was selected. We audit the previous implementation during discovery, identify what went wrong structurally, and design the new architecture to avoid the same failure points.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How long does a process audit and architecture design engagement take?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Typically two to four weeks. The output is a documented architecture plan prioritized by operational impact, with a defined build sequence and success criteria — actionable whether or not you proceed to a full build.' },
+    },
+  ],
+};
+
 export default function BlogPost() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Breadcrumb
         items={[

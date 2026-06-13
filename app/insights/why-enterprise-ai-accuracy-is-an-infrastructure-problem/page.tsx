@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: `${TITLE} | Invisigent`,
   description: DESCRIPTION,
   keywords: [
+    // Core topic
     'enterprise AI accuracy',
     'AI retrieval architecture',
     'RAG accuracy production',
@@ -24,26 +25,72 @@ export const metadata: Metadata = {
     'AI observability infrastructure',
     'AI data quality',
     'AI output accuracy',
+    'why AI accuracy fails',
+    'AI accuracy infrastructure layers',
+    'enterprise AI accuracy improvement',
+    // US market
+    'enterprise AI accuracy USA',
+    'AI accuracy infrastructure United States',
+    'RAG accuracy US enterprises',
+    'AI observability tools USA',
+    'EU AI Act compliance US',
+    'enterprise AI accuracy improvement US',
+    // UK market
+    'enterprise AI accuracy UK',
+    'AI accuracy infrastructure United Kingdom',
+    'RAG accuracy UK enterprises',
+    'AI observability London',
+    'EU AI Act GDPR compliance UK',
+    'enterprise AI accuracy improvement UK',
+    // Australia market
+    'enterprise AI accuracy Australia',
+    'AI accuracy infrastructure Australia',
+    'RAG accuracy Australian enterprises',
+    'AI observability Sydney Melbourne',
+    'enterprise AI accuracy improvement Australia',
+    // India market
+    'enterprise AI accuracy India',
+    'AI accuracy infrastructure India',
+    'RAG accuracy India enterprises',
+    'DPDP AI accuracy compliance India',
+    // General
+    'Invisigent AI consulting',
     'EU AI Act compliance',
     'DPDP AI accuracy',
-    'Invisigent AI consulting',
+    'how to improve AI accuracy',
+    'AI model accuracy vs infrastructure',
   ],
   authors: [{ name: 'Invisigent', url: 'https://invisigent.ai' }],
   creator: 'Invisigent',
+  publisher: 'Invisigent',
   category: 'AI Infrastructure',
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
-  alternates: { canonical: CANONICAL },
+  alternates: {
+    canonical: CANONICAL,
+    languages: {
+      'en-US': CANONICAL,
+      'en-GB': CANONICAL,
+      'en-AU': CANONICAL,
+      'en-IN': CANONICAL,
+    },
+  },
   openGraph: {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
     title: TITLE,
     description:
-      'AI accuracy failures are infrastructure failures. The four layers that actually determine enterprise AI output accuracy — and why fixing the model never solves them.',
+      'AI accuracy failures are infrastructure failures. The four layers that actually determine enterprise AI output accuracy — and why fixing the model never solves them. For teams in the US, UK, Australia, and India.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -55,6 +102,8 @@ export const metadata: Metadata = {
       'AI guardrails',
       'AI observability',
       'enterprise AI infrastructure',
+      'RAG accuracy',
+      'EU AI Act',
     ],
     images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
   },
@@ -64,8 +113,32 @@ export const metadata: Metadata = {
     creator: '@invisigent_ai',
     title: TITLE,
     description:
-      'AI accuracy failures are infrastructure failures. The four layers that actually determine enterprise AI output accuracy.',
+      'AI accuracy failures are infrastructure failures, not model failures. The four layers that actually determine enterprise AI output accuracy.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
+  },
+  other: {
+    'geo.region': 'IN-RJ',
+    'geo.placename': 'Jaipur, Rajasthan, India',
+    'geo.position': '26.9124;75.7873',
+    ICBM: '26.9124, 75.7873',
+    'og:locale:alternate': 'en_GB,en_AU,en_IN',
+    'article:published_time': PUBLISHED,
+    'article:modified_time': PUBLISHED,
+    'article:author': 'https://invisigent.ai',
+    'article:section': 'AI Infrastructure',
+    'article:tag': 'AI accuracy,retrieval architecture,AI guardrails,AI observability,enterprise AI infrastructure,EU AI Act',
+    'revisit-after': '7 days',
+    rating: 'general',
+    language: 'en',
+    coverage: 'Worldwide',
+    distribution: 'global',
+    target: 'all',
+    audience: 'AI engineers, enterprise architects, CTOs, technical founders',
+    'DC.coverage': 'United States, United Kingdom, Australia, India',
+    'DC.language': 'en',
+    'DC.subject': 'enterprise AI accuracy, RAG infrastructure, AI guardrails, AI observability, EU AI Act GDPR DPDP compliance',
+    'DC.publisher': 'Invisigent',
+    'theme-color': '#0d0d0d',
   },
 };
 
@@ -87,14 +160,32 @@ const articleSchema = {
   },
   mainEntityOfPage: { '@type': 'WebPage', '@id': CANONICAL },
   articleSection: 'AI Infrastructure',
+  articleBody: 'Enterprise AI accuracy is determined by four infrastructure layers, not by the underlying model. Layer 1 — Retrieval Architecture: chunking strategy, reranking, hybrid search combining vector and keyword, and retrieval trace logging. Layer 2 — Data Quality: stale knowledge bases, inconsistent terminology, unstructured data without preprocessing, no data ownership discipline. Layer 3 — Guardrail Design: confidence thresholds, input validation, output validation, escalation pathways with full context. Layer 4 — Observability Infrastructure: accuracy baselines, drift detection, agent decision logging, feedback loop capture. Also covers compliance obligations under EU AI Act high-risk requirements, GDPR Article 5 accuracy obligations, and India DPDP Act 2023 for organizations processing Indian personal data.',
   keywords:
-    'enterprise AI accuracy, retrieval architecture, AI guardrails, AI observability, data quality, RAG, EU AI Act, DPDP',
-  inLanguage: 'en-US',
+    'enterprise AI accuracy infrastructure, RAG retrieval accuracy, hybrid search AI, semantic chunking AI, reranking retrieval AI, AI accuracy baseline measurement, AI guardrail design, confidence threshold routing, AI observability drift detection, EU AI Act accuracy requirements, GDPR AI accuracy obligations, DPDP Act AI accuracy India, AI accuracy degradation prevention, knowledge base staleness, retrieval trace logging, four layers enterprise AI accuracy',
+  wordCount: 3000,
+  timeRequired: 'PT12M',
+  inLanguage: 'en',
   isPartOf: {
     '@type': 'Blog',
     '@id': 'https://invisigent.ai/insights#blog',
     name: 'AI Infrastructure Insights',
     publisher: { '@type': 'Organization', name: 'Invisigent' },
+  },
+  about: [
+    { '@type': 'Thing', name: 'enterprise AI accuracy' },
+    { '@type': 'Thing', name: 'RAG retrieval architecture' },
+    { '@type': 'Thing', name: 'AI guardrail design' },
+    { '@type': 'Thing', name: 'AI observability' },
+  ],
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+    ],
   },
 };
 
@@ -161,12 +252,48 @@ const LAYERS = [
   },
 ];
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Our AI system was accurate at launch and has degraded over time. What is most likely causing this?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The most common cause is data staleness combined with query distribution shift. The knowledge base that was accurate at indexing has not been updated as operational reality changed. An accuracy audit examining retrieval trace logs against current query distributions will typically identify both patterns quickly.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How does the DPDP Act affect AI accuracy obligations for Indian organizations?',
+      acceptedAnswer: { '@type': 'Answer', text: "India's Digital Personal Data Protection Act 2023 establishes accuracy as a principle for personal data processing. If your AI system processes personal data of Indian residents and produces outputs based on that data, the accuracy of those outputs is subject to DPDP obligations. You need monitoring infrastructure that can demonstrate outputs are accurate and that inaccurate outputs are detected and corrected." },
+    },
+    {
+      '@type': 'Question',
+      name: 'We operate across India and the EU. Does accuracy infrastructure need to be different for each jurisdiction?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The underlying accuracy infrastructure — retrieval architecture, data quality, guardrails, observability — is the same. What differs is the compliance documentation and the specific thresholds that trigger escalation. We design the accuracy infrastructure once and configure the compliance layer per jurisdiction.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do we establish accuracy baselines if we have never measured AI output accuracy before?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Start with a representative sample of queries from your actual operational environment. Run them through the system. Have subject matter experts evaluate outputs against ground truth. Document the accuracy rate per query category. This becomes your baseline for ongoing drift detection.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Is it possible to add accuracy infrastructure layers to a system that was already built without them?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes, but cost depends on which layers are missing. Observability infrastructure is the most straightforward to add. Guardrail design can usually be implemented at the orchestration layer. Retrieval architecture improvements require rebuilding the retrieval pipeline. Poor data quality requires the most fundamental remediation because it affects every layer above it.' },
+    },
+  ],
+};
+
 export default function BlogPost() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Breadcrumb
         items={[

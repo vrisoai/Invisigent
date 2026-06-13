@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: `${TITLE} | Invisigent`,
   description: DESCRIPTION,
   keywords: [
+    // Core topic
     'AI hallucination fix',
     'RAG hallucination',
     'AI infrastructure monitoring',
@@ -26,24 +27,68 @@ export const metadata: Metadata = {
     'confidence threshold AI',
     'n8n AI automation',
     'enterprise AI accuracy',
+    'AI hallucination detection production',
+    'reduce AI hallucination rate',
+    'RAG accuracy infrastructure',
+    // US market
+    'AI hallucination fix USA',
+    'enterprise AI accuracy US',
+    'AI observability tools United States',
+    'RAG hallucination fix US startups',
+    'AI infrastructure monitoring US',
+    // UK market
+    'AI hallucination fix UK',
+    'enterprise AI accuracy United Kingdom',
+    'AI observability London',
+    'RAG infrastructure UK',
+    'GDPR compliant AI monitoring UK',
+    // Australia market
+    'AI hallucination fix Australia',
+    'enterprise AI accuracy Australia',
+    'AI observability Sydney',
+    'RAG infrastructure Australia',
+    // India market
+    'AI hallucination fix India',
+    'enterprise AI accuracy India',
+    'AI infrastructure monitoring India',
+    'DPDP AI compliance India',
+    // General
     'Invisigent AI consulting',
+    'production AI hallucination prevention',
+    'LangSmith AI monitoring',
+    'OpenLLMetry observability',
   ],
   authors: [{ name: 'Invisigent Research', url: 'https://invisigent.ai' }],
   creator: 'Invisigent',
+  publisher: 'Invisigent',
   category: 'AI Infrastructure',
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
-  alternates: { canonical: CANONICAL },
+  alternates: {
+    canonical: CANONICAL,
+    languages: {
+      'en-US': CANONICAL,
+      'en-GB': CANONICAL,
+      'en-AU': CANONICAL,
+      'en-IN': CANONICAL,
+    },
+  },
   openGraph: {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
     title: TITLE,
     description:
-      '80% of AI hallucination issues are infrastructure failures. 7 infrastructure-level fixes that reduce hallucination rates by 60-80% in production.',
+      '80% of AI hallucination issues are infrastructure failures. 7 infrastructure-level fixes that reduce hallucination rates by 60-80% in production — for teams in the US, UK, Australia, and India.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -55,6 +100,8 @@ export const metadata: Metadata = {
       'AI observability',
       'hallucination detection',
       'enterprise AI accuracy',
+      'AI monitoring',
+      'production AI',
     ],
     images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
   },
@@ -64,8 +111,32 @@ export const metadata: Metadata = {
     creator: '@invisigent_ai',
     title: TITLE,
     description:
-      '80% of AI hallucination issues are infrastructure failures. 7 fixes that reduce hallucination rates by 60-80%.',
+      '80% of AI hallucination issues are infrastructure failures, not model failures. 7 fixes that reduce hallucination rates by 60-80% in production.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
+  },
+  other: {
+    'geo.region': 'IN-RJ',
+    'geo.placename': 'Jaipur, Rajasthan, India',
+    'geo.position': '26.9124;75.7873',
+    ICBM: '26.9124, 75.7873',
+    'og:locale:alternate': 'en_GB,en_AU,en_IN',
+    'article:published_time': PUBLISHED,
+    'article:modified_time': PUBLISHED,
+    'article:author': 'https://invisigent.ai',
+    'article:section': 'AI Infrastructure',
+    'article:tag': 'AI hallucination,RAG infrastructure,AI observability,hallucination detection,enterprise AI accuracy',
+    'revisit-after': '7 days',
+    rating: 'general',
+    language: 'en',
+    coverage: 'Worldwide',
+    distribution: 'global',
+    target: 'all',
+    audience: 'developers, AI engineers, technical founders, enterprise teams',
+    'DC.coverage': 'United States, United Kingdom, Australia, India',
+    'DC.language': 'en',
+    'DC.subject': 'AI hallucination fix, RAG infrastructure, AI observability, enterprise AI accuracy',
+    'DC.publisher': 'Invisigent',
+    'theme-color': '#0d0d0d',
   },
 };
 
@@ -75,26 +146,51 @@ const articleSchema = {
   '@id': `${CANONICAL}#article`,
   headline: TITLE,
   description: DESCRIPTION,
-  image: { '@type': 'ImageObject', url: OG_IMAGE, width: 1200, height: 675 },
+  image: { '@type': 'ImageObject', url: OG_IMAGE, width: 1200, height: 675, caption: 'AI hallucination fix infrastructure — 7 strategies for reducing hallucination rates in production AI systems' },
   datePublished: PUBLISHED,
   dateModified: PUBLISHED,
+  wordCount: 3500,
+  timeRequired: 'PT14M',
   author: { '@type': 'Organization', name: 'Invisigent Research', url: 'https://invisigent.ai' },
   publisher: {
     '@type': 'Organization',
     name: 'Invisigent',
     url: 'https://invisigent.ai',
     logo: { '@type': 'ImageObject', url: 'https://invisigent.ai/logo.png' },
+    address: { '@type': 'PostalAddress', addressLocality: 'Jaipur', addressRegion: 'Rajasthan', addressCountry: 'IN' },
   },
   mainEntityOfPage: { '@type': 'WebPage', '@id': CANONICAL },
   articleSection: 'AI Infrastructure',
+  articleBody: 'Seven infrastructure strategies to reduce AI hallucination rates by 60-80% in production: AI observability with LangSmith, Arize AI, and OpenLLMetry; RAG source attribution and citation validation; multi-model verification routing; data quality validation pipeline; human-in-the-loop confidence routing (>0.9 send to user, >0.7 route for review); context window management with smart prioritization; and n8n monitoring automation. Covers 5 root causes including data pipeline failures, observability blind spots, routing issues, context window management, and absent human-in-the-loop QA. Results table shows hallucination rate drop from 15-20% to 3-5%. Fintech case study: 23% to 4% in 30 days, saving $120K/year in customer support costs.',
   keywords:
-    'AI hallucination fix, RAG hallucination, AI infrastructure monitoring, hallucination detection, AI observability, source attribution AI, multi-model verification, confidence threshold AI, n8n AI automation, enterprise AI accuracy',
-  inLanguage: 'en-US',
+    'AI hallucination fix infrastructure, RAG hallucination detection, AI observability stack, LangSmith hallucination tracing, Arize AI model monitoring, OpenLLMetry AI observability, source attribution RAG, multi-model verification AI, confidence threshold blocking, n8n hallucination monitoring automation, production AI monitoring, AI fact-checking pipeline, enterprise AI accuracy, reduce hallucination rate production, AI hallucination fintech case study, hallucination root causes infrastructure',
+  inLanguage: 'en',
   isPartOf: {
     '@type': 'Blog',
     '@id': 'https://invisigent.ai/insights#blog',
     name: 'AI Infrastructure Insights',
     publisher: { '@type': 'Organization', name: 'Invisigent' },
+  },
+  about: [
+    { '@type': 'Thing', name: 'AI hallucination detection' },
+    { '@type': 'Thing', name: 'RAG infrastructure' },
+    { '@type': 'Thing', name: 'AI observability' },
+    { '@type': 'Thing', name: 'enterprise AI accuracy' },
+  ],
+  mentions: [
+    { '@type': 'SoftwareApplication', name: 'LangSmith', applicationCategory: 'AI Observability' },
+    { '@type': 'SoftwareApplication', name: 'Arize AI', applicationCategory: 'AI Monitoring' },
+    { '@type': 'SoftwareApplication', name: 'OpenLLMetry', applicationCategory: 'AI Observability' },
+    { '@type': 'SoftwareApplication', name: 'n8n', applicationCategory: 'Workflow Automation' },
+  ],
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+    ],
   },
 };
 
@@ -296,12 +392,48 @@ const RESULTS = [
   },
 ];
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'Can I fix AI hallucinations by just fine-tuning the model?',
+      acceptedAnswer: { '@type': 'Answer', text: "No. 80% of hallucinations are infrastructure problems — data pipeline failures, observability blind spots, routing issues. Fine-tuning alone won't fix missing source attribution, stale retrieval data, or absent confidence thresholds. Fix the infrastructure first." },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the fastest way to reduce hallucinations in production?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Add source attribution to your RAG prompts and set up confidence threshold blocking. These two fixes reduce hallucinations by 40-50% within a week. Source attribution forces the model to cite retrievable documents for every claim. Confidence blocking prevents low-confidence responses from reaching users without routing them to human review.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How much does AI hallucination monitoring infrastructure cost?',
+      acceptedAnswer: { '@type': 'Answer', text: '$500-2,000/month for the core tooling stack — Arize AI or OpenLLMetry for model monitoring, LangSmith for tracing, n8n for automation workflows. ROI comes from reduced customer support costs, reduced reputational risk, and improved user trust. For enterprise deployments, the monitoring infrastructure typically pays for itself within the first quarter.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should I use n8n for hallucination monitoring workflows?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes. n8n handles the trigger-based workflow pattern (new response logged → calculate risk score → route or alert) without requiring custom engineering. It connects to Slack, email, databases, and external APIs including fact-checking services.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is an acceptable hallucination rate for production AI?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Under 5% for most business applications. Under 2% for high-stakes applications in legal, medical, or financial services. Establish your baseline before implementing fixes so you can measure actual improvement.' },
+    },
+  ],
+};
+
 export default function BlogPost() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Breadcrumb
         items={[

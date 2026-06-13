@@ -17,39 +17,85 @@ export const metadata: Metadata = {
   title: `${TITLE} | Invisigent`,
   description: DESCRIPTION,
   keywords: [
+    // Core topic
     'AI implementation mistakes',
     'AI infrastructure budget',
     'AI guardrails production',
     'AI ROI mid-market',
-    'AI system design',
+    'AI system design mistakes',
     'AI governance ownership',
-    'AI process automation',
-    'AI data quality',
+    'AI process automation failures',
+    'AI data quality problems',
+    'AI project failure reasons',
+    '7 AI mistakes to avoid',
+    // US market
+    'AI implementation mistakes USA',
+    'AI infrastructure budget US companies',
+    'AI ROI mid-market United States',
+    'AI project failures US',
+    'enterprise AI mistakes USA',
+    'AI implementation guide US 2026',
+    // UK market
+    'AI implementation mistakes UK',
+    'AI infrastructure budget UK companies',
+    'AI ROI mid-market United Kingdom',
+    'AI project failures UK',
+    'enterprise AI mistakes London',
+    'GDPR AI implementation UK',
+    // Australia market
+    'AI implementation mistakes Australia',
+    'AI infrastructure budget Australia',
+    'AI ROI mid-market Australia',
+    'AI project failures Sydney',
+    'enterprise AI mistakes Melbourne',
+    // India market
+    'AI implementation mistakes India',
+    'AI infrastructure budget India',
+    'AI project failures India',
+    'DPDP AI compliance mistakes India',
+    // General
     'GDPR DPDP AI compliance',
     'Invisigent AI consulting',
+    'how to avoid AI implementation failures',
+    'AI infrastructure mistakes to avoid',
   ],
   authors: [{ name: 'Invisigent', url: 'https://invisigent.ai' }],
   creator: 'Invisigent',
+  publisher: 'Invisigent',
   category: 'AI Infrastructure',
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
-  alternates: { canonical: CANONICAL },
+  alternates: {
+    canonical: CANONICAL,
+    languages: {
+      'en-US': CANONICAL,
+      'en-GB': CANONICAL,
+      'en-AU': CANONICAL,
+      'en-IN': CANONICAL,
+    },
+  },
   openGraph: {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
     title: TITLE,
     description:
-      'AI is not failing. Execution is. Here are the 7 most expensive mistakes mid-market organizations make when building AI infrastructure.',
+      'AI is not failing. Execution is. The 7 most expensive AI infrastructure mistakes mid-market organizations in the US, UK, Australia, and India make — and how to avoid every one.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
     authors: ['https://invisigent.ai'],
     section: 'AI Infrastructure',
-    tags: ['AI implementation', 'AI infrastructure', 'AI governance', 'mid-market AI', 'AI ROI'],
+    tags: ['AI implementation', 'AI infrastructure', 'AI governance', 'mid-market AI', 'AI ROI', 'AI mistakes'],
     images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
@@ -58,8 +104,32 @@ export const metadata: Metadata = {
     creator: '@invisigent_ai',
     title: TITLE,
     description:
-      'AI is not failing. Execution is. Here are the 7 most expensive mistakes to avoid.',
+      'AI is not failing. Execution is. The 7 most expensive AI infrastructure mistakes — and how to avoid them.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
+  },
+  other: {
+    'geo.region': 'IN-RJ',
+    'geo.placename': 'Jaipur, Rajasthan, India',
+    'geo.position': '26.9124;75.7873',
+    ICBM: '26.9124, 75.7873',
+    'og:locale:alternate': 'en_GB,en_AU,en_IN',
+    'article:published_time': PUBLISHED,
+    'article:modified_time': PUBLISHED,
+    'article:author': 'https://invisigent.ai',
+    'article:section': 'AI Infrastructure',
+    'article:tag': 'AI implementation,AI infrastructure,AI governance,mid-market AI,AI ROI,AI mistakes',
+    'revisit-after': '7 days',
+    rating: 'general',
+    language: 'en',
+    coverage: 'Worldwide',
+    distribution: 'global',
+    target: 'all',
+    audience: 'CTOs, CEOs, technical founders, AI project leads, enterprise teams',
+    'DC.coverage': 'United States, United Kingdom, Australia, India',
+    'DC.language': 'en',
+    'DC.subject': 'AI implementation mistakes, AI infrastructure budget, AI ROI, AI governance, mid-market AI',
+    'DC.publisher': 'Invisigent',
+    'theme-color': '#0d0d0d',
   },
 };
 
@@ -158,14 +228,32 @@ const articleSchema = {
   },
   mainEntityOfPage: { '@type': 'WebPage', '@id': CANONICAL },
   articleSection: 'AI Infrastructure',
+  articleBody: 'Seven AI infrastructure mistakes that burn budget and how mid-market organizations avoid them. M01: Deploying without guardrails — no input validation, no permission constraints, no escalation pathways, no rollback. M02: Automating a broken process — AI accelerates flawed logic. M03: No clear ROI model — no defined metric, no baseline, scope creep and termination at budget review. M04: Tool stacking instead of system design — data silos, integration failures, escalating subscription costs for overlapping capabilities. M05: Ignoring data quality — no validation at ingestion, stale records, no data ownership. M06: Treating AI as a one-time project with no monitoring, no iteration, no performance baseline. M07: No clear ownership assigned before deployment. Includes 7 winning patterns (outcomes before tools, workflow clarity before automation, architecture before development) and 5 pre-investment diagnostic questions for COOs, CTOs, and operations leaders. Addresses India DPDP Act 2023, GDPR, and cross-border compliance at architecture stage.',
   keywords:
-    'AI implementation mistakes, AI infrastructure, AI ROI, AI governance, mid-market AI strategy',
-  inLanguage: 'en-US',
+    'AI implementation mistakes mid-market, AI infrastructure guardrails production, automating broken processes AI, AI ROI model baseline, tool stacking vs system design AI, AI data quality validation, AI infrastructure ownership accountability, AI project lifecycle monitoring, AI governance COO CTO operations leaders, DPDP GDPR compliance AI architecture, AI budget burn patterns, AI infrastructure iteration discipline, 7 AI implementation mistakes, pre-investment questions AI, what happens when AI fails in production',
+  wordCount: 2500,
+  timeRequired: 'PT10M',
+  inLanguage: 'en',
   isPartOf: {
     '@type': 'Blog',
     '@id': 'https://invisigent.ai/insights#blog',
     name: 'AI Infrastructure Insights',
     publisher: { '@type': 'Organization', name: 'Invisigent' },
+  },
+  about: [
+    { '@type': 'Thing', name: 'AI implementation mistakes' },
+    { '@type': 'Thing', name: 'AI infrastructure governance' },
+    { '@type': 'Thing', name: 'AI ROI measurement' },
+    { '@type': 'Thing', name: 'mid-market AI strategy' },
+  ],
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+    ],
   },
 };
 
@@ -176,12 +264,48 @@ const h2Style = {
   marginBottom: '-0.25rem',
 } as const;
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'We are an Indian mid-market company planning our first AI infrastructure build. Where do these mistakes typically appear first?',
+      acceptedAnswer: { '@type': 'Answer', text: 'In our experience with Indian mid-market organizations, Mistakes 02 and 05 appear most frequently and earliest. Workflows that appear consistent often have undocumented exception handling that AI cannot execute. And data quality — particularly in organizations that have grown quickly — is rarely as clean as the implementation team assumes.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Our operations span India and the EU. Does AI infrastructure compliance add significant complexity?',
+      acceptedAnswer: { '@type': 'Answer', text: "It adds complexity that is manageable when addressed at the architecture stage. GDPR for EU data subjects and India's DPDP Act 2023 for Indian personal data have overlapping requirements around consent, data residency, and audit trails. Systems designed with jurisdiction-specific controls from sprint one meet both frameworks without architectural compromise." },
+    },
+    {
+      '@type': 'Question',
+      name: 'We have already made some of these AI implementation mistakes. Is it worth rebuilding or should we extend what we have?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Depends on which mistakes were made. Mistakes 01, 04, and 07 — missing guardrails, tool stacking, and absent ownership — are often addressable through structured remediation without a full rebuild. Mistakes 02 and 05 — broken process automation and poor data quality — typically require going back to the process audit and data layer first.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do we establish ROI baselines if we have never run AI infrastructure before?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Start with the operational metric most directly affected by the workflow being automated — response time, processing volume, error rate, or team hours consumed. Document the current baseline manually before implementation begins. Define what improvement looks like at 30, 60, and 90 days post-deployment.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What does clear AI infrastructure ownership look like in a lean mid-market team without dedicated AI staff?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Ownership does not require an AI specialist. It requires a designated person who understands the system well enough to recognize when it is performing correctly and when it is not. Every system we deliver includes operational documentation and monitoring access designed for the team that will actually run it.' },
+    },
+  ],
+};
+
 export default function BlogPost() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Breadcrumb
         items={[

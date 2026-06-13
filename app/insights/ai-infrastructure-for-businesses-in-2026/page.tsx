@@ -16,7 +16,9 @@ export const metadata: Metadata = {
   title: `${TITLE} | Invisigent`,
   description: DESCRIPTION,
   keywords: [
-    'AI infrastructure',
+    // Core topic
+    'AI infrastructure 2026',
+    'AI infrastructure for businesses',
     'AI workloads',
     'AI agents',
     'AI scaling',
@@ -26,28 +28,71 @@ export const metadata: Metadata = {
     'cloud AI',
     'AI governance',
     'AI deployment',
-    'AI systems',
+    'AI systems architecture',
     'AI operations',
-    'AI architecture',
-    'production AI',
+    'production AI infrastructure',
+    'AI infrastructure layers',
+    'six layer AI infrastructure',
+    // US market
+    'AI infrastructure USA 2026',
+    'enterprise AI infrastructure United States',
+    'AI infrastructure for US businesses',
+    'AI deployment US companies',
+    'AI governance framework USA',
+    'cloud AI infrastructure US',
+    // UK market
+    'AI infrastructure UK 2026',
+    'enterprise AI infrastructure United Kingdom',
+    'AI infrastructure for UK businesses',
+    'AI deployment London',
+    'AI governance GDPR UK',
+    // Australia market
+    'AI infrastructure Australia 2026',
+    'enterprise AI infrastructure Australia',
+    'AI infrastructure for Australian businesses',
+    'AI deployment Sydney',
+    'AI governance Australia',
+    // India market
+    'AI infrastructure India 2026',
+    'enterprise AI infrastructure India',
+    'AI deployment India',
+    'DPDP AI infrastructure compliance',
+    // General
     'Invisigent AI consulting',
+    'AI infrastructure guide 2026',
+    'how to build AI infrastructure',
   ],
   authors: [{ name: 'Invisigent', url: 'https://invisigent.ai' }],
   creator: 'Invisigent',
+  publisher: 'Invisigent',
   category: 'AI Infrastructure',
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
-  alternates: { canonical: CANONICAL },
+  alternates: {
+    canonical: CANONICAL,
+    languages: {
+      'en-US': CANONICAL,
+      'en-GB': CANONICAL,
+      'en-AU': CANONICAL,
+      'en-IN': CANONICAL,
+    },
+  },
   openGraph: {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
     title: TITLE,
     description:
-      'The six infrastructure layers that determine whether AI runs as a business operation or falls apart under pressure — and what serious companies are building in 2026.',
+      'The six infrastructure layers that determine whether AI runs as a business operation or falls apart under pressure. What serious companies in the US, UK, Australia, and India are building in 2026.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -59,6 +104,7 @@ export const metadata: Metadata = {
       'AI agents',
       'AI governance',
       'production AI',
+      'AI architecture 2026',
     ],
     images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
   },
@@ -68,19 +114,32 @@ export const metadata: Metadata = {
     creator: '@invisigent_ai',
     title: TITLE,
     description:
-      'The six infrastructure layers that determine whether AI runs as a business operation or falls apart under pressure.',
+      'The six infrastructure layers every serious business needs to run AI in production in 2026.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
   },
   other: {
-    'article:published_time': PUBLISHED,
-    'article:modified_time': PUBLISHED,
-    'article:author': 'https://invisigent.ai',
-    'article:section': 'AI Infrastructure',
-    'article:tag': 'AI infrastructure, enterprise AI, AI agents, AI governance, production AI',
     'geo.region': 'IN-RJ',
     'geo.placename': 'Jaipur, Rajasthan, India',
     'geo.position': '26.9124;75.7873',
     ICBM: '26.9124, 75.7873',
+    'og:locale:alternate': 'en_GB,en_AU,en_IN',
+    'article:published_time': PUBLISHED,
+    'article:modified_time': PUBLISHED,
+    'article:author': 'https://invisigent.ai',
+    'article:section': 'AI Infrastructure',
+    'article:tag': 'AI infrastructure,enterprise AI,AI agents,AI governance,production AI,AI architecture 2026',
+    'revisit-after': '7 days',
+    rating: 'general',
+    language: 'en',
+    coverage: 'Worldwide',
+    distribution: 'global',
+    target: 'all',
+    audience: 'CTOs, technical founders, enterprise architects, AI teams',
+    'DC.coverage': 'United States, United Kingdom, Australia, India',
+    'DC.language': 'en',
+    'DC.subject': 'AI infrastructure for businesses, enterprise AI deployment, AI governance, production AI systems',
+    'DC.publisher': 'Invisigent',
+    'theme-color': '#0d0d0d',
   },
 };
 
@@ -102,14 +161,32 @@ const articleSchema = {
   },
   mainEntityOfPage: { '@type': 'WebPage', '@id': CANONICAL },
   articleSection: 'AI Infrastructure',
+  articleBody: 'What AI infrastructure means for businesses in 2026: the shift from AI experiments to production operations. Six layers that matter: Layer 01 Clean Data (centralization, validation, data lineage); Layer 02 Reliable Compute (cloud for GPUs and fast experimentation, hybrid or edge for latency-sensitive or sensitive-data workloads); Layer 03 Scalable Storage (vector databases, data lakes, object storage designed for retrieval speed); Layer 04 Fast Networking (low-latency API routing, edge delivery for 150ms inference); Layer 05 Workflow Integration (orchestration connecting AI to CRMs, document systems, communication platforms); Layer 06 Governance (RBAC, audit trails, compliance, clear policies on AI scope). Also covers AI agent production requirements: logging, permission controls, fallback logic, human oversight. Includes concrete CRM example: lead scoring pipeline with observability and feedback loops.',
   keywords:
-    'AI infrastructure, AI workloads, AI agents, AI scaling, AI automation, enterprise AI, AI-ready business, cloud AI, AI governance, AI deployment, AI systems, AI operations, AI architecture, production AI',
-  inLanguage: 'en-US',
+    'AI infrastructure 2026, six layers AI infrastructure, clean data AI foundation, vector database AI storage, cloud vs hybrid AI compute edge, AI workflow integration CRM, AI governance compliance 2026, AI agent production requirements logging, AI infrastructure for small businesses, automating broken processes AI, AI experiments to production operations, AI inference latency networking, what is AI infrastructure simple terms',
+  wordCount: 2750,
+  timeRequired: 'PT11M',
+  inLanguage: 'en',
   isPartOf: {
     '@type': 'Blog',
     '@id': 'https://invisigent.ai/insights#blog',
     name: 'AI Infrastructure Insights',
     publisher: { '@type': 'Organization', name: 'Invisigent' },
+  },
+  about: [
+    { '@type': 'Thing', name: 'AI infrastructure' },
+    { '@type': 'Thing', name: 'enterprise AI deployment' },
+    { '@type': 'Thing', name: 'AI governance' },
+    { '@type': 'Thing', name: 'production AI systems' },
+  ],
+  speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+    ],
   },
 };
 
@@ -189,12 +266,53 @@ const FAQ = [
   },
 ];
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is AI infrastructure in simple terms?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI infrastructure is the set of systems that let AI run inside a business — including data, compute, storage, security, and workflow automation. It is the foundation that makes AI useful in real operations.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Why do businesses need AI infrastructure in 2026?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI workloads are now more complex, more production-focused, and more dependent on clean data, scalable systems, and secure deployment. Without the right setup, AI tools become slow, unreliable, or expensive.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Do small businesses need AI infrastructure too?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Yes, but the setup can be lighter. A small business may only need structured data, cloud-based tools, automation workflows, and basic governance rather than a large enterprise stack.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'What is the biggest mistake companies make with AI?',
+      acceptedAnswer: { '@type': 'Answer', text: 'The biggest mistake is automating broken processes. AI cannot fix unclear workflows, poor data, or disorganized operations. Build systems first, automate second.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'Should companies use cloud or on-premise AI?',
+      acceptedAnswer: { '@type': 'Answer', text: 'Many start in cloud because it is faster and easier to scale, but some move toward hybrid or edge setups when latency, cost, or data control becomes important. The best choice depends on workload and business requirements.' },
+    },
+    {
+      '@type': 'Question',
+      name: 'How do AI agents fit into infrastructure?',
+      acceptedAnswer: { '@type': 'Answer', text: 'AI agents sit on top of infrastructure and need access to data, tools, APIs, and runtime controls to work safely. They are not standalone features — they depend on the whole system underneath them.' },
+    },
+  ],
+};
+
 export default function BlogPost() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       <Breadcrumb
         items={[
