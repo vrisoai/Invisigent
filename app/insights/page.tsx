@@ -75,6 +75,13 @@ const insightsBlogSchema = {
       blogPost: [
         {
           '@type': 'BlogPosting',
+          headline: 'How Production AI Teams Prevent Hallucinations, Control Costs, and Debug AI Systems With Observability',
+          url: 'https://invisigent.ai/insights/ai-observability-for-production-ai-teams',
+          datePublished: '2026-07-07',
+          image: 'https://invisigent.ai/blog-ai-observability-production-teams.svg',
+        },
+        {
+          '@type': 'BlogPosting',
           headline: 'n8n AI Automation Tutorial: Complete Workflow Setup Guide (2026)',
           url: 'https://invisigent.ai/insights/n8n-ai-automation-tutorial',
           datePublished: '2026-06-14',
@@ -214,6 +221,16 @@ export default function InsightsPage() {
             gap: 'clamp(1.25rem, 3vw, 2rem)',
           }}
         >
+          <BlogCard
+            imageSrc="/blog-ai-observability-production-teams.svg"
+            imageAlt="AI observability architecture showing instrumentation, storage and processing, dashboards, and alerting layers for production AI systems"
+            category="AI Observability"
+            readTime="17 min read"
+            heading="How Production AI Teams Prevent Hallucinations, Control Costs, and Debug AI Systems With Observability"
+            excerpt="AI observability has quietly become one of the most important parts of building a reliable AI product. Why engineering teams are investing in it, and how to build an observability stack that actually scales with you."
+            author="Invisigent Research"
+            href="/insights/ai-observability-for-production-ai-teams"
+          />
           <BlogCard
             imageSrc="/blog-n8n-ai-automation-tutorial.svg"
             imageAlt="n8n AI automation workflow diagram showing trigger, AI agent, LangChain nodes, cost comparison, and MCP integration for 2026"

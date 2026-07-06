@@ -10,159 +10,70 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 // ─── design constants ──────────────────────────────────────────────────────────
 const AC = '#3B82F6';
-const GAUGE_R = 52;
-const GAUGE_CIRC = parseFloat((2 * Math.PI * GAUGE_R).toFixed(3));
-const GAUGE_VAL = 50; // % LLM cost reduction
 
-const PROBLEMS = [
-  'Lose context in long documents',
-  'Produce inconsistent outputs',
-  'Cannot reason through multiple document sections simultaneously',
-];
-
-const AGENT_ROLES = [
-  'Document understanding',
-  'Clause extraction',
-  'Risk identification',
-  'Summary generation',
-  'Response validation',
+const AGENT_DOMAINS = [
+  ['News Agent', 'Recent headlines and market-moving catalysts'],
+  ['Financial Agent', 'Fundamentals and financial statement analysis'],
+  ['Technical Agent', 'Price action, indicators, and technical signals'],
+  ['Sentiment Agent', 'Investor sentiment across public sources'],
+  ['Company Agent', 'Company-level context and business overview'],
 ];
 
 const KEY_FEATURES = [
-  'Multi-agent orchestration',
-  'Streaming responses (Server-Sent Events)',
-  'Prompt caching for cost optimization',
-  'Structured outputs with Pydantic',
-  'LangSmith tracing',
-  'Conversation memory',
-  'Modular agent architecture',
+  'Parallel execution',
+  'Multi-agent reasoning',
+  'LangGraph reducers',
+  'LangSmith observability',
+  'Cost tracking',
+  'Portfolio-ready reports',
 ];
 
-const TECH_STACK = ['LangGraph', 'OpenAI GPT-4o', 'FastAPI', 'Next.js', 'TypeScript', 'LangSmith', 'Pydantic'];
+const TECH_STACK = ['Python', 'LangGraph', 'FastAPI', 'OpenAI', 'Tavily', 'yfinance', 'LangSmith'];
 
 const RESULTS = [
   {
     color: '#3B82F6',
-    title: 'Reduced LLM cost by approximately 50%',
-    detail: 'Achieved through prompt caching across the multi-agent pipeline.',
+    title: '~30 second report generation',
+    detail: 'A full research report is generated in about 30 seconds despite querying five independent data domains.',
   },
   {
     color: '#22C55E',
-    title: 'Real-time streaming responses',
-    detail: 'Enabled using Server-Sent Events for a noticeably faster-feeling user experience.',
+    title: 'Concurrent research streams',
+    detail: 'News, financials, technicals, sentiment, and company data are gathered in parallel instead of one after another.',
   },
   {
     color: '#A855F7',
-    title: 'Improved maintainability',
-    detail: 'Achieved by separating reasoning into specialized agents instead of one monolithic prompt.',
+    title: '~$0.0003 average cost per report',
+    detail: 'Low enough per-report inference cost to run continuously across a large ticker universe.',
   },
 ];
 
 const FAQS = [
   {
-    q: 'Why use a multi-agent architecture instead of a single LLM prompt for contract analysis?',
-    a: 'Single-prompt chatbot approaches lose context in long documents, produce inconsistent outputs, and cannot reason through multiple sections simultaneously. A multi-agent architecture distributes responsibility across specialized agents, so each one focuses on a single task instead of one generalist prompt trying to do everything at once.',
+    q: 'Why use five parallel agents instead of one agent that gathers everything sequentially?',
+    a: 'Investment research spans independent domains: news, fundamentals, technicals, sentiment, and company data. Running one agent per domain in parallel means total wait time is set by the slowest single agent rather than the sum of all five, which is what keeps full report generation to around 30 seconds.',
   },
   {
-    q: 'How does LangGraph coordinate the agents in this system?',
-    a: 'A planner agent routes the parsed and retrieved document context to the clause extraction, risk identification, and summary generation agents. LangGraph coordinates these as nodes in a graph, and an aggregator node merges their outputs into a single validated, structured response.',
+    q: 'What does each of the five research agents actually do?',
+    a: 'The News Agent pulls recent headlines and catalysts, the Financial Agent analyzes fundamentals and financial statements, the Technical Agent evaluates price action and indicators, the Sentiment Agent gauges investor sentiment, and the Company Agent gathers company-level context. A planner dispatches the ticker to all five, and an aggregator merges their findings into a single report.',
   },
   {
-    q: 'How does prompt caching reduce LLM cost by roughly 50%?',
-    a: "Multiple agents in the pipeline share overlapping context, like the same document chunks and system instructions. Caching that shared context means it isn't resent and re-billed on every agent call, which is what drove the roughly 50% reduction in LLM cost.",
+    q: 'How does LangGraph coordinate parallel agents and merge their results?',
+    a: 'Each research agent runs as an independent node in a LangGraph graph. LangGraph reducers combine their individual outputs into a single shared state, and the aggregator node only produces the final buy/hold/sell recommendation once every agent has reported back.',
   },
   {
-    q: 'Why stream responses instead of returning one completed analysis?',
-    a: "Server-Sent Events stream each agent's output as it completes rather than making the user wait for the entire pipeline to finish before seeing anything. For longer documents, this significantly improves perceived responsiveness.",
+    q: 'Does the Stock Research Agent work for tickers outside the US market?',
+    a: 'Coverage depends on the underlying data sources. yfinance and Tavily both support a wide range of exchanges beyond the US, including listings relevant to UK, Australian, and Indian markets, though the depth of fundamentals and news coverage can vary by exchange and region.',
   },
   {
-    q: 'What does structured output with Pydantic provide over freeform text responses?',
-    a: "Each agent's output, and the final aggregated response, is validated against a defined schema before it reaches the frontend. Downstream systems can rely on consistent fields instead of parsing freeform text.",
+    q: 'Is the buy/hold/sell recommendation reliable enough to base investment decisions on?',
+    a: 'The recommendation is generated only after all five agents report back, and every contributing input is traceable through LangSmith. That makes the output explainable and auditable, but it is a research aid that consolidates public information, not financial advice, and should be treated as one input into a broader investment decision.',
+  },
+  {
+    q: 'What does the roughly $0.0003 average cost per report actually include?',
+    a: 'It covers the LLM inference cost across all five parallel research agents plus the aggregation step for a single ticker report. Cost is tracked per report through LangSmith, which is what makes it practical to run continuously across a large ticker universe.',
   },
 ];
-
-// ─── cost reduction gauge (SVG arc) ─────────────────────────────────────────────
-function CostGauge({
-  arcRef,
-  scoreRef,
-}: {
-  arcRef: React.RefObject<SVGCircleElement | null>;
-  scoreRef: React.RefObject<SVGTSpanElement | null>;
-}) {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-      <svg
-        viewBox="0 0 130 130"
-        width="130"
-        height="130"
-        style={{ overflow: 'visible' }}
-        aria-hidden
-      >
-        <defs>
-          <filter id="gauge-glow">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          <linearGradient id="gauge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#60A5FA" />
-            <stop offset="100%" stopColor="#3B82F6" />
-          </linearGradient>
-        </defs>
-        {/* track */}
-        <circle
-          cx="65" cy="65" r={GAUGE_R}
-          fill="none"
-          stroke="rgba(59,130,246,0.12)"
-          strokeWidth="8"
-          strokeDasharray={GAUGE_CIRC}
-          strokeDashoffset="0"
-          transform="rotate(-90 65 65)"
-        />
-        {/* animated arc */}
-        <circle
-          ref={arcRef}
-          cx="65" cy="65" r={GAUGE_R}
-          fill="none"
-          stroke="url(#gauge-grad)"
-          strokeWidth="8"
-          strokeLinecap="round"
-          strokeDasharray={GAUGE_CIRC}
-          strokeDashoffset={String(GAUGE_CIRC)}
-          transform="rotate(-90 65 65)"
-          filter="url(#gauge-glow)"
-          style={{ transition: 'none' }}
-        />
-        {/* center text */}
-        <text
-          x="65" y="70"
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fill={AC}
-          fontSize="26"
-          fontWeight="700"
-          fontFamily="var(--font-mono, monospace)"
-        >
-          <tspan ref={scoreRef}>0%</tspan>
-        </text>
-      </svg>
-      <span
-        style={{
-          fontFamily: 'var(--font-mono, monospace)',
-          fontSize: '0.55rem',
-          letterSpacing: '0.2em',
-          textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.4)',
-          textAlign: 'center',
-        }}
-      >
-        LLM cost reduction
-      </span>
-    </div>
-  );
-}
 
 // ─── result item ───────────────────────────────────────────────────────────────
 function ResultItem({ color, title, detail }: { color: string; title: string; detail: string }) {
@@ -316,10 +227,8 @@ function AgentBlock({
 }
 
 // ─── main client component ─────────────────────────────────────────────────────
-export default function CaseStudyDocIntelClient() {
+export default function CaseStudyStockAgentClient() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const gaugeArcRef = useRef<SVGCircleElement | null>(null);
-  const scoreRef = useRef<SVGTSpanElement | null>(null);
   const spine1Ref = useRef<HTMLDivElement | null>(null);
   const spine2Ref = useRef<HTMLDivElement | null>(null);
   const spine3Ref = useRef<HTMLDivElement | null>(null);
@@ -380,25 +289,6 @@ export default function CaseStudyDocIntelClient() {
             scrollTrigger: { trigger: ref.current, start: 'top 85%', once: true },
           });
         });
-
-        // ── cost reduction gauge ────────────────────────────────────────────
-        if (gaugeArcRef.current && scoreRef.current) {
-          const targetOffset = GAUGE_CIRC * (1 - GAUGE_VAL / 100);
-          const obj = { v: 0, off: GAUGE_CIRC };
-          gsap.to(obj, {
-            v: GAUGE_VAL,
-            off: targetOffset,
-            duration: 1.8,
-            ease: 'power2.out',
-            scrollTrigger: { trigger: gaugeArcRef.current, start: 'top 80%', once: true },
-            onUpdate() {
-              if (gaugeArcRef.current)
-                gaugeArcRef.current.style.strokeDashoffset = String(obj.off);
-              if (scoreRef.current)
-                scoreRef.current.textContent = `${Math.round(obj.v)}%`;
-            },
-          });
-        }
 
         // ── result cards ────────────────────────────────────────────────────
         ScrollTrigger.batch('.cs-result', {
@@ -467,15 +357,6 @@ export default function CaseStudyDocIntelClient() {
     fontSize: 'clamp(0.875rem, 1.6vw, 0.9375rem)',
     color: 'var(--color-text-secondary)',
     lineHeight: 1.8,
-  };
-
-  const bulletList: React.CSSProperties = {
-    ...body,
-    margin: '0.85rem 0 0',
-    paddingLeft: '1.2rem',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.5rem',
   };
 
   const tagCloud = (items: string[]) => (
@@ -572,7 +453,7 @@ export default function CaseStudyDocIntelClient() {
               gap: '0.5rem',
             }}
           >
-            <span style={{ color: AC }}>Document intelligence</span>
+            <span style={{ color: AC }}>Investment research</span>
             <span style={{ color: 'rgba(255,255,255,0.18)' }}>·</span>
             <span>Case study</span>
             <span
@@ -599,7 +480,7 @@ export default function CaseStudyDocIntelClient() {
               letterSpacing: '-0.02em',
             }}
           >
-            {'Multi-Agent Document Intelligence System'
+            {'Stock Research Agent'
               .split(' ')
               .map((w, i) => (
                 <span
@@ -630,15 +511,15 @@ export default function CaseStudyDocIntelClient() {
               padding: '0.85rem 1.1rem',
             }}
           >
-            A production-ready multi-agent platform that analyzes contracts, extracts key clauses, identifies risks, and generates structured summaries through collaborative AI agents coordinated with LangGraph.
+            A five-agent research system that gathers financial statements, market news, technical signals, and investor sentiment in parallel to generate an explainable buy/hold/sell report.
           </p>
 
           {/* ── stat pills ─────────────────────────────────────────────────── */}
           <div className="cs-stat-grid" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: 'clamp(3rem, 6vw, 5rem)' }}>
             {[
-              { v: '~50%', l: 'LLM cost reduction' },
-              { v: '5', l: 'Specialized agents' },
-              { v: 'SSE', l: 'Real-time streaming' },
+              { v: '~30s', l: 'Report generation' },
+              { v: '5', l: 'Parallel agents' },
+              { v: '$0.0003', l: 'Avg cost per report' },
             ].map(({ v, l }) => (
               <div
                 key={v}
@@ -674,7 +555,7 @@ export default function CaseStudyDocIntelClient() {
           <section aria-label="Overview" className="cs-section" style={sectionBox}>
             <p className="font-mono" style={{ ...mono, marginBottom: '0.85rem' }}>Overview</p>
             <p style={{ ...body, margin: 0 }}>
-              Enterprise organizations spend significant time reviewing contracts, legal agreements, and business documents manually. Traditional LLM-based chatbots often struggle with long documents, structured outputs, and complex reasoning across multiple sections. The goal of this project was to build a production-ready multi-agent platform capable of analyzing contracts, extracting key clauses, identifying risks, and generating structured summaries through collaborative AI agents.
+              Investment research requires gathering information from multiple independent sources including financial statements, company fundamentals, market news, and investor sentiment. This project automates that workflow using multiple AI agents working in parallel to generate comprehensive research reports.
             </p>
           </section>
 
@@ -684,11 +565,8 @@ export default function CaseStudyDocIntelClient() {
           <section aria-label="Problem" className="cs-section" style={sectionBox}>
             <p className="font-mono" style={{ ...mono, marginBottom: '0.85rem' }}>Problem</p>
             <p style={{ ...body, margin: 0 }}>
-              Legal and procurement teams manually review lengthy contracts, leading to slow turnaround times and inconsistent analysis. Existing chatbot-style solutions often:
+              Retail investors spend hours switching between finance websites, news platforms, and earnings reports before making investment decisions. There was no single system capable of consolidating all this information into an explainable AI-generated report.
             </p>
-            <ul style={bulletList}>
-              {PROBLEMS.map((p) => <li key={p}>{p}</li>)}
-            </ul>
           </section>
 
           {/* ────────────────────────────────────────────────────────────────
@@ -697,13 +575,7 @@ export default function CaseStudyDocIntelClient() {
           <section aria-label="Solution" className="cs-section" style={sectionBox}>
             <p className="font-mono" style={{ ...mono, marginBottom: '0.85rem' }}>Solution</p>
             <p style={{ ...body, margin: 0 }}>
-              I designed a multi-agent architecture where specialized AI agents collaborate to complete different stages of document analysis. Instead of relying on a single LLM prompt, the workflow distributes responsibilities across multiple autonomous agents coordinated through LangGraph. Each agent focuses on a dedicated task such as:
-            </p>
-            <ul style={bulletList}>
-              {AGENT_ROLES.map((r) => <li key={r}>{r}</li>)}
-            </ul>
-            <p style={{ ...body, margin: '0.85rem 0 0' }}>
-              The final output is streamed back to the user in real time with structured JSON responses.
+              Built a five-agent research system where each AI agent specializes in one domain. Instead of sequential processing, agents execute in parallel, significantly reducing response time. The final recommendation is generated only after aggregating outputs from all research agents.
             </p>
           </section>
 
@@ -730,54 +602,39 @@ export default function CaseStudyDocIntelClient() {
                 marginBottom: 'clamp(2rem, 4vw, 3rem)',
               }}
             >
-{`PDF Upload
+{`  Ticker
     |
     v
-  Parser
+  Planner
     |
-    v
- Chunking
-    |
-    v
- Retriever
-    |
-    v
-Planner Agent
-    |
-    +-----------+-----------+
-    v           v           v
-Clause Agent  Risk Agent  Summary Agent
-    |           |           |
-    +-----------+-----------+
+    +-------+-------+-------+-------+
+    v       v       v       v       v
+  News   Financial Technical Sentiment Company
+  Agent    Agent    Agent    Agent    Agent
+    |       |       |       |       |
+    +-------+-------+-------+-------+
                 |
                 v
            Aggregator
                 |
                 v
-        Structured Output
-                |
-                v
-            Frontend`}
+      Buy / Hold / Sell Report`}
             </div>
 
             {/* Stage 1 */}
-            <AgentBlock num={1} name="Parsing & retrieval" time="Ingestion" spineRef={spine1Ref}>
+            <AgentBlock num={1} name="Planning & dispatch" time="Ingestion" spineRef={spine1Ref}>
               <p style={{ ...body, fontSize: '0.85rem', margin: 0 }}>
-                The uploaded PDF is parsed, split into chunks, and indexed by a retriever so downstream agents can pull only the relevant context for a given task instead of reasoning over the entire document at once.
+                A ticker symbol enters the graph and a planner dispatches it to all five research agents at once, instead of routing it through a single sequential pipeline.
               </p>
             </AgentBlock>
 
             {/* Stage 2 */}
-            <AgentBlock num={2} name="Specialized analysis agents" time="Parallel execution" spineRef={spine2Ref}>
+            <AgentBlock num={2} name="Parallel research agents" time="Concurrent execution" spineRef={spine2Ref}>
               <p style={{ ...body, fontSize: '0.85rem', marginBottom: '1rem' }}>
-                A planner agent dispatches retrieved context to three specialized agents running in parallel, each focused on a single dedicated task:
+                Five specialized agents run concurrently, each covering one research domain:
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                {[
-                  ['Clause Agent', 'Extracts key clauses from the document'],
-                  ['Risk Agent', 'Identifies risk signals within extracted clauses'],
-                  ['Summary Agent', 'Generates a structured summary of the findings'],
-                ].map(([name, desc]) => (
+                {AGENT_DOMAINS.map(([name, desc]) => (
                   <div key={name} style={{ display: 'flex', gap: '0.6rem', alignItems: 'baseline' }}>
                     <span style={{ fontWeight: 600, color: AC, fontSize: '0.8rem', flexShrink: 0 }}>{name}</span>
                     <span style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.55)' }}>{desc}</span>
@@ -787,9 +644,9 @@ Clause Agent  Risk Agent  Summary Agent
             </AgentBlock>
 
             {/* Stage 3 */}
-            <AgentBlock num={3} name="Aggregation & streaming" time="Response" spineRef={spine3Ref}>
+            <AgentBlock num={3} name="Aggregation & report" time="Response" spineRef={spine3Ref}>
               <p style={{ ...body, fontSize: '0.85rem', margin: 0 }}>
-                An aggregator merges the outputs from all three agents, a validation step checks the result against a defined schema, and the structured JSON response is streamed back to the frontend in real time using Server-Sent Events.
+                LangGraph reducers merge the five agent outputs into a single shared state. The aggregator only produces the final buy, hold, or sell report once every agent has reported back, with cost and latency tracked per report through LangSmith.
               </p>
             </AgentBlock>
           </section>
@@ -817,13 +674,10 @@ Clause Agent  Risk Agent  Summary Agent
             <h2 style={{ ...h2, fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)', marginBottom: '1.5rem' }}>
               Results
             </h2>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-              <CostGauge arcRef={gaugeArcRef} scoreRef={scoreRef} />
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', flex: 1, minWidth: '14rem' }}>
-                {RESULTS.map(({ color, title, detail }) => (
-                  <ResultItem key={title} color={color} title={title} detail={detail} />
-                ))}
-              </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+              {RESULTS.map(({ color, title, detail }) => (
+                <ResultItem key={title} color={color} title={title} detail={detail} />
+              ))}
             </div>
           </section>
 

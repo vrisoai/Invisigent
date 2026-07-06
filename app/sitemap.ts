@@ -85,6 +85,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/insights/ai-observability-for-production-ai-teams`,
+      lastModified: new Date('2026-07-07'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/case-studies`,
       lastModified: now,
       changeFrequency: 'monthly',
@@ -93,6 +99,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: `${BASE_URL}/case-studies/multi-agent-document-intelligence`,
       lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/case-studies/stock-research-agent`,
+      lastModified: new Date('2026-07-07'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/case-studies/governed-ai-architecture-walkthrough`,
+      lastModified: new Date('2026-07-07'),
       changeFrequency: 'monthly',
       priority: 0.7,
     },

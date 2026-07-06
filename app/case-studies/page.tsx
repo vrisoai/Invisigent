@@ -150,18 +150,48 @@ export default function CaseStudiesPage() {
         >
           <CaseStudyCard
             category="Multi-Agent System"
-            title="Multi-Agent Document Intelligence Platform"
-            description="Multi-Agent Document Intelligence is a full-stack AI application that analyzes PDF contracts in real time using a sequential three-agent pipeline. It is designed to assist legal teams, business analysts, and C-suite executives by automatically extracting contract entities, flagging compliance risks, and generating an executive briefing — all with live token-by-token streaming visible in the browser."
+            title="Multi-Agent Document Intelligence System"
+            description="A production-ready multi-agent platform built on LangGraph that analyzes contracts, extracts key clauses, identifies risks, and generates structured summaries through collaborative AI agents — with real-time streaming, prompt caching, and full LangSmith tracing."
             tags={[
               { label: 'Legal AI' },
-              { label: 'PDF Analysis' },
-              { label: 'Real-time Streaming' },
+              { label: 'LangGraph' },
               { label: 'Multi-Agent' },
-              { label: 'Compliance' },
-              { label: 'Full-Stack' },
+              { label: 'Streaming (SSE)' },
+              { label: 'Prompt Caching' },
+              { label: 'Structured Outputs' },
             ]}
             accentColor="#3B82F6"
             href="/case-studies/multi-agent-document-intelligence"
+          />
+          <CaseStudyCard
+            category="Finance AI"
+            title="Stock Research Agent"
+            description="A five-agent research system built on LangGraph that gathers financial statements, market news, technical signals, and investor sentiment in parallel to generate an explainable buy/hold/sell report in about 30 seconds."
+            tags={[
+              { label: 'Finance AI' },
+              { label: 'LangGraph' },
+              { label: 'Multi-Agent' },
+              { label: 'Parallel Execution' },
+              { label: 'LangSmith' },
+              { label: 'Cost Tracking' },
+            ]}
+            accentColor="#3B82F6"
+            href="/case-studies/stock-research-agent"
+          />
+          <CaseStudyCard
+            category="AI Governance"
+            title="Governed AI Architecture Walkthrough"
+            description="An interactive walkthrough of the four controlled layers in a governed AI deployment — Ingestion, Knowledge & Retrieval, Reasoning, and Action — mirroring the governance architecture deployed in a clinical workflow system live at two US clinics."
+            tags={[
+              { label: 'AI Governance' },
+              { label: 'Regulated Industries' },
+              { label: 'Healthcare AI' },
+              { label: 'Audit Trail' },
+              { label: 'Zero Data Retention' },
+              { label: 'RAG' },
+            ]}
+            accentColor="#3B82F6"
+            href="/case-studies/governed-ai-architecture-walkthrough"
           />
           <CaseStudyCard
             category="Document Intelligence"

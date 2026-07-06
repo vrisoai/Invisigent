@@ -5,49 +5,106 @@ import CaseStudyDocIntelClient from './CaseStudyDocIntelClient';
 
 const CANONICAL = 'https://invisigent.ai/case-studies/multi-agent-document-intelligence';
 const OG_IMAGE = 'https://invisigent.ai/og-image.png';
+const PUBLISHED = '2026-04-25T10:00:00.000Z';
+const MODIFIED = '2026-07-07T10:00:00.000Z';
+const TITLE = 'Multi-Agent Document Intelligence System: AI Contract Analysis With LangGraph';
+const DESCRIPTION =
+  'How we built a production-ready multi-agent AI platform on LangGraph that analyzes contracts, extracts clauses, identifies risks, and streams structured summaries — cutting LLM cost by roughly 50% through prompt caching.';
 
 export const metadata: Metadata = {
-  title: 'AI Contract Review Case Study: 73-Second Risk Assessment on $180K SaaS Agreement | Invisigent',
-  description:
-    'See how a multi-agent AI document intelligence system identified 5 contract risks including 2 GDPR violations in 73 seconds — before a $180,000 SaaS vendor agreement was signed.',
+  title: `${TITLE} | Invisigent`,
+  description: DESCRIPTION,
   keywords: [
-    'AI contract review',
     'multi-agent document intelligence',
-    'GDPR compliance AI',
+    'LangGraph AI agents',
+    'AI contract analysis',
+    'LLM prompt caching',
+    'structured outputs Pydantic',
+    'LangSmith tracing',
+    'AI document processing',
+    'streaming AI responses SSE',
+    'FastAPI AI backend',
     'legal AI tools',
-    'PDF contract analysis',
-    'LangGraph contract review',
-    'automated legal review',
-    'SaaS vendor agreement AI',
-    'contract risk assessment',
-    'Invisigent',
+    'AI agent orchestration',
+    'Invisigent AI consulting',
   ],
   authors: [{ name: 'Invisigent', url: 'https://invisigent.ai' }],
   creator: 'Invisigent',
+  publisher: 'Invisigent',
+  category: 'Multi-Agent Systems',
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
   },
-  alternates: { canonical: CANONICAL },
+  alternates: {
+    canonical: CANONICAL,
+    languages: {
+      'en-US': CANONICAL,
+      'en-GB': CANONICAL,
+      'en-AU': CANONICAL,
+      'en-IN': CANONICAL,
+    },
+  },
   openGraph: {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
-    title: 'AI Contract Review Case Study: 73-Second Risk Assessment on $180K SaaS Agreement | Invisigent',
-    description:
-      'See how a multi-agent AI document intelligence system identified 5 contract risks including 2 GDPR violations in 73 seconds — before a $180,000 SaaS vendor agreement was signed.',
+    title: TITLE,
+    description: DESCRIPTION,
     url: CANONICAL,
-    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Invisigent Case Study', type: 'image/png' }],
+    publishedTime: PUBLISHED,
+    modifiedTime: MODIFIED,
+    authors: ['https://invisigent.ai'],
+    section: 'Multi-Agent Systems',
+    tags: [
+      'multi-agent AI',
+      'LangGraph',
+      'AI contract analysis',
+      'prompt caching',
+      'structured outputs',
+      'AI observability',
+    ],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
     site: '@invisigent_ai',
     creator: '@invisigent_ai',
-    title: 'AI Contract Review Case Study: 73-Second Risk Assessment | Invisigent',
+    title: TITLE,
     description:
-      'Multi-agent AI flagged 5 contract risks including 2 GDPR violations in 73 seconds — before a $180K SaaS deal was signed.',
-    images: [{ url: OG_IMAGE, alt: 'Invisigent Case Study' }],
+      'A LangGraph-coordinated multi-agent platform for contract analysis — structured outputs, real-time streaming, and roughly 50% lower LLM cost via prompt caching.',
+    images: [{ url: OG_IMAGE, alt: TITLE }],
+  },
+  other: {
+    'geo.region': 'IN-RJ',
+    'geo.placename': 'Jaipur, Rajasthan, India',
+    'geo.position': '26.9124;75.7873',
+    ICBM: '26.9124, 75.7873',
+    'og:locale:alternate': 'en_GB,en_AU,en_IN',
+    'article:published_time': PUBLISHED,
+    'article:modified_time': MODIFIED,
+    'article:author': 'https://invisigent.ai',
+    'article:section': 'Multi-Agent Systems',
+    'article:tag': 'multi-agent AI,LangGraph,AI contract analysis,prompt caching,structured outputs',
+    'revisit-after': '7 days',
+    rating: 'general',
+    language: 'en',
+    coverage: 'Worldwide',
+    distribution: 'global',
+    target: 'all',
+    audience: 'developers, AI engineers, technical founders, enterprise teams',
+    'DC.coverage': 'United States, United Kingdom, Australia, India',
+    'DC.language': 'en',
+    'DC.subject': 'multi-agent AI, LangGraph, AI contract analysis, prompt caching, structured outputs',
+    'DC.publisher': 'Invisigent',
+    'theme-color': '#0d0d0d',
   },
 };
 
@@ -59,13 +116,31 @@ const articleSchema = {
       '@id': `${CANONICAL}#article`,
       url: CANONICAL,
       headline:
-        'How an AI document intelligence system flagged GDPR violations and uncapped liability in 73 seconds — before a $180K vendor contract was signed',
+        'Multi-Agent Document Intelligence System: A LangGraph-Coordinated Platform for Contract Analysis',
       description:
-        'A multi-agent AI contract review system analyzed a 12-page SaaS vendor agreement in 73 seconds, identified 5 risk flags including 2 GDPR violations, and prevented a potentially career-ending signature on a $180,000 annual contract.',
+        'A production-ready multi-agent platform that analyzes contracts, extracts key clauses, identifies risks, and generates structured summaries through collaborative AI agents coordinated with LangGraph — with real-time streaming, prompt caching, and full LangSmith tracing.',
+      image: { '@type': 'ImageObject', url: OG_IMAGE, width: 1200, height: 630, caption: TITLE },
+      datePublished: PUBLISHED,
+      dateModified: MODIFIED,
       inLanguage: 'en-US',
       author: { '@id': 'https://invisigent.ai/#organization' },
       publisher: { '@id': 'https://invisigent.ai/#organization' },
       isPartOf: { '@id': 'https://invisigent.ai/case-studies#collection' },
+      articleSection: 'Multi-Agent Systems',
+      keywords: 'multi-agent AI, LangGraph, AI contract analysis, prompt caching, structured outputs, LangSmith tracing',
+      about: [
+        { '@type': 'Thing', name: 'Multi-agent AI systems' },
+        { '@type': 'Thing', name: 'LangGraph orchestration' },
+        { '@type': 'Thing', name: 'AI contract analysis' },
+      ],
+      mentions: [
+        { '@type': 'SoftwareApplication', name: 'LangGraph', applicationCategory: 'AI Orchestration' },
+        { '@type': 'SoftwareApplication', name: 'LangSmith', applicationCategory: 'AI Observability' },
+        { '@type': 'SoftwareApplication', name: 'FastAPI', applicationCategory: 'Web Framework' },
+        { '@type': 'SoftwareApplication', name: 'Pydantic', applicationCategory: 'Data Validation' },
+      ],
+      speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2'] },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': CANONICAL },
     },
     {
       '@type': 'BreadcrumbList',
@@ -82,34 +157,42 @@ const articleSchema = {
       mainEntity: [
         {
           '@type': 'Question',
-          name: 'How long does AI contract review take compared to manual legal review?',
+          name: 'Why use a multi-agent architecture instead of a single LLM prompt for contract analysis?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'The multi-agent system analyzed a 12-page SaaS vendor agreement in 73 seconds. Manual legal review of the same document typically takes 2–3 hours.',
+            text: 'Single-prompt chatbot approaches lose context in long documents, produce inconsistent outputs, and cannot reason through multiple sections simultaneously. A multi-agent architecture distributes responsibility across specialized agents, so each one focuses on a single task instead of one generalist prompt trying to do everything at once.',
           },
         },
         {
           '@type': 'Question',
-          name: 'What compliance issues can an AI contract review system detect?',
+          name: 'How does LangGraph coordinate the agents in this system?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'The system flagged: a missing GDPR Article 28 Data Processing Agreement, uncapped indemnification clauses, unilateral pricing escalation with no cap, IP ownership ambiguity, and a non-standard 90-day auto-renewal window.',
+            text: 'A planner agent routes the parsed and retrieved document context to the clause extraction, risk identification, and summary generation agents. LangGraph coordinates these as nodes in a graph, and an aggregator node merges their outputs into a single validated, structured response.',
           },
         },
         {
           '@type': 'Question',
-          name: 'Is AI-powered contract analysis suitable for enterprise procurement and legal teams?',
+          name: 'How does prompt caching reduce LLM cost by roughly 50%?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes. The system produces a structured risk score with clause-level references, a severity-ranked finding list, a structured executive recommendation, and a full LangSmith audit trail covering every agent decision.',
+            text: 'Multiple agents in the pipeline share overlapping context, such as the same document chunks and system instructions. Caching that shared context means it is not resent and re-billed on every agent call, which is what drove the roughly 50% reduction in LLM cost.',
           },
         },
         {
           '@type': 'Question',
-          name: 'How is this different from using a generic AI chatbot to review contracts?',
+          name: 'Why stream responses instead of returning one completed analysis?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'A generic AI chatbot processes the entire document in a single prompt with no specialization, no structured output, and no audit trail. This system uses three independent specialized agents running sequentially with every decision logged and replayable.',
+            text: 'Server-Sent Events stream each agent’s output as it completes rather than making the user wait for the entire pipeline to finish before showing anything. For longer documents, this significantly improves perceived responsiveness.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What does structured output with Pydantic provide over freeform text responses?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Each agent’s output, and the final aggregated response, is validated against a defined schema before it reaches the frontend. That means downstream systems can rely on consistent fields instead of parsing freeform text.',
           },
         },
       ],
