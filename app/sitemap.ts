@@ -91,6 +91,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/insights/self-healing-ai-agents`,
+      lastModified: new Date('2026-08-30'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/case-studies`,
       lastModified: now,
       changeFrequency: 'monthly',

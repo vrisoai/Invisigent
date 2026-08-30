@@ -75,6 +75,13 @@ const insightsBlogSchema = {
       blogPost: [
         {
           '@type': 'BlogPosting',
+          headline: 'Self-Healing AI Agents: When Agents Learn to Fix Themselves',
+          url: 'https://invisigent.ai/insights/self-healing-ai-agents',
+          datePublished: '2026-08-30',
+          image: 'https://invisigent.ai/blog-self-healing-ai-agents.svg',
+        },
+        {
+          '@type': 'BlogPosting',
           headline: 'How Production AI Teams Prevent Hallucinations, Control Costs, and Debug AI Systems With Observability',
           url: 'https://invisigent.ai/insights/ai-observability-for-production-ai-teams',
           datePublished: '2026-07-07',
@@ -221,6 +228,16 @@ export default function InsightsPage() {
             gap: 'clamp(1.25rem, 3vw, 2rem)',
           }}
         >
+          <BlogCard
+            imageSrc="/blog-self-healing-ai-agents.svg"
+            imageAlt="Self-healing AI agent architecture showing the detect, diagnose, isolate, repair and learn loop feeding a human approval gate that reviews the proposed prompt diff"
+            category="AI Agents"
+            readTime="11 min read"
+            heading="Self-Healing AI Agents: When Agents Learn to Fix Themselves"
+            excerpt="Deploy, discover, diagnose, patch, repeat. Self-healing agents automate the grinding analysis half of that loop — reading thousands of traces to find the root cause — while a human still approves what ships."
+            author="Invisigent Research"
+            href="/insights/self-healing-ai-agents"
+          />
           <BlogCard
             imageSrc="/blog-ai-observability-production-teams.svg"
             imageAlt="AI observability architecture showing instrumentation, storage and processing, dashboards, and alerting layers for production AI systems"

@@ -16,6 +16,7 @@ Invisigent is an AI development company based in Jaipur, India. We design and de
 
 ## Insights
 
+- [Self-Healing AI Agents: When Agents Learn to Fix Themselves](https://invisigent.ai/insights/self-healing-ai-agents): The detect–diagnose–isolate–repair–learn loop, why manual prompt fixes stop scaling, and where the human approval gate belongs.
 - [Why Your Business Is Losing Customers While You Sleep](https://invisigent.ai/insights/why-your-business-is-losing-customers-while-you-sleep): How always-on AI agents close the gap between business hours and 24/7 customer demand.
 - [The Real Reason AI Tools Don't Work for Most Small Businesses](https://invisigent.ai/insights/the-real-reason-ai-tools-dont-work-for-most-small-businesses): Why buying AI tools without an AI strategy fails — and what to do instead.
 - [How a 2-Person Team Can Compete With a 20-Person Company Using AI](https://invisigent.ai/insights/how-a-2-person-team-can-compete-with-a-20-person-company-using-ai): How intelligent automation lets small teams punch above their weight.
