@@ -515,6 +515,8 @@ a:focus-visible {
   }
   .vp-card__inner {
     transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    /* Keep the flip layer promoted so the first frame of the tap doesn't pay for layer creation */
+    will-change: transform;
   }
   .vp-card:hover .vp-card__inner {
     transform: rotateY(180deg);
@@ -555,6 +557,18 @@ a:focus-visible {
   -webkit-backdrop-filter: blur(20px);
   border-radius: inherit;
   opacity: 0.9;
+}
+
+/* Mobile/tablet (CSS tap-flip): a backdrop blur inside the rotating 3D layer is re-sampled every frame of the
+   flip — the main source of flip jank on phones. What sits behind these faces is the card's own flat fill over
+   the section's solid background, so the blur has nothing visible to blur; dropping it is visually identical.
+   Must stay below the base .vp-card__front / .vp-card__back-blur rules (same specificity). */
+@media (max-width: 1023px) {
+  .vp-card__front,
+  .vp-card__back-blur {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 .vp-card__back .vp-card__desc,

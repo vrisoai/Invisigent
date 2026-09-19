@@ -129,11 +129,22 @@ export function WhyInvisigent() {
   }, []);
   const handleEnter = useCallback((i: number) => () => setHoveredCard(i), []);
 
+  /* Coalesce to one layout read + style write per frame, using the latest pointer position */
+  const glowFrame = useRef(0);
+  const glowPending = useRef<{ el: HTMLElement; x: number; y: number } | null>(null);
   const handleCardMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-    e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    glowPending.current = { el: e.currentTarget, x: e.clientX, y: e.clientY };
+    if (glowFrame.current) return;
+    glowFrame.current = requestAnimationFrame(() => {
+      glowFrame.current = 0;
+      const p = glowPending.current;
+      if (!p) return;
+      const rect = p.el.getBoundingClientRect();
+      p.el.style.setProperty('--mouse-x', `${p.x - rect.left}px`);
+      p.el.style.setProperty('--mouse-y', `${p.y - rect.top}px`);
+    });
   }, []);
+  useEffect(() => () => cancelAnimationFrame(glowFrame.current), []);
 
   return (
     <section
@@ -340,7 +351,7 @@ export function WhyInvisigent() {
                   transition={{ duration: 1.6, delay: ring * 0.42, ease: 'easeOut', repeat: hoveredCard !== null ? Infinity : 0 }}
                 />
               ))}
-              <IntelligenceCore cardHovered={hoveredCard} />
+              <IntelligenceCore active={hoveredCard !== null} />
             </motion.div>
             {[2, 3].map((i) => (
               <motion.article

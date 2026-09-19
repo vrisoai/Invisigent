@@ -5,6 +5,7 @@ import Script from 'next/script';
 import { Navbar } from '@/app/components';
 import { CustomCursor } from '@/app/components/CustomCursor';
 import { ChatbotWidget } from '@/app/components/ChatbotWidget';
+import { OffscreenAnimationPauser } from '@/app/components/OffscreenAnimationPauser';
 import SchemaOrg from '@/app/components/SchemaOrg';
 import { Analytics } from '@vercel/analytics/next';
 import '@/app/styles/globals.css';
@@ -176,6 +177,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <ChatbotWidget />
+        <OffscreenAnimationPauser />
         <Analytics />
       </body>
     </html>

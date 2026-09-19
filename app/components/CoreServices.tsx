@@ -133,19 +133,32 @@ export function CoreServices() {
       // HTMLElement | null inside the nested named function declarations below.
       const el: HTMLElement = card;
 
+      // Coalesce to one layout read + tween per frame, using the latest pointer position
+      let frame = 0;
+      let lastX = 0;
+      let lastY = 0;
+
       function onMove(e: MouseEvent) {
-        const rect = el.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top)  / rect.height - 0.5;
-        gsap.to(el, {
-          rotateY:  x * MAX_TILT * 2,
-          rotateX: -y * MAX_TILT * 2,
-          duration: 0.35,
-          ease: 'power2.out',
-          overwrite: 'auto',
+        lastX = e.clientX;
+        lastY = e.clientY;
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+          frame = 0;
+          const rect = el.getBoundingClientRect();
+          const x = (lastX - rect.left) / rect.width - 0.5;
+          const y = (lastY - rect.top)  / rect.height - 0.5;
+          gsap.to(el, {
+            rotateY:  x * MAX_TILT * 2,
+            rotateX: -y * MAX_TILT * 2,
+            duration: 0.35,
+            ease: 'power2.out',
+            overwrite: 'auto',
+          });
         });
       }
       function onLeave() {
+        cancelAnimationFrame(frame);
+        frame = 0;
         gsap.to(el, {
           rotateY: 0,
           rotateX: 0,
@@ -157,6 +170,7 @@ export function CoreServices() {
       el.addEventListener('mousemove', onMove);
       el.addEventListener('mouseleave', onLeave);
       return () => {
+        cancelAnimationFrame(frame);
         el.removeEventListener('mousemove', onMove);
         el.removeEventListener('mouseleave', onLeave);
       };

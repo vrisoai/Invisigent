@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import {
   HeroSection,
@@ -12,6 +12,7 @@ import {
   FooterSection,
 } from '@/app/components';
 import { EASE } from '@/app/lib/animations';
+import { setLoopingAnimationsPaused } from '@/app/lib/pauseAnimations';
 
 /* Opacity only — no translateY: transforms on the inner motion layer still confuse stacking with 3D sections above. */
 const sectionReveal = {
@@ -79,16 +80,75 @@ const HOME_MOBILE_STAGE_H = `calc(200svh - ${NAV})`;
 /** Pull content up so its top sits at 100svh — first paint is hero only, then scroll reveals overlap */
 const HOME_MOBILE_CONTENT_MARGIN = `calc(${NAV} - 100svh)`;
 
+/** Tailwind `lg` — must match the `hidden lg:block` / `block lg:hidden` split below */
+const DESKTOP_QUERY = '(min-width: 64rem)';
+
 export default function Home() {
+  /* Both layouts are server-rendered and CSS picks one (no hydration mismatch, no layout shift).
+     Once mounted, drop the layout that CSS is hiding anyway so its DOM, observers and
+     animations stop costing anything. null = not measured yet → keep both. */
+  const [viewport, setViewport] = useState<'desktop' | 'mobile' | null>(null);
+  const heroWrapperRef = useRef<HTMLDivElement>(null);
+  const contentTopRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const mq = window.matchMedia(DESKTOP_QUERY);
+    const update = () => setViewport(mq.matches ? 'desktop' : 'mobile');
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  /* Desktop: the sticky hero never leaves the viewport, it just gets covered by the opaque
+     content sheet. Once the sheet's top edge is well above the viewport the hero can't be seen,
+     so stop painting it and pause its looping animations until the user scrolls back up. */
+  useEffect(() => {
+    if (viewport === 'mobile') return;
+    const wrapper = heroWrapperRef.current;
+    const contentTop = contentTopRef.current;
+    if (!wrapper || !contentTop || typeof IntersectionObserver === 'undefined') return;
+
+    const io = new IntersectionObserver(([entry]) => {
+      /* height > 0 rules out the display:none case (mobile viewport, before this tree's content unmounts) */
+      const covered = !entry.isIntersecting && entry.boundingClientRect.height > 0;
+      wrapper.style.visibility = covered ? 'hidden' : '';
+      setLoopingAnimationsPaused(wrapper, covered);
+    });
+    io.observe(contentTop);
+    return () => {
+      io.disconnect();
+      wrapper.style.visibility = '';
+      setLoopingAnimationsPaused(wrapper, false);
+    };
+  }, [viewport]);
+
   return (
     <main className="home-page" style={{ position: 'relative' }}>
       {/* ── DESKTOP (lg+): sticky hero cover ── */}
       <div className="hidden lg:block">
-        <div className="sticky-hero-wrapper">
+        {/* Kept mounted on mobile too: it holds the page's only <h1> */}
+        <div ref={heroWrapperRef} className="sticky-hero-wrapper" data-pause-managed>
           <HeroSection />
         </div>
 
+        {viewport !== 'mobile' && (
         <div className="content-over-hero">
+          {/* Hero-cover sentinel: spans one viewport above the sheet's top edge to 200px below it, so it is
+              on-screen exactly while any of the hero could be exposed (plus 200px of lead when scrolling back up).
+              Tall rather than zero-height so a jump scroll straight past it still flips its intersection state. */}
+          <div
+            ref={contentTopRef}
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              top: '-100vh',
+              left: 0,
+              width: 1,
+              height: 'calc(100vh + 200px)',
+              visibility: 'hidden',
+              pointerEvents: 'none',
+            }}
+          />
           <HomeOverHeroSlab slab={1}>
             <ValueProposition />
           </HomeOverHeroSlab>
@@ -108,9 +168,11 @@ export default function Home() {
             <FooterSection />
           </HomeOverHeroSlab>
         </div>
+        )}
       </div>
 
       {/* ── MOBILE/TABLET (<lg): sticky hero + content slides over (no overflow:hidden on main — breaks sticky) ── */}
+      {viewport !== 'desktop' && (
       <div className="block lg:hidden" style={{ position: 'relative' }}>
         <div
           className="home-mobile-hero-stage"
@@ -180,6 +242,7 @@ export default function Home() {
           </HomeMobileSlab>
         </div>
       </div>
+      )}
     </main>
   );
 }

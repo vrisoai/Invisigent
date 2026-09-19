@@ -2,8 +2,41 @@
 
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Line } from '@react-three/drei';
-import { useRef, useMemo } from 'react';
+import { memo, useEffect, useRef, useMemo, useState } from 'react';
 import * as THREE from 'three';
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * Off-screen pausing — canvases only run their frame loop while near the viewport
+ * ═══════════════════════════════════════════════════════════════════════════ */
+function useNearViewport<T extends Element>() {
+  const ref = useRef<T>(null);
+  const [near, setNear] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setNear(entry.isIntersecting),
+      { rootMargin: '200px 0px' },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return [ref, near] as const;
+}
+
+/** R3F resets clock.elapsedTime to 0 whenever frameloop changes. Restore it so scenes
+ *  resume from the pose they paused at. Must be the first child of <Canvas> so it runs
+ *  before the scene's own useFrame callbacks. */
+function ClockKeeper() {
+  const last = useRef(0);
+  useFrame(({ clock }) => {
+    if (clock.elapsedTime < last.current) clock.elapsedTime = last.current;
+    last.current = clock.elapsedTime;
+  });
+  return null;
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
  * Card 0 — Sovereign Architecture: rotating glass server cluster
@@ -228,7 +261,7 @@ function GlobeScene({ hovered }: { hovered: boolean }) {
 /* ═══════════════════════════════════════════════════════════════════════════
  * Intelligence Core — glass sphere with orbiting nodes (centerpiece)
  * ═══════════════════════════════════════════════════════════════════════════ */
-function IntelligenceCoreInner({ cardHovered }: { cardHovered: number | null }) {
+function IntelligenceCoreInner({ active }: { active: boolean }) {
   const coreRef = useRef<THREE.Group>(null);
   const orbitRef = useRef<THREE.Group>(null);
   const nodeCount = 6;
@@ -251,8 +284,6 @@ function IntelligenceCoreInner({ cardHovered }: { cardHovered: number | null }) 
       orbitRef.current.rotation.z = t * 0.2;
     }
   });
-
-  const active = cardHovered !== null;
 
   return (
     <group>
@@ -332,11 +363,13 @@ interface WhyInvisigentCardSceneProps {
   hovered: boolean;
 }
 
-export function WhyInvisigentCardScene({ variant, hovered }: WhyInvisigentCardSceneProps) {
+export const WhyInvisigentCardScene = memo(function WhyInvisigentCardScene({ variant, hovered }: WhyInvisigentCardSceneProps) {
   const Scene = CARD_SCENES[variant] ?? SovereignClusterScene;
+  const [wrapRef, near] = useNearViewport<HTMLDivElement>();
   return (
-    <div style={{ height: '100%', width: '100%' }} aria-hidden="true">
-      <Canvas camera={{ position: [0, 0, 2.2], fov: 42 }} dpr={[1, 1.5]} gl={{ antialias: true }} style={{ background: 'transparent' }}>
+    <div ref={wrapRef} style={{ height: '100%', width: '100%' }} aria-hidden="true">
+      <Canvas frameloop={near ? 'always' : 'never'} camera={{ position: [0, 0, 2.2], fov: 42 }} dpr={[1, 1.5]} gl={{ antialias: true }} style={{ background: 'transparent' }}>
+        <ClockKeeper />
         <ambientLight intensity={0.3} />
         <pointLight position={[2, 2, 2]} intensity={0.8} color="#3B82F6" />
         <pointLight position={[-1, -1, 1]} intensity={0.25} color="#1E3A8A" />
@@ -344,21 +377,24 @@ export function WhyInvisigentCardScene({ variant, hovered }: WhyInvisigentCardSc
       </Canvas>
     </div>
   );
-}
+});
 
 interface IntelligenceCoreProps {
-  cardHovered: number | null;
+  /** True while any card is hovered — a boolean so moving between cards doesn't re-render the core */
+  active: boolean;
 }
 
-export function IntelligenceCore({ cardHovered }: IntelligenceCoreProps) {
+export const IntelligenceCore = memo(function IntelligenceCore({ active }: IntelligenceCoreProps) {
+  const [wrapRef, near] = useNearViewport<HTMLDivElement>();
   return (
-    <div className="h-full w-full" style={{ minHeight: 200 }} aria-hidden="true">
-      <Canvas camera={{ position: [0, 0, 2.5], fov: 45 }} dpr={[1, 1.5]} gl={{ antialias: true }} style={{ background: 'transparent' }}>
+    <div ref={wrapRef} className="h-full w-full" style={{ minHeight: 200 }} aria-hidden="true">
+      <Canvas frameloop={near ? 'always' : 'never'} camera={{ position: [0, 0, 2.5], fov: 45 }} dpr={[1, 1.5]} gl={{ antialias: true }} style={{ background: 'transparent' }}>
+        <ClockKeeper />
         <ambientLight intensity={0.35} />
         <pointLight position={[3, 3, 3]} intensity={1} color="#3B82F6" />
         <pointLight position={[-2, -2, 2]} intensity={0.4} color="#FBBF24" />
-        <IntelligenceCoreInner cardHovered={cardHovered} />
+        <IntelligenceCoreInner active={active} />
       </Canvas>
     </div>
   );
-}
+});
