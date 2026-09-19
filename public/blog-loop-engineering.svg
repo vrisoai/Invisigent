@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="Loop engineering diagram showing weight-tied Transformer blocks reused across two computation passes">
+  <defs>
+    <linearGradient id="leBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#070c10"/>
+      <stop offset="50%" style="stop-color:#0a0d12"/>
+      <stop offset="100%" style="stop-color:#0a0907"/>
+    </linearGradient>
+    <radialGradient id="leCenterGlow" cx="50%" cy="50%" r="48%">
+      <stop offset="0%" style="stop-color:#122018;stop-opacity:0.85"/>
+      <stop offset="100%" style="stop-color:#060a08;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="leAmberGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.14"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="leCyanGlow" cx="32%" cy="48%" r="42%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.14"/>
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="leVioletGlow" cx="72%" cy="52%" r="40%">
+      <stop offset="0%" style="stop-color:#a78bfa;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="lePanelFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#181818;stop-opacity:0.94"/>
+      <stop offset="100%" style="stop-color:#0f0f0f;stop-opacity:0.94"/>
+    </linearGradient>
+    <linearGradient id="leNodeFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1b1b1b"/>
+      <stop offset="100%" style="stop-color:#131313"/>
+    </linearGradient>
+    <filter id="leGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="leArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(251,191,36,0.55)"/>
+    </marker>
+    <marker id="leArrowCyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(6,182,212,0.55)"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#leBg)"/>
+  <rect width="1200" height="675" fill="url(#leCenterGlow)"/>
+  <ellipse cx="600" cy="340" rx="360" ry="280" fill="url(#leAmberGlow)"/>
+  <ellipse cx="280" cy="340" rx="240" ry="250" fill="url(#leCyanGlow)"/>
+  <ellipse cx="920" cy="360" rx="240" ry="240" fill="url(#leVioletGlow)"/>
+
+  <g opacity="0.045" stroke="#fbbf24" stroke-width="0.5">
+    <line x1="0" y1="112" x2="1200" y2="112"/>
+    <line x1="0" y1="225" x2="1200" y2="225"/>
+    <line x1="0" y1="338" x2="1200" y2="338"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <line x1="0" y1="563" x2="1200" y2="563"/>
+    <line x1="150" y1="0" x2="150" y2="675"/>
+    <line x1="300" y1="0" x2="300" y2="675"/>
+    <line x1="450" y1="0" x2="450" y2="675"/>
+    <line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="750" y1="0" x2="750" y2="675"/>
+    <line x1="900" y1="0" x2="900" y2="675"/>
+    <line x1="1050" y1="0" x2="1050" y2="675"/>
+  </g>
+
+  <g transform="translate(0,20)">
+
+    <!-- Left: conventional depth -->
+    <rect x="60" y="120" width="300" height="430" rx="12" fill="url(#lePanelFill)" stroke="rgba(6,182,212,0.22)" stroke-width="1"/>
+    <text x="84" y="152" fill="#06b6d4" font-size="10" font-family="monospace" font-weight="700" letter-spacing="2">CONVENTIONAL DEPTH</text>
+    <text x="84" y="172" fill="#6b6b6b" font-size="9" font-family="monospace">8 UNIQUE BLOCKS</text>
+
+    <g font-family="monospace" font-size="11">
+      <rect x="96" y="198" width="228" height="34" rx="6" fill="url(#leNodeFill)" stroke="rgba(6,182,212,0.35)" stroke-width="1"/>
+      <text x="210" y="219" text-anchor="middle" fill="#e5e5e5">Block 1</text>
+      <rect x="96" y="244" width="228" height="34" rx="6" fill="url(#leNodeFill)" stroke="rgba(6,182,212,0.35)" stroke-width="1"/>
+      <text x="210" y="265" text-anchor="middle" fill="#e5e5e5">Block 2</text>
+      <rect x="96" y="290" width="228" height="34" rx="6" fill="url(#leNodeFill)" stroke="rgba(6,182,212,0.35)" stroke-width="1"/>
+      <text x="210" y="311" text-anchor="middle" fill="#e5e5e5">Block 3</text>
+      <rect x="96" y="336" width="228" height="34" rx="6" fill="url(#leNodeFill)" stroke="rgba(6,182,212,0.35)" stroke-width="1"/>
+      <text x="210" y="357" text-anchor="middle" fill="#e5e5e5">Block 4</text>
+      <rect x="96" y="382" width="228" height="34" rx="6" fill="url(#leNodeFill)" stroke="rgba(6,182,212,0.25)" stroke-width="1"/>
+      <text x="210" y="403" text-anchor="middle" fill="#a3a3a3">Block 5</text>
+      <rect x="96" y="428" width="228" height="34" rx="6" fill="url(#leNodeFill)" stroke="rgba(6,182,212,0.25)" stroke-width="1"/>
+      <text x="210" y="449" text-anchor="middle" fill="#a3a3a3">Block 6&#8230;8</text>
+    </g>
+    <text x="210" y="510" text-anchor="middle" fill="#6b6b6b" font-size="9" font-family="monospace">MORE PARAMS = MORE CAPACITY</text>
+
+    <!-- Center: looped depth -->
+    <rect x="400" y="120" width="400" height="430" rx="12" fill="url(#lePanelFill)" stroke="rgba(251,191,36,0.28)" stroke-width="1"/>
+    <text x="424" y="152" fill="#fbbf24" font-size="10" font-family="monospace" font-weight="700" letter-spacing="2">LOOPED TRANSFORMER</text>
+    <text x="424" y="172" fill="#6b6b6b" font-size="9" font-family="monospace">4 BLOCKS &#215; 2 PASSES</text>
+
+    <!-- Pass 1 stack -->
+    <rect x="440" y="198" width="200" height="168" rx="10" fill="url(#leNodeFill)" stroke="rgba(251,191,36,0.4)" stroke-width="1.25" filter="url(#leGlow)"/>
+    <text x="540" y="222" text-anchor="middle" fill="#fbbf24" font-size="9" font-family="monospace" font-weight="700" letter-spacing="1.5">PASS 1</text>
+    <rect x="456" y="236" width="168" height="26" rx="5" fill="#141414" stroke="rgba(251,191,36,0.25)" stroke-width="1"/>
+    <text x="540" y="253" text-anchor="middle" fill="#e5e5e5" font-size="10" font-family="monospace">Block 1&#8211;4</text>
+    <rect x="456" y="270" width="168" height="26" rx="5" fill="#141414" stroke="rgba(251,191,36,0.2)" stroke-width="1"/>
+    <text x="540" y="287" text-anchor="middle" fill="#c4c4c4" font-size="10" font-family="monospace">Shared weights</text>
+    <rect x="456" y="304" width="168" height="26" rx="5" fill="#141414" stroke="rgba(251,191,36,0.2)" stroke-width="1"/>
+    <text x="540" y="321" text-anchor="middle" fill="#c4c4c4" font-size="10" font-family="monospace">Representation 1</text>
+
+    <!-- Loop arrow -->
+    <path d="M 650 282 C 720 282, 720 430, 650 430" fill="none" stroke="rgba(251,191,36,0.55)" stroke-width="2" marker-end="url(#leArrow)"/>
+    <text x="742" y="360" fill="#fbbf24" font-size="10" font-family="monospace" font-weight="700" letter-spacing="1">LOOP</text>
+    <text x="742" y="376" fill="#8a8a8a" font-size="8" font-family="monospace">reuse weights</text>
+
+    <!-- Pass 2 stack -->
+    <rect x="440" y="386" width="200" height="118" rx="10" fill="url(#leNodeFill)" stroke="rgba(167,139,250,0.45)" stroke-width="1.25"/>
+    <text x="540" y="410" text-anchor="middle" fill="#a78bfa" font-size="9" font-family="monospace" font-weight="700" letter-spacing="1.5">PASS 2</text>
+    <rect x="456" y="424" width="168" height="26" rx="5" fill="#141414" stroke="rgba(167,139,250,0.3)" stroke-width="1"/>
+    <text x="540" y="441" text-anchor="middle" fill="#e5e5e5" font-size="10" font-family="monospace">Same Block 1&#8211;4</text>
+    <rect x="456" y="458" width="168" height="26" rx="5" fill="#141414" stroke="rgba(167,139,250,0.25)" stroke-width="1"/>
+    <text x="540" y="475" text-anchor="middle" fill="#c4c4c4" font-size="10" font-family="monospace">Representation 2</text>
+
+    <text x="600" y="530" text-anchor="middle" fill="#6b6b6b" font-size="9" font-family="monospace">SAME PARAMS &#183; MORE COMPUTATION</text>
+
+    <!-- Right: scaling knobs -->
+    <rect x="840" y="120" width="300" height="430" rx="12" fill="url(#lePanelFill)" stroke="rgba(167,139,250,0.22)" stroke-width="1"/>
+    <text x="864" y="152" fill="#a78bfa" font-size="10" font-family="monospace" font-weight="700" letter-spacing="2">SCALING KNOBS</text>
+    <text x="864" y="172" fill="#6b6b6b" font-size="9" font-family="monospace">WHERE TO SPEND COMPUTE</text>
+
+    <rect x="872" y="206" width="236" height="110" rx="10" fill="url(#leNodeFill)" stroke="rgba(6,182,212,0.35)" stroke-width="1"/>
+    <text x="990" y="236" text-anchor="middle" fill="#06b6d4" font-size="10" font-family="monospace" font-weight="700">KNOB 1</text>
+    <text x="990" y="258" text-anchor="middle" fill="#e5e5e5" font-size="13" font-family="monospace">Parameter scale</text>
+    <text x="990" y="282" text-anchor="middle" fill="#8a8a8a" font-size="9" font-family="monospace">unique weights &#8594; capacity</text>
+
+    <rect x="872" y="340" width="236" height="110" rx="10" fill="url(#leNodeFill)" stroke="rgba(251,191,36,0.4)" stroke-width="1" filter="url(#leGlow)"/>
+    <text x="990" y="370" text-anchor="middle" fill="#fbbf24" font-size="10" font-family="monospace" font-weight="700">KNOB 2</text>
+    <text x="990" y="392" text-anchor="middle" fill="#e5e5e5" font-size="13" font-family="monospace">Computational depth</text>
+    <text x="990" y="416" text-anchor="middle" fill="#8a8a8a" font-size="9" font-family="monospace">more passes &#8594; processing</text>
+
+    <text x="990" y="490" text-anchor="middle" fill="#6b6b6b" font-size="9" font-family="monospace">ALLOCATE &#183; DON&apos;T JUST ADD</text>
+  </g>
+</svg>

@@ -69,12 +69,7 @@
   </g>
 
   <!-- Content, centred vertically so the 21:9 hero crop shows the whole composition -->
-  <g transform="translate(0,40)">
-
-  <!-- Header label -->
-  <text x="60" y="62" fill="#fbbf24" font-size="11" font-family="monospace" font-weight="700" letter-spacing="4">SELF-HEALING AI AGENTS</text>
-  <text x="60" y="82" fill="#8a8a8a" font-size="9.5" font-family="monospace" letter-spacing="1.5">CLOSED-LOOP DETECTION &#8594; DIAGNOSIS &#8594; REPAIR, WITH A HUMAN IN THE APPROVAL PATH</text>
-  <line x1="60" y1="96" x2="1140" y2="96" stroke="rgba(251,191,36,0.14)" stroke-width="0.75"/>
+  <g transform="translate(0,20)">
 
   <!-- LEFT PANEL: production signals -->
   <rect x="60" y="132" width="248" height="412" rx="12" fill="url(#shPanelFill)" stroke="rgba(6,182,212,0.22)" stroke-width="1"/>

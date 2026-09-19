@@ -75,6 +75,22 @@ const insightsBlogSchema = {
       blogPost: [
         {
           '@type': 'BlogPosting',
+          headline:
+            'AI Agent Harness: What It Is, How It Works, and Why It Matters for Production AI',
+          url: 'https://invisigent.ai/insights/ai-agent-harness',
+          datePublished: '2026-09-20',
+          image: 'https://invisigent.ai/blog-ai-agent-harness.svg',
+        },
+        {
+          '@type': 'BlogPosting',
+          headline:
+            'Loop Engineering: How Reusing the Same Neural Layers Could Change AI Scaling',
+          url: 'https://invisigent.ai/insights/loop-engineering',
+          datePublished: '2026-09-20',
+          image: 'https://invisigent.ai/blog-loop-engineering.svg',
+        },
+        {
+          '@type': 'BlogPosting',
           headline: 'Self-Healing AI Agents: When Agents Learn to Fix Themselves',
           url: 'https://invisigent.ai/insights/self-healing-ai-agents',
           datePublished: '2026-08-30',
@@ -228,6 +244,26 @@ export default function InsightsPage() {
             gap: 'clamp(1.25rem, 3vw, 2rem)',
           }}
         >
+          <BlogCard
+            imageSrc="/blog-ai-agent-harness.svg"
+            imageAlt="AI agent harness architecture showing the reason-act-observe loop, model-plus-harness framing, and infrastructure-sandbox-harness-runtime-model stack"
+            category="AI Agents"
+            readTime="20 min read"
+            heading="AI Agent Harness: What It Is, How It Works, and Why It Matters for Production AI"
+            excerpt="Agent = Model + Harness. Why tools, context, memory, permissions, feedback, and observability — not just the model — determine whether a production agent can turn reasoning into controlled action."
+            author="Invisigent Research"
+            href="/insights/ai-agent-harness"
+          />
+          <BlogCard
+            imageSrc="/blog-loop-engineering.svg"
+            imageAlt="Loop engineering diagram comparing conventional Transformer depth with weight-tied looped blocks and two scaling knobs: parameter scale and computational depth"
+            category="AI Architecture"
+            readTime="16 min read"
+            heading="Loop Engineering: How Reusing the Same Neural Layers Could Change AI Scaling"
+            excerpt="Instead of adding more layers, reuse the ones you already have. How looped Transformers, recurrent depth, and weight-tied computation change the trade-off between parameters and computational depth — and what reports about GPT-6 Astra actually confirm."
+            author="Invisigent Research"
+            href="/insights/loop-engineering"
+          />
           <BlogCard
             imageSrc="/blog-self-healing-ai-agents.svg"
             imageAlt="Self-healing AI agent architecture showing the detect, diagnose, isolate, repair and learn loop feeding a human approval gate that reviews the proposed prompt diff"

@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="AI agent harness architecture showing model surrounded by tools, context, memory, permissions, feedback, and observability">
+  <defs>
+    <linearGradient id="ahBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#070c10"/>
+      <stop offset="50%" style="stop-color:#0a0d12"/>
+      <stop offset="100%" style="stop-color:#0a0907"/>
+    </linearGradient>
+    <radialGradient id="ahCenterGlow" cx="50%" cy="50%" r="48%">
+      <stop offset="0%" style="stop-color:#122018;stop-opacity:0.85"/>
+      <stop offset="100%" style="stop-color:#060a08;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="ahAmberGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.14"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="ahCyanGlow" cx="28%" cy="48%" r="42%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.14"/>
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="ahGreenGlow" cx="78%" cy="52%" r="40%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#16a34a;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="ahPanelFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#181818;stop-opacity:0.94"/>
+      <stop offset="100%" style="stop-color:#0f0f0f;stop-opacity:0.94"/>
+    </linearGradient>
+    <linearGradient id="ahNodeFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1b1b1b"/>
+      <stop offset="100%" style="stop-color:#131313"/>
+    </linearGradient>
+    <filter id="ahGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="ahArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(251,191,36,0.55)"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#ahBg)"/>
+  <rect width="1200" height="675" fill="url(#ahCenterGlow)"/>
+  <ellipse cx="600" cy="340" rx="360" ry="280" fill="url(#ahAmberGlow)"/>
+  <ellipse cx="260" cy="340" rx="240" ry="250" fill="url(#ahCyanGlow)"/>
+  <ellipse cx="940" cy="360" rx="240" ry="240" fill="url(#ahGreenGlow)"/>
+
+  <g opacity="0.045" stroke="#fbbf24" stroke-width="0.5">
+    <line x1="0" y1="112" x2="1200" y2="112"/>
+    <line x1="0" y1="225" x2="1200" y2="225"/>
+    <line x1="0" y1="338" x2="1200" y2="338"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <line x1="0" y1="563" x2="1200" y2="563"/>
+    <line x1="150" y1="0" x2="150" y2="675"/>
+    <line x1="300" y1="0" x2="300" y2="675"/>
+    <line x1="450" y1="0" x2="450" y2="675"/>
+    <line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="750" y1="0" x2="750" y2="675"/>
+    <line x1="900" y1="0" x2="900" y2="675"/>
+    <line x1="1050" y1="0" x2="1050" y2="675"/>
+  </g>
+
+  <g transform="translate(0,20)">
+
+    <!-- Left: agent loop -->
+    <rect x="60" y="120" width="300" height="430" rx="12" fill="url(#ahPanelFill)" stroke="rgba(6,182,212,0.22)" stroke-width="1"/>
+    <text x="84" y="152" fill="#06b6d4" font-size="10" font-family="monospace" font-weight="700" letter-spacing="2">CORE AGENT LOOP</text>
+    <text x="84" y="172" fill="#6b6b6b" font-size="9" font-family="monospace">REASON &#8594; ACT &#8594; OBSERVE</text>
+
+    <g font-family="monospace" font-size="11">
+      <rect x="96" y="198" width="228" height="36" rx="6" fill="url(#ahNodeFill)" stroke="rgba(6,182,212,0.35)" stroke-width="1"/>
+      <text x="210" y="221" text-anchor="middle" fill="#e5e5e5">Context</text>
+      <rect x="96" y="250" width="228" height="36" rx="6" fill="url(#ahNodeFill)" stroke="rgba(251,191,36,0.4)" stroke-width="1" filter="url(#ahGlow)"/>
+      <text x="210" y="273" text-anchor="middle" fill="#fbbf24">Model reasons</text>
+      <rect x="96" y="302" width="228" height="36" rx="6" fill="url(#ahNodeFill)" stroke="rgba(6,182,212,0.35)" stroke-width="1"/>
+      <text x="210" y="325" text-anchor="middle" fill="#e5e5e5">Tool call</text>
+      <rect x="96" y="354" width="228" height="36" rx="6" fill="url(#ahNodeFill)" stroke="rgba(34,197,94,0.4)" stroke-width="1"/>
+      <text x="210" y="377" text-anchor="middle" fill="#86efac">Harness executes</text>
+      <rect x="96" y="406" width="228" height="36" rx="6" fill="url(#ahNodeFill)" stroke="rgba(6,182,212,0.35)" stroke-width="1"/>
+      <text x="210" y="429" text-anchor="middle" fill="#e5e5e5">Observe result</text>
+      <rect x="96" y="458" width="228" height="36" rx="6" fill="url(#ahNodeFill)" stroke="rgba(251,191,36,0.3)" stroke-width="1"/>
+      <text x="210" y="481" text-anchor="middle" fill="#e5e5e5">Update &#38; repeat</text>
+    </g>
+    <text x="210" y="525" text-anchor="middle" fill="#6b6b6b" font-size="9" font-family="monospace">NOT PROMPT &#8594; ANSWER</text>
+
+    <!-- Center: model + harness -->
+    <rect x="400" y="120" width="400" height="430" rx="12" fill="url(#ahPanelFill)" stroke="rgba(251,191,36,0.28)" stroke-width="1"/>
+    <text x="424" y="152" fill="#fbbf24" font-size="10" font-family="monospace" font-weight="700" letter-spacing="2">MODEL + HARNESS</text>
+    <text x="424" y="172" fill="#6b6b6b" font-size="9" font-family="monospace">REASONING INSIDE A CONTROLLED ENVIRONMENT</text>
+
+    <!-- Outer harness ring label boxes -->
+    <rect x="430" y="198" width="110" height="40" rx="8" fill="url(#ahNodeFill)" stroke="rgba(6,182,212,0.4)" stroke-width="1"/>
+    <text x="485" y="223" text-anchor="middle" fill="#67e8f9" font-size="10" font-family="monospace">Tools</text>
+
+    <rect x="560" y="198" width="110" height="40" rx="8" fill="url(#ahNodeFill)" stroke="rgba(6,182,212,0.4)" stroke-width="1"/>
+    <text x="615" y="223" text-anchor="middle" fill="#67e8f9" font-size="10" font-family="monospace">Context</text>
+
+    <rect x="690" y="198" width="90" height="40" rx="8" fill="url(#ahNodeFill)" stroke="rgba(6,182,212,0.4)" stroke-width="1"/>
+    <text x="735" y="223" text-anchor="middle" fill="#67e8f9" font-size="10" font-family="monospace">Memory</text>
+
+    <!-- Model center -->
+    <rect x="480" y="270" width="240" height="100" rx="12" fill="url(#ahNodeFill)" stroke="rgba(251,191,36,0.55)" stroke-width="1.5" filter="url(#ahGlow)"/>
+    <text x="600" y="310" text-anchor="middle" fill="#fbbf24" font-size="11" font-family="monospace" font-weight="700" letter-spacing="2">MODEL</text>
+    <text x="600" y="335" text-anchor="middle" fill="#e5e5e5" font-size="12" font-family="monospace">Reasoning engine</text>
+
+    <rect x="430" y="400" width="110" height="40" rx="8" fill="url(#ahNodeFill)" stroke="rgba(34,197,94,0.4)" stroke-width="1"/>
+    <text x="485" y="425" text-anchor="middle" fill="#86efac" font-size="10" font-family="monospace">Permissions</text>
+
+    <rect x="560" y="400" width="110" height="40" rx="8" fill="url(#ahNodeFill)" stroke="rgba(34,197,94,0.4)" stroke-width="1"/>
+    <text x="615" y="425" text-anchor="middle" fill="#86efac" font-size="10" font-family="monospace">Feedback</text>
+
+    <rect x="690" y="400" width="90" height="40" rx="8" fill="url(#ahNodeFill)" stroke="rgba(34,197,94,0.4)" stroke-width="1"/>
+    <text x="735" y="425" text-anchor="middle" fill="#86efac" font-size="10" font-family="monospace">Traces</text>
+
+    <text x="600" y="480" text-anchor="middle" fill="#e5e5e5" font-size="12" font-family="monospace" font-weight="700">HARNESS</text>
+    <text x="600" y="505" text-anchor="middle" fill="#6b6b6b" font-size="9" font-family="monospace">TURNS REASONING INTO CONTROLLED ACTION</text>
+    <text x="600" y="530" text-anchor="middle" fill="#6b6b6b" font-size="9" font-family="monospace">MODEL &#8800; AGENT</text>
+
+    <!-- Right: layers -->
+    <rect x="840" y="120" width="300" height="430" rx="12" fill="url(#ahPanelFill)" stroke="rgba(34,197,94,0.22)" stroke-width="1"/>
+    <text x="864" y="152" fill="#86efac" font-size="10" font-family="monospace" font-weight="700" letter-spacing="2">STACK LAYERS</text>
+    <text x="864" y="172" fill="#6b6b6b" font-size="9" font-family="monospace">DIFFERENT PROBLEMS, SAME SYSTEM</text>
+
+    <g font-family="monospace" font-size="11">
+      <rect x="872" y="198" width="236" height="42" rx="8" fill="url(#ahNodeFill)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+      <text x="990" y="224" text-anchor="middle" fill="#a3a3a3">Infrastructure</text>
+      <rect x="872" y="254" width="236" height="42" rx="8" fill="url(#ahNodeFill)" stroke="rgba(6,182,212,0.35)" stroke-width="1"/>
+      <text x="990" y="280" text-anchor="middle" fill="#67e8f9">Sandbox</text>
+      <rect x="872" y="310" width="236" height="42" rx="8" fill="url(#ahNodeFill)" stroke="rgba(251,191,36,0.45)" stroke-width="1" filter="url(#ahGlow)"/>
+      <text x="990" y="336" text-anchor="middle" fill="#fbbf24">Agent Harness</text>
+      <rect x="872" y="366" width="236" height="42" rx="8" fill="url(#ahNodeFill)" stroke="rgba(34,197,94,0.35)" stroke-width="1"/>
+      <text x="990" y="392" text-anchor="middle" fill="#86efac">Runtime</text>
+      <rect x="872" y="422" width="236" height="42" rx="8" fill="url(#ahNodeFill)" stroke="rgba(251,191,36,0.35)" stroke-width="1"/>
+      <text x="990" y="448" text-anchor="middle" fill="#fbbf24">Model</text>
+    </g>
+    <text x="990" y="500" text-anchor="middle" fill="#6b6b6b" font-size="9" font-family="monospace">SANDBOX LIMITS &#183; HARNESS ENABLES</text>
+  </g>
+</svg>
