@@ -253,74 +253,6 @@ const faqSchema = {
   })),
 };
 
-const SOURCES = [
-  {
-    label: 'Red Hat — What even is the harness in AI?',
-    href: 'https://www.redhat.com/en/blog/what-even-harness-ai',
-    note: 'Infrastructure, sandbox, harness, runtime, and model; additive vs subtractive framing.',
-  },
-  {
-    label: 'Martin Fowler — Harness engineering for coding agent users',
-    href: 'https://martinfowler.com/articles/harness-engineering.html',
-    note: 'Feedforward/feedback controls, computational vs inferential controls, steering loop.',
-  },
-  {
-    label: 'LangChain — The Anatomy of an Agent Harness',
-    href: 'https://www.langchain.com/blog/the-anatomy-of-an-agent-harness',
-    note: 'Model-plus-harness framing; tools, state, execution, and orchestration.',
-  },
-  {
-    label: 'Parallel — What is an AI harness?',
-    href: 'https://parallel.ai/articles/what-is-an-agent-harness',
-    note: 'Tools, memory, context management, and long-running task continuity.',
-  },
-  {
-    label: 'MindStudio — What Is a Harness?',
-    href: 'https://www.mindstudio.ai/blog/what-is-an-ai-harness-infrastructure-for-agents',
-    note: 'Execution loop, permissions, observability, coding-agent examples.',
-  },
-  {
-    label: 'Bright Data — What Is an AI Harness?',
-    href: 'https://brightdata.com/blog/ai/what-is-an-ai-harness',
-    note: 'Architectural view separating infrastructure, sandbox, harness, and runtime.',
-  },
-  {
-    label: 'Databricks — What is an AI Agent Harness?',
-    href: 'https://www.databricks.com/blog/ai-harness',
-    note: 'Tools, memory, workspaces, guardrails, feedback loops, observability.',
-  },
-  {
-    label: 'Microsoft Learn — Agent Harness',
-    href: 'https://learn.microsoft.com/en-us/agent-framework/concepts/harness',
-    note: 'Context providers, tools, approvals, observability, looping, background agents.',
-  },
-  {
-    label: 'Atlan — What Is an Agent Harness?',
-    href: 'https://atlan.com/know/what-is-an-agent-harness/',
-    note: 'Guides/sensors framing, state, tools, guardrails, context layer.',
-  },
-  {
-    label: 'Cobus Greyling — Agent = Model + Harness',
-    href: 'https://cobusgreyling.medium.com/agent-model-harness-0d018f3d5014',
-    note: 'Model-harness relationship and execution-alignment perspective.',
-  },
-  {
-    label: 'Harnesses.sh — AI Agent Harness Directory',
-    href: 'https://www.harnesses.sh/',
-    note: 'Ecosystem-level view of different harness and agent implementations.',
-  },
-  {
-    label: 'BoringBot — AI Agent Harnesses Explained',
-    href: 'https://boringbot.substack.com/p/ai-agent-harnesses-explained-architecture',
-    note: 'Execution, permissions, multi-user isolation, auditability, governance.',
-  },
-  {
-    label: 'DEV Community — Building a Production-Ready AI Agent Harness',
-    href: 'https://dev.to/apssouza22/building-a-production-ready-ai-agent-harness-2570',
-    note: 'Auth, memory, persistence, guardrails, metrics, MCP, evaluation.',
-  },
-];
-
 const h2Style = {
   fontSize: 'clamp(1.125rem, 2.5vw, 1.4rem)',
   fontWeight: 700,
@@ -1346,64 +1278,6 @@ Harness     → Information + Tools + State + Execution
             }}
             aria-hidden
           />
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '3rem' }}>
-            <div
-              className="font-mono"
-              style={{
-                fontSize: '0.625rem',
-                letterSpacing: '0.18em',
-                textTransform: 'uppercase',
-                color: 'var(--color-text-tertiary)',
-              }}
-            >
-              Sources and Further Reading
-            </div>
-            <p
-              className="font-serif"
-              style={{
-                fontSize: 'clamp(0.875rem, 1.6vw, 0.9375rem)',
-                lineHeight: 1.7,
-                color: 'var(--color-text-secondary)',
-                margin: 0,
-              }}
-            >
-              This article synthesizes the following references, with the strongest technical
-              emphasis on Microsoft Learn, Databricks, Martin Fowler, and LangChain:
-            </p>
-            <ul
-              style={{
-                margin: 0,
-                paddingLeft: '1.15rem',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '0.85rem',
-              }}
-            >
-              {SOURCES.map(({ label, href, note }) => (
-                <li
-                  key={href}
-                  className="font-serif"
-                  style={{
-                    fontSize: 'clamp(0.8125rem, 1.5vw, 0.875rem)',
-                    lineHeight: 1.65,
-                    color: 'var(--color-text-secondary)',
-                  }}
-                >
-                  <a
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: 'var(--color-link)', textDecoration: 'underline' }}
-                  >
-                    {label}
-                  </a>
-                  {' — '}
-                  {note}
-                </li>
-              ))}
-            </ul>
-          </div>
 
           <div
             style={{
