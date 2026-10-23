@@ -669,19 +669,9 @@ With a proxy:      Application ──→ Proxy ──→ Destination
             </ul>
 
             <p>
-              This is the use case most commercial &quot;AI proxy&quot; providers focus on.
-              Developer educator Piyush Garg&apos;s video{' '}
-              <a
-                href="https://www.youtube.com/watch?v=9W3XpE9uGQ4"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: 'var(--color-link)', textDecoration: 'underline' }}
-              >
-                The Ultimate Proxy for AI Agents
-              </a>
-              , for example, walks through a residential proxy network that pools tens of millions
-              of IP addresses across countries so agents can browse without being throttled. Large
-              IP pools like this are why browsing agents can gather location-aware data at scale —
+              This is the use case most commercial &quot;AI proxy&quot; providers focus on. Many
+              offer residential proxy networks that pool tens of millions of IP addresses across
+              countries so agents can browse without being throttled. Large IP pools like this are why browsing agents can gather location-aware data at scale —
               and also why they must be used responsibly.
             </p>
 
