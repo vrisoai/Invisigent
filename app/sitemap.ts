@@ -109,6 +109,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
+      url: `${BASE_URL}/insights/proxy-for-ai-agents`,
+      lastModified: new Date('2026-10-24'),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${BASE_URL}/case-studies`,
       lastModified: now,
       changeFrequency: 'monthly',

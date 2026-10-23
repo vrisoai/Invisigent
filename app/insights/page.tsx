@@ -76,6 +76,14 @@ const insightsBlogSchema = {
         {
           '@type': 'BlogPosting',
           headline:
+            'Proxy for AI Agents: Network Proxies, LLM Gateways, and MCP Gateways Explained',
+          url: 'https://invisigent.ai/insights/proxy-for-ai-agents',
+          datePublished: '2026-10-24',
+          image: 'https://invisigent.ai/blog-proxy-for-ai-agents.svg',
+        },
+        {
+          '@type': 'BlogPosting',
+          headline:
             'AI Agent Harness: What It Is, How It Works, and Why It Matters for Production AI',
           url: 'https://invisigent.ai/insights/ai-agent-harness',
           datePublished: '2026-09-20',
@@ -244,6 +252,16 @@ export default function InsightsPage() {
             gap: 'clamp(1.25rem, 3vw, 2rem)',
           }}
         >
+          <BlogCard
+            imageSrc="/blog-proxy-for-ai-agents.svg"
+            imageAlt="Proxy for AI agents architecture: an AI agent routes traffic through a network proxy, LLM gateway, and MCP tool gateway, with a policy check enforcing limits"
+            category="AI Agents"
+            readTime="15 min read"
+            heading="Proxy for AI Agents: Network Proxies, LLM Gateways, and MCP Gateways Explained"
+            excerpt="The agent decides. The gateway enforces. How network proxies, LLM gateways, and MCP tool gateways control what AI agents can reach — and what stops an agent from issuing a $90 refund when its limit is $50."
+            author="Invisigent Research"
+            href="/insights/proxy-for-ai-agents"
+          />
           <BlogCard
             imageSrc="/blog-ai-agent-harness.svg"
             imageAlt="AI agent harness architecture showing the reason-act-observe loop, model-plus-harness framing, and infrastructure-sandbox-harness-runtime-model stack"
