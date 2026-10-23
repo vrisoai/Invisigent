@@ -75,6 +75,13 @@ const insightsBlogSchema = {
       blogPost: [
         {
           '@type': 'BlogPosting',
+          headline: 'Anthropic Scion: Why AI Agents Outgrew Git and What Replaced It',
+          url: 'https://invisigent.ai/insights/anthropic-scion-source-control',
+          datePublished: '2026-10-24',
+          image: 'https://invisigent.ai/blog-anthropic-scion-source-control.svg',
+        },
+        {
+          '@type': 'BlogPosting',
           headline:
             'Proxy for AI Agents: Network Proxies, LLM Gateways, and MCP Gateways Explained',
           url: 'https://invisigent.ai/insights/proxy-for-ai-agents',
@@ -252,6 +259,16 @@ export default function InsightsPage() {
             gap: 'clamp(1.25rem, 3vw, 2rem)',
           }}
         >
+          <BlogCard
+            imageSrc="/blog-anthropic-scion-source-control.svg"
+            imageAlt="Anthropic Scion architecture: thin scn clients fetch trees and blobs on demand through scion-daemon, scion-cache, and scion-server backed by Spanner and blob storage"
+            category="AI Engineering"
+            readTime="14 min read"
+            heading="Anthropic Scion: Why AI Agents Outgrew Git and What Replaced It"
+            excerpt="Merges jumped from 2,500 to 30,000 a day and Git became the bottleneck. How Anthropic built Scion — thin clients, server-side merges, Spanner-backed changesets — with seven engineers and Claude in five months, and what every team can learn from it."
+            author="Invisigent Research"
+            href="/insights/anthropic-scion-source-control"
+          />
           <BlogCard
             imageSrc="/blog-proxy-for-ai-agents.svg"
             imageAlt="Proxy for AI agents architecture: an AI agent routes traffic through a network proxy, LLM gateway, and MCP tool gateway, with a policy check enforcing limits"
