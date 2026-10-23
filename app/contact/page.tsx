@@ -9,8 +9,8 @@ const DESCRIPTION =
   'Start a conversation with Invisigent about enterprise AI systems, automation workflows, and intelligent infrastructure for your business. Book a free strategy call today.';
 
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
+  title: 'Contact — Start Your AI Infrastructure Project',
+  description: 'Talk to Invisigent about enterprise AI systems, automation workflows, and AI infrastructure for your business. Book a free strategy call today.',
   keywords: [
     'contact Invisigent',
     'AI consulting inquiry',

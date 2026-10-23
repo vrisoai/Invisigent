@@ -6,15 +6,15 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 
 const SLUG = 'ai-hallucination-fix-infrastructure';
 const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
-const OG_IMAGE = 'https://invisigent.ai/blog-ai-hallucination-fix.svg';
+const OG_IMAGE = 'https://invisigent.ai/blog-ai-hallucination-fix.png';
 const PUBLISHED = '2026-06-07T10:00:00.000Z';
 const TITLE = 'The Problem: When Your AI Model Hallucinates in Production';
 const DESCRIPTION =
   'In our experience building AI infrastructure for 15+ enterprise clients, we found that 80% of hallucination issues stem from infrastructure-level failures, not model limitations. Here are 7 infrastructure fixes that reduce hallucination rates by 60-80%.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | Invisigent`,
-  description: DESCRIPTION,
+  title: 'How to Fix AI Hallucinations in Production',
+  description: 'Most production AI hallucinations stem from infrastructure failures, not model limits. Seven infrastructure fixes that sharply reduce hallucination rates.',
   keywords: [
     // Core topic
     'AI hallucination fix',
@@ -103,7 +103,7 @@ export const metadata: Metadata = {
       'AI monitoring',
       'production AI',
     ],
-    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -184,14 +184,16 @@ const articleSchema = {
     { '@type': 'SoftwareApplication', name: 'n8n', applicationCategory: 'Workflow Automation' },
   ],
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
-      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
-    ],
-  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+    { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+  ],
 };
 
 const h2Style = {
@@ -430,6 +432,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
@@ -1059,10 +1065,12 @@ export default function BlogPost() {
 
           {/* ── FAQ ── */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            <div
+            <h2
               className="font-mono"
               style={{
                 fontSize: '0.625rem',
+                fontWeight: 400,
+                lineHeight: 1.6,
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--color-text-tertiary)',
@@ -1070,7 +1078,7 @@ export default function BlogPost() {
               }}
             >
               Frequently Asked Questions
-            </div>
+            </h2>
 
             {[
               {

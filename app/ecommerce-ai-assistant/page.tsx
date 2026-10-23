@@ -11,8 +11,8 @@ const DESCRIPTION =
   'Virtual shopping assistant demo for recommendations, orders, and catalog help. See how Invisigent builds brand-aligned AI customer service that handles queries 24/7 at scale.';
 
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
+  title: 'E-commerce AI Assistant — Personalized Shopping',
+  description: 'Virtual shopping assistant demo for recommendations, orders, and catalog help — brand-aligned AI customer service by Invisigent that works 24/7 at scale.',
   keywords: [
     'ecommerce AI assistant',
     'AI shopping assistant',

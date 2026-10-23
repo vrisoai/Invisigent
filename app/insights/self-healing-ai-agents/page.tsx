@@ -6,7 +6,7 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 
 const SLUG = 'self-healing-ai-agents';
 const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
-const OG_IMAGE = 'https://invisigent.ai/blog-self-healing-ai-agents.svg';
+const OG_IMAGE = 'https://invisigent.ai/blog-self-healing-ai-agents.png';
 const PUBLISHED = '2026-08-30T10:00:00.000Z';
 const TITLE = 'Self-Healing AI Agents: When Agents Learn to Fix Themselves';
 const DESCRIPTION =
@@ -14,8 +14,8 @@ const DESCRIPTION =
 
 export const metadata: Metadata = {
   // The root layout applies the `%s | Invisigent` template, so no brand suffix here.
-  title: TITLE,
-  description: DESCRIPTION,
+  title: 'Self-Healing AI Agents: How They Fix Themselves',
+  description: 'Self-healing AI agents detect failures, diagnose root causes, and propose fixes while humans approve what ships. How the detect-diagnose-repair loop works.',
   keywords: [
     'self-healing AI agents',
     'self-healing agents',
@@ -84,7 +84,7 @@ export const metadata: Metadata = {
       'human in the loop',
       'context engineering',
     ],
-    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -179,14 +179,16 @@ const articleSchema = {
     { '@type': 'SoftwareApplication', name: 'Langfuse', applicationCategory: 'AI Observability' },
   ],
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
-      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
-    ],
-  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+    { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+  ],
 };
 
 const h2Style = {
@@ -401,6 +403,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
@@ -789,7 +795,14 @@ export default function BlogPost() {
             <p>
               It helps to picture what a human actually sees at that checkpoint. Not a summary
               saying the agent has been improved, but the change itself, at the line level, with
-              execution held until someone decides.
+              execution held until someone decides. It is the same principle we describe for{' '}
+              <Link
+                href="/insights/proxy-for-ai-agents"
+                style={{ color: 'var(--color-link)', textDecoration: 'underline' }}
+              >
+                AI agent gateways
+              </Link>
+              : the agent proposes, something outside the agent decides what actually runs.
             </p>
           </div>
 
@@ -1198,10 +1211,12 @@ export default function BlogPost() {
 
           {/* FAQ */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            <div
+            <h2
               className="font-mono"
               style={{
                 fontSize: '0.625rem',
+                fontWeight: 400,
+                lineHeight: 1.6,
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--color-text-tertiary)',
@@ -1209,7 +1224,7 @@ export default function BlogPost() {
               }}
             >
               Frequently Asked Questions
-            </div>
+            </h2>
 
             {FAQS.map(({ q, a }, i) => (
               <div

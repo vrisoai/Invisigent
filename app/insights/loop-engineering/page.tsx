@@ -7,7 +7,7 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 
 const SLUG = 'loop-engineering';
 const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
-const OG_IMAGE = 'https://invisigent.ai/blog-loop-engineering.svg';
+const OG_IMAGE = 'https://invisigent.ai/blog-loop-engineering.png';
 const PUBLISHED = '2026-09-20T10:00:00.000Z';
 const TITLE =
   'Loop Engineering: How Reusing the Same Neural Layers Could Change AI Scaling';
@@ -15,8 +15,8 @@ const DESCRIPTION =
   'Loop engineering explains looped Transformers, recurrent depth, and weight-tied computation — why reusing neural layers can increase effective depth without adding equal parameters, how that differs from chain-of-thought, and what reports about GPT-6 Astra actually confirm.';
 
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
+  title: 'Loop Engineering: Looped Transformers Explained',
+  description: 'Loop engineering explained: looped Transformers, recurrent depth, and weight-tied layers that add depth without more parameters — plus what GPT-6 Astra shows.',
   keywords: [
     'loop engineering',
     'looped Transformers',
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
       'weight sharing',
       'computational depth',
     ],
-    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -183,14 +183,16 @@ const articleSchema = {
     { '@type': 'Organization', name: 'OpenAI' },
   ],
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
-      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
-    ],
-  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+    { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+  ],
 };
 
 const FAQS = [
@@ -316,6 +318,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
@@ -950,10 +956,12 @@ Greater effective computational depth`}</pre>
           />
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            <div
+            <h2
               className="font-mono"
               style={{
                 fontSize: '0.625rem',
+                fontWeight: 400,
+                lineHeight: 1.6,
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--color-text-tertiary)',
@@ -961,7 +969,7 @@ Greater effective computational depth`}</pre>
               }}
             >
               Frequently Asked Questions
-            </div>
+            </h2>
 
             {FAQS.map(({ q, a }, i) => (
               <div

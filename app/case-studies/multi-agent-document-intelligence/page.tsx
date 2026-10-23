@@ -12,8 +12,8 @@ const DESCRIPTION =
   'How we built a production-ready multi-agent AI platform on LangGraph that analyzes contracts, extracts clauses, identifies risks, and streams structured summaries — cutting LLM cost by roughly 50% through prompt caching.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | Invisigent`,
-  description: DESCRIPTION,
+  title: 'Multi-Agent Document Intelligence Case Study',
+  description: 'How we built a production multi-agent LangGraph platform that analyzes contracts, extracts clauses, flags risks, and cut LLM costs ~50% with prompt caching.',
   keywords: [
     'multi-agent document intelligence',
     'LangGraph AI agents',

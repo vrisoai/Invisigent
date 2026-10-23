@@ -8,15 +8,30 @@ Invisigent is an AI development company based in Jaipur, India. We design and de
 
 - [AI Infrastructure & Agent Systems](https://invisigent.ai/services): Custom multi-agent systems, LangGraph/LangChain pipelines, real-time streaming AI applications, RAG architectures, and full-stack AI product development.
 - [Interactive Demo](https://invisigent.ai/interactive-demo): Live demonstration of Invisigent's multi-agent document intelligence platform — upload a PDF contract and watch three AI agents analyze it in real time.
+- [Market Intelligence Engine](https://invisigent.ai/market-intelligence-engine): Live AI-powered stock and market analysis tool.
 
 ## Case Studies
 
+- [All Case Studies](https://invisigent.ai/case-studies): Index of Invisigent's production AI builds.
 - [Multi-Agent Document Intelligence Platform](https://invisigent.ai/case-studies/multi-agent-document-intelligence): A three-agent AI pipeline that analyzed a 12-page SaaS vendor agreement in 73 seconds, flagged 5 contract risks including 2 GDPR violations, and prevented a $180,000 contract signature. Built with LangGraph, Claude, real-time token streaming.
 - [IPO Prospectus Intelligence Platform](https://invisigent.ai/case-studies/ipo-prospectus-intelligence): AI platform that cut DRHP/RHP review from days to under 10 minutes — 70% reduction in manual effort, 90% change-detection accuracy across 300-page filings, board-ready PDF/Word exports, and interactive plain-language Q&A.
+- [Stock Research Agent](https://invisigent.ai/case-studies/stock-research-agent): A five-agent LangGraph system that analyzes financials, news, technical signals, and sentiment in parallel to produce explainable buy/hold/sell reports in about 30 seconds.
+- [Governed AI Architecture Walkthrough](https://invisigent.ai/case-studies/governed-ai-architecture-walkthrough): Interactive reference design of the four governed AI layers — ingestion, retrieval, reasoning, and action — for regulated industries.
 
 ## Insights
 
+- [All Insights](https://invisigent.ai/insights): Invisigent's blog on AI infrastructure, AI agents, and automation.
+- [Anthropic Scion: Why AI Agents Outgrew Git and What Replaced It](https://invisigent.ai/insights/anthropic-scion-source-control): How Anthropic replaced Git with Scion, an agent-native version control system, after merges hit 30,000 a day — architecture, results, Claude's role, and lessons for engineering teams.
+- [Proxy for AI Agents: Network Proxies, LLM Gateways, and MCP Gateways Explained](https://invisigent.ai/insights/proxy-for-ai-agents): What a proxy for AI agents is, how network proxies, LLM gateways, and MCP tool gateways differ, and why "the agent decides, the gateway enforces."
+- [AI Agent Harness: What It Is, How It Works, and Why It Matters](https://invisigent.ai/insights/ai-agent-harness): Agent = Model + Harness — the tools, context, memory, permissions, feedback, and observability that turn model reasoning into controlled action.
+- [Loop Engineering: How Reusing the Same Neural Layers Could Change AI Scaling](https://invisigent.ai/insights/loop-engineering): Looped Transformers, recurrent depth, and weight-tied computation explained.
 - [Self-Healing AI Agents: When Agents Learn to Fix Themselves](https://invisigent.ai/insights/self-healing-ai-agents): The detect–diagnose–isolate–repair–learn loop, why manual prompt fixes stop scaling, and where the human approval gate belongs.
+- [AI Observability for Production AI Teams](https://invisigent.ai/insights/ai-observability-for-production-ai-teams): How production teams prevent hallucinations, control LLM costs, and debug AI systems with observability.
+- [n8n AI Automation Tutorial (2026)](https://invisigent.ai/insights/n8n-ai-automation-tutorial): Docker self-hosting, production AI agents with LangChain, MCP integration, and data-compliant n8n setup.
+- [How to Fix AI Hallucinations in Production](https://invisigent.ai/insights/ai-hallucination-fix-infrastructure): Why most production hallucinations are infrastructure failures, and seven infrastructure fixes.
+- [AI Infrastructure for Businesses in 2026](https://invisigent.ai/insights/ai-infrastructure-for-businesses-in-2026): What AI infrastructure means for companies in 2026 and how to approach it.
+- [Why Enterprise AI Accuracy Is an Infrastructure Problem](https://invisigent.ai/insights/why-enterprise-ai-accuracy-is-an-infrastructure-problem): Why accuracy problems persist when teams only audit the model, tweak prompts, or switch providers.
+- [7 AI Implementation Mistakes That Burn Budget](https://invisigent.ai/insights/7-ai-implementation-mistakes-that-burn-budget-and-how-to-avoid-them): The most expensive architecture, ownership, and execution mistakes in AI implementation — and how to avoid them.
 - [Why Your Business Is Losing Customers While You Sleep](https://invisigent.ai/insights/why-your-business-is-losing-customers-while-you-sleep): How always-on AI agents close the gap between business hours and 24/7 customer demand.
 - [The Real Reason AI Tools Don't Work for Most Small Businesses](https://invisigent.ai/insights/the-real-reason-ai-tools-dont-work-for-most-small-businesses): Why buying AI tools without an AI strategy fails — and what to do instead.
 - [How a 2-Person Team Can Compete With a 20-Person Company Using AI](https://invisigent.ai/insights/how-a-2-person-team-can-compete-with-a-20-person-company-using-ai): How intelligent automation lets small teams punch above their weight.

@@ -6,7 +6,7 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 
 const SLUG = 'ai-observability-for-production-ai-teams';
 const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
-const OG_IMAGE = 'https://invisigent.ai/blog-ai-observability-production-teams.svg';
+const OG_IMAGE = 'https://invisigent.ai/blog-ai-observability-production-teams.png';
 const PUBLISHED = '2026-07-07T10:00:00.000Z';
 const TITLE =
   'How Production AI Teams Prevent Hallucinations, Control Costs, and Debug AI Systems With Observability';
@@ -14,8 +14,8 @@ const DESCRIPTION =
   'AI observability has quietly become one of the most important parts of building a reliable AI product. Why engineering teams are investing in it, and how to build an observability stack that actually scales with you.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | Invisigent`,
-  description: DESCRIPTION,
+  title: 'AI Observability for Production AI Teams',
+  description: 'How production AI teams use observability to prevent hallucinations, control LLM costs, and debug faster — and how to build an observability stack that scales.',
   keywords: [
     'AI observability',
     'LLM observability',
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
       'AI cost monitoring',
       'production AI',
     ],
-    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -172,14 +172,16 @@ const articleSchema = {
     { '@type': 'SoftwareApplication', name: 'Helicone', applicationCategory: 'AI Monitoring' },
   ],
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
-      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
-    ],
-  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+    { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+  ],
 };
 
 const h2Style = {
@@ -460,6 +462,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
@@ -1549,6 +1555,27 @@ export default function BlogPost() {
               building production AI, that visibility isn&apos;t optional anymore. It&apos;s part
               of the architecture.
             </p>
+
+            <p>
+              Some teams are already handing part of that watch to agents themselves. Anthropic, for
+              example, assigns dedicated Claude &quot;Superfan&quot; instances to read telemetry and
+              logs for each component of its new source control system — see our breakdown of{' '}
+              <Link
+                href="/insights/anthropic-scion-source-control"
+                style={{ color: 'var(--color-link)', textDecoration: 'underline' }}
+              >
+                Anthropic Scion
+              </Link>
+              . And if your model traffic runs through an LLM gateway, that gateway is one of the
+              richest sources of traces you have; our guide to{' '}
+              <Link
+                href="/insights/proxy-for-ai-agents"
+                style={{ color: 'var(--color-link)', textDecoration: 'underline' }}
+              >
+                proxies for AI agents
+              </Link>{' '}
+              covers how that layer works.
+            </p>
           </div>
 
           {/* Divider */}
@@ -1563,10 +1590,12 @@ export default function BlogPost() {
 
           {/* FAQ */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            <div
+            <h2
               className="font-mono"
               style={{
                 fontSize: '0.625rem',
+                fontWeight: 400,
+                lineHeight: 1.6,
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--color-text-tertiary)',
@@ -1574,7 +1603,7 @@ export default function BlogPost() {
               }}
             >
               Frequently Asked Questions
-            </div>
+            </h2>
 
             {FAQS.map(({ q, a }, i) => (
               <div

@@ -6,9 +6,8 @@ const CANONICAL = 'https://invisigent.ai/services';
 const OG_IMAGE = 'https://invisigent.ai/og-image.png';
 
 export const metadata: Metadata = {
-  title: 'Services — AI Infrastructure Built for Production, Not Proof of Concept',
-  description:
-    'Seven AI infrastructure services: LangGraph multi-agent orchestration, Pinecone RAG retrieval, AI performance optimization, AI-native product development, and compliance-ready AI for GDPR, EU AI Act, DPDP, ISO 42001, and SOC2. Model-agnostic. No vendor lock-in.',
+  title: 'AI Infrastructure Services for Production',
+  description: 'Multi-agent orchestration, RAG retrieval, AI performance tuning, AI product development, and compliance-ready AI (GDPR, EU AI Act, DPDP, SOC 2). No lock-in.',
   keywords: [
     'AI infrastructure services',
     'LangGraph multi-agent orchestration',

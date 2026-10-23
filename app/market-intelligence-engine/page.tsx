@@ -11,7 +11,7 @@ const DESCRIPTION =
   'Search a stock by name or symbol for AI-assisted market context — news aggregation, trend detection, and insight workflows. A live demo by Invisigent.';
 
 export const metadata: Metadata = {
-  title: TITLE,
+  title: 'Market Intelligence Engine — AI Stock Analysis',
   description: DESCRIPTION,
   keywords: [
     'market intelligence AI',

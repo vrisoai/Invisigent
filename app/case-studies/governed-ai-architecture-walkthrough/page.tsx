@@ -12,8 +12,8 @@ const DESCRIPTION =
   'An interactive walkthrough of the four controlled layers in a governed AI deployment — Ingestion, Knowledge & Retrieval, Reasoning, and Action — mirroring the governance architecture deployed in a clinical workflow system live at two US clinics.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | Invisigent`,
-  description: DESCRIPTION,
+  title: 'Governed AI Architecture: Regulated Industries',
+  description: 'An interactive walkthrough of the four governed AI layers — ingestion, retrieval, reasoning, and action — mirroring a clinical AI system live at two US clinics.',
   keywords: [
     'governed AI architecture',
     'AI governance framework',

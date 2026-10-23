@@ -7,9 +7,8 @@ const CANONICAL = 'https://invisigent.ai/case-studies/ipo-prospectus-intelligenc
 const OG_IMAGE = 'https://invisigent.ai/og-image.png';
 
 export const metadata: Metadata = {
-  title: 'IPO Prospectus Intelligence: DRHP/RHP Review in Minutes, Not Days | Invisigent',
-  description:
-    'How an AI-powered platform cut DRHP and RHP review from days to under 10 minutes — with 90% accurate change detection across 300-page filings and plain-language Q&A for investment teams.',
+  title: 'IPO Prospectus AI: DRHP/RHP Review in Minutes',
+  description: 'How an AI platform cut DRHP and RHP review from days to under 10 minutes, with 90% accurate change detection across 300-page filings and plain-language Q&A.',
   keywords: [
     'IPO prospectus AI',
     'DRHP review automation',

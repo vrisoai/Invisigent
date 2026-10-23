@@ -7,15 +7,15 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 
 const SLUG = 'ai-agent-harness';
 const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
-const OG_IMAGE = 'https://invisigent.ai/blog-ai-agent-harness.svg';
+const OG_IMAGE = 'https://invisigent.ai/blog-ai-agent-harness.png';
 const PUBLISHED = '2026-09-20T14:00:00.000Z';
 const TITLE = 'AI Agent Harness: What It Is, How It Works, and Why It Matters for Production AI';
 const DESCRIPTION =
   'An AI agent harness is the system around the model — tools, context, memory, permissions, feedback, and observability — that turns reasoning into controlled action. How harness engineering differs from prompts, sandboxes, and runtimes.';
 
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
+  title: 'AI Agent Harness: What It Is and Why It Matters',
+  description: 'An AI agent harness is the system around the model — tools, context, memory, permissions, and feedback — that turns reasoning into controlled, reliable action.',
   keywords: [
     'AI agent harness',
     'agent harness',
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
       'agent observability',
       'production AI',
     ],
-    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -182,14 +182,16 @@ const articleSchema = {
     { '@type': 'Person', name: 'Martin Fowler' },
   ],
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
-      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
-    ],
-  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+    { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+  ],
 };
 
 const FAQS = [
@@ -315,6 +317,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
@@ -730,6 +736,18 @@ Tuesday: Agent resumes
             <Quote>
               The model should not be the final authority on what it is allowed to do.
             </Quote>
+
+            <p>
+              In practice, many teams enforce these permissions in a gateway that sits between the
+              agent and its models and tools. We cover that layer in our guide to{' '}
+              <Link
+                href="/insights/proxy-for-ai-agents"
+                style={{ color: 'var(--color-link)', textDecoration: 'underline' }}
+              >
+                proxies for AI agents
+              </Link>
+              : the agent decides, the gateway enforces.
+            </p>
 
             <h2 className="font-serif" style={h2Style}>
               Harness vs Sandbox: They Are Not the Same Thing
@@ -1170,6 +1188,18 @@ Harness     → Information + Tools + State + Execution
 
             <Quote>Those are harness questions. And they are production engineering questions.</Quote>
 
+            <p>
+              The shift reaches further than the agent itself. When Anthropic&apos;s coding agents
+              pushed merges past 30,000 a day, even Git became a bottleneck — the story we tell in{' '}
+              <Link
+                href="/insights/anthropic-scion-source-control"
+                style={{ color: 'var(--color-link)', textDecoration: 'underline' }}
+              >
+                Anthropic Scion: why AI agents outgrew Git
+              </Link>
+              .
+            </p>
+
             <h2 className="font-serif" style={h2Style}>
               Final Takeaway
             </h2>
@@ -1222,10 +1252,12 @@ Harness     → Information + Tools + State + Execution
           />
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            <div
+            <h2
               className="font-mono"
               style={{
                 fontSize: '0.625rem',
+                fontWeight: 400,
+                lineHeight: 1.6,
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--color-text-tertiary)',
@@ -1233,7 +1265,7 @@ Harness     → Information + Tools + State + Execution
               }}
             >
               Frequently Asked Questions
-            </div>
+            </h2>
 
             {FAQS.map(({ q, a }, i) => (
               <div

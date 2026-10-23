@@ -2303,8 +2303,9 @@ main.ecommerce-assistant-page {
 /* Services page — typography scaling at 2400px+ */
 @media (min-width: 2400px) {
   .services-page h1 { font-size: clamp(7rem, 6.5vw, 11rem) !important; }
-  .services-page h2 { font-size: clamp(5rem, 5vw, 8.5rem) !important; }
-  .services-page h3 { font-size: clamp(2.25rem, 2.2vw, 3.75rem) !important; }
+  .services-page h2:not(.invisigent-footer-heading) { font-size: clamp(5rem, 5vw, 8.5rem) !important; }
+  .services-page h3,
+  .services-page .invisigent-footer-heading { font-size: clamp(2.25rem, 2.2vw, 3.75rem) !important; }
   .services-page p  { font-size: clamp(1.375rem, 1.1vw, 2rem) !important; }
 }
 

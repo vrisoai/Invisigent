@@ -7,8 +7,8 @@ const DESCRIPTION =
   'Invisigent is an AI infrastructure firm founded in Jaipur, India — building multi-agent systems, RAG pipelines, and production-grade AI automation for mid-market companies and regulated industries. Architecture-first, model-agnostic, and built to be owned. Every engagement is handled directly by the founder.';
 
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
+  title: 'About Us — Architecture-First AI Infrastructure',
+  description: 'Invisigent is a Jaipur-based AI infrastructure firm building multi-agent systems, RAG pipelines, and production AI automation — model-agnostic and founder-led.',
   keywords: [
     'about Invisigent',
     'AI infrastructure firm India',

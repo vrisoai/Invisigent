@@ -64,12 +64,12 @@ export default function MultiAgentDemoClient() {
         {(phase === "idle" || phase === "uploading" || phase === "error") && (
           <section className="w-full max-w-xl flex flex-col items-center gap-6 sm:gap-8">
             <div className="text-center" style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
-              <p
+              <h1
                 className="font-serif font-bold tracking-tight text-text-primary"
                 style={{ fontSize: "clamp(1.5rem, 5vw, 2.5rem)", lineHeight: "1.2", margin: 0, paddingTop: "1.25rem" }}
               >
                 Analyze any contract in seconds
-              </p>
+              </h1>
               <p
                 className="text-text-secondary leading-relaxed"
                 style={{ fontSize: "clamp(0.875rem, 1.5vw, 1rem)", maxWidth: "34ch", margin: "0 auto" }}

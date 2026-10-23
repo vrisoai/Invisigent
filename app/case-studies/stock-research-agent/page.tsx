@@ -12,8 +12,8 @@ const DESCRIPTION =
   'How we built a five-agent LangGraph research system that gathers financial statements, news, technical signals, and investor sentiment in parallel to generate explainable buy/hold/sell reports in about 30 seconds.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | Invisigent`,
-  description: DESCRIPTION,
+  title: 'Stock Research Agent: Multi-Agent AI Case Study',
+  description: 'A five-agent LangGraph system that analyzes financials, news, technicals, and sentiment in parallel to produce explainable stock reports in 30 seconds.',
   keywords: [
     'stock research agent',
     'multi-agent investment research AI',

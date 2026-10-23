@@ -6,15 +6,15 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 
 const SLUG = 'ai-infrastructure-for-businesses-in-2026';
 const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
-const OG_IMAGE = 'https://invisigent.ai/blog-ai-infrastructure-2026.svg';
+const OG_IMAGE = 'https://invisigent.ai/blog-ai-infrastructure-2026.png';
 const PUBLISHED = '2026-05-27T10:00:00.000Z';
 const TITLE = 'AI Infrastructure for Businesses in 2026';
 const DESCRIPTION =
   'AI infrastructure has quietly become one of the most important conversations happening inside serious companies right now. It is no longer about buying cloud credits or plugging in a new tool.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | Invisigent`,
-  description: DESCRIPTION,
+  title: 'AI Infrastructure for Businesses in 2026',
+  description: 'AI infrastructure is now a core business decision, not a cloud-credit purchase. What AI infrastructure means in 2026 and how companies should approach it.',
   keywords: [
     // Core topic
     'AI infrastructure 2026',
@@ -106,7 +106,7 @@ export const metadata: Metadata = {
       'production AI',
       'AI architecture 2026',
     ],
-    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -180,14 +180,16 @@ const articleSchema = {
     { '@type': 'Thing', name: 'production AI systems' },
   ],
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
-      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
-    ],
-  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+    { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+  ],
 };
 
 const h2Style = {
@@ -309,6 +311,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
@@ -774,10 +780,12 @@ export default function BlogPost() {
 
           {/* ── FAQ ── */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            <div
+            <h2
               className="font-mono"
               style={{
                 fontSize: '0.625rem',
+                fontWeight: 400,
+                lineHeight: 1.6,
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--color-text-tertiary)',
@@ -785,7 +793,7 @@ export default function BlogPost() {
               }}
             >
               Frequently Asked Questions
-            </div>
+            </h2>
 
             {FAQ.map(({ q, a }, i) => (
               <div

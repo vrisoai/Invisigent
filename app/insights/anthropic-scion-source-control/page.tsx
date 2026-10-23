@@ -7,7 +7,7 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 
 const SLUG = 'anthropic-scion-source-control';
 const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
-const OG_IMAGE = 'https://invisigent.ai/blog-anthropic-scion-source-control.svg';
+const OG_IMAGE = 'https://invisigent.ai/blog-anthropic-scion-source-control.png';
 const PUBLISHED = '2026-10-24T14:00:00.000Z';
 const TITLE = 'Anthropic Scion: Why AI Agents Outgrew Git and What Replaced It';
 const DESCRIPTION =
@@ -16,8 +16,8 @@ const DESCRIPTION =
 const ANTHROPIC_POST = 'https://www.anthropic.com/research/redesigning-source-control';
 
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
+  title: 'Anthropic Scion: Why AI Agents Outgrew Git',
+  description: 'Scion is Anthropic’s agent-native version control system that replaced Git after merges hit 30,000 a day. Architecture, results, Claude’s role, and lessons.',
   keywords: [
     'Anthropic Scion',
     'Scion version control',
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
       'developer infrastructure',
       'monorepo',
     ],
-    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -192,14 +192,16 @@ const articleSchema = {
     { '@type': 'Organization', name: 'GitLab' },
   ],
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
-      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
-    ],
-  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+    { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+  ],
 };
 
 const FAQS = [
@@ -370,6 +372,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
@@ -965,10 +971,12 @@ Infrastructure gets redesigned for agents`}</pre>
           />
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            <div
+            <h2
               className="font-mono"
               style={{
                 fontSize: '0.625rem',
+                fontWeight: 400,
+                lineHeight: 1.6,
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--color-text-tertiary)',
@@ -976,7 +984,7 @@ Infrastructure gets redesigned for agents`}</pre>
               }}
             >
               Frequently Asked Questions
-            </div>
+            </h2>
 
             {FAQS.map(({ q, a }, i) => (
               <div

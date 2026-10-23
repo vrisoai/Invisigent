@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description:
     "Upload a contract PDF and watch three AI agents extract entities, assess compliance risk, and generate an executive briefing in real time. Built with LangGraph and Claude.",
   robots: { index: false, follow: false },
+  alternates: { canonical: "https://invisigent.ai/multi-agent-document-intelligence" },
+  openGraph: { url: "https://invisigent.ai/multi-agent-document-intelligence" },
 };
 
 export default function MultiAgentDocumentIntelligencePage() {

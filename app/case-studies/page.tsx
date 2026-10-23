@@ -7,7 +7,7 @@ const CANONICAL = 'https://invisigent.ai/case-studies';
 const OG_IMAGE = 'https://invisigent.ai/og-image.png';
 
 export const metadata: Metadata = {
-  title: 'Case Studies — AI Builds & Solutions | Invisigent',
+  title: 'Case Studies — AI Builds & Solutions',
   description:
     'Real-world AI applications built by Invisigent — multi-agent systems, document intelligence pipelines, and enterprise automation in production.',
   keywords: [

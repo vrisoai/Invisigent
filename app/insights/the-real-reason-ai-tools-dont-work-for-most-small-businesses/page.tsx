@@ -14,8 +14,8 @@ const DESCRIPTION =
   'Most organizations that struggle with AI are not using the wrong model. They are automating the wrong process. Here is what a correct process audit looks like before an AI infrastructure build.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | Invisigent`,
-  description: DESCRIPTION,
+  title: 'Why AI Infrastructure Projects Really Fail',
+  description: 'Most teams struggling with AI aren’t using the wrong model — they’re automating the wrong process. What a proper process audit looks like before an AI build.',
   keywords: [
     // Core topic
     'why AI projects fail',
@@ -192,14 +192,16 @@ const articleSchema = {
     { '@type': 'Thing', name: 'mid-market AI strategy' },
   ],
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
-      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
-    ],
-  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+    { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+  ],
 };
 
 const h2Style = {
@@ -256,6 +258,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
@@ -825,10 +831,12 @@ export default function BlogPost() {
 
           {/* ── FAQ ── */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            <div
+            <h2
               className="font-mono"
               style={{
                 fontSize: '0.625rem',
+                fontWeight: 400,
+                lineHeight: 1.6,
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--color-text-tertiary)',
@@ -836,7 +844,7 @@ export default function BlogPost() {
               }}
             >
               Frequently Asked Questions
-            </div>
+            </h2>
 
             {[
               {

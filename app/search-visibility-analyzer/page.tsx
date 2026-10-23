@@ -11,8 +11,8 @@ const DESCRIPTION =
   'Submit your keyword, location, and website for a tailored search visibility snapshot. Analyze Google rankings, Google Business Profile visibility, and on-page SEO — receive a structured PDF report.';
 
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
+  title: 'Search Visibility Analyzer — Free SEO Audit Tool',
+  description: 'Get a tailored search visibility snapshot: Google rankings, Google Business Profile visibility, and on-page SEO for your keyword and location — as a PDF report.',
   keywords: [
     'search visibility analyzer',
     'free SEO audit tool',

@@ -7,7 +7,7 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 
 const SLUG = 'proxy-for-ai-agents';
 const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
-const OG_IMAGE = 'https://invisigent.ai/blog-proxy-for-ai-agents.svg';
+const OG_IMAGE = 'https://invisigent.ai/blog-proxy-for-ai-agents.png';
 const PUBLISHED = '2026-10-24T10:00:00.000Z';
 const TITLE = 'Proxy for AI Agents: Network Proxies, LLM Gateways, and MCP Gateways Explained';
 const DESCRIPTION =
@@ -18,8 +18,8 @@ const VIDEO_URL = `https://www.youtube.com/watch?v=${VIDEO_ID}`;
 const VIDEO_THUMB = `https://i.ytimg.com/vi/${VIDEO_ID}/hqdefault.jpg`;
 
 export const metadata: Metadata = {
-  title: TITLE,
-  description: DESCRIPTION,
+  title: 'Proxy for AI Agents: LLM & MCP Gateway Guide',
+  description: 'What is a proxy for AI agents? How network proxies, LLM gateways, and MCP tool gateways control what agents reach — with architecture, code, and security tips.',
   keywords: [
     'proxy for AI agents',
     'AI agent proxy',
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
       'AI agent security',
       'AI agent architecture',
     ],
-    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
     videos: [{ url: VIDEO_URL }],
   },
   twitter: {
@@ -194,14 +194,16 @@ const articleSchema = {
   ],
   video: { '@id': `${CANONICAL}#video` },
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
-      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
-    ],
-  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+    { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+  ],
 };
 
 const videoSchema = {
@@ -398,6 +400,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
@@ -1150,10 +1156,12 @@ Observability (traces, cost, audit log)`}</pre>
           />
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            <div
+            <h2
               className="font-mono"
               style={{
                 fontSize: '0.625rem',
+                fontWeight: 400,
+                lineHeight: 1.6,
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--color-text-tertiary)',
@@ -1161,7 +1169,7 @@ Observability (traces, cost, audit log)`}</pre>
               }}
             >
               Frequently Asked Questions
-            </div>
+            </h2>
 
             {FAQS.map(({ q, a }, i) => (
               <div

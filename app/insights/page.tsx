@@ -7,9 +7,8 @@ const CANONICAL = 'https://invisigent.ai/insights';
 const OG_IMAGE = 'https://invisigent.ai/og-image.png';
 
 export const metadata: Metadata = {
-  title: 'AI Infrastructure Insights ? Field Notes & Patterns',
-  description:
-    'Thinking, patterns, and field notes from Invisigent on enterprise AI infrastructure, agent systems, automation architecture, and AI strategy for small businesses.',
+  title: 'AI Infrastructure Insights & Field Notes',
+  description: 'Field notes from Invisigent on enterprise AI infrastructure, AI agent systems, automation architecture, and practical AI strategy for growing businesses.',
   keywords: [
     'AI infrastructure insights',
     'enterprise AI blog',
@@ -78,7 +77,7 @@ const insightsBlogSchema = {
           headline: 'Anthropic Scion: Why AI Agents Outgrew Git and What Replaced It',
           url: 'https://invisigent.ai/insights/anthropic-scion-source-control',
           datePublished: '2026-10-24',
-          image: 'https://invisigent.ai/blog-anthropic-scion-source-control.svg',
+          image: 'https://invisigent.ai/blog-anthropic-scion-source-control.png',
         },
         {
           '@type': 'BlogPosting',
@@ -86,7 +85,7 @@ const insightsBlogSchema = {
             'Proxy for AI Agents: Network Proxies, LLM Gateways, and MCP Gateways Explained',
           url: 'https://invisigent.ai/insights/proxy-for-ai-agents',
           datePublished: '2026-10-24',
-          image: 'https://invisigent.ai/blog-proxy-for-ai-agents.svg',
+          image: 'https://invisigent.ai/blog-proxy-for-ai-agents.png',
         },
         {
           '@type': 'BlogPosting',
@@ -94,7 +93,7 @@ const insightsBlogSchema = {
             'AI Agent Harness: What It Is, How It Works, and Why It Matters for Production AI',
           url: 'https://invisigent.ai/insights/ai-agent-harness',
           datePublished: '2026-09-20',
-          image: 'https://invisigent.ai/blog-ai-agent-harness.svg',
+          image: 'https://invisigent.ai/blog-ai-agent-harness.png',
         },
         {
           '@type': 'BlogPosting',
@@ -102,35 +101,35 @@ const insightsBlogSchema = {
             'Loop Engineering: How Reusing the Same Neural Layers Could Change AI Scaling',
           url: 'https://invisigent.ai/insights/loop-engineering',
           datePublished: '2026-09-20',
-          image: 'https://invisigent.ai/blog-loop-engineering.svg',
+          image: 'https://invisigent.ai/blog-loop-engineering.png',
         },
         {
           '@type': 'BlogPosting',
           headline: 'Self-Healing AI Agents: When Agents Learn to Fix Themselves',
           url: 'https://invisigent.ai/insights/self-healing-ai-agents',
           datePublished: '2026-08-30',
-          image: 'https://invisigent.ai/blog-self-healing-ai-agents.svg',
+          image: 'https://invisigent.ai/blog-self-healing-ai-agents.png',
         },
         {
           '@type': 'BlogPosting',
           headline: 'How Production AI Teams Prevent Hallucinations, Control Costs, and Debug AI Systems With Observability',
           url: 'https://invisigent.ai/insights/ai-observability-for-production-ai-teams',
           datePublished: '2026-07-07',
-          image: 'https://invisigent.ai/blog-ai-observability-production-teams.svg',
+          image: 'https://invisigent.ai/blog-ai-observability-production-teams.png',
         },
         {
           '@type': 'BlogPosting',
           headline: 'n8n AI Automation Tutorial: Complete Workflow Setup Guide (2026)',
           url: 'https://invisigent.ai/insights/n8n-ai-automation-tutorial',
           datePublished: '2026-06-14',
-          image: 'https://invisigent.ai/blog-n8n-ai-automation-tutorial.svg',
+          image: 'https://invisigent.ai/blog-n8n-ai-automation-tutorial.png',
         },
         {
           '@type': 'BlogPosting',
           headline: 'The Problem: When Your AI Model Hallucinates in Production',
           url: 'https://invisigent.ai/insights/ai-hallucination-fix-infrastructure',
           datePublished: '2026-06-07',
-          image: 'https://invisigent.ai/blog-ai-hallucination-fix.svg',
+          image: 'https://invisigent.ai/blog-ai-hallucination-fix.png',
         },
         {
           '@type': 'BlogPosting',
@@ -165,14 +164,14 @@ const insightsBlogSchema = {
           headline: 'Why Enterprise AI Accuracy Is an Infrastructure Problem Not a Model Problem',
           url: 'https://invisigent.ai/insights/why-enterprise-ai-accuracy-is-an-infrastructure-problem',
           datePublished: '2026-05-12',
-          image: 'https://invisigent.ai/blog-ai-accuracy-infrastructure.svg',
+          image: 'https://invisigent.ai/blog-ai-accuracy-infrastructure.png',
         },
         {
           '@type': 'BlogPosting',
           headline: 'AI Infrastructure for Businesses in 2026',
           url: 'https://invisigent.ai/insights/ai-infrastructure-for-businesses-in-2026',
           datePublished: '2026-05-27',
-          image: 'https://invisigent.ai/blog-ai-infrastructure-2026.svg',
+          image: 'https://invisigent.ai/blog-ai-infrastructure-2026.png',
         },
       ],
     },

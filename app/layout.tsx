@@ -39,8 +39,7 @@ export const metadata: Metadata = {
     default: 'Invisigent — AI Infrastructure Built to Be Owned, Not Rented',
     template: '%s | Invisigent',
   },
-  description:
-    'Invisigent designs and builds custom AI infrastructure for mid-market and enterprise organizations — multi-agent systems, RAG knowledge retrieval, and production-grade workflow automation you own outright. Compliance-ready for GDPR, DPDP Act, and EU AI Act.',
+  description: 'Invisigent builds custom AI infrastructure you own — multi-agent systems, RAG retrieval, and production workflow automation. GDPR, DPDP and EU AI Act ready.',
   keywords: [
     'AI infrastructure company',
     'custom AI systems architecture',

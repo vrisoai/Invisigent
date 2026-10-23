@@ -9,8 +9,7 @@ const DEMO_OG_IMAGE = 'https://invisigent.ai/og-image.png';
 
 export const metadata: Metadata = {
   title: 'Interactive AI Demos — Live Enterprise AI Tools',
-  description:
-    'Live AI tool demos by Invisigent — enterprise AI systems, automation workflows, and intelligent infrastructure for businesses across India, US, and Europe. Try them now.',
+  description: 'Try live AI demos by Invisigent — multi-agent document intelligence, market analysis, and automation tools built on production AI infrastructure.',
   keywords: [
     'interactive AI demo',
     'live AI tools',

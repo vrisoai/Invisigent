@@ -6,7 +6,7 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 
 const SLUG = 'why-enterprise-ai-accuracy-is-an-infrastructure-problem';
 const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
-const OG_IMAGE = 'https://invisigent.ai/blog-ai-accuracy-infrastructure.svg';
+const OG_IMAGE = 'https://invisigent.ai/blog-ai-accuracy-infrastructure.png';
 const PUBLISHED = '2026-05-12T10:00:00.000Z';
 const TITLE =
   'Why Enterprise AI Accuracy Is an Infrastructure Problem Not a Model Problem';
@@ -14,8 +14,8 @@ const DESCRIPTION =
   'Most organizations debugging AI accuracy problems are looking in the wrong place. They audit the model. They adjust the prompt. They switch providers. The accuracy problem persists because it was never a model problem.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | Invisigent`,
-  description: DESCRIPTION,
+  title: 'Why AI Accuracy Is an Infrastructure Problem',
+  description: 'Teams debugging AI accuracy audit the model, tweak prompts, and switch providers — and the problem persists. Why AI accuracy is an infrastructure issue.',
   keywords: [
     // Core topic
     'enterprise AI accuracy',
@@ -105,7 +105,7 @@ export const metadata: Metadata = {
       'RAG accuracy',
       'EU AI Act',
     ],
-    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/svg+xml' }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 675, alt: TITLE, type: 'image/png' }],
   },
   twitter: {
     card: 'summary_large_image',
@@ -179,14 +179,16 @@ const articleSchema = {
     { '@type': 'Thing', name: 'AI observability' },
   ],
   speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', 'blockquote'] },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
-      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
-    ],
-  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+    { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+  ],
 };
 
 const h2Style = {
@@ -290,6 +292,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
@@ -793,10 +799,12 @@ export default function BlogPost() {
 
           {/* ── FAQ ── */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            <div
+            <h2
               className="font-mono"
               style={{
                 fontSize: '0.625rem',
+                fontWeight: 400,
+                lineHeight: 1.6,
                 letterSpacing: '0.18em',
                 textTransform: 'uppercase',
                 color: 'var(--color-text-tertiary)',
@@ -804,7 +812,7 @@ export default function BlogPost() {
               }}
             >
               Frequently Asked Questions
-            </div>
+            </h2>
 
             {[
               {

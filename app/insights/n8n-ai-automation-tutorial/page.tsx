@@ -6,15 +6,15 @@ import Breadcrumb from '@/app/components/Breadcrumb';
 
 const SLUG = 'n8n-ai-automation-tutorial';
 const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
-const OG_IMAGE = 'https://invisigent.ai/blog-n8n-ai-automation-tutorial.svg';
+const OG_IMAGE = 'https://invisigent.ai/blog-n8n-ai-automation-tutorial.png';
 const PUBLISHED = '2026-06-14T10:00:00.000Z';
 const TITLE = 'n8n AI Automation Tutorial: Complete Workflow Setup Guide (2026)';
 const DESCRIPTION =
   'A complete guide to n8n AI automation in 2026. From Docker self-hosting to production AI agents with LangChain, MCP integration, and data-compliant setup for startups and technical teams in the US, UK, Australia, and India.';
 
 export const metadata: Metadata = {
-  title: `${TITLE} | Invisigent`,
-  description: DESCRIPTION,
+  title: 'n8n AI Automation Tutorial (2026 Setup Guide)',
+  description: 'A complete n8n AI automation guide for 2026: Docker self-hosting, production AI agents with LangChain, MCP integration, and data-compliant setup for teams.',
   keywords: [
     // Core product terms
     'n8n AI automation tutorial',
@@ -131,7 +131,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 675,
         alt: 'n8n AI automation workflow diagram showing trigger, AI agent, LangChain nodes, cost comparison, and MCP integration for 2026',
-        type: 'image/svg+xml',
+        type: 'image/png',
       },
     ],
   },
@@ -249,14 +249,16 @@ const articleSchema = {
     '@type': 'SpeakableSpecification',
     cssSelector: ['h1', 'h2', 'blockquote'],
   },
-  breadcrumb: {
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
-      { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
-      { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
-    ],
-  },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://invisigent.ai' },
+    { '@type': 'ListItem', position: 2, name: 'Insights', item: 'https://invisigent.ai/insights' },
+    { '@type': 'ListItem', position: 3, name: TITLE, item: CANONICAL },
+  ],
 };
 
 const faqSchema = {
@@ -383,6 +385,10 @@ export default function BlogPost() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"

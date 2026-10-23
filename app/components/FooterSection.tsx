@@ -89,7 +89,7 @@ export default function FooterSection() {
 
           {/* Quick Links column */}
           <nav aria-label="Invisigent quick links" className="invisigent-footer-column invisigent-footer-quicklinks">
-            <h3 className="invisigent-footer-heading">Quick Links</h3>
+            <h2 className="invisigent-footer-heading">Quick Links</h2>
             <ul className="invisigent-footer-list">
               {footerColumns.company.map((item) => (
                 <li key={item.href}>
@@ -107,7 +107,7 @@ export default function FooterSection() {
 
           {/* Contact section */}
           <div className="invisigent-footer-column invisigent-footer-contact-column">
-            <h3 className="invisigent-footer-heading">Contact</h3>
+            <h2 className="invisigent-footer-heading">Contact</h2>
             <div className="invisigent-footer-contact-items">
               <a
                 href="mailto:hello@invisigent.com"
