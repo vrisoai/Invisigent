@@ -1,6 +1,6 @@
 // app/layout.tsx
 import type { Metadata } from 'next';
-import { Space_Grotesk, Playfair_Display, JetBrains_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import Script from 'next/script';
 import { Navbar } from '@/app/components';
 import { CustomCursor } from '@/app/components/CustomCursor';
@@ -12,25 +12,31 @@ import '@/app/styles/globals.css';
 
 const GA_ID = 'G-WNNNJCTFS1';
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
+// Fonts are self-hosted (latin variable woff2 from Google Fonts) so builds don't
+// depend on fonts.googleapis.com, whose responses intermittently broke next/font/google.
+const spaceGrotesk = localFont({
+  src: './fonts/SpaceGrotesk-latin.woff2',
+  weight: '300 700',
   variable: '--font-space-grotesk',
   display: 'swap',
+  fallback: ['system-ui', 'sans-serif'],
 });
 
-const playfairDisplay = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '700'],
+const playfairDisplay = localFont({
+  src: './fonts/PlayfairDisplay-latin.woff2',
+  weight: '400 900',
   variable: '--font-playfair',
   display: 'swap',
+  adjustFontFallback: 'Times New Roman',
+  fallback: ['Georgia', 'serif'],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
+const jetbrainsMono = localFont({
+  src: './fonts/JetBrainsMono-latin.woff2',
+  weight: '100 800',
   variable: '--font-jetbrains',
   display: 'swap',
+  fallback: ['Courier New', 'monospace'],
 });
 
 export const metadata: Metadata = {
