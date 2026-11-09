@@ -10,12 +10,13 @@ const OG_IMAGE = 'https://invisigent.ai/blog-ai-observability-production-teams.p
 const PUBLISHED = '2026-07-07T10:00:00.000Z';
 const TITLE =
   'How Production AI Teams Prevent Hallucinations, Control Costs, and Debug AI Systems With Observability';
+const SOCIAL_TITLE = 'AI Observability for Production AI Teams: A Practical Guide';
 const DESCRIPTION =
   'AI observability has quietly become one of the most important parts of building a reliable AI product. Why engineering teams are investing in it, and how to build an observability stack that actually scales with you.';
 
 export const metadata: Metadata = {
   title: 'AI Observability for Production AI Teams',
-  description: 'How production AI teams use observability to prevent hallucinations, control LLM costs, and debug faster — and how to build an observability stack that scales.',
+  description: 'How production AI teams use observability to prevent hallucinations, control LLM costs, and debug faster, plus how to build a stack that scales.',
   keywords: [
     'AI observability',
     'LLM observability',
@@ -67,9 +68,9 @@ export const metadata: Metadata = {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
-      'Why production AI teams treat observability as core infrastructure, the platforms worth comparing, and the architecture that makes AI systems debuggable, measurable, and trustworthy.',
+      'Why production AI teams treat observability as core infrastructure, which platforms to compare, and the architecture that makes AI debuggable and measurable.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -89,7 +90,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@invisigent_ai',
     creator: '@invisigent_ai',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
       'AI observability has quietly become one of the most important parts of building a reliable AI product. Here is how to build a stack that scales with you.',
     images: [{ url: OG_IMAGE, alt: TITLE }],

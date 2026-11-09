@@ -15,7 +15,7 @@ const DESCRIPTION =
 
 export const metadata: Metadata = {
   title: 'Why Slow Operations Cost Mid-Market Revenue',
-  description: 'Revenue leaks through the gap between what your team handles manually and what your business demands. How AI infrastructure — not AI tools — closes that gap.',
+  description: 'Revenue leaks through the gap between what your team handles manually and what your business demands. How AI infrastructure closes that gap.',
   keywords: [
     // Core topic
     'AI infrastructure for mid-market',
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
     siteName: 'Invisigent',
     title: TITLE,
     description:
-      'Revenue is leaking through the gap between what your operations team can handle and what your business demands. AI infrastructure closes it permanently — for mid-market teams in the US, UK, Australia, and India.',
+      'Revenue leaks through the gap between what your operations team can handle and what your business demands. How AI infrastructure closes that gap for good.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -109,7 +109,7 @@ export const metadata: Metadata = {
     creator: '@invisigent_ai',
     title: TITLE,
     description:
-      'Revenue leaks through slow operations. AI infrastructure — not AI tools — closes the gap permanently.',
+      'Revenue leaks through slow internal operations. Why AI infrastructure, not another AI tool, closes the gap between team capacity and customer demand.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
   },
   other: {

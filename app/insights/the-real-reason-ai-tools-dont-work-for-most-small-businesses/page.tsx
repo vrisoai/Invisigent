@@ -10,12 +10,13 @@ const OG_IMAGE = 'https://invisigent.ai/blog-ai-tools-dont-work-small-businesses
 const PUBLISHED = '2026-04-23T09:00:00.000Z';
 const TITLE =
   'The Real Reason AI Infrastructure Projects Fail And It Has Nothing to Do With the Technology';
+const SOCIAL_TITLE = 'The Real Reason AI Projects Fail, and It Is Not the Tech';
 const DESCRIPTION =
   'Most organizations that struggle with AI are not using the wrong model. They are automating the wrong process. Here is what a correct process audit looks like before an AI infrastructure build.';
 
 export const metadata: Metadata = {
   title: 'Why AI Infrastructure Projects Really Fail',
-  description: 'Most teams struggling with AI aren’t using the wrong model — they’re automating the wrong process. What a proper process audit looks like before an AI build.',
+  description: 'Most teams struggling with AI are not using the wrong model. They are automating the wrong process. What a proper process audit looks like first.',
   keywords: [
     // Core topic
     'why AI projects fail',
@@ -87,9 +88,9 @@ export const metadata: Metadata = {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
-      'Most organizations struggling with AI are not using the wrong model. They are automating the wrong process. What correct AI infrastructure looks like — for teams in the US, UK, Australia, and India.',
+      'Most teams struggling with AI are not using the wrong model. They are automating the wrong process. What a proper process audit looks like before an AI build.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -109,9 +110,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@invisigent_ai',
     creator: '@invisigent_ai',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
-      'Most organizations struggling with AI are automating the wrong process. The real reason AI infrastructure projects fail.',
+      'Most organizations struggling with AI are automating the wrong process. The real reason AI infrastructure projects fail, and how to audit before you build.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
   },
   other: {

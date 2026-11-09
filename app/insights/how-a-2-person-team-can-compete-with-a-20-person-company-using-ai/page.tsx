@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     siteName: 'Invisigent',
     title: TITLE,
     description:
-      'The competitive gap used to be headcount and budget. In 2026, it is infrastructure — and mid-market organizations in the US, UK, Australia, and India can close it faster than enterprise competitors can respond.',
+      'The competitive gap used to be headcount and budget. In 2026 it is infrastructure, and mid-market teams can close it faster than larger competitors can respond.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -111,7 +111,7 @@ export const metadata: Metadata = {
     creator: '@invisigent_ai',
     title: TITLE,
     description:
-      'The competitive gap used to be headcount. In 2026 it is infrastructure — and it is closeable faster than most organizations realize.',
+      'The competitive gap used to be headcount. In 2026 it is infrastructure, and it closes faster than most organizations realize. Here is where to start.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
   },
   other: {

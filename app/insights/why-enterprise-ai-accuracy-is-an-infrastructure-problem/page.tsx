@@ -10,6 +10,7 @@ const OG_IMAGE = 'https://invisigent.ai/blog-ai-accuracy-infrastructure.png';
 const PUBLISHED = '2026-05-12T10:00:00.000Z';
 const TITLE =
   'Why Enterprise AI Accuracy Is an Infrastructure Problem Not a Model Problem';
+const SOCIAL_TITLE = 'Enterprise AI Accuracy Is an Infrastructure Problem';
 const DESCRIPTION =
   'Most organizations debugging AI accuracy problems are looking in the wrong place. They audit the model. They adjust the prompt. They switch providers. The accuracy problem persists because it was never a model problem.';
 
@@ -88,9 +89,9 @@ export const metadata: Metadata = {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
-      'AI accuracy failures are infrastructure failures. The four layers that actually determine enterprise AI output accuracy — and why fixing the model never solves them. For teams in the US, UK, Australia, and India.',
+      'AI accuracy failures are usually infrastructure failures. The four layers that set enterprise AI accuracy, and why swapping the model rarely fixes them.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -111,9 +112,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@invisigent_ai',
     creator: '@invisigent_ai',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
-      'AI accuracy failures are infrastructure failures, not model failures. The four layers that actually determine enterprise AI output accuracy.',
+      'AI accuracy failures are infrastructure failures, not model failures. The four layers that actually determine enterprise AI accuracy, and how to fix them.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
   },
   other: {

@@ -9,6 +9,7 @@ const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
 const OG_IMAGE = 'https://invisigent.ai/blog-ai-infrastructure-2026.png';
 const PUBLISHED = '2026-05-27T10:00:00.000Z';
 const TITLE = 'AI Infrastructure for Businesses in 2026';
+const SOCIAL_TITLE = 'AI Infrastructure for Businesses in 2026: The 6 Key Layers';
 const DESCRIPTION =
   'AI infrastructure has quietly become one of the most important conversations happening inside serious companies right now. It is no longer about buying cloud credits or plugging in a new tool.';
 
@@ -90,9 +91,9 @@ export const metadata: Metadata = {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
-      'The six infrastructure layers that determine whether AI runs as a business operation or falls apart under pressure. What serious companies in the US, UK, Australia, and India are building in 2026.',
+      'The six infrastructure layers that decide whether AI runs as a real business operation or breaks under pressure, and what serious companies build in 2026.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -112,9 +113,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@invisigent_ai',
     creator: '@invisigent_ai',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
-      'The six infrastructure layers every serious business needs to run AI in production in 2026.',
+      'The six infrastructure layers every serious business needs to run AI in production in 2026, and how to approach each one without wasting time or budget.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
   },
   other: {

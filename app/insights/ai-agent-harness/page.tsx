@@ -10,12 +10,13 @@ const CANONICAL = `https://invisigent.ai/insights/${SLUG}`;
 const OG_IMAGE = 'https://invisigent.ai/blog-ai-agent-harness.png';
 const PUBLISHED = '2026-09-20T14:00:00.000Z';
 const TITLE = 'AI Agent Harness: What It Is, How It Works, and Why It Matters for Production AI';
+const SOCIAL_TITLE = 'AI Agent Harness: What It Is, How It Works, Why It Matters';
 const DESCRIPTION =
   'An AI agent harness is the system around the model — tools, context, memory, permissions, feedback, and observability — that turns reasoning into controlled action. How harness engineering differs from prompts, sandboxes, and runtimes.';
 
 export const metadata: Metadata = {
   title: 'AI Agent Harness: What It Is and Why It Matters',
-  description: 'An AI agent harness is the system around the model — tools, context, memory, permissions, and feedback — that turns reasoning into controlled, reliable action.',
+  description: 'An AI agent harness is the system around the model: tools, context, memory, permissions, and feedback that turn reasoning into reliable action.',
   keywords: [
     'AI agent harness',
     'agent harness',
@@ -69,9 +70,9 @@ export const metadata: Metadata = {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
-      'Agent = Model + Harness. Why the surrounding system — tools, context, state, permissions, and feedback — often determines whether a production agent actually works.',
+      'Agent = Model + Harness. How tools, context, memory, permissions, and feedback decide whether a production AI agent actually works, and how to build one.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -91,9 +92,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@invisigent_ai',
     creator: '@invisigent_ai',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
-      'The model reasons. The harness turns that reasoning into controlled, repeatable work. How production teams should evaluate agents as systems, not just models.',
+      'The model reasons, the harness turns that reasoning into controlled, repeatable work. How production teams evaluate AI agents as systems, not just models.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
   },
   other: {

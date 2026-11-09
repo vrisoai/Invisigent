@@ -10,12 +10,13 @@ const OG_IMAGE = 'https://invisigent.ai/blog-ai-implementation-mistakes.png';
 const PUBLISHED = '2026-05-04T10:00:00.000Z';
 const TITLE =
   '7 AI Infrastructure Mistakes That Burn Budget — And How Mid-Market Organizations Avoid Them';
+const SOCIAL_TITLE = '7 AI Mistakes That Burn Budget and How to Avoid Them';
 const DESCRIPTION =
   'Most AI failures are not model failures — they are architecture, ownership, and execution failures. Here are the seven most expensive mistakes mid-market organizations make when implementing AI infrastructure.';
 
 export const metadata: Metadata = {
   title: '7 AI Implementation Mistakes That Burn Budget',
-  description: 'Most AI failures are architecture, ownership, and execution failures — not model failures. The seven costliest AI implementation mistakes and how to avoid them.',
+  description: 'Most AI failures are architecture, ownership, and execution failures, not model failures. The 7 costliest AI implementation mistakes and fixes.',
   keywords: [
     // Core topic
     'AI implementation mistakes',
@@ -87,9 +88,9 @@ export const metadata: Metadata = {
     type: 'article',
     locale: 'en_US',
     siteName: 'Invisigent',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
-      'AI is not failing. Execution is. The 7 most expensive AI infrastructure mistakes mid-market organizations in the US, UK, Australia, and India make — and how to avoid every one.',
+      'AI is not failing, execution is. The 7 most expensive AI infrastructure mistakes mid-market companies make, from missing guardrails to broken processes.',
     url: CANONICAL,
     publishedTime: PUBLISHED,
     modifiedTime: PUBLISHED,
@@ -102,9 +103,9 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@invisigent_ai',
     creator: '@invisigent_ai',
-    title: TITLE,
+    title: SOCIAL_TITLE,
     description:
-      'AI is not failing. Execution is. The 7 most expensive AI infrastructure mistakes — and how to avoid them.',
+      'AI is not failing, execution is. The 7 most expensive AI infrastructure mistakes mid-market teams make, and practical ways to avoid every one of them.',
     images: [{ url: OG_IMAGE, alt: TITLE }],
   },
   other: {
