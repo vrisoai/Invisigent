@@ -74,6 +74,13 @@ const insightsBlogSchema = {
       blogPost: [
         {
           '@type': 'BlogPosting',
+          headline: 'LLM Inference, Explained: Why Your Model Is Slow and How to Fix It',
+          url: 'https://invisigent.ai/insights/llm-inference-optimization',
+          datePublished: '2026-11-09',
+          image: 'https://invisigent.ai/blog-llm-inference-optimization.svg',
+        },
+        {
+          '@type': 'BlogPosting',
           headline: 'Anthropic Scion: Why AI Agents Outgrew Git and What Replaced It',
           url: 'https://invisigent.ai/insights/anthropic-scion-source-control',
           datePublished: '2026-10-24',
@@ -258,6 +265,16 @@ export default function InsightsPage() {
             gap: 'clamp(1.25rem, 3vw, 2rem)',
           }}
         >
+          <BlogCard
+            imageSrc="/blog-llm-inference-optimization.svg"
+            imageAlt="LLM inference pipeline: a compute-bound prefill pass fills a paged KV cache, then memory-bound decode steps generate tokens, sped up by continuous batching and speculative decoding"
+            category="AI Engineering"
+            readTime="13 min read"
+            heading="LLM Inference, Explained: Why Your Model Is Slow and How to Fix It"
+            excerpt="Your GPU is probably not short on compute. It is waiting on memory. A practical walk through prefill and decode, the KV cache, continuous batching, PagedAttention, quantization and speculative decoding, and the order we would apply them in."
+            author="Invisigent Research"
+            href="/insights/llm-inference-optimization"
+          />
           <BlogCard
             imageSrc="/blog-anthropic-scion-source-control.svg"
             imageAlt="Anthropic Scion architecture: thin scn clients fetch trees and blobs on demand through scion-daemon, scion-cache, and scion-server backed by Spanner and blob storage"

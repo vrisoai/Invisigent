@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675" role="img" aria-label="LLM inference pipeline: a compute-bound prefill pass fills a paged KV cache, then memory-bound decode steps generate tokens, sped up by continuous batching and speculative decoding">
+  <defs>
+    <linearGradient id="liBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#070c10"/>
+      <stop offset="50%" style="stop-color:#0a0d12"/>
+      <stop offset="100%" style="stop-color:#0a0907"/>
+    </linearGradient>
+    <radialGradient id="liAmberGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#fbbf24;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="liCyanGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#06b6d4;stop-opacity:0.14"/>
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="liGreenGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#16a34a;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="liNode" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1b1b1b"/>
+      <stop offset="100%" style="stop-color:#131313"/>
+    </linearGradient>
+    <marker id="liArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(251,191,36,0.6)"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#liBg)"/>
+  <ellipse cx="600" cy="370" rx="320" ry="260" fill="url(#liAmberGlow)"/>
+  <ellipse cx="190" cy="360" rx="220" ry="240" fill="url(#liCyanGlow)"/>
+  <ellipse cx="1010" cy="360" rx="220" ry="240" fill="url(#liGreenGlow)"/>
+
+  <g opacity="0.045" stroke="#fbbf24" stroke-width="0.5">
+    <line x1="0" y1="112" x2="1200" y2="112"/>
+    <line x1="0" y1="225" x2="1200" y2="225"/>
+    <line x1="0" y1="338" x2="1200" y2="338"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/>
+    <line x1="0" y1="563" x2="1200" y2="563"/>
+    <line x1="300" y1="0" x2="300" y2="675"/>
+    <line x1="600" y1="0" x2="600" y2="675"/>
+    <line x1="900" y1="0" x2="900" y2="675"/>
+  </g>
+
+  <text x="600" y="76" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="15" letter-spacing="5" fill="#fbbf24" opacity="0.85">LLM INFERENCE</text>
+  <text x="600" y="112" text-anchor="middle" font-family="Georgia, serif" font-size="30" font-weight="700" fill="#f5f5f5">Where the time actually goes</text>
+
+  <!-- Prefill -->
+  <g font-family="Georgia, serif">
+    <rect x="70" y="200" width="230" height="110" rx="12" fill="url(#liNode)" stroke="#06b6d4" stroke-opacity="0.55"/>
+    <text x="185" y="238" text-anchor="middle" font-size="20" font-weight="700" fill="#f5f5f5">Prefill</text>
+    <text x="185" y="263" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#a3a3a3">whole prompt · one pass</text>
+    <text x="185" y="287" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#06b6d4">compute-bound → TTFT</text>
+  </g>
+  <!-- prompt tokens -->
+  <g fill="#06b6d4" fill-opacity="0.55">
+    <rect x="86" y="330" width="22" height="22" rx="4"/>
+    <rect x="114" y="330" width="22" height="22" rx="4"/>
+    <rect x="142" y="330" width="22" height="22" rx="4"/>
+    <rect x="170" y="330" width="22" height="22" rx="4"/>
+    <rect x="198" y="330" width="22" height="22" rx="4"/>
+    <rect x="226" y="330" width="22" height="22" rx="4"/>
+    <rect x="254" y="330" width="22" height="22" rx="4"/>
+  </g>
+  <text x="185" y="378" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#737373">prompt tokens in parallel</text>
+
+  <!-- KV cache pages -->
+  <g font-family="Georgia, serif">
+    <rect x="410" y="180" width="380" height="190" rx="14" fill="url(#liNode)" stroke="#fbbf24" stroke-opacity="0.5"/>
+    <text x="600" y="214" text-anchor="middle" font-size="20" font-weight="700" fill="#f5f5f5">Paged KV cache</text>
+    <text x="600" y="238" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#a3a3a3">fixed-size blocks · allocated on demand</text>
+  </g>
+  <g>
+    <!-- row A -->
+    <rect x="440" y="258" width="52" height="26" rx="5" fill="#fbbf24" fill-opacity="0.55"/>
+    <rect x="500" y="258" width="52" height="26" rx="5" fill="#fbbf24" fill-opacity="0.55"/>
+    <rect x="560" y="258" width="52" height="26" rx="5" fill="#fbbf24" fill-opacity="0.55"/>
+    <rect x="620" y="258" width="52" height="26" rx="5" fill="#fbbf24" fill-opacity="0.25"/>
+    <rect x="680" y="258" width="52" height="26" rx="5" fill="none" stroke="#525252" stroke-dasharray="4 3"/>
+    <!-- row B -->
+    <rect x="440" y="292" width="52" height="26" rx="5" fill="#06b6d4" fill-opacity="0.5"/>
+    <rect x="500" y="292" width="52" height="26" rx="5" fill="#06b6d4" fill-opacity="0.22"/>
+    <rect x="560" y="292" width="52" height="26" rx="5" fill="#22c55e" fill-opacity="0.5"/>
+    <rect x="620" y="292" width="52" height="26" rx="5" fill="#22c55e" fill-opacity="0.5"/>
+    <rect x="680" y="292" width="52" height="26" rx="5" fill="#22c55e" fill-opacity="0.22"/>
+    <!-- row C -->
+    <rect x="440" y="326" width="52" height="26" rx="5" fill="none" stroke="#525252" stroke-dasharray="4 3"/>
+    <rect x="500" y="326" width="52" height="26" rx="5" fill="#a78bfa" fill-opacity="0.5"/>
+    <rect x="560" y="326" width="52" height="26" rx="5" fill="#a78bfa" fill-opacity="0.22"/>
+    <rect x="620" y="326" width="52" height="26" rx="5" fill="none" stroke="#525252" stroke-dasharray="4 3"/>
+    <rect x="680" y="326" width="52" height="26" rx="5" fill="none" stroke="#525252" stroke-dasharray="4 3"/>
+  </g>
+
+  <!-- Decode -->
+  <g font-family="Georgia, serif">
+    <rect x="410" y="430" width="380" height="100" rx="14" fill="url(#liNode)" stroke="#22c55e" stroke-opacity="0.5"/>
+    <text x="600" y="466" text-anchor="middle" font-size="20" font-weight="700" fill="#f5f5f5">Decode</text>
+    <text x="600" y="490" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#a3a3a3">one token per step · reads all weights + KV</text>
+    <text x="600" y="512" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#22c55e">memory-bound → inter-token latency</text>
+  </g>
+
+  <g stroke="rgba(251,191,36,0.55)" stroke-width="1.6" fill="none" marker-end="url(#liArrow)">
+    <path d="M 300 255 L 402 270"/>
+    <path d="M 600 370 L 600 422"/>
+    <path d="M 790 480 C 860 480, 860 300, 798 300"/>
+  </g>
+  <text x="878" y="395" font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#737373">append</text>
+
+  <!-- Levers -->
+  <g font-family="Georgia, serif">
+    <rect x="930" y="170" width="210" height="76" rx="12" fill="rgba(251,191,36,0.06)" stroke="#fbbf24" stroke-opacity="0.4"/>
+    <text x="1035" y="204" text-anchor="middle" font-size="16" font-weight="700" fill="#fbbf24">Continuous batching</text>
+    <text x="1035" y="228" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#a3a3a3">share each weight read</text>
+
+    <rect x="930" y="262" width="210" height="76" rx="12" fill="rgba(34,197,94,0.06)" stroke="#22c55e" stroke-opacity="0.4"/>
+    <text x="1035" y="296" text-anchor="middle" font-size="16" font-weight="700" fill="#22c55e">Quantization</text>
+    <text x="1035" y="320" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#a3a3a3">move fewer bytes</text>
+
+    <rect x="930" y="354" width="210" height="76" rx="12" fill="rgba(6,182,212,0.06)" stroke="#06b6d4" stroke-opacity="0.4"/>
+    <text x="1035" y="388" text-anchor="middle" font-size="16" font-weight="700" fill="#06b6d4">Speculative decoding</text>
+    <text x="1035" y="412" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#a3a3a3">fewer slow steps</text>
+  </g>
+
+  <text x="600" y="600" text-anchor="middle" font-family="ui-monospace, Menlo, monospace" font-size="13" letter-spacing="2" fill="#737373">7B · FP16 ≈ 14 GB read per token · KV ≈ 0.5 MB / token · paged KV ≈ near-zero waste</text>
+</svg>
